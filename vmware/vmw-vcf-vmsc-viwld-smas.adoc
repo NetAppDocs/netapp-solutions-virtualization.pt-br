@@ -1,0 +1,64 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-vmsc-viwld-smas.html 
+keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, iscsi 
+summary:  
+---
+= Configurar um cluster de extensão para um domínio de carga de trabalho de VI usando o SnapMirror Active Sync
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Neste caso de uso, descrevemos o procedimento para configurar um cluster estendido para um domínio de carga de trabalho de infraestrutura virtual (VI) usando o SnapMirror Active Sync com ONTAP tools for VMware vSphere.  Este procedimento inclui a criação de um domínio de carga de trabalho VCF com VMFS no Fibre Channel, o registro do vCenter com ferramentas ONTAP , o registro de sistemas de armazenamento e a proteção do cluster vSphere.
+
+image:vmware-vcf-asa-mgmt-stretchcluster-001.png["Instância Única - Múltiplas Zonas de Disponibilidade"]
+
+
+
+== Visão geral do cenário
+
+Os datastores no domínio de carga de trabalho do VCF podem ser protegidos com sincronização ativa do SnapMirror para fornecer uma solução de cluster expansível.  A proteção é habilitada no nível do cluster do vSphere e todos os armazenamentos de dados do bloco ONTAP no cluster serão protegidos.
+
+.Armazenamento principal no domínio de carga de trabalho
+[%collapsible%open]
+====
+O domínio de carga de trabalho pode ser criado importando usando a ferramenta de importação VCF ou implantando usando o gerenciador SDDC.  A implantação com o gerenciador do SDDC fornecerá mais opções de rede do que importar um ambiente existente.
+
+. Criar domínio de carga de trabalho com VMFS no FC
+. link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html["Registre o domínio de carga de trabalho vCenter no gerenciador de ferramentas ONTAP para implantar o plugin vCenter"]
+. link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html["Registre sistemas de armazenamento em ferramentas ONTAP"]
+. link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/protect-cluster.html["Proteja o cluster vSphere"]
+
+
+
+NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualizar o relacionamento do cluster do host nas ferramentas ONTAP para que o cluster indique as alterações feitas na origem ou no destino.
+
+====
+.Armazenamento suplementar no domínio de carga de trabalho
+[%collapsible%open]
+====
+Depois que o domínio da carga de trabalho estiver ativo e em execução, armazenamentos de dados adicionais poderão ser criados usando ferramentas ONTAP , o que acionará a expansão do grupo de consistência.
+
+
+TIP: Se um cluster vSphere estiver protegido, todos os armazenamentos de dados no cluster estarão protegidos.
+
+====
+
+
+== Informações adicionais
+
+Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
+
+Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html["Documentação do VMware Cloud Foundation"] .
+
+
+
+== Demonstração em vídeo desta solução
+
+.Cluster de alongamento para VCF com ferramentas ONTAP
+video::569a91a9-2679-4414-b6dc-b25d00ff0c5a[panopto,width=360]

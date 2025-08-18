@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-getting-started-snapcenter.html 
+keywords: netapp, vmware, getting, started 
+summary:  
+---
+= Aprenda sobre backup e restauração de máquinas virtuais usando o plug-in SnapCenter para VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O SnapCenter Plug-in for VMware vSphere permite operações rápidas de backup e restauração consistentes com VMs, armazenamentos de dados e arquivos VMDK.  Este plug-in do VMware integra-se ao SnapCenter Server para oferecer suporte a backup e restauração baseados em aplicativos para plug-ins específicos do aplicativo SnapCenter .
+
+
+
+== Recursos de documentação
+
+Consulte os seguintes recursos de documentação para obter informações detalhadas.
+
+* link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/["Documentação do SnapCenter Plug-in for VMware vSphere"]
+
+
+
+
+== Recursos da solução
+
+Consulte a seguinte solução de backup 3-2-1 com o SnapCenter Plug-in for VMware vSphere e BlueXP backup and recovery para VMs.
+
+Relatório Técnico:link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-321-dp-scv.html["Proteção de dados 3-2-1 para VMware com plug-in SnapCenter e BlueXP backup and recovery para VMs"^]
+
+Blog Tech ONTAP :link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/3-2-1-Data-Protection-for-VMware-with-SnapCenter-Plug-in-and-BlueXP-backup-and/ba-p/446180["Proteção de dados 3-2-1 para VMware com plug-in SnapCenter e BlueXP backup and recovery para VMs"]
+
+
+
+== Recursos de vídeo
+
+.SnapCenter Plug-in for VMware vSphere - Pré-requisitos da solução
+video::38881de9-9ab5-4a8e-a17d-b01200fade6a[panopto]
+.SnapCenter Plug-in for VMware vSphere - Implantação
+video::10cbcf2c-9964-41aa-ad7f-b01200faca01[panopto]
+.SnapCenter Plug-in for VMware vSphere - Fluxo de trabalho de backup
+video::b7272f18-c424-4cc3-bc0d-b01200faaf25[panopto]
+.SnapCenter Plug-in for VMware vSphere - Fluxo de trabalho de restauração
+video::ed41002e-585c-445d-a60c-b01200fb1188[panopto]
+.SnapCenter - Fluxo de trabalho de restauração de SQL
+video::8df4ad1f-83ad-448b-9405-b01200fb2567[panopto]

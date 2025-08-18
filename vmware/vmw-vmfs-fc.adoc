@@ -1,0 +1,92 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vmfs-fc.html 
+keywords: vSphere, datastore, VMFS, FC, ONTAP tools, zone, WWPN 
+summary: Esta página fornece etapas para implantar um armazenamento NetApp ONTAP FC VMFS em um ambiente VMware vSphere. 
+---
+= Armazenamento de dados vSphere VMFS - backend de armazenamento Fibre Channel com ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta seção aborda a criação de um armazenamento de dados VMFS com armazenamento ONTAP Fibre Channel (FC).
+
+
+
+== O que você precisa
+
+* As habilidades básicas necessárias para gerenciar um ambiente vSphere e ONTAP
+* Um sistema de armazenamento ONTAP (FAS/ AFF/ CVO / ONTAP Select/ ASA) executando {ontap_version}
+* Credenciais ONTAP (nome SVM, ID de usuário e senha)
+* ONTAP WWPN de informações de host, destino, SVM e LUN
+* link:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-fc-esx-cpg/GUID-429C4DDD-5EC0-4DBD-8EA8-76082AB7ADEC.html++["A planilha de configuração do FC concluída"]
+* Credenciais do vCenter Server
+* Informações do(s) host(s) vSphere
++
+** {versão_vsphere}
+
+
+* Troca(s) de tecido
++
+** Com portas de dados ONTAP FC conectadas e hosts vSphere
+** Com o recurso de virtualização de ID da porta N (NPIV) habilitado
+** Crie uma única zona de alvo único e iniciador.
++
+*** Crie uma zona para cada iniciador (zona de iniciador único).
+*** Para cada zona, inclua um destino que seja a interface lógica ONTAP FC (WWPN) para as SVMs.  Deve haver pelo menos duas interfaces lógicas por nó por SVM.  Não utilize o WWPN das portas físicas.
+
+
+
+
+* Uma ferramenta ONTAP para VMware vSphere implantada, configurada e pronta para consumo.
+
+
+
+
+== Provisionando um armazenamento de dados VMFS
+
+Para provisionar um armazenamento de dados VMFS, conclua as seguintes etapas:
+
+. Verifique a compatibilidade com o https://mysupport.netapp.com/matrix["Ferramenta de Matriz de Interoperabilidade (IMT)"]
+. Verifique se olink:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-fc-esx-cpg/GUID-7D444A0D-02CE-4A21-8017-CB1DC99EFD9A.html++["A configuração FCP é suportada"] .
+
+
+
+
+=== Tarefas ONTAP
+
+. link:https://docs.netapp.com/us-en/ontap-cli-98/system-license-show.html["Verifique se você tem uma licença ONTAP para FCP."]
++
+.. Use o `system license show` comando para verificar se o FCP está listado.
+.. Usar `licen  se add -license-code <license code>` para adicionar a licença.
+
+
+. Certifique-se de que o protocolo FCP esteja habilitado no SVM.
++
+.. link:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-fc-esx-cpg/GUID-1C31DF2B-8453-4ED0-952A-DF68C3D8B76F.html++["Verifique o FCP em um SVM existente."]
+.. link:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-fc-esx-cpg/GUID-D322649F-0334-4AD7-9700-2A4494544CB9.html++["Configure o FCP em um SVM existente."]
+.. link:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-fc-esx-cpg/GUID-0FCB46AA-DA18-417B-A9EF-B6A665DB77FC.html++["Crie um novo SVM com o FCP."]
+
+
+. Certifique-se de que as interfaces lógicas do FCP estejam disponíveis em uma SVM.
++
+.. Usar `Network Interface show` para verificar o adaptador FCP.
+.. Quando uma SVM é criada com a GUI, as interfaces lógicas fazem parte desse processo.
+.. Para renomear interfaces de rede, use `Network Interface modify` .
+
+
+. link:++https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/GUID-D4DAC7DB-A6B0-4696-B972-7327EE99FD72.html++["Crie e mapeie um LUN."]Pule esta etapa se estiver usando ONTAP tools for VMware vSphere.
+
+
+
+
+=== Tarefas do VMware vSphere
+
+. Verifique se os drivers HBA estão instalados.  Os HBAs com suporte da VMware têm drivers implantados prontos para uso e devem estar visíveis nolink:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/getting-started-with-a-traditional-storage-model-in-vsphere-environment/supported-storage-adapters/view-storage-adapters-available-on-an-esxi-host.html++["Informações do adaptador de armazenamento"] .
+. link:++https://docs.netapp.com/vapp-98/topic/com.netapp.doc.vsc-iag/GUID-D7CAD8AF-E722-40C2-A4CB-5B4089A14B00.html++["Provisione um armazenamento de dados VMFS com ferramentas ONTAP"] .
+

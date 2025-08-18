@@ -1,0 +1,46 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-dr-gs.html 
+keywords: vmware, getting, started, overview, netapp, bluexp, disaster, recovery, draas 
+summary:  
+---
+= Aprenda sobre recuperação de desastres de máquinas virtuais usando a BlueXP disaster recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+A BlueXP disaster recovery automatiza a replicação e a recuperação de máquinas virtuais VMware usando armazenamento ONTAP .  Ele oferece suporte à recuperação da configuração local para o VMware Cloud na AWS com o Amazon FSx for NetApp ONTAP ou outro ambiente VMware local.
+
+
+
+== Introdução
+
+Ter um plano bem-sucedido e uma combinação de tecnologias garante a proteção de dados, aplicativos e VMs críticos.  O desafio com DR é determinar o nível apropriado de proteção e os custos associados.
+
+Os arrays ONTAP oferecem replicação integrada para transferir dados de volume e, portanto, as máquinas virtuais que residem nos LUNs de armazenamento de dados designados, de um site para outro. O BlueXP DRaaS integra-se ao vSphere e automatiza todo o fluxo de trabalho para failover e failback perfeitos em caso de desastre.
+
+Para obter mais informações sobre BlueXP DRaaS, consultelink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-overview.html["Visão geral do BlueXP DRaaS"^] .
+
+
+
+== Considerações
+
+As partes mais demoradas de um failover de DR em um ambiente VMware vSphere são a execução das etapas necessárias para inventariar, registrar, reconfigurar e ligar as VMs no site de DR. Uma solução ideal tem um RPO baixo (medido em minutos) e um RTO baixo (medido em minutos a horas). Um fator que muitas vezes é negligenciado em uma solução de DR é a capacidade de testar a solução de DR de forma eficiente em um intervalo periódico.
+
+Para arquitetar uma solução de DR, tenha em mente os seguintes fatores:
+
+* O objetivo do tempo de recuperação (RTO). O RTO é a rapidez com que uma empresa pode se recuperar de um desastre ou, mais especificamente, quanto tempo leva para executar o processo de recuperação para tornar os serviços empresariais disponíveis novamente.
+* O objetivo do ponto de recuperação (RPO). O RPO é a idade dos dados recuperados depois de terem sido disponibilizados, em relação ao momento em que o desastre ocorreu.
+* Escalabilidade e adaptabilidade. Esse fator inclui a capacidade de aumentar os recursos de armazenamento gradualmente conforme a demanda aumenta.
+
+
+Para mais informações técnicas sobre as soluções disponíveis, consulte:
+
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-nfs.html["DR usando BlueXP DRaaS para datastores NFS"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html["DR usando BlueXP DRaaS para datastores VMFS"^]
+

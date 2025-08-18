@@ -1,0 +1,113 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-viwld-principal-fc.html 
+keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, fc 
+summary:  
+---
+= Use um armazenamento de dados VMFS baseado em FC no ONTAP como armazenamento principal para um domínio de carga de trabalho VI
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Neste caso de uso, descrevemos o procedimento para configurar um armazenamento de dados VMFS Fibre Channel (FC) no ONTAP como a solução de armazenamento primária para um domínio de carga de trabalho de infraestrutura virtual (VI) do VMware Cloud Foundation (VCF).  Este procedimento resume os componentes necessários, as etapas de configuração e o processo de implantação.
+
+
+
+== Benefícios do Fibre Channel
+
+*Alto desempenho:* o FC fornece altas taxas de transferência de dados, tornando-o ideal para aplicações que exigem acesso rápido e confiável a grandes quantidades de dados.
+
+*Baixa latência:* latência muito baixa, o que é crucial para aplicativos sensíveis ao desempenho, como bancos de dados e ambientes virtualizados.
+
+*Confiabilidade:* As redes FC são conhecidas por sua robustez e confiabilidade, com recursos como redundância integrada e correção de erros.
+
+*Largura de banda dedicada:* o FC fornece largura de banda dedicada para tráfego de armazenamento, reduzindo o risco de congestionamento da rede.
+
+Para obter mais informações sobre o uso do Fibre Channel com sistemas de armazenamento NetApp , consulte https://docs.netapp.com/us-en/ontap/san-admin/san-provisioning-fc-concept.html["Provisionamento SAN com FC"] .
+
+
+
+== Visão geral do cenário
+
+Este cenário abrange as seguintes etapas de alto nível:
+
+* Crie uma máquina virtual de armazenamento (SVM) com interfaces lógicas (LIFs) para tráfego FC.
+* Colete informações WWPN dos hosts a serem implantados e crie grupos iniciadores correspondentes no sistema de armazenamento ONTAP .
+* Crie um volume FC no sistema de armazenamento ONTAP .
+* Grupos de iniciadores de mapa para criar volume FC
+* Utilize zoneamento de iniciador-alvo único em switches FC.  Crie uma zona para cada iniciador (zona de iniciador único).
++
+** Para cada zona, inclua um destino que seja a interface lógica ONTAP FC (WWPN) para as SVMs.  Deve haver pelo menos duas interfaces lógicas por nó por SVM.  Não utilize o WWPN das portas físicas.
+
+
+* Crie um pool de rede para tráfego vMotion no SDDC Manager.
+* Comissionar hosts no VCF para uso em um domínio de carga de trabalho do VI.
+* Implante um domínio de carga de trabalho VI no VCF usando um armazenamento de dados FC como armazenamento principal.
+
+
+
+NOTE: Esta solução é aplicável para plataformas ONTAP que suportam armazenamento NFS, incluindo NetApp AFF e FAS.
+
+
+
+== Pré-requisitos
+
+Os seguintes componentes e configurações são usados neste cenário:
+
+* Um sistema de armazenamento ONTAP AFF ou ASA com portas FC conectadas a switches FC.
+* SVM criado com FC lifs.
+* vSphere com HBAs FC conectados a switches FC.
+* O zoneamento de iniciador-alvo único é configurado em switches FC.
+
+
+
+NOTE: A NetApp recomenda vários caminhos para LUNs FC.
+
+
+
+== Etapas de implantação
+
+
+
+=== Domínio de Gerenciamento - Cluster Padrão
+
+O armazenamento principal do FC no cluster inicial só é suportado com a ferramenta de importação brownfield do VCF.  Se o VCF for implantado com a ferramenta cloudbuilder (até a versão 5.2.x), somente o VSAN será suportado.  Referir https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html["convertendo o ambiente vSphere existente para o domínio de gerenciamento"] para mais informações.
+
+
+
+=== Domínio de Gerenciamento - Cluster Adicional
+
+O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com as seguintes opções: * Ter um cluster adicional no ambiente vSphere e usar a ferramenta de importação brownfield do VCF para converter o ambiente vSphere em domínio de gerenciamento. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-vvols-datastore.html["ONTAP tools for VMware vSphere"] , https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] pode ser usado para implantar o armazenamento de dados VMFS no cluster vSphere.  * Use a API do SDDC para implantar um cluster adicional.  Os hosts vSphere devem ter o armazenamento de dados VMFS configurado.  Usar https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] para implantar LUN em hosts vSphere.  * Use a interface de usuário do SDDC Manager para implantar um cluster adicional.  Mas esta opção só cria um armazenamento de dados VSAN até a versão 5.2.x.
+
+
+
+=== Domínio de Carga de Trabalho VI - Cluster Padrão
+
+Depois que o domínio de gerenciamento estiver instalado e funcionando, o domínio de carga de trabalho do VI poderá ser criado:
+
+* Usando a interface de usuário do SDDC Manager.  Os hosts vSphere devem ter o armazenamento de dados VMFS configurado.  Use o System Manager ou a API ONTAP para implantar LUN em hosts vSphere.
+* Importe um ambiente vSphere existente como novo domínio de carga de trabalho do VI.  ONTAP tools for VMware vSphere, System Manager ou API ONTAP podem ser usadas para implantar o armazenamento de dados VMFS no cluster vSphere.
+
+
+
+
+=== Domínio de Carga de Trabalho VI - Cluster Adicional
+
+Depois que a carga de trabalho do VI estiver ativa e em execução, clusters adicionais poderão ser implantados com o VMFS no FC LUN usando as seguintes opções.
+
+* Clusters adicionais no ambiente vSphere importados usando a ferramenta de importação brownfield do VCF.  ONTAP tools for VMware vSphere, System Manager ou API ONTAP podem ser usadas para implantar o armazenamento de dados VMFS no cluster vSphere.
+* Usando a interface de usuário ou API do SDDC Manager para implantar um cluster adicional.  Os hosts vSphere devem ter o armazenamento de dados VMFS configurado.  Use o System Manager ou a API ONTAP para implantar LUN em hosts vSphere.
+
+
+
+
+== Informações adicionais
+
+Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
+
+Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html["Documentação do VMware Cloud Foundation"] .

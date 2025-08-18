@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-ci-samples.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, cloud Insights 
+summary: Monitoramento usando Cloud Insights para VMs no Red Hat OpenShift Virtualization 
+---
+= Monitore VMs no Red Hat OpenShift Virtualization usando o Data Infrastructure Insights
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O NetApp Data Infrastructure Insights (antigo Cloud Insights) fornece recursos robustos de monitoramento para VMs no OpenShift Virtualization, incluindo monitoramento baseado em eventos, criação de alertas e mapeamento de armazenamento de back-end.  Ele também oferece análises de alterações para rastrear alterações de cluster e auxiliar na solução de problemas.
+
+
+
+== **Monitoramento baseado em eventos e criação de alertas**
+
+Aqui está um exemplo em que o namespace que contém uma VM no OpenShift Virtualization é monitorado com base em eventos.  Neste exemplo, um monitor é criado com base em **logs.kubernetes**.event para o namespace especificado no cluster.
+
+image:redhat-openshift-ci-samples-001.png["Amostras do Cloud Insights"]
+
+Esta consulta fornece todos os eventos para a máquina virtual no namespace.  (Há apenas uma máquina virtual no namespace).  Uma consulta avançada também pode ser construída para filtrar com base no evento cujo motivo é "failed" ou "FailedMount". Esses eventos geralmente são criados quando há um problema na criação de um PV ou na montagem do PV em um pod, indicando problemas no provisionador dinâmico para criar volumes persistentes para a VM.  Ao criar o Monitor de Alertas, conforme mostrado acima, você também pode configurar notificações para destinatários.  Você também pode fornecer ações corretivas ou informações adicionais que podem ser úteis para resolver o erro.  No exemplo acima, informações adicionais poderiam ser obtidas consultando a configuração do backend do Trident e as definições de classe de armazenamento para resolver o problema.
+
+
+
+== **Análise de alterações**
+
+Com o Change Analytics, você pode ter uma visão do que mudou no estado do seu cluster, incluindo quem fez essa alteração, o que pode ajudar na solução de problemas.
+
+image:redhat-openshift-ci-samples-002.png["Amostras do Cloud Insights"]
+
+No exemplo acima, a Análise de Mudanças é configurada no cluster OpenShift para o namespace que contém uma VM de virtualização OpenShift.  O painel mostra as alterações em relação à linha do tempo.  Você pode detalhar para ver o que mudou e clicar em Todas as alterações Diff para ver a diferença dos manifestos.  No manifesto, você pode ver que um novo backup dos discos persistentes foi criado.
+
+image:redhat-openshift-ci-samples-003.png["Amostras do Cloud Insights"]
+
+image:redhat-openshift-ci-samples-004.png["Amostras do Cloud Insights"]
+
+
+
+== **Mapeamento de armazenamento de backend**
+
+Com o Cloud Insights, você pode ver facilmente o armazenamento de back-end dos discos da VM e diversas estatísticas sobre os PVCs.
+
+image:redhat-openshift-ci-samples-005.png["Amostras do Cloud Insights"]
+
+Você pode clicar nos links abaixo da coluna do backend, que extrairão dados diretamente do armazenamento ONTAP do backend.
+
+image:redhat-openshift-ci-samples-006.png["Amostras do Cloud Insights"]
+
+Outra maneira de analisar todo o mapeamento de pod para armazenamento é criar uma consulta Todas as métricas no menu Observabilidade em Explorar.
+
+image:redhat-openshift-ci-samples-007.png["Amostras do Cloud Insights"]
+
+Clicar em qualquer um dos links fornecerá os detalhes correspondentes do armazenamento ONTP.  Por exemplo, clicar no nome de um SVM na coluna storageVirtualMachine extrairá detalhes sobre o SVM do ONTAP.  Clicar no nome de um volume interno extrairá detalhes sobre o volume no ONTAP.
+
+image:redhat-openshift-ci-samples-008.png["Amostras do Cloud Insights"]
+
+image:redhat-openshift-ci-samples-009.png["Amostras do Cloud Insights"]

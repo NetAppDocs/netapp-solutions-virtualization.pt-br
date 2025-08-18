@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: hyperv/hyperv-deploy-conclusion.html 
+keywords: hyperv, hyper-v, deploy, netapp, virtualization 
+summary: A solução fornece as etapas necessárias para implantar o Hyper-V no armazenamento NetApp 
+---
+= Resumo da implantação do Microsoft Hyper-V em sistemas de armazenamento ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP é a base de armazenamento compartilhado ideal para implantar uma variedade de cargas de trabalho de TI.  As plataformas ONTAP AFF ou ASA são flexíveis e escaláveis para múltiplos casos de uso e aplicações.  O Windows Server 2022 e o Hyper-V habilitado são um caso de uso comum como solução de virtualização, descrito neste documento.  A flexibilidade e a escalabilidade do armazenamento ONTAP e dos recursos associados permitem que os clientes comecem com uma camada de armazenamento do tamanho certo, que pode crescer e se adaptar às necessidades de seus negócios em evolução.  Nas atuais condições de mercado, o Hyper-V oferece uma opção de hipervisor alternativa perfeita que fornece a maioria das funcionalidades fornecidas pela VMware.

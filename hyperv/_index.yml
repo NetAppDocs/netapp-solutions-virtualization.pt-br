@@ -1,0 +1,39 @@
+---
+indexpage:
+  title: Soluções de virtualização NetApp Hyper-V
+  summary: As soluções de virtualização NetApp Hyper-V são um conjunto de recursos
+    estratégicos e tecnológicos que demonstram os recursos de armazenamento da NetApp
+    para virtualização usando o Microsoft Hyper-V.
+  lead: As soluções de virtualização NetApp Hyper-V são um conjunto de recursos estratégicos
+    e tecnológicos que demonstram os recursos de armazenamento da NetApp para virtualização
+    usando o Microsoft Hyper-V.
+  tiles:
+  - title: Começar
+    links:
+    - title: Saiba mais sobre a implantação do Hyper-V com o ONTAP
+      url: hyperv-deploy.html
+    - title: Introdução ao Hyper-V no Windows Server
+      url: https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/
+    - title: Saiba mais sobre a tecnologia Hyper-V
+      url: https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview
+  - title: Implantar o Microsoft Hyper-V
+    links:
+    - title: Preparar para implantar
+      url: hyperv-deploy-prereqs.html
+    - title: Diretrizes de implantação
+      url: hyperv-deploy-considerations.html
+    - title: Implantar o Microsoft Hyper-V no armazenamento NetApp
+      url: hyperv-deploy-data-protection.html
+    - title: Migrar VMs usando FlexClone e PowerShell
+      url: hyperv-deploy-script.html
+  - title: Soluções para Microsoft Hyper-V com NetApp
+    links:
+    - title: SnapMirror Active Sync com clusters extensíveis
+      url: hyperv-smas.html
+    - title: NetApp SMI-S Provider para Hyper-V
+      url: hyperv-smis.html
+  - title: Recursos adicionais
+    links:
+    - title: Diretrizes de implantação e práticas recomendadas de armazenamento para
+        Hyper-V
+      url: https://docs.netapp.com/us-en/ontap-apps-dbs/microsoft/win_overview.html

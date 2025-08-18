@@ -1,0 +1,162 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-rosa-overview.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, ROSA, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization 
+summary: Virtualização Red Hat OpenShift no ROSA 
+---
+= Implantar o Red Hat OpenShift Virtualization com FSx para ONTAP em um cluster ROSA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configure o Amazon FSx for NetApp ONTAP como o StorageClass padrão para um cluster ROSA (Red Hat OpenShift Service on AWS).  Este procedimento inclui a criação de uma VM que aproveita o armazenamento FSx ONTAP para seus volumes, a revisão de todos os objetos criados para a VM e a conexão com a VM usando credenciais de convidado.
+
+Também veremos como conectar-se à máquina virtual usando as credenciais de convidado e reiniciar a VM.  E, por fim, realizaremos uma migração ao vivo da Máquina Virtual do nó atual para um novo nó.  Examinaremos o conteúdo do armazenamento em disco após a reinicialização da VM e a migração ao vivo.
+
+
+
+== Pré-requisitos
+
+* link:https://signin.aws.amazon.com/signin?redirect_uri=https://portal.aws.amazon.com/billing/signup/resume&client_id=signup["Conta AWS"]
+* link:https://console.redhat.com/["Uma conta Red Hat"]
+* Usuário IAMlink:https://www.rosaworkshop.io/rosa/1-account_setup/["com permissões apropriadas"] para criar e acessar o cluster ROSA
+* link:https://aws.amazon.com/cli/["CLI da AWS"]
+* link:https://console.redhat.com/openshift/downloads["ROSA CLI"]
+* link:https://console.redhat.com/openshift/downloads["Interface de linha de comando OpenShift"](oc)
+* link:https://docs.aws.amazon.com/eks/latest/userguide/helm.html["Documentação do Helm 3"]
+* link:https://docs.openshift.com/rosa/rosa_hcp/rosa-hcp-sts-creating-a-cluster-quickly.html["Um cluster HCP ROSA"](com pelo menos 3 nós de trabalho bare-metal)
+* link:https://console.redhat.com/openshift/overview["Acesso ao console web do Red Hat OpenShift"]
+* Trident 25.02 ou posterior Para o pré-requisito do Trident acima, consultelink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
+* link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.17/html/virtualization/installing#virt-aws-bm_preparing-cluster-for-virt["Virtualização OpenShift instalada no Cluster ROSA"]
+
+
+A partir da versão Trident 25.02, você pode preparar facilmente os nós de trabalho do cluster ROSA (ou qualquer cluster OpenShift) para executar operações iSCSI no armazenamento FSxN. Há duas maneiras fáceis de instalar o Trident 25.02 (ou posterior) que automatiza a preparação do nó de trabalho para iSCSI. Antes de instalar o OpenShift Virtualization, você já deve ter criado o backend trident, a classe de armazenamento e os objetos de classe de instantâneo de volume e configurá-los como padrões.  Você pode consultar olink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
+
+
+
+== Configuração inicial
+
+Configure o backend do trident, a classe de armazenamento e o VolumeSnapshotClass.  Você pode consultar olink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
+
+Exemplo de yaml para criar um objeto de backend trident
+
+[source, yaml]
+----
+cat tbc.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-tbc-ontap-san-secret
+type: Opaque
+stringData:
+  username: fsxadmin
+  password: <password for the fsxN filesystem>
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-san
+spec:
+  version: 1
+  storageDriverName: ontap-san
+  managementLIF: <management lif of fsxN filesystem>
+  backendName: backend-tbc-ontap-san
+  svm: svm_FSxNForROSAiSCSI
+  credentials:
+    name: backend-tbc-ontap-san-secret
+
+cat sc.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: trident-csi
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
+  media: "ssd"
+  provisioningType: "thin"
+  snapshots: "true"
+allowVolumeExpansion: true
+
+cat snapshot-class.yaml
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: fsx-snapclass
+driver: csi.trident.netapp.io
+deletionPolicy: Retain
+
+#oc create -f tbc,yaml -n trident
+#oc create -f sc.yaml
+#oc create -f snapshot-class.yaml
+----
+Certifique-se de que a classe de armazenamento e a classe de instantâneo de volume estejam configuradas como padrões antes de instalar o OpenShift Virtualization.  Para obter detalhes sobre como configurar padrões, você pode consultar olink:osv-trident-install.html["Definindo padrões com a seção Trident Storage e Snapshot Class"] para mais detalhes.
+
+
+
+=== **Crie uma VM a partir do modelo**
+
+Use o console da Web para criar uma VM a partir de um modelo.  No console do RedHat OpenShiftService na AWS, crie uma máquina virtual.  Há modelos disponíveis no cluster que podem ser usados para criar a VM.  Na captura de tela abaixo, escolhemos a VM do Fedora nesta lista.  Dê um nome à VM e clique em **Personalizar máquina virtual**.  Selecione a aba **Discos** e clique em **Adicionar discos**.  Altere o nome do disco, de preferência para algo significativo, e certifique-se de que **trident-csi** esteja selecionado para classe de armazenamento.  Clique em **Salvar**.  Clique em **Criar Máquina Virtual**
+
+Após alguns minutos, a VM estará em estado de execuçãoimage:redhat-openshift-ocpv-rosa-003.png["OCP-v Criar VM a partir do modelo"]
+
+image:redhat-openshift-ocpv-rosa-004.png["Fontes de modelo OCP-v disponíveis"]
+
+image:redhat-openshift-ocpv-rosa-005.png["OCP-v Personalizar VM"]
+
+image:redhat-openshift-ocpv-rosa-006.png["Guia Discos OCP-v"]
+
+image:redhat-openshift-ocpv-rosa-007.png["OCP-v Adicionar disco"]
+
+image:redhat-openshift-ocpv-rosa-008.png["VM OCP-v em execução"]
+
+
+
+=== **Revise todos os objetos criados para a VM**
+
+Os discos de armazenamento.image:redhat-openshift-ocpv-rosa-009.png["Discos de armazenamento OCP-v"]
+
+Os sistemas de arquivos da VM mostrarão as partições, o tipo de sistema de arquivos e os pontos de montagem.image:redhat-openshift-ocpv-rosa-010.png["Sistemas de arquivos OCP-v"]
+
+2 PVCs são criados para a VM, um do disco de inicialização e um para o disco de hot plug.image:redhat-openshift-ocpv-rosa-011.png["PVCs de VM OCP-v"]
+
+O PVC para o disco de inicialização mostra que o modo de acesso é ReadWriteMany e a classe de armazenamento é trident-csi.image:redhat-openshift-ocpv-rosa-012.png["Disco de inicialização de VM OCP-v PVC"]
+
+Da mesma forma, o PVC para o disco hot-plug mostra que o modo de acesso é ReadWriteMany e a classe de armazenamento é trident-csi.image:redhat-openshift-ocpv-rosa-013.png["Disco hotplug OCP-v VM PVC"]
+
+Na captura de tela abaixo, podemos ver que o pod da VM tem o status Em execução.image:redhat-openshift-ocpv-rosa-014.png["VM OCP-v em execução"]
+
+Aqui podemos ver os dois volumes associados ao pod da VM e os dois PVCs associados a eles.image:redhat-openshift-ocpv-rosa-015.png["PVCs e PVs de VM OCP-v"]
+
+
+
+=== **Conecte-se à VM**
+
+Clique no botão 'Abrir console da web' e faça login usando as credenciais de convidadoimage:redhat-openshift-ocpv-rosa-016.png["Conexão de VM OCP-v"]
+
+image:redhat-openshift-ocpv-rosa-017.png["Login OCP-v"]
+
+Emita os seguintes comandos
+
+[source]
+----
+$ df (to display information about the disk space usage on a file system).
+----
+[source]
+----
+$ dd if=/dev/urandom of=random.dat bs=1M count=10240 (to create a file called random.dat in the home dir and fill it with random data).
+----
+O disco contém 11 GB de dados.image:redhat-openshift-ocpv-rosa-018.png["A VM OCP-v preenche o disco"]
+
+Use o vi para criar um arquivo de texto de exemplo que usaremos para testar.image:redhat-openshift-ocpv-rosa-019.png["OCP-v cria um arquivo"]
+
+**Blogs relacionados**
+
+link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlock-Seamless-iSCSI-Storage-Integration-A-Guide-to-FSxN-on-ROSA-Clusters-for/ba-p/459124["Desbloqueie a integração perfeita de armazenamento iSCSI: um guia para FSxN em clusters ROSA para iSCSI"]
+
+link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Simplifying-Trident-Installation-on-Red-Hat-OpenShift-with-the-New-Certified/ba-p/459710["Simplificando a instalação do Trident no Red Hat OpenShift com o novo operador certificado do Trident"]

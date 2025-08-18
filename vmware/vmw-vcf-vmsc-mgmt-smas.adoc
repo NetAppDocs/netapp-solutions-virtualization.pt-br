@@ -1,0 +1,74 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-vmsc-mgmt-smas.html 
+keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, iscsi 
+summary:  
+---
+= Configurar um cluster de extensão para um domínio de gerenciamento VCF usando o SnapMirror Active Sync
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Neste caso de uso, descrevemos o procedimento para usar ONTAP tools for VMware vSphere para configurar um cluster estendido para um domínio de gerenciamento VCF.  Este procedimento inclui a implantação de hosts vSphere e vCenter Server, a instalação de ferramentas ONTAP , a proteção de datastores com o SnapMirror Active Sync, a migração de VMs para datastores protegidos e a configuração de armazenamento suplementar.
+
+image:vmware-vcf-asa-mgmt-stretchcluster-001.png["Instância Única - Múltiplas Zonas de Disponibilidade"]
+
+
+
+== Visão geral do cenário
+
+A solução de cluster extensível pode ser implementada no cluster padrão ou em um cluster adicional em domínios de gerenciamento ou carga de trabalho do VCF.  O VMFS no FC é suportado tanto no armazenamento de dados principal quanto no armazenamento de dados suplementar.  O VMFS no iSCSI só é suportado com armazenamentos de dados suplementares.  Consulte o IMT para obter suporte de VMFS em NVMe-oF com sincronização ativa do SnapMirror .
+
+image:vmware-vcf-asa-mgmt-stretchcluster-002.png["Stretch Cluster com ONTAP para domínio de gerenciamento de VCF"]
+
+.Armazenamento principal no domínio de gerenciamento
+[%collapsible%open]
+====
+A partir do VCF 5.2, o domínio de gerenciamento pode ser implantado sem VSAN usando a ferramenta de importação do VCF.  A opção de conversão da ferramenta de importação VCF permitelink:vmw-vcf-mgmt-fc.html["uma implantação existente do vCenter em um domínio de gerenciamento"] .  Todos os clusters no vCenter se tornarão parte do domínio de gerenciamento.
+
+. Implantar hosts vSphere
+. Implantar o servidor vCenter no armazenamento de dados local (o vCenter precisa coexistir em hosts vSphere que serão convertidos em domínio de gerenciamento)
+. Implantar ONTAP tools for VMware vSphere
+. Implantar o plugin SnapCenter para VMware vSphere (opcional)
+. Criar armazenamento de dados (a configuração da zona FC deve estar em vigor)
+. Proteja o cluster vSphere
+. Migrar VMs para um armazenamento de dados recém-criado
+
+
+
+NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualizar o relacionamento do cluster do host nas ferramentas ONTAP para que o cluster indique as alterações feitas na origem ou no destino.
+
+====
+.Armazenamento suplementar no domínio de gerenciamento
+[%collapsible%open]
+====
+Depois que o domínio de gerenciamento estiver instalado e funcionando, armazenamentos de dados adicionais poderão ser criados usando ferramentas ONTAP , o que acionará a expansão do grupo de consistência.
+
+
+TIP: Se um cluster vSphere estiver protegido, todos os armazenamentos de dados no cluster estarão protegidos.
+
+Se o ambiente VCF for implantado com a ferramenta Cloud Builder, para criar o armazenamento suplementar com iSCSI, implante ferramentas ONTAP para criar o armazenamento de dados iSCSI e proteger o cluster vSphere.
+
+
+NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualizar o relacionamento do cluster do host nas ferramentas ONTAP para que o cluster indique as alterações feitas na origem ou no destino.
+
+====
+
+
+== Informações adicionais
+
+Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
+
+Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html["Documentação do VMware Cloud Foundation 5.2"] .
+
+
+
+== Demonstração em vídeo desta solução
+
+.Cluster de alongamento para VCF com ferramentas ONTAP
+video::569a91a9-2679-4414-b6dc-b25d00ff0c5a[panopto,width=360]

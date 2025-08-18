@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-migrate.html 
+keywords: vmware, vcf, migrate, import 
+summary:  
+---
+= Saiba mais sobre como converter um ambiente vSphere com armazenamentos de dados existentes para VCF
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+A conversão de um ambiente vSphere com armazenamentos de dados existentes em execução no ONTAP em um ambiente VMware Cloud Foundation (VCF) envolve a integração da infraestrutura atual em uma arquitetura de nuvem privada moderna.
+
+Este processo aproveita a flexibilidade do armazenamento ONTAP para acesso e gerenciamento de dados contínuos.  Depois que o domínio de gerenciamento do VCF estiver estabelecido, os administradores poderão importar com eficiência ambientes vSphere adicionais para o ecossistema do VCF.  Essa integração melhora a utilização de recursos, simplifica o gerenciamento de nuvem privada e garante uma transição tranquila com interrupção mínima nas cargas de trabalho existentes.
+
+Consulte as soluções a seguir para obter detalhes técnicos sobre a conversão de uma instância do vCenter.
+
+* link:vmw-vcf-mgmt-nfs.html["Converter instância existente do vCenter em domínio de gerenciamento VCF (NFS)"]
+* link:vmw-vcf-mgmt-fc.html["Converter instância do vCenter (armazenamento de dados FC) em domínio de gerenciamento VCF"]
+

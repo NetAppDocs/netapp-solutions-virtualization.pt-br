@@ -1,0 +1,26 @@
+---
+section: hyperv
+title: Virtualização Hyper-V
+url: "/hyperv/index.html"
+entries:
+- title: Implantar o Hyper-V no armazenamento NetApp
+  pdf-filename: Implantar o Hyper-V no NetApp Storage
+  entries:
+  - title: Sobre a implantação do Hyper-V com o ONTAP
+    url: "/hyperv/hyperv-deploy.html"
+  - title: Preparar para implantar
+    url: "/hyperv/hyperv-deploy-prereqs.html"
+  - title: Diretrizes de implantação
+    url: "/hyperv/hyperv-deploy-considerations.html"
+  - title: Implantar o Hyper-V
+    url: "/hyperv/hyperv-deploy-data-protection.html"
+  - title: Resumo
+    url: "/hyperv/hyperv-deploy-conclusion.html"
+  - title: Migrar VMs para o Hyper-V
+    url: "/hyperv/hyperv-deploy-script.html"
+- title: Configurar replicação com SnapMirror Active Sync
+  pdf-filename: Configurar replicação com SnapMirror Active Sync
+  url: "/hyperv/hyperv-smas.html"
+- title: Use o Provedor SMI-S para Hyper-V
+  pdf-filename: Use o Provedor SMI-S para Microsoft Hyper-V
+  url: "/hyperv/hyperv-smis.html"

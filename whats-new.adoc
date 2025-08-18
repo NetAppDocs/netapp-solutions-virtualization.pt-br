@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: whats-new.html 
+keywords: 'netapp, solutions, virtualization, what"s new, updates, change log' 
+summary: Log de alterações recentes no material de apoio das soluções de virtualização da NetApp . 
+---
+= Novidades nas soluções de virtualização da NetApp
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Aprenda o que há de novo em soluções de virtualização.
+
+
+
+== 18 de agosto de 2025
+
+O site da NetApp Solutions agora é olink:https://docs.netapp.com/us-en/netapp-solutions-family/index.html["Família de soluções NetApp"^] , que inclui os seguintes sites:
+
+* link:https://docs.netapp.com/us-en/netapp-solutions-ai/index.html["Soluções de inteligência artificial da NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-containers/index.html["Soluções de contêiner NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-dataops/index.html["Soluções de gerenciamento de dados da NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-databases/index.html["Soluções de banco de dados NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-cloud/index.html["Soluções de nuvem pública e híbrida da NetApp"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-sap/index.html["Soluções NetApp para SAP"^]
+* Soluções de virtualização da NetApp
+

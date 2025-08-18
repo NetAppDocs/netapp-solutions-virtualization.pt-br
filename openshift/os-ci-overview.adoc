@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-ci-overview.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, cloud Insights 
+summary: Monitoramento usando Cloud Insights para VMs no Red Hat OpenShift Virtualization 
+---
+= Aprenda sobre o monitoramento de VMs com o Data Infrastructure Insights no Red Hat OpenShift Virtualization
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O NetApp Data Infrastructure Insights (antigo Cloud Insights) integra-se ao OpenShift Virtualization para monitorar VMs, fornecendo visibilidade em nuvens públicas e data centers privados.  Ele permite que os usuários solucionem problemas, otimizem recursos e obtenham insights usando painéis, consultas poderosas e alertas para limites de dados.
+
+O NetApp Cloud Insights é uma ferramenta de monitoramento de infraestrutura de nuvem que oferece visibilidade de toda a sua infraestrutura.  Com o Cloud Insights, você pode monitorar, solucionar problemas e otimizar todos os seus recursos, incluindo suas nuvens públicas e seus data centers privados.  Para obter mais informações sobre o NetApp Cloud Insights, consulte o https://docs.netapp.com/us-en/cloudinsights["Documentação do Cloud Insights"] .
+
+Para começar a usar o Cloud Insights, você deve se inscrever no portal NetApp BlueXP .  Para mais detalhes, consulte olink:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html["Integração do Cloud Insights"]
+
+O Cloud Insights tem vários recursos que permitem que você encontre dados de forma rápida e fácil, solucione problemas e forneça insights sobre seu ambiente.  Você pode encontrar dados facilmente com consultas poderosas, visualizar dados em painéis e enviar alertas por e-mail para limites de dados definidos por você.  Consulte olink:https://docs.netapp.com/us-en/cloudinsights/concept_feature_tutorials.html#introduction["tutoriais em vídeo"] para ajudar você a entender esses recursos.
+
+Para que o Cloud Insights comece a coletar dados, você precisa do seguinte
+
+**Coletores de Dados** Existem 3 tipos de Coletores de Dados: * Infraestrutura (dispositivos de armazenamento, switches de rede, infraestrutura de computação) * Sistemas Operacionais (como VMware ou Windows) * Serviços (como Kafka)
+
+Os coletores de dados descobrem informações de fontes de dados, como dispositivos de armazenamento ONTAP (coletor de dados de infraestrutura).  As informações coletadas são usadas para análise, validação, monitoramento e solução de problemas.
+
+**Unidade de Aquisição** Se você estiver usando um Coletor de Dados de infraestrutura, também precisará de uma Unidade de Aquisição para injetar dados no Cloud Insights.  Uma Unidade de Aquisição é um computador dedicado a hospedar coletores de dados, normalmente uma Máquina Virtual.  Este computador normalmente está localizado no mesmo data center/VPC que os itens monitorados.
+
+**Agentes Telegraf** O Cloud Insights também oferece suporte ao Telegraf como seu agente para coleta de dados de integração.  O Telegraf é um agente de servidor controlado por plugin que pode ser usado para coletar e relatar métricas, eventos e logs.
+
+Arquitetura de Cloud Insights
+
+image:redhat-openshift-ci-overview-001.png["Arquitetura de Cloud Insights"]

@@ -1,0 +1,82 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-vm-dp-using-velero.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, Openshift Data Protection Application operator, velero 
+summary: Virtualização Red Hat OpenShift com NetApp ONTAP 
+---
+= Crie backup sob demanda para VMs no Red Hat OpenShift Virtualization usando Velero
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Faça backup de VMs no OpenShift Virtualization usando Velero e NetApp ONTAP S3 ou StorageGRID.  Este procedimento inclui a criação de Recursos Personalizados de Backup (CRs) para backups sob demanda e CRs Agendados para backups agendados.  Cada backup captura metadados de VM e volumes persistentes, armazenando-os no local de armazenamento de objetos especificado para fins de recuperação ou conformidade.
+
+
+
+== Etapas para criar um backup de uma VM
+
+Para criar um backup sob demanda de toda a VM (metadados da VM e discos da VM), clique na guia **Backup**.  Isso cria um Recurso Personalizado de Backup (CR). Um exemplo de yaml é fornecido para criar o Backup CR.  Usando este yaml, a VM e seus discos no namespace especificado serão copiados. Parâmetros adicionais podem ser definidos conforme mostrado nalink:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/oadp-creating-backup-cr.html["documentação"] .
+
+Um instantâneo dos volumes persistentes que dão suporte aos discos será criado pelo CSI.  Um backup da VM junto com o instantâneo de seus discos são criados e armazenados no local de backup especificado no yaml. O backup permanecerá no sistema por 30 dias, conforme especificado no ttl.
+
+....
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: backup1
+  namespace: openshift-adp
+spec:
+  includedNamespaces:
+  - virtual-machines-demo
+  snapshotVolumes: true
+  storageLocation: velero-demo-1 -->this is the backupStorageLocation previously created
+                                    when Velero is configured.
+  ttl: 720h0m0s
+....
+Quando o backup for concluído, sua Fase será exibida como concluída.
+
+image:redhat-openshift-oadp-backup-001.png["Backup concluído"]
+
+Você pode inspecionar o backup no armazenamento de objetos com a ajuda de um aplicativo de navegador S3. O caminho do backup é exibido no bucket configurado com o prefixo nome (velero/demobackup).  Você pode ver que o conteúdo do backup inclui instantâneos de volume, logs e outros metadados da máquina virtual.
+
+
+NOTE: No StorageGrid, você também pode usar o console S3 disponível no Tenant Manager para visualizar os objetos de backup.
+
+image:redhat-openshift-oadp-backup-002.png["Objetos de backup no S3"]
+
+
+
+== Criação de backups agendados para VMs no OpenShift Virtualization
+
+Para criar backups agendados, você precisa criar uma CR agendada. O agendamento é simplesmente uma expressão Cron que permite que você especifique o horário em que deseja criar o backup. Um exemplo de yaml para criar um Schedule CR.
+
+....
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: <schedule>
+  namespace: openshift-adp
+spec:
+  schedule: 0 7 * * *
+  template:
+    hooks: {}
+    includedNamespaces:
+    - <namespace>
+    storageLocation: velero-demo-1
+    defaultVolumesToFsBackup: true
+    ttl: 720h0m0s
+....
+A expressão Cron 0 7 * * * significa que um backup será criado às 7:00 todos os dias. Os namespaces a serem incluídos no backup e o local de armazenamento do backup também são especificados. Então, em vez de um CR de backup, o CR agendado é usado para criar um backup no horário e na frequência especificados.
+
+Depois que o agendamento for criado, ele será habilitado.
+
+image:redhat-openshift-oadp-backup-003.png["Cronograma criado"]
+
+Os backups serão criados de acordo com esta programação e podem ser visualizados na aba Backup.
+
+image:redhat-openshift-oadp-backup-004.png["Cronograma criado"]

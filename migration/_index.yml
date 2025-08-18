@@ -1,0 +1,34 @@
+---
+indexpage:
+  title: Soluções de migração de VM
+  summary: As soluções de migração de VM da NetApp fornecem ferramentas e utilitários
+    abrangentes para migrar e converter máquinas virtuais em diferentes plataformas
+    e sistemas de armazenamento.
+  lead: As soluções de migração de VM da NetApp fornecem ferramentas e utilitários
+    abrangentes para migrar e converter máquinas virtuais em diferentes plataformas
+    e sistemas de armazenamento.
+  tiles:
+  - title: Começar
+    links:
+    - title: Sobre o Shift Toolkit
+      url: shift-toolkit-overview.html
+    - title: Sobre a migração de VMs para datastores ONTAP
+      url: migrate-get-start-ontap.html
+    - title: Sobre a migração de VMs para o Amazon EC2
+      url: migrate-vms-to-ec2-fsxn-overview.html
+  - title: Usar Shift Toolkit
+    links:
+    - title: Instalar o Shift Toolkit
+      url: shift-toolkit-install.html
+    - title: Configurar Shift Toolkit
+      url: shift-toolkit-ui.html
+    - title: Migrar VMs usando o Shift Toolkit
+      url: shift-toolkit-migration.html
+    - title: Converter VMs usando o Shift Toolkit
+      url: shift-toolkit-conversion.html
+  - title: Migrar VMs no local e na nuvem
+    links:
+    - title: Migrar VMs para datastores ONTAP
+      url: migrate-vms-to-ontap-datastore.html
+    - title: Migrar VMs para o Amazon EC2
+      url: migrate-vms-to-ec2-fsxn-deploy.html

@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-vm-dp-delete-using-velero.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, CNV, Container Native Virtualization, Red Hat OpenShift Virtualization, OADP operator, Openshift Data Protection Application operator, velero 
+summary: Virtualização Red Hat OpenShift com NetApp ONTAP 
+---
+= Excluir um CR de backup ou restaurar o CR no Red Hat OpenShift Virtualization usando o Velero
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Exclua recursos de backup e restauração para VMs no OpenShift Virtualization usando o Velero.  Use a CLI do OpenShift para excluir backups enquanto retém os dados de armazenamento de objetos, ou a CLI do Velero para excluir o recurso personalizado de backup (CR) e os dados de armazenamento associados.
+
+
+
+== Excluindo um backup
+
+Você pode excluir um CR de backup sem excluir os dados do Object Storage usando a ferramenta OC CLI.
+
+....
+oc delete backup <backup_CR_name> -n <velero_namespace>
+....
+Se você quiser excluir o Backup CR e excluir os dados de armazenamento de objetos associados, poderá fazer isso usando a ferramenta Velero CLI.
+
+Baixe o CLI conforme as instruções nolink:https://velero.io/docs/v1.3.0/basic-install/#install-the-cli["Documentação do Velero"] .
+
+Execute o seguinte comando delete usando o Velero CLI
+
+....
+velero backup delete <backup_CR_name> -n <velero_namespace>
+....
+
+
+== Excluindo uma restauração
+
+Você pode excluir o CR de restauração usando o Velero CLI
+
+....
+velero restore delete restore --namespace openshift-adp
+....
+Você pode usar o comando oc e também a IU para excluir o CR de restauração
+
+....
+oc delete backup <backup_CR_name> -n <velero_namespace>
+....

@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-getting-started-hmc.html 
+keywords: vmware, getting, started, overview, netapp, hybrid, multicloud, multi, cloud 
+summary:  
+---
+= Saiba mais sobre ambientes multicloud híbridos com NetApp e VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Descubra como a NetApp e a VMware otimizam as configurações de multicloud híbrida integrando a infraestrutura local com serviços de nuvem pública, permitindo a migração de carga de trabalho, otimização de recursos e operações consistentes em todos os ambientes.
+
+
+
+== Introdução
+
+Essa abordagem permite que as empresas migrem facilmente cargas de trabalho, otimizem o uso de recursos e mantenham operações consistentes em ambos os ambientes.
+
+Para obter mais informações sobre cenários de nuvem híbrida com VMware e NetApp, consultelink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-overview.html#vmware-cloud-options-in-public-cloud["Visão geral do NetApp Hybrid Multicloud com VMware"^] .
+
+
+
+== Cenários de implantação do VMware com NetApp
+
+Esta seção descreve várias opções de implantação para ambientes VMware em nuvens públicas e locais.  Cada um dos provedores de nuvem oferece suporte a uma pilha VMware Software Defined Data Center (SDDC) e/ou VMware Cloud Foundation (VCF) em suas respectivas ofertas de nuvem pública.
+
+* *VMware local*
+
+
+Usar o VMware com armazenamento NetApp no local proporciona um ambiente de virtualização robusto, escalável e flexível.  Ao combinar os recursos avançados de gerenciamento de dados da NetApp, como desduplicação, compactação e snapshots eficientes com o sistema de armazenamento apropriado fornecido pela ONTAP, os clientes podem escolher a plataforma que melhor funciona para eles.  Essa combinação garante alto desempenho, confiabilidade e gerenciamento simplificado para cargas de trabalho virtualizadas, melhorando a eficiência geral do data center.
+
+* *Solução VMware Azure*
+
+
+O Azure VMware Solution é um serviço de nuvem híbrida que permite SDDCs VMware totalmente funcionais dentro da nuvem pública do Microsoft Azure. O Azure VMware Solution é uma solução primária totalmente gerenciada e suportada pela Microsoft, verificada pela VMware e que aproveita a infraestrutura do Azure. Isso significa que, quando o Azure VMware Solution é implantado, os clientes obtêm o ESXi da VMware para virtualização de computação, o vSAN para armazenamento hiperconvergente e o NSX para rede e segurança, tudo isso aproveitando a presença global do Microsoft Azure, as instalações de data center líderes da categoria e a proximidade com o rico ecossistema de serviços e soluções nativos do Azure.
+
+* *Nuvem VMware na AWS*
+
+
+O VMware Cloud on AWS traz o software SDDC de nível empresarial da VMware para a AWS Cloud com acesso otimizado aos serviços nativos da AWS. Com a tecnologia VMware Cloud Foundation, o VMware Cloud on AWS integra os produtos de computação, armazenamento e virtualização de rede da VMware (VMware vSphere, VMware vSAN e VMware NSX) juntamente com o gerenciamento do VMware vCenter Server, otimizado para execução em infraestrutura AWS dedicada, elástica e bare-metal.
+
+* *Google Cloud VMware Engine*
+
+
+O Google Cloud VMware Engine é uma oferta de infraestrutura como serviço (IaaS) desenvolvida com base na infraestrutura escalável de alto desempenho do Google Cloud e na pilha VMware Cloud Foundation – VMware vSphere, vCenter, vSAN e NSX-T. Este serviço permite um caminho rápido para a nuvem, migrando ou estendendo cargas de trabalho VMware existentes de ambientes locais para o Google Cloud Platform sem o custo, esforço ou risco de rearquitetar aplicativos ou reestruturar operações. É um serviço vendido e suportado pelo Google, trabalhando em estreita colaboração com a VMware.

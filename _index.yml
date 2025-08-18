@@ -1,0 +1,76 @@
+---
+indexpage:
+  title: Soluções de virtualização da NetApp
+  summary: A NetApp fornece soluções abrangentes de virtualização que permitem que
+    as organizações otimizem sua infraestrutura de TI em vários hipervisores e plataformas.  Descubra
+    estratégias para modernizar ambientes VMware, migrar para hipervisores alternativos
+    e aproveitar os recursos avançados de gerenciamento de dados e integração de nuvem
+    da NetApp.
+  lead: A NetApp fornece soluções abrangentes de virtualização que permitem que as
+    organizações otimizem sua infraestrutura de TI em vários hipervisores e plataformas.  Descubra
+    estratégias para modernizar ambientes VMware, migrar para hipervisores alternativos
+    e aproveitar os recursos avançados de gerenciamento de dados e integração de nuvem
+    da NetApp.
+  tiles:
+  - title: Começar
+    links:
+    - title: O que há de novo
+      url: "/whats-new.html"
+    - title: Saiba mais sobre virtualização com a NetApp
+      url: "/virtualization/virt-overview.html"
+    - title: Use o NetApp para qualquer solução de virtualização
+      url: "/virtualization/virt-options-on-netapp.html"
+    - title: Blogs
+      url: "/blogs.html"
+    - title: Vídeos e demonstrações
+      url: "/videos/index.html"
+  - title: Soluções NetApp para virtualização
+    links:
+    - title: VMware local e na nuvem
+      url: "/vmware/index.html"
+    - title: Microsoft Hyper-V
+      url: hyperv/index.html
+    - title: Virtualização Red Hat OpenShift
+      url: "/openshift/index.html"
+    - title: Ambiente Virtual Proxmox
+      url: "/proxmox/index.html"
+    - title: KVM e libvirt
+      url: "/kvm/index.html"
+  - title: Migração e conversão de VM
+    links:
+    - title: Migrar VMs usando o Shift Toolkit
+      url: "/migration/shift-toolkit-migration.html"
+    - title: Converter VMs usando o Shift Toolkit
+      url: "/migration/shift-toolkit-conversion.html"
+    - title: Migrar VMs para datastores ONTAP
+      url: "/migration/migrate-vms-to-ontap-datastore.html"
+    - title: Migrar VMs para o Amazon EC2
+      url: "/migration/migrate-vms-to-ec2-fsxn-overview.html"
+  - title: Ferramentas de gestão e integrações
+    links:
+    - title: ONTAP tools for VMware vSphere
+      url: "/vmware/vmw-getting-started-otv.html"
+    - title: APIs ONTAP e VMware para administração
+      url: "/vmware/vmw-getting-started-automation.html"
+    - title: Data Infrastructure Insights para monitoramento
+      url: "/vmware/vmw-getting-started-dii.html"
+    - title: Migração de carga de trabalho de VM para maior eficiência
+      url: "/vmware/vmw-getting-started-migration.html"
+  - title: Proteção de dados e recuperação de desastres
+    links:
+    - title: Proteja com MetroCluster e SnapMirror Active Sync
+      url: "/vmware/vmw-getting-started-vmsc.html"
+    - title: Proteja e recupere dados contra ransomware
+      url: "/vmware/vmw-getting-started-security.html"
+    - title: SnapCenter Plug-in for VMware vSphere
+      url: "/vmware/vmw-getting-started-snapcenter.html"
+    - title: BlueXP disaster recovery
+      url: "/vmware/vmw-dr-gs.html"
+  - title: Solicitações de soluções e feedback
+    links:
+    - title: Solicitação de automação
+      url: https://github.com/NetAppDocs/netapp-solutions/issues/new?body=[Request%20Automation]%0d%0a%0d%0aSolution%20Name:%20%0d%0aRequest%20Title:%20%0d%0aDescription:%0d%0aSuggestions:&title=Request%20Automation%20-%20%3Crequest_title%3E
+    - title: Proponha uma nova solução
+      url: https://github.com/NetAppDocs/netapp-solutions/issues/new?body=[Request%20Solution]%0d%0a%0d%0aSolution%20Use%20Case:%20%0d%0aSolution%20Description:%20%0d%0aAdditional%20Comments:&title=Request%20Solution%20-%20%3Csolution%3E
+    - title: Fornecer feedback da solução
+      url: https://github.com/NetAppDocs/netapp-solutions/issues/new?body=[Solution%20Feedback]%0d%0a%0d%0aSolution%20Name:%20%0d%0aSolution%20Feedback:%20%0d%0aAdditional%20Comments:&title=Solution%20Feedback%20-%20%3Csolution%3E

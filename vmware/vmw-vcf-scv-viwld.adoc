@@ -1,0 +1,479 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-scv-viwld.html 
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, vvol, vvols, array, ontap tools, otv, sddc, scv, snapcenter, plug-in 
+summary:  
+---
+= Proteja um domínio de carga de trabalho VCF com o plug-in SnapCenter para VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Neste caso de uso, descrevemos o procedimento para usar o plug-in SnapCenter para VMware vSphere para fazer backup e restaurar VMs e armazenamentos de dados em um domínio de carga de trabalho do VMware Cloud Foundation (VCF).  Este procedimento resume a implantação do plug-in SnapCenter para VMware vSphere, a adição de sistemas de armazenamento, a criação de políticas de backup e a execução de restaurações de VMs e arquivos.
+
+*iSCSI* é usado como protocolo de armazenamento para o armazenamento de dados VMFS nesta solução.
+
+
+
+== Visão geral do cenário
+
+Este cenário abrange as seguintes etapas de alto nível:
+
+* Implante o SnapCenter Plug-in for VMware vSphere (SCV) no domínio de carga de trabalho do VI.
+* Adicione sistemas de armazenamento ao SCV.
+* Crie políticas de backup no SCV.
+* Crie grupos de recursos no SCV.
+* Use o SCV para fazer backup de armazenamentos de dados ou VMs específicas.
+* Use o SCV para restaurar VMs em um local alternativo no cluster.
+* Use o SCV para restaurar arquivos para um sistema de arquivos do Windows.
+
+
+
+
+== Pré-requisitos
+
+Este cenário requer os seguintes componentes e configurações:
+
+* Um sistema de armazenamento ONTAP ASA com armazenamentos de dados iSCSI VMFS alocados ao cluster de domínio de carga de trabalho.
+* Um sistema de armazenamento ONTAP secundário configurado para receber backups secundários usando SnapMirror.
+* A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
+* Um domínio de carga de trabalho VI foi implantado anteriormente.
+* As máquinas virtuais estão presentes no cluster que o SCV foi designado para proteger.
+
+
+Para obter informações sobre como configurar armazenamentos de dados iSCSI VMFS como armazenamento suplementar, consultelink:vmw-vcf-mgmt-supplemental-iscsi.html["*iSCSI como armazenamento suplementar para domínios de gerenciamento usando ferramentas ONTAP para VMware*"] nesta documentação.  O processo para usar o OTV para implantar armazenamentos de dados é idêntico para domínios de gerenciamento e carga de trabalho.
+
+
+TIP: Além de replicar backups feitos com SCV para armazenamento secundário, cópias externas de dados podem ser feitas para armazenamento de objetos em um dos três (3) principais provedores de nuvem usando o BlueXP backup and recovery NetApp BlueXP para VMs.  Para mais informações consulte a soluçãolink:vmw-vcf-321-data-protection.html["Proteção de dados 3-2-1 para VMware com plug-in SnapCenter e BlueXP backup and recovery para VMs"] .
+
+image:vmware-vcf-asa-108.png["Estratégia de backup 3-2-1"]
+
+
+
+== Etapas de implantação
+
+Para implantar o plug-in SnapCenter e usá-lo para criar backups e restaurar VMs e armazenamentos de dados, conclua as seguintes etapas:
+
+
+
+=== Implantar e usar o SCV para proteger dados em um domínio de carga de trabalho do VI
+
+Conclua as seguintes etapas para implantar, configurar e usar o SCV para proteger dados em um domínio de carga de trabalho do VI:
+
+.Implantar o SnapCenter Plug-in for VMware vSphere
+[%collapsible%open]
+====
+O plug-in SnapCenter é hospedado no domínio de gerenciamento do VCF, mas registrado no vCenter para o domínio de carga de trabalho do VI.  Uma instância do SCV é necessária para cada instância do vCenter e lembre-se de que um domínio de carga de trabalho pode incluir vários clusters gerenciados por uma única instância do vCenter.
+
+Conclua as seguintes etapas no cliente vCenter para implantar o SCV no domínio de carga de trabalho do VI:
+
+. Baixe o arquivo OVA para a implantação do SCV na área de download do site de suporte da NetApplink:https://mysupport.netapp.com/site/products/all/details/scv/downloads-tab["*AQUI*"] .
+. No domínio de gerenciamento vCenter Client, selecione *Implantar modelo OVF...*.
++
+image:vmware-vcf-asa-046.png["Implantar modelo OVF..."]
+
++
+{nbsp}
+
+. No assistente *Implantar modelo OVF*, clique no botão de opção *Arquivo local* e selecione para carregar o modelo OVF baixado anteriormente. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-047.png["Selecione o modelo OVF"]
+
++
+{nbsp}
+
+. Na página *Selecionar nome e pasta*, forneça um nome para a VM do SCV data broker e uma pasta no domínio de gerenciamento. Clique em *Avançar* para continuar.
+. Na página *Selecionar um recurso de computação*, selecione o cluster de domínio de gerenciamento ou o host ESXi específico dentro do cluster para instalar a VM.
+. Revise as informações referentes ao modelo OVF na página *Revisar detalhes* e concorde com os termos de licenciamento na página *Contratos de licenciamento*.
+. Na página *Selecionar armazenamento*, escolha o armazenamento de dados no qual a VM será instalada e selecione o *formato do disco virtual* e a *Política de armazenamento da VM*.  Nesta solução, a VM será instalada em um armazenamento de dados iSCSI VMFS localizado em um sistema de armazenamento ONTAP , conforme implantado anteriormente em uma seção separada desta documentação. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-048.png["Selecione o modelo OVF"]
+
++
+{nbsp}
+
+. Na página *Selecionar rede*, selecione a rede de gerenciamento que pode se comunicar com o dispositivo vCenter do domínio de carga de trabalho e os sistemas de armazenamento ONTAP primário e secundário.
++
+image:vmware-vcf-asa-049.png["selecionar rede de gerenciamento"]
+
++
+{nbsp}
+
+. Na página *Personalizar modelo* preencha todas as informações necessárias para a implantação:
++
+** FQDN ou IP e credenciais para o domínio de carga de trabalho do dispositivo vCenter.
+** Credenciais para a conta administrativa do SCV.
+** Credenciais para a conta de manutenção do SCV.
+** Detalhes das propriedades da rede IPv4 (o IPv6 também pode ser usado).
+** Configurações de data e hora.
++
+Clique em *Avançar* para continuar.
+
++
+image:vmware-vcf-asa-050.png["selecionar rede de gerenciamento"]
+
++
+image:vmware-vcf-asa-051.png["selecionar rede de gerenciamento"]
+
++
+image:vmware-vcf-asa-052.png["selecionar rede de gerenciamento"]
+
++
+{nbsp}
+
+
+
+. Por fim, na página *Pronto para concluir*, revise todas as configurações e clique em Concluir para iniciar a implantação.
+
+
+====
+.Adicionar sistemas de armazenamento ao SCV
+[%collapsible%open]
+====
+Depois que o plug-in SnapCenter estiver instalado, conclua as seguintes etapas para adicionar sistemas de armazenamento ao SCV:
+
+. O SCV pode ser acessado no menu principal do vSphere Client.
++
+image:vmware-vcf-asa-053.png["Abra o plugin SnapCenter"]
+
++
+{nbsp}
+
+. Na parte superior da interface do SCV UI, selecione a instância correta do SCV que corresponde ao cluster vSphere a ser protegido.
++
+image:vmware-vcf-asa-054.png["Selecione a instância correta"]
+
++
+{nbsp}
+
+. Navegue até *Sistemas de armazenamento* no menu à esquerda e clique em *Adicionar* para começar.
++
+image:vmware-vcf-asa-055.png["Adicionar novo sistema de armazenamento"]
+
++
+{nbsp}
+
+. No formulário *Adicionar Sistema de Armazenamento*, preencha o endereço IP e as credenciais do sistema de armazenamento ONTAP a ser adicionado e clique em *Adicionar* para concluir a ação.
++
+image:vmware-vcf-asa-056.png["Fornecer credenciais do sistema de armazenamento"]
+
++
+{nbsp}
+
+. Repita esse procedimento para quaisquer sistemas de armazenamento adicionais a serem gerenciados, incluindo quaisquer sistemas a serem usados como destinos de backup secundários.
+
+
+====
+.Configurar políticas de backup no SCV
+[%collapsible%open]
+====
+Para obter mais informações sobre a criação de políticas de backup do SCV, consultelink:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_backup_policies_for_vms_and_datastores.html["Crie políticas de backup para VMs e armazenamentos de dados"] .
+
+Conclua as seguintes etapas para criar uma nova política de backup:
+
+. No menu à esquerda, selecione *Políticas* e clique em *Criar* para começar.
++
+image:vmware-vcf-asa-057.png["Criar nova política"]
+
++
+{nbsp}
+
+. No formulário *Nova Política de Backup*, forneça um *Nome* e uma *Descrição* para a política, a *Frequência* em que os backups ocorrerão e o período de *Retenção* que especifica por quanto tempo o backup será retido.
++
+*Período de bloqueio* permite que o recurso ONTAP SnapLock crie instantâneos à prova de violação e permite a configuração do período de bloqueio.
+
++
+Para *Replicação* Selecione para atualizar os relacionamentos SnapMirror ou SnapVault subjacentes para o volume de armazenamento ONTAP .
+
++
+
+TIP: A replicação do SnapMirror e do SnapVault são semelhantes, pois ambas utilizam a tecnologia ONTAP SnapMirror para replicar de forma assíncrona volumes de armazenamento para um sistema de armazenamento secundário para maior proteção e segurança.  Para relacionamentos SnapMirror , o cronograma de retenção especificado na política de backup do SCV regerá a retenção para o volume primário e secundário.  Com os relacionamentos do SnapVault , um cronograma de retenção separado pode ser estabelecido no sistema de armazenamento secundário para cronogramas de retenção de longo prazo ou diferentes.  Nesse caso, o rótulo do instantâneo é especificado na política de backup do SCV e na política associada ao volume secundário, para identificar a quais volumes aplicar o cronograma de retenção independente.
+
++
+Escolha quaisquer opções avançadas adicionais e clique em *Adicionar* para criar a política.
+
++
+image:vmware-vcf-asa-058.png["Preencha os detalhes da apólice"]
+
+
+
+====
+.Criar grupos de recursos no SCV
+[%collapsible%open]
+====
+Para obter mais informações sobre a criação de Grupos de Recursos SCV, consultelink:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_resource_groups_for_vms_and_datastores.html["Criar grupos de recursos"] .
+
+Conclua as seguintes etapas para criar um novo grupo de recursos:
+
+. No menu à esquerda, selecione *Grupos de recursos* e clique em *Criar* para começar.
++
+image:vmware-vcf-asa-059.png["Criar novo grupo de recursos"]
+
++
+{nbsp}
+
+. Na página *Informações gerais e notificação*, forneça um nome para o grupo de recursos, configurações de notificação e quaisquer opções adicionais para a nomenclatura dos instantâneos.
+. Na página *Recurso*, selecione os armazenamentos de dados e as VMs a serem protegidas no grupo de recursos. Clique em *Avançar* para continuar.
++
+
+TIP: Mesmo quando apenas VMs específicas são selecionadas, todo o armazenamento de dados sempre é feito backup.  Isso ocorre porque o ONTAP tira instantâneos do volume que hospeda o armazenamento de dados.  No entanto, observe que selecionar apenas VMs específicas para backup limita a capacidade de restauração apenas para essas VMs.
+
++
+image:vmware-vcf-asa-060.png["Selecione os recursos para backup"]
+
++
+{nbsp}
+
+. Na página *Discos de abrangência*, selecione a opção de como lidar com VMs com VMDKs que abrangem vários armazenamentos de dados. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-061.png["Selecione a opção de armazenamento de dados abrangente"]
+
++
+{nbsp}
+
+. Na página *Políticas*, selecione uma política criada anteriormente ou várias políticas que serão usadas com este grupo de recursos. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-062.png["Selecione políticas"]
+
++
+{nbsp}
+
+. Na página *Agendamentos*, estabeleça quando o backup será executado configurando a recorrência e a hora do dia. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-063.png["Selecione o cronograma"]
+
++
+{nbsp}
+
+. Por fim, revise o *Resumo* e clique em *Concluir* para criar o grupo de recursos.
++
+image:vmware-vcf-asa-064.png["Revise o resumo e crie um grupo de recursos"]
+
++
+{nbsp}
+
+. Com o grupo de recursos criado, clique no botão *Executar agora* para executar o primeiro backup.
++
+image:vmware-vcf-asa-065.png["Revise o resumo e crie um grupo de recursos"]
+
++
+{nbsp}
+
+. Navegue até o *Painel* e, em *Atividades recentes do trabalho*, clique no número ao lado de *ID do trabalho* para abrir o monitor de trabalhos e visualizar o andamento do trabalho em execução.
++
+image:vmware-vcf-asa-066.png["Ver o andamento do trabalho de backup"]
+
+
+
+====
+
+
+==== Use o SCV para restaurar VMs, VMDKs e arquivos
+
+O plug-in SnapCenter permite restaurações de VMs, VMDKs, arquivos e pastas de backups primários ou secundários.
+
+As VMs podem ser restauradas para o host original, para um host alternativo no mesmo vCenter Server ou para um host ESXi alternativo gerenciado pelo mesmo vCenter ou qualquer vCenter no modo vinculado.
+
+VMs vVol podem ser restauradas para o host original.
+
+VMDKs em VMs tradicionais podem ser restaurados no armazenamento de dados original ou em um alternativo.
+
+VMDKs em VMs vVol podem ser restaurados para o armazenamento de dados original.
+
+Arquivos e pastas individuais em uma sessão de restauração de arquivos de convidado podem ser restaurados, o que anexa uma cópia de backup de um disco virtual e restaura os arquivos ou pastas selecionados.
+
+Conclua as etapas a seguir para restaurar VMs, VMDKs ou pastas individuais.
+
+.Restaurar VMs usando o plug-in SnapCenter
+[%collapsible%open]
+====
+Conclua as seguintes etapas para restaurar uma VM com SCV:
+
+. Navegue até a VM a ser restaurada no cliente vSphere, clique com o botão direito e navegue até * SnapCenter Plug-in for VMware vSphere*.  Selecione *Restaurar* no submenu.
++
+image:vmware-vcf-asa-067.png["Selecione para restaurar a VM"]
+
++
+
+TIP: Uma alternativa é navegar até o armazenamento de dados no inventário e, na guia *Configurar*, ir para * SnapCenter Plug-in for VMware vSphere > Backups*.  No backup escolhido, selecione as VMs a serem restauradas.
+
++
+image:vmware-vcf-asa-068.png["Navega pelos backups do armazenamento de dados"]
+
++
+{nbsp}
+
+. No assistente *Restaurar* selecione o backup a ser usado. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-069.png["Selecione o backup a ser usado"]
+
++
+{nbsp}
+
+. Na página *Selecionar escopo* preencha todos os campos obrigatórios:
++
+** *Restaurar escopo* - Selecione para restaurar toda a máquina virtual.
+** *Reiniciar VM* - Escolha se deseja iniciar a VM após a restauração.
+** *Restaurar local* - Escolha restaurar para o local original ou para um local alternativo.  Ao escolher o local alternativo, selecione as opções de cada um dos campos:
++
+*** *Servidor vCenter de destino* - vCenter local ou vCenter alternativo no modo vinculado
+*** *Host ESXi de destino*
+*** *Rede*
+*** *Nome da VM após restauração*
+*** *Selecione o armazenamento de dados:*
++
+image:vmware-vcf-asa-070.png["Selecione opções de escopo de restauração"]
+
++
+{nbsp}
+
++
+Clique em *Avançar* para continuar.
+
+
+
+
+
+. Na página *Selecionar local*, escolha restaurar a VM do sistema de armazenamento ONTAP primário ou secundário. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-071.png["Selecione o local de armazenamento"]
+
++
+{nbsp}
+
+. Por fim, revise o *Resumo* e clique em *Concluir* para iniciar o trabalho de restauração.
++
+image:vmware-vcf-asa-072.png["Clique em Concluir para iniciar o trabalho de restauração"]
+
++
+{nbsp}
+
+. O progresso do trabalho de restauração pode ser monitorado no painel *Tarefas recentes* no vSphere Client e no monitor de tarefas no SCV.
++
+image:vmware-vcf-asa-073.png["Monitorar o trabalho de restauração"]
+
+
+
+====
+.Restaurar VMDKs usando o plug-in SnapCenter
+[%collapsible%open]
+====
+O ONTAP Tools permite a restauração completa de VMDKs para seu local original ou a capacidade de anexar um VMDK como um novo disco a um sistema host.  Neste cenário, um VMDK será anexado a um host Windows para acessar o sistema de arquivos.
+
+Para anexar um VMDK de um backup, conclua as seguintes etapas:
+
+. No vSphere Client, navegue até uma VM e, no menu *Ações*, selecione * SnapCenter Plug-in for VMware vSphere > Anexar disco(s) virtual(is)*.
++
+image:vmware-vcf-asa-080.png["Selecione Anexar Disco(s) Virtual(is)"]
+
++
+{nbsp}
+
+. No assistente *Anexar disco(s) virtual(is)*, selecione a instância de backup a ser usada e o VMDK específico a ser anexado.
++
+image:vmware-vcf-asa-081.png["Selecione anexar configurações de disco virtual"]
+
++
+
+TIP: As opções de filtro podem ser usadas para localizar backups e exibir backups de sistemas de armazenamento primário e secundário.
+
++
+image:vmware-vcf-asa-082.png["Anexar filtro de disco(s) virtual(is)"]
+
++
+{nbsp}
+
+. Depois de selecionar todas as opções, clique no botão *Anexar* para iniciar o processo de restauração e anexar o VMDK ao host.
+. Após a conclusão do procedimento de anexação, o disco poderá ser acessado a partir do sistema operacional do host.  Neste caso, o SCV anexou o disco com seu sistema de arquivos NTFS à unidade E: do nosso Windows SQL Server e os arquivos de banco de dados SQL no sistema de arquivos podem ser acessados pelo Explorador de Arquivos.
++
+image:vmware-vcf-asa-083.png["Acessar o sistema de arquivos do Windows"]
+
+
+
+====
+.Restauração do sistema de arquivos convidado usando o plug-in SnapCenter
+[%collapsible%open]
+====
+O ONTAP Tools oferece restaurações de sistemas de arquivos convidados a partir de um VMDK em sistemas operacionais Windows Server.  Isso é realizado centralmente a partir da interface do plug-in SnapCenter .
+
+Para obter informações detalhadas, consultelink:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_restore_guest_files_and_folders_overview.html["Restaurar arquivos e pastas de convidados"] no site de documentação do SCV.
+
+Para executar uma restauração do sistema de arquivos convidado para um sistema Windows, conclua as seguintes etapas:
+
+. O primeiro passo é criar credenciais Executar Como para fornecer acesso ao sistema host Windows.  No vSphere Client, navegue até a interface do plug-in CSV e clique em *Guest File Restore* no menu principal.
++
+image:vmware-vcf-asa-084.png["Abrir restauração de arquivo de convidado"]
+
++
+{nbsp}
+
+. Em *Executar como credenciais*, clique no ícone *+* para abrir a janela *Executar como credenciais*.
+. Preencha um nome para o registro de credenciais, um nome de usuário e uma senha de administrador para o sistema Windows e, em seguida, clique no botão *Selecionar VM* para selecionar uma VM proxy opcional a ser usada para a restauração.image:vmware-vcf-asa-085.png["Executar como janela de credenciais"]
++
+{nbsp}
+
+. Na página Proxy VM, forneça um nome para a VM e localize-a pesquisando por host ESXi ou por nome.  Depois de selecionado, clique em *Salvar*.
++
+image:vmware-vcf-asa-086.png["Localizar VM na página Proxy VM"]
+
++
+{nbsp}
+
+. Clique em *Salvar* novamente na janela *Executar como credenciais* para concluir o salvamento do registro.
+. Em seguida, navegue até uma VM no inventário.  No menu *Ações* ou clicando com o botão direito do mouse na VM, selecione * SnapCenter Plug-in for VMware vSphere > Restauração de arquivo convidado*.
++
+image:vmware-vcf-asa-087.png["Abra o assistente de restauração de arquivo de convidado"]
+
++
+{nbsp}
+
+. Na página *Escopo de restauração* do assistente *Restauração de arquivo de convidado*, selecione o backup a ser restaurado, o VMDK específico e o local (primário ou secundário) para restaurar o VMDK. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-088.png["Escopo de restauração do arquivo convidado"]
+
++
+{nbsp}
+
+. Na página *Detalhes do convidado*, selecione usar *VM convidada* ou *Usar VM proxy de restauração de arquivo do convidado* para a restauração.  Além disso, preencha as configurações de notificação por e-mail aqui, se desejar. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-asa-089.png["Detalhes do arquivo de convidado"]
+
++
+{nbsp}
+
+. Por fim, revise a página *Resumo* e clique em *Concluir* para iniciar a sessão de Restauração do Sistema de Arquivos Convidado.
+. De volta à interface do plug-in SnapCenter , navegue até *Guest File Restore* novamente e visualize a sessão em execução em *Guest Session Monitor*.  Clique no ícone em *Navegar pelos arquivos* para continuar.
++
+image:vmware-vcf-asa-090.png["Monitor de sessão de convidado"]
+
++
+{nbsp}
+
+. No assistente *Guest File Browse*, selecione a pasta ou os arquivos a serem restaurados e o local do sistema de arquivos para restaurá-los.  Por fim, clique em *Restaurar* para iniciar o processo de *Restauração*.
++
+image:vmware-vcf-asa-091.png["Navegação de arquivo de convidado 1"]
+
++
+image:vmware-vcf-asa-092.png["Navegação de arquivo de convidado 2"]
+
++
+{nbsp}
+
+. O trabalho de restauração pode ser monitorado no painel de tarefas do vSphere Client.
+
+
+====
+
+
+== Informações adicionais
+
+Para obter informações sobre como configurar o VCF, consulte https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html["Documentação do VMware Cloud Foundation"] .
+
+Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte o https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
+
+Para obter informações sobre como usar o SnapCenter Plug-in for VMware vSphere, consulte o https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/["Documentação do SnapCenter Plug-in for VMware vSphere"] .

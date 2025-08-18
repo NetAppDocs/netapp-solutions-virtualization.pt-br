@@ -1,0 +1,64 @@
+---
+sidebar: sidebar 
+permalink: videos/openshift-videos.html 
+summary: Vídeos e demonstrações mostrando a integração do OpenShift Virtualization com soluções de armazenamento NetApp 
+keywords: openshift, virtualization, netapp, trident, videos, demos 
+---
+= Assista a vídeos sobre virtualização do Red Hat OpenShift com NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Explore a integração do OpenShift Virtualization com o NetApp por meio de uma série de vídeos que demonstram recursos importantes, como recuperação de desastres, proteção de VM, gerenciamento de armazenamento e automação usando Trident e Ansible.
+
+
+
+== Gerenciamento e operações de VM
+
+.Criando uma VM no OpenShift Virtualization usando armazenamento iSCSI
+video::497b868d-2917-4824-bbaa-b2d500f92dda[panopto,width=360]
+.Implantando uma máquina virtual com o OpenShift Virtualization - Red Hat OpenShift com NetApp
+video::8a29fa18-8643-499e-94c7-b01200f9ce11[panopto,width=360]
+.Migração ao vivo de máquinas virtuais no OpenShift Virtualization no ROSA com Amazon FSx for NetApp ONTAP
+video::4b3ef03d-7d65-4637-9dab-b21301371d7d[panopto,width=360]
+.Usando o Red Hat MTV para migrar VMs para o OpenShift Virtualization com o NetApp ONTAP Storage
+video::bac58645-dd75-4e92-b5fe-b12b015dc199[panopto,width=360]
+.Migração de carga de trabalho - Red Hat OpenShift com NetApp
+video::27773297-a80c-473c-ab41-b01200fa009a[panopto,width=360]
+
+
+== Proteção de dados e recuperação de desastres
+
+.Protegendo uma VM usando o Trident Protect
+video::4670e188-3d67-4207-84c5-b2d500f934a0[panopto,width=360]
+.Recuperação de desastres para uma VM usando Trident Protect
+video::ae4bdcf7-b344-4f19-89ed-b2d500f94efd[panopto,width=360]
+.Failover/Failback de VMs OpenShift usando recursos avançados de gerenciamento de dados do Trident (somente disponível no Programa de acesso antecipado)
+video::f2a8fa24-2971-4cdc-9bbb-b1f1007032ea[panopto,width=360]
+
+
+== Integração e gerenciamento de armazenamento
+
+.Instalando o Trident usando o operador Trident certificado pela Red Hat
+video::15c225f3-13ef-41ba-b255-b2d500f927c0[panopto,width=360]
+.Implantar uma nova VM no OpenShift Virtualization usando a classe de armazenamento ONTAP SAN (iSCSI)
+video::2e2c6fdb-4651-46dd-b028-b1ed00d37da3[panopto,width=360]
+.Implantar um aplicativo de contêiner postgresql usando a classe de armazenamento NAS ONTAP
+video::d3eacf8c-888f-4028-a695-b1ed00d28dee[panopto,width=360]
+
+
+== Automação e monitoramento
+
+.Automação Ansible para implantar o Trident e criar uma classe de armazenamento no cluster OpenShift
+video::fae6605f-b61a-4a34-a97f-b1ed00d2de93[panopto,width=360]
+link:https://github.com/NetApp/trident-install["O manual usado para instalar o NetApp Trident, StorageClasses e Backend usando o Ansible pode ser encontrado no GitHub."]
+
+.Integração do Cloud Insights com o Openshift Virtualization
+video::29ed6938-eeaf-4e70-ae7b-b15d011d75ff[panopto,width=360]
+.Instalando o OpenShift Virtualization - Red Hat OpenShift com NetApp
+video::e589a8a3-ce82-4a0a-adb6-b01200f9b907[panopto,width=360]

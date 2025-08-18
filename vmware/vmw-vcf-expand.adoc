@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-expand.html 
+keywords: vmware, vcf, expand, supplemental, storage 
+summary:  
+---
+= Aprenda sobre como expandir o armazenamento para um ambiente VCF usando armazenamento suplementar
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O VMware Cloud Foundation (VCF) oferece suporte a uma ampla variedade de opções de armazenamento suplementar para expandir o armazenamento em domínios de gerenciamento de VCF e domínios de carga de trabalho de infraestrutura virtual (VI).
+
+As ferramentas ONTAP da NetApp para VMware vSphere fornecem uma solução eficiente para essa expansão, integrando perfeitamente o armazenamento NetApp ao ambiente VCF.  As ferramentas ONTAP simplificam a configuração e o gerenciamento de armazenamentos de dados, permitindo que os administradores provisionem e gerenciem o armazenamento diretamente do vSphere Client.  Os recursos avançados do ONTAP, como snapshots, clonagem e proteção de dados, melhoram o desempenho, a eficiência e a escalabilidade do armazenamento no ambiente VCF.
+
+Consulte as soluções a seguir para obter detalhes técnicos sobre como expandir o ambiente VCF.
+
+* link:vmw-vcf-mgmt-supplemental-iscsi.html["Domínio de gerenciamento com iSCSI"]
+* link:vmw-vcf-mgmt-supplemental-fc.html["Domínio de Gestão com FC"]
+* link:vmw-vcf-viwld-supp-iscsi-vvols.html["Domínio de carga de trabalho de infraestrutura virtual com vVols (iSCSI)"]
+* link:vmw-vcf-viwld-supp-nfs-vvols.html["Domínio de carga de trabalho de infraestrutura virtual com vVols (NFS)"]
+* link:vmw-vcf-viwld-supp-nvme.html["Domínio de carga de trabalho de infraestrutura virtual com NVMe/TCP"]
+* link:vmw-vcf-viwld-supp-fc.html["Domínio de carga de trabalho de infraestrutura virtual com FC"]
+

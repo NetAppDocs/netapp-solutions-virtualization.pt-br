@@ -1,0 +1,205 @@
+---
+sidebar: sidebar 
+permalink: assess/vmw-vmdc.html 
+keywords: vmware, vm, data, collector, vmdc 
+summary: 'O Virtual machine Data Collector (VMDC) é um kit de ferramentas gratuito, leve e simples baseado em interface gráfica de usuário (GUI) para ambientes VMware que permite aos usuários coletar informações detalhadas de inventário sobre suas máquinas virtuais (VMs), hosts, armazenamento e redes.' 
+---
+= Coletor de dados de máquina virtual (VMDC)
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O Virtual Machine Data Collector (VMDC) é um kit de ferramentas gratuito, leve e simples baseado em interface gráfica de usuário (GUI) para ambientes VMware que permite aos usuários coletar informações detalhadas de inventário sobre suas máquinas virtuais (VMs), hosts, armazenamento e redes.
+
+
+NOTE: *Esta é uma versão de pré-visualização do VMDC.*
+
+
+
+== Visão geral
+
+A principal função do VMDC é gerar relatórios sobre a configuração do vCenter, dos servidores ESXi e das máquinas virtuais (VMs) que residem em um ambiente vSphere, incluindo configuração de cluster, rede, armazenamento e dados de desempenho.  Depois que dados ambientais abrangentes forem coletados, eles podem ser utilizados para produzir informações úteis sobre a infraestrutura.  A exibição da saída do relatório é uma interface gráfica do usuário (GUI) no estilo de planilha com várias guias para suas diversas seções.  Ele fornece relatórios fáceis de ler e ajuda a otimizar o uso de recursos e a planejar a capacidade.
+
+O VMDC é apenas um trampolim para coletar estatísticas rápidas e instantâneas para projetar possibilidades de otimização para licenciamento de núcleo VMWare junto com vCPU e RAM. link:https://docs.netapp.com/us-en/data-infrastructure-insights/["Data Infrastructure Insights da NetApp"] que requer a instalação de AUs e coletores de dados deve ser o próximo passo óbvio para entender a topologia detalhada da VM, agrupando as VMs usando anotação para dimensionar corretamente as cargas de trabalho e preparar a infraestrutura para o futuro.
+
+O VMDC pode ser baixadolink:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector["aqui"] e está disponível somente para sistemas Windows.
+
+
+
+== Instalando e configurando o VMDC
+
+O VMDC pode ser executado no Windows versão 2019 e 2022.  O pré-requisito é ter conectividade de rede da instância VMDC aos servidores vCenter designados.  Após a verificação, baixe o pacote VMDC delink:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector["Caixa de ferramentas NetApp"] e então descompacte o pacote e execute o arquivo em lote para instalar e iniciar o serviço.
+
+Após a instalação do VMDC, acesse a interface do usuário usando o endereço IP mencionado durante a instalação.  Isso abrirá a interface de login do VMDC, onde os vCenters podem ser adicionados inserindo o endereço IP ou o nome DNS e as credenciais de um vCenter Server.
+
+. Downloadlink:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector["Pacote VMDC"] .
++
+image:vmdc-001.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+. Extraia o pacote para a pasta designada.
++
+image:vmdc-002.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+. Execute o pacote VMDC clicando no arquivo em lote Start_VMDC.  Isso abrirá o prompt de comando e solicitará que você insira o endereço IP.
++
+image:vmdc-003.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+. O instalador iniciará o processo de instalação e iniciará o serviço VMDC.
++
+image:vmdc-004.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
++
+image:vmdc-005.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+. Uma vez feito isso, "Pressione qualquer tecla para continuar" para fechar o prompt de comando.
++
+image:vmdc-006.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+
+NOTE: Para interromper a coleta de dados, clique em Stop_VMDC batch file.
+
+
+NOTE: Para remover os dados coletados e redefinir o VMDC, execute o arquivo em lote reset_VMDC.  Lembre-se de que executar reset bat file excluirá todos os dados existentes e começará do zero.
+
+image:vmdc-007.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+== Usando a GUI
+
+
+
+=== Executar VMDC
+
+* Usando o navegador, acesse a interface do usuário do VMDC
++
+image:vmdc-008.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+* Adicione o vCenter designado usando a opção "Adicionar vCenter"
++
+** Nome do vCenter - Forneça um nome para o vCenter
+** Ponto de extremidade - Insira o endereço IP ou FQDN do servidor vCenter
+** Nome de usuário - nome de usuário para acessar o vCenter (no formato UPN: nomedeusuario@dominio.com)
+** Senha
+
+
+* Modifique os “Detalhes Adicionais” conforme os requisitos
++
+** Tempo de intervalo de dados – Especifica o intervalo de tempo de agregação da amostra.  O padrão é 5 minutos, mas pode ser modificado para 30 segundos ou 1 minuto, conforme necessário.
+** Retenção de dados – especifica o período de retenção para armazenar as métricas históricas.
+** Coletar métricas de desempenho – quando habilitado, coleta as métricas de desempenho para cada VM.  Se não for selecionado, o VMDC fornece funcionalidades como o RVtools, fornecendo apenas os detalhes da VM, do host e do armazenamento de dados.
+
+
+* Uma vez feito isso, clique em "Adicionar vCenter"
++
+image:vmdc-009.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+
+NOTE: A coleta de dados começa imediatamente após a adição do vCenter.  Não há necessidade de agendar um horário para a coleta, pois o processo buscaria os dados disponíveis no banco de dados do vCenter e começaria a agregá-los com base no "intervalo de tempo de dados" especificado.
+
+Para visualizar os dados de um vCenter específico, acesse o painel e clique em "Exibir inventário" ao lado do nome do vCenter apropriado.  A página exibirá o inventário da VM junto com os atributos da VM.  Por padrão, "Métricas de desempenho" está desabilitada na interface do usuário, mas pode ser habilitada usando a opção de alternância.  Depois que as métricas de desempenho forem habilitadas, os dados de desempenho de cada VM serão exibidos.  Para informações sobre a apresentação ao vivo, clique no botão atualizar.
+
+
+
+=== Exibir topologia de VM
+
+O VMDC fornece a opção "Mostrar topologia" para cada VM, que fornece uma interface interativa para visualizar recursos e seus relacionamentos em relação ao disco da VM, VM, host ESXi, armazenamentos de dados e redes.  Ajuda a gerenciar e monitorar com insights dos dados de desempenho coletados.  A topologia ajuda a realizar diagnósticos básicos e solucionar problemas usando os dados atuais.  Para solução de problemas detalhada e MTTR rápido, uselink:https://docs.netapp.com/us-en/data-infrastructure-insights/["Data Infrastructure Insights da NetApp"] que fornece uma visão detalhada da topologia com mapeamento de dependências de ponta a ponta.
+
+Para acessar a visualização da topologia, siga as etapas abaixo:
+
+* Acesse o painel do VMDC.
+* Selecione o nome do vCenter e clique em "Exibir inventário".
++
+image:vmdc-010.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+* Selecione a VM e clique em "Mostrar topologia".
++
+image:vmdc-011.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+
+
+=== Exportar para Excel
+
+Para capturar os dados coletados em um formato utilizável, use a opção "Baixar relatório" para baixar o arquivo XLSX.
+
+Para baixar o relatório, siga os passos abaixo:
+
+* Acesse o painel do VMDC.
+* Selecione o nome do vCenter e clique em "Exibir inventário".
++
+image:vmdc-012.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+* Selecione a opção "Baixar relatório"
++
+image:vmdc-013.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+* Selecione o intervalo de tempo.  O intervalo de tempo oferece várias opções, de 4 horas a 7 dias.
++
+image:vmdc-014.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+Por exemplo, se os dados necessários forem das últimas 4 horas, escolha 4 ou escolha o valor apropriado para capturar os dados daquele período específico.  Os dados gerados são agregados de forma contínua.  Portanto, selecione o intervalo de tempo para garantir que o relatório gerado capture as estatísticas de carga de trabalho necessárias.
+
+
+
+=== Contadores de dados VMDC
+
+Após o download, a primeira planilha exibida pelo VMDC é "VM Info", uma planilha que contém informações sobre as VMs que residem no ambiente vSphere.  Isso mostra informações genéricas sobre as máquinas virtuais: nome da VM, estado de energia, CPUs, memória provisionada (MB), memória utilizada (MB), capacidade provisionada (GB), capacidade utilizada (GB), versão das ferramentas VMware, versão do sistema operacional, tipo de ambiente, datacenter, cluster, host, pasta, armazenamento de dados primário, discos, NICs, ID da VM e UUID da VM.
+
+A guia 'Desempenho da VM' captura os dados de desempenho de cada VM amostrada no nível de intervalo selecionado (o padrão é 5 minutos).  A amostra de cada máquina virtual abrange: IOPS médio de leitura, IOPS médio de gravação, IOPS médio total, IOPS de pico de leitura, IOPS de pico de gravação, IOPS de pico total, throughput médio de leitura (KB/s), throughput médio de gravação (KB/s), throughput médio total (KB/s), throughput de pico de leitura (KB/s), throughput de pico de gravação (KB/s), throughput de pico total (KB/s), latência média de leitura (ms), latência média de gravação (ms), latência média total (ms), latência de pico de leitura (ms), latência de pico de gravação (ms) e latência de pico total (ms).
+
+A aba "ESXi Host Info" captura para cada host: Datacenter, vCenter, Cluster, SO, Fabricante, Modelo, Soquetes de CPU, Núcleos de CPU, Velocidade do clock líquido (GHz), Velocidade do clock da CPU (GHz), Threads de CPU, Memória (GB), Memória usada (%), Uso da CPU (%), Contagem de VMs convidadas e Número de NICs.
+
+
+
+=== Próximos passos
+
+Use o arquivo XLSX baixado para exercícios de otimização e refatoração.
+
+
+
+== Descrição dos atributos do VMDC
+
+Esta seção do documento aborda a definição de cada contador usado na planilha do Excel.
+
+*Folha de informações da VM*
+
+image:vmdc-015.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+*Folha de desempenho da VM*
+
+image:vmdc-016.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+*Informações do host ESXi*
+
+image:vmdc-017.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+== Conclusão
+
+Com as mudanças iminentes no licenciamento, as organizações estão abordando proativamente o potencial aumento no Custo Total de Propriedade (TCO).  Eles estão otimizando estrategicamente sua infraestrutura VMware por meio de gerenciamento agressivo de recursos e dimensionamento correto para melhorar a utilização de recursos e simplificar o planejamento de capacidade.  Por meio do uso eficaz de ferramentas especializadas, as organizações podem identificar e recuperar recursos desperdiçados de forma eficiente, reduzindo subsequentemente as contagens de núcleos e as despesas gerais de licenciamento.  O VMDC oferece a capacidade de coletar rapidamente dados de VM que podem ser divididos para gerar relatórios e otimizar o ambiente existente.
+
+Usando o VMDC, realize uma avaliação rápida para identificar recursos subutilizados e, em seguida, use o NetApp Data Infrastructure Insights (DII) para fornecer análises detalhadas e recomendações para recuperação de VM.  Isso permite que os clientes entendam as potenciais economias de custos e otimização enquanto o NetApp Data Infrastructure Insights (DII) é implantado e configurado.  O NetApp Data Infrastructure Insights (DII) pode ajudar as empresas a tomar decisões informadas sobre a otimização de seu ambiente de VM.  Ele pode identificar onde os recursos podem ser recuperados ou os hosts desativados com impacto mínimo na produção, ajudando as empresas a navegar pelas mudanças trazidas pela aquisição da VMware pela Broadcom de maneira estratégica e ponderada.  Em outras palavras, o VMDC e o DII, como um mecanismo de análise detalhada, ajudam as empresas a eliminar a emoção da decisão.  Em vez de reagir às mudanças com pânico ou frustração, eles podem usar os insights fornecidos por essas duas ferramentas para tomar decisões racionais e estratégicas que equilibrem a otimização de custos com a eficiência operacional e a produtividade.
+
+Com a NetApp, dimensione corretamente seus ambientes virtualizados e introduza desempenho de armazenamento flash econômico, juntamente com soluções simplificadas de gerenciamento de dados e ransomware para garantir que as organizações estejam preparadas para o novo modelo de assinatura, ao mesmo tempo em que otimiza os recursos de TI atualmente em vigor.
+
+image:vmdc-018.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
+
+
+
+== Próximos passos
+
+Baixe o pacote VMDC e reúna os dados e uselink:https://mhcsolengg.com/vmwntaptco/["Estimador de TCO do vSAN"] para fácil projeção e depois usarlink:https://docs.netapp.com/us-en/data-infrastructure-insights/task_cloud_insights_onboarding_1.html["DII"] fornecer continuamente inteligência, impactando a TI agora e no futuro para garantir que ela possa se adaptar conforme novas necessidades surgirem.

@@ -1,0 +1,239 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-vm-dr-using-tp.html 
+keywords: OpenShift, OCP, Trident, Trident protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, ROSA, Red Hat OpenShift Virtualization 
+summary: Virtualização Red Hat OpenShift no ROSA 
+---
+= Configurar failover e failback para VMs no Red Hat OpenShift Virtualization usando Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configure a recuperação de desastres para VMs no OpenShift Virtualization usando o Trident Protect.  Este procedimento inclui a criação de um AppVault com o ONTAP S3, o estabelecimento de relacionamentos do AppMirror entre namespaces de origem e recuperação de desastres, o agendamento de replicação e a execução de operações de failover e failback para manter a disponibilidade da VM durante interrupções do site.
+
+
+
+== Pré-requisitos
+
+* O Trident deve ser instalado.  As classes de backend e armazenamento devem ser criadas antes que o OpenShift Virtualization seja instalado no cluster usando o operador OpenShift Virtualization.
+* O Trident Protect deve ser instalado para implementar operações de failover e failback para as VMs do OpenShift.  Consulte as instruções aqui paralink:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-installation.html["instalar trident protect"]
+
+
+image:redhat-openshift-ocpv-tp-001.png["OCP-v trident protect instalado no namespace trident-protect"]
+
+Uma VM deve estar disponível no OpenShift Virtualization.  Para obter detalhes sobre como implantar uma nova VM ou migrar uma VM existente para o OpenShift Virtualization, consulte a seção apropriada na documentação.
+
+image:redhat-openshift-ocpv-tp-003.png["VM OCP-v instalada no namespace source-ns"]
+
+
+
+== Crie o App Vault usando o ONTAP S3
+
+Esta seção mostra como configurar um cofre de aplicativos no Trident Protect usando o armazenamento de objetos Ontap S3.
+
+Use os comandos oc e os arquivos yaml mostrados abaixo para criar um segredo e o recurso personalizado appvault para o ontap s3.  Certifique-se de criá-los no namespace trident protect.
+
+[source, cli]
+----
+oc create -f app-vault-secret.yaml -n trident-protect
+oc create -f app-vault.yaml -n trident-protect
+----
+[source, yaml]
+----
+apiVersion: v1
+# You can provide the keys either as stringData or base 64 encoded data
+stringData:
+  accessKeyID: "<access key id as obtained from ONTAP>"
+  secretAccessKey: "<secret access key as obtained from ONTAP>"
+#data:
+  #accessKeyID: <base 64 encoded value of access key>
+  #secretAccessKey: <base 64 encoded value of secret access key>
+kind: Secret
+metadata:
+  name: appvault-secret
+  namespace: trident-protect
+type: Opaque
+----
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: ontap-s3-appvault
+  namespace: trident-protect
+spec:
+  providerConfig:
+    azure:
+      accountName: ""
+      bucketName: ""
+      endpoint: ""
+    gcp:
+      bucketName: ""
+      projectID: ""
+    s3:
+      bucketName: trident-protect
+      endpoint: <data lif to use to access S3>
+      secure: "false"
+      skipCertValidation: "true"
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: appvault-secret
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: appvault-secret
+  providerType: OntapS3
+----
+Certifique-se de que o cofre ontap S3 foi criado e está no estado Disponível
+
+image:redhat-openshift-ocpv-tp-002.png["OCP-v appvault no namespace trident-protect"]
+
+
+
+== Crie um aplicativo de proteção Trident para a VM
+
+Crie um recurso personalizado de aplicativo no namespace onde a VM está localizada.
+
+image:redhat-openshift-ocpv-tp-004.png["Aplicativo OCP-v no namespace source-ns"]
+
+[source, CLI]
+----
+tridentctl-protect create app source-vm -n source-ns --namespaces source-ns
+----
+image:redhat-openshift-ocpv-tp-004.png["Aplicativo OCP-v no namespace source-ns"]
+
+
+
+== Crie um aplicativo de proteção Trident para a VM de recuperação de desastres em um novo namespace
+
+[source, CLI]
+----
+oc create ns dr-ns
+tridentctl-protect create app dr-vm -n dr-ns --namespaces dr-ns
+----
+image:redhat-openshift-ocpv-tp-005.png["Aplicativo OCP-v no namespace source-ns"]
+
+
+
+== Crie um AppMirror Schedule no namespace de origem
+
+Crie uma programação para o AppMirror usando o yaml, conforme mostrado.  Isso criará instantâneos usando a programação (a cada 5 minutos) e manterá 2 instantâneos
+
+[source, CLI]
+----
+oc create -f appmirror-schedule.yaml -n source-ns
+----
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  name: appmirror-sched1
+spec:
+  appVaultRef: ontap-s3-appvault
+  applicationRef: source-vm
+  backupRetention: "0"
+  enabled: true
+  granularity: Custom
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  snapshotRetention: "2"
+----
+image:redhat-openshift-ocpv-tp-006.png["Espelho do aplicativo Agendar namespace source-ns"]
+
+image:redhat-openshift-ocpv-tp-007.png["Snapshot criado"]
+
+
+
+== Crie um relacionamento appMirror no namespace DR
+
+Crie um relacionamento Appmirror no namespace Disaster Recovery.  Defina desiredState como Estabelecido.
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: amr1
+spec:
+  desiredState: Established
+  destinationAppVaultRef: ontap-s3-appvault
+  destinationApplicationRef: dr-vm
+  namespaceMapping:
+  - destination: dr-ns
+    source: source-ns
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  sourceAppVaultRef: ontap-s3-appvault
+  sourceApplicationName: source-vm
+  sourceApplicationUID: "<application UID of the source VM>"
+  storageClassName: "ontap-nas"
+----
+
+NOTE: Você pode obter o UID do aplicativo da VM de origem a partir da saída json do aplicativo de origem, conforme mostrado abaixo
+
+image:redhat-openshift-ocpv-tp-008.png["UID do aplicativo criado"]
+
+image:redhat-openshift-ocpv-tp-009.png["Criar relacionamento com o App Mirror"]
+
+Quando o relacionamento do AppMirror é estabelecido, o instantâneo mais recente é transferido para o namespace de destino.  O PVC é criado para a VM no namespace dr, no entanto, o pod da VM ainda não foi criado no namespace dr.
+
+image:redhat-openshift-ocpv-tp-010.png["Criar relação de espelho de aplicativo é estabelecido"]
+
+image:redhat-openshift-ocpv-tp-011.png["Alterações de estado para o espelho do aplicativo"]
+
+image:redhat-openshift-ocpv-tp-012.png["O PVC é criado no namespace de destino"]
+
+
+
+== Promova o relacionamento com o Failover
+
+Altere o estado desejado do relacionamento para "Promovido" para criar a VM no namespace DR.  A VM ainda está em execução no namespace de origem.
+
+[source, CLI]
+----
+oc patch amr amr1 -n dr-ns --type=merge -p '{"spec":{"desiredState":"Promoted"}}'
+----
+image:redhat-openshift-ocpv-tp-013.png["Aplicação de patch de relacionamento do AppMirror"]
+
+image:redhat-openshift-ocpv-tp-014.png["O relacionamento do AppMirror está em estado promovido"]
+
+image:redhat-openshift-ocpv-tp-015.png["VM criada no namespace DR"]
+
+image:redhat-openshift-ocpv-tp-016.png["VM no ns de origem ainda em execução"]
+
+
+
+== Estabelecer o relacionamento novamente com o Failback
+
+Altere o estado desejado do relacionamento para "Estabelecido".  A VM é excluída no namespace DR.  O pvc ainda existe no namespace DR.  A VM ainda está em execução no namespace de origem.  O relacionamento original do namespace de origem para DR ns é estabelecido. .
+
+[source, CLI]
+----
+oc patch amr amr1 -n dr-ns --type=merge -p '{"spec":{"desiredState":"Established"}}'
+----
+image:redhat-openshift-ocpv-tp-017.png["Patch para Estado Estabelecido"]
+
+image:redhat-openshift-ocpv-tp-018.png["Espelho de aplicativo em estado estabelecido"]
+
+image:redhat-openshift-ocpv-tp-019.png["PVC em DR ns ainda permanece"]
+
+image:redhat-openshift-ocpv-tp-020.png["POD e PVC em ns de origem ainda permanecem"]
+
+
+
+== Demonstração em vídeo
+
+O vídeo a seguir mostra uma demonstração da implementação de um cenário de recuperação de desastres para uma VM OpenShift usando o Trident Protect
+
+.Recuperação de desastres usando Trident Protect
+video::ae4bdcf7-b344-4f19-89ed-b2d500f94efd[panopto,width=360]

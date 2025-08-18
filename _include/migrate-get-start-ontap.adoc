@@ -1,0 +1,21 @@
+= Casos de uso
+:allow-uri-read: 
+
+
+Essa migração permite integração perfeita, melhor proteção de dados e maior flexibilidade no gerenciamento de ambientes virtualizados, garantindo uma transição tranquila com tempo de inatividade mínimo.
+
+
+
+== Casos de uso
+
+Há muitas opções de migração em termos de origem e destino ao considerar a mudança para armazenamentos de dados suportados ONTAP .
+
+* Migração de sistemas de armazenamento de terceiros (incluindo vSAN) para datastores ONTAP .
+* Migração de VMs no mesmo cluster vSphere
+* Migração de VMs entre vários clusters vSphere
+* Migração de VMs entre servidores vCenter no mesmo domínio SSO
+* Migração de VMs entre servidores vCenter em diferentes domínios SSO
+* Migração de VMs entre locais de datacenter
+* Migração de sistemas de armazenamento de terceiros (incluindo vSAN) para datastores ONTAP .
+* Migração de VMs em um ambiente de nuvem híbrida
+

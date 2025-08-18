@@ -1,0 +1,483 @@
+---
+sidebar: sidebar 
+permalink: virtualization/virt-options-on-netapp.html 
+keywords: virtualization, overview, options, vmware, alternatives, hyperv, proxmox, openshift 
+summary: Este documento fornece uma visão geral dos motivos pelos quais a NetApp é a melhor plataforma para ambientes de virtualização, independentemente da solução de virtualização. 
+---
+= Saiba mais sobre como usar o NetApp para qualquer solução de virtualização
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Descubra como o NetApp ONTAP fornece uma base sólida para virtualização, especialmente em resposta às recentes mudanças no licenciamento da VMware.  Explore estratégias para otimizar ambientes VMware, migrar para o VMware Cloud Foundation ou hipervisores alternativos e aproveitar os recursos avançados de gerenciamento de dados, proteção e integração de nuvem da NetApp.
+
+
+
+== Introdução
+
+Dadas as recentes mudanças de licenciamento da VMware, as organizações devem adaptar suas estratégias de virtualização para maximizar a eficiência de custos e a escalabilidade e minimizar os riscos comerciais.  Otimizar os ambientes VMware existentes, considerar a migração do vSphere autônomo para o VMware Cloud Foundation (VCF) usando o armazenamento empresarial existente e adotar uma abordagem de nuvem híbrida ou multi-hipervisor são etapas essenciais.  Notavelmente, o VCF 5.2.1 introduziu maior flexibilidade ao permitir o uso de soluções de armazenamento externo no lugar do vSAN, simplificando a capacidade da organização de adotar os novos modelos de licenciamento enquanto usa funcionalidades de armazenamento empresarial e mantém a continuidade.
+
+ONTAP é a melhor plataforma para qualquer hipervisor local ou na nuvem.  O ONTAP oferece suporte a todos os principais hipervisores em ambientes locais e tem serviços de dados primários em cada nuvem principal, dando suporte a ofertas de nuvem da VMware e cargas de trabalho nativas da nuvem.  Isso permite que as organizações naveguem facilmente pelas mudanças de licenciamento, escolhendo o modelo de implantação apropriado para suas cargas de trabalho.
+
+Este artigo descreve estratégias para otimizar os custos de implantação do VMware, avalia a adoção de vários hipervisores, detalha a migração de VMs do vSphere para o VCF e a migração de VMs para hipervisores alternativos, abrangendo todas as opções disponíveis.
+
+
+
+== O que mudou
+
+A aquisição da VMware pela Broadcom levou a uma mudança significativa no modelo de licenciamento da VMware.  A nova abordagem está em transição para uma estrutura de preços de pacotes baseada em assinatura, embora esteja em linha com as tendências do setor, o que deve resultar em custos substancialmente mais altos para os clientes.  Aqui estão três pontos principais a serem lembrados:
+
+*Licenciamento baseado em assinatura*: a VMware está migrando de licenças perpétuas para modelos baseados em assinatura.
+
+*Pacote agrupado*: o VMware Cloud Foundation (VCF) reúne vários produtos em uma única oferta para empresas e provedores de serviços.
+
+*Por soquete para núcleo*: A mudança de preço por soquete para por núcleo de CPU indica uma mudança significativa que pode aumentar substancialmente os custos.
+
+*Conclusão principal* - Essas mudanças estão levando os clientes a avaliar suas necessidades de virtualização, otimizar a utilização de forma mais eficaz e explorar opções alternativas.
+
+
+
+== Por que ONTAP
+
+As soluções de armazenamento da NetApp capacitam e permitem que os clientes aproveitem ao máximo todos os benefícios de uma infraestrutura virtualizada.  Com as soluções da NetApp , os clientes podem implantar rapidamente um software abrangente de gerenciamento de dados, oferecendo automação, eficiência, proteção de dados e recursos de segurança de ponta, ao mesmo tempo em que atendem a quaisquer necessidades exigentes de desempenho.  A combinação do software ONTAP com o VMware vSphere permite reduzir as despesas com hardware de host e licenciamento do VMware, garantir que os dados sejam protegidos a um custo menor e fornecer alto desempenho consistente.
+
+Cargas de trabalho virtualizadas são inerentemente dinâmicas.  Consequentemente, os administradores utilizam o VMware Storage vMotion para migrar VMs entre datastores VMFS, NFS ou vVols , tudo dentro do mesmo sistema de armazenamento.  Isso permite que eles explorem diversas estratégias de armazenamento, incluindo sistemas All-Flash ou os modelos ASA mais recentes, aproveitando as inovações SAN para maior eficiência de custos.
+
+image:virt-options-001.png["Diagrama dos benefícios do NetApp ONTAP"]
+
+A solução de armazenamento ONTAP oferece os seguintes benefícios:
+
+* *Escalonamento independente:* Descarregue o gerenciamento de dados de carga de trabalho, proteção e mobilidade para armazenamento integrado com vSphere para dimensionar o armazenamento sem adicionar computação
+* *Desempenho extremamente rápido:* fornece latência abaixo de um milissegundo e alto rendimento com arquiteturas NVMe e ASA de ponta.  Otimize o desempenho de flash, NVMe e GPU para VMs tradicionais e implantações modernas de Kubernetes ou IA.
+* *Serviços de dados abrangentes:* Comprima, desduplique e compacte dados usando recursos integrados para 5 a 30 vezes menos armazenamento com 85 a 90% mais eficiência do data center
+* *Clustering contínuo e alta disponibilidade:* utilize o SnapMirror Active Sync ou o MetroCluster para clustering extensível sem esforço e recuperação de desastres robusta.
+* *Multiprotocolo:* o ONTAP suporta acesso a dados por meio de vários protocolos, ou seja, NFS, iSCSI, SMB e S3. Os sistemas que executam o ONTAP são unificados de várias maneiras significativas.  Originalmente, essa abordagem se referia aos protocolos NAS e SAN, e o ONTAP continua sendo uma plataforma líder para SAN, juntamente com sua força original no NAS.
+* *Provisionamento e orquestração automatizados:* Aproveite as ferramentas ONTAP para VMware e suas APIs REST, plug-ins do vSphere e SPBM (políticas de armazenamento) para automatizar e otimizar o gerenciamento de armazenamento.
+* *Proteção de dados integrada e recuperação de desastres de baixo custo:* Descarregue o backup e a restauração da carga de trabalho virtual usando o NetApp SnapCenter.  Utilize a recuperação de desastres como serviço (DRaaS) do NetApp BlueXP disaster recovery para obter um RPO menor e uma replicação de dados RTO reduzida.  Isso elimina a necessidade de infraestrutura alternativa dispendiosa, oferecendo proteção contra desastres acessível para cargas de trabalho VMware.  Seja em ambientes NetApp ONTAP locais ou no VMware Cloud, o armazenamento com tecnologia NetApp garante proteção robusta.
+* *Detecção de ransomware:* Estenda a segurança e a conformidade de nível VMware aos dados para melhorar os recursos de proteção, detecção, correção e recuperação por meio de proteção autônoma integrada contra ransomware e compatibilidade com confiança zero, permitindo autenticação multifator, acesso baseado em função, registro abrangente e detecção de anomalias no comportamento do usuário.
+* *Nuvem híbrida integrada:* simplificada e integrada para mobilidade de carga de trabalho, backup e restauração e recuperação de desastres em qualquer nuvem hiperescaladora (Elastic VMware Service, Azure VMware Solution e Google Cloud VMware Engine).
+* *Programa de ciclo de vida de armazenamento (SLP):* Atualize sem interrupções para o controlador de próxima geração ou opte pelo armazenamento em nuvem se a organização estiver pronta para dar esse passo.
+
+
+
+
+=== Principais conclusões
+
+* Use o ONTAP para eliminar o impacto e a sobrecarga da CPU em hosts ESXi, descarregando tarefas que exigem uso intensivo da CPU, como eficiência de armazenamento, criptografia, snapshots e muito mais.  Essa otimização reduz o custo total de propriedade (TCO) ao exigir menos núcleos em cada host.
+* Com o ONTAP, comece com a capacidade inicial e aproveite técnicas superiores de redução e movimentação de dados, reduzindo custos em 20-50% sem adicionar novos hosts.
+* O armazenamento ONTAP pode ser usado com vários domínios de carga de trabalho e não está restrito a um cluster específico, melhorando assim a utilização geral em vários clusters.
+* O ONTAP Snapshot, integrado ao SnapCenter, oferece proteção de dados excepcional e gratuita para backups em nível de VM e de armazenamento de dados, bem como restaurações granulares.  Além disso, o ONTAP permite o descarregamento de snapshots para armazenamento de objetos para retenção de longo prazo.
+* Experimente armazenamento contínuo sem RAID ou pools de armazenamento para configurar, redução contínua de dados e criptografia.
+* Com o ONTAP One, acesse todos os recursos do ONTAP e segurança robusta sem barreiras de licenciamento.  O emparelhamento com o NetApp BlueXP DRaaS reduz ainda mais os custos.
+
+
+
+
+== Ajuste o tamanho e otimize
+
+À medida que essas mudanças no licenciamento entram em vigor, todas as organizações de TI ficam sob o estresse de um potencial aumento do Custo Total de Propriedade (TCO), às vezes mais de 10 vezes.  Um ambiente VMware bem otimizado maximiza o desempenho e controla as despesas de licenciamento.  Isso garante gerenciamento eficaz de recursos e planejamento de capacidade.  Com o conjunto certo de ferramentas, você identificará rapidamente recursos desperdiçados ou ociosos para recuperar os núcleos, reduzindo assim a contagem de núcleos, o que por sua vez reduz o custo geral de licenciamento.
+
+A NetApp oferece um poderoso conjunto de ferramentas para superar esses desafios, proporcionando maior visibilidade, integração perfeita, eficiência de custos e segurança robusta.  Ao usar esses recursos, as organizações podem sobreviver e até prosperar durante essa ruptura e estar preparadas para quaisquer desafios que o futuro traga.  Observação: lembre-se de que a maioria das organizações já está fazendo isso como parte de sua avaliação de nuvem, e são os mesmos processos e ferramentas que ajudam a evitar o pânico de custos no mundo local e economizam qualquer custo imediato de migração para hipervisores alternativos motivado por emoções.
+
+
+
+=== Como a NetApp ajuda
+
+
+
+==== Estimador de TCO da NetApp : ferramenta gratuita de estimativa de TCO da NetApp
+
+* Calculadora simples baseada em HTML
+* Utiliza NetApp VMDC, RVTools ou métodos de entrada manual
+* Projete facilmente quantos hosts são necessários para a implantação fornecida e calcule a economia para otimizar a implantação usando os sistemas de armazenamento NetApp ONTAP .
+* Mostra as possíveis economias
+
+
+
+NOTE: Olink:https://tco.solutions.netapp.com/vmwntaptco/["Estimador de TCO"] é acessível somente para equipes de campo e parceiros da NetApp .  Trabalhe com as equipes de contas da NetApp para avaliar seu ambiente existente.
+
+
+
+==== VM Data Collector (VMDC): ferramenta gratuita de avaliação VMware da NetApp
+
+* Coleta leve e pontual de dados de configuração e desempenho
+* Implantação simples baseada em Windows com interface web
+* Visualiza relacionamentos de topologia de VM e exporta relatórios do Excel
+* Visa especificamente a otimização do licenciamento do núcleo VMware
+
+
+VMDC está disponívellink:https://mysupport.netapp.com/site/tools/tool-eula/vm-data-collector/["aqui"] .
+
+
+
+==== Data Infrastructure Insights (anteriormente Cloud Insights)
+
+* Monitoramento contínuo baseado em SaaS em ambientes híbridos/multi-nuvem
+* Suporta ambientes heterogêneos, incluindo sistemas de armazenamento Pure, Dell, HPE e vSAN.
+* Apresenta análises avançadas com tecnologia de IA/ML que identificam VMs órfãs e capacidade de armazenamento não utilizada - implante para obter análises detalhadas e recomendações para recuperação de VM.
+* Fornece recursos de análise de carga de trabalho para dimensionar corretamente as VMs antes da migração e garantir que os aplicativos críticos atendam aos SLAs antes, durante e depois da migração.
+* Disponível com período de teste GRATUITO de 30 dias
+
+
+Com o DII, mergulhe fundo na análise dos perfis de E/S da carga de trabalho em máquinas virtuais usando métricas em tempo real.
+
+
+NOTE: A NetApp fornece uma avaliação chamada Avaliação de Modernização de Virtualização, que é um recurso do Serviço de Arquitetura e Design da NetApp .  Cada VM é mapeada em dois eixos: utilização da CPU e utilização da memória.  Durante o workshop, todos os detalhes são fornecidos ao cliente para estratégias de otimização local e migração para a nuvem, a fim de promover a utilização eficaz de recursos e redução de custos.  Ao implementar essas estratégias, as organizações mantêm um ambiente VMware de alto desempenho e, ao mesmo tempo, gerenciam os custos de forma eficaz.
+
+
+
+==== Conclusão principal
+
+O VMDC serve como uma primeira etapa rápida de avaliação antes de implementar o DII para monitoramento contínuo e análises avançadas orientadas por IA/ML em ambientes heterogêneos.
+
+
+
+==== Ferramenta de importação de VCF: execute VCF com NFS ou FC como armazenamento principal
+
+Com o lançamento do VMware Cloud Foundation (VCF) 5.2, vem a capacidade de converter a infraestrutura vSphere existente em domínios de gerenciamento VCF e importar clusters adicionais como domínios de carga de trabalho VCF VI.  Com isso, o VMware Cloud Foundation (VCF) agora pode ser totalmente executado em plataformas de armazenamento NetApp sem a necessidade de usar o vSAN (sim, tudo isso sem o vSAN).  A conversão de um cluster com um armazenamento de dados NFS ou FC existente em execução no ONTAP envolve a integração da infraestrutura existente em uma nuvem privada moderna, o que significa que não há necessidade de vSAN.  Este processo se beneficia da flexibilidade do armazenamento NFS e FC para garantir acesso e gerenciamento de dados contínuos.  Depois que um domínio de gerenciamento do VCF é estabelecido por meio do processo de conversão, os administradores podem importar com eficiência clusters vSphere adicionais, incluindo aqueles que usam armazenamentos de dados NFS ou FC, para o ecossistema do VCF.  Essa integração não apenas melhora a utilização de recursos, mas também simplifica o gerenciamento da infraestrutura de nuvem privada, garantindo uma transição tranquila com interrupção mínima nas cargas de trabalho existentes.
+
+
+NOTE: Suporta somente o protocolo NFS v3 e FC quando usado como armazenamento principal.  O armazenamento suplementar pode ser usado com o protocolo NFS compatível com vSphere v3 ou 4.1.
+
+
+
+==== Conclusão principal:
+
+Importar ou converter clusters ESXi existentes permite aproveitar o armazenamento ONTAP existente como armazenamento de dados e não há necessidade de implantar vSAN ou recursos de hardware adicionais, tornando o VCF eficiente em termos de recursos, otimizado em termos de custos e simplificado.
+
+
+
+==== Migração do vSphere existente para o VCF usando armazenamento ONTAP
+
+Se o VMware Cloud Foundation for uma instalação greenfield (criando uma nova infraestrutura do vSphere e um domínio de logon único), as cargas de trabalho existentes em execução em versões mais antigas do vSphere não poderão ser gerenciadas pelo Cloud Foundation.  O primeiro passo é migrar as VMs de aplicativos atuais em execução em ambientes vSphere existentes para o Cloud Foundation.  O caminho de migração depende das opções de migração (ativa, passiva e passiva) e da versão de quaisquer ambientes vSphere existentes.  A seguir estão as opções em ordem de prioridade, dependendo do armazenamento de origem.
+
+* O HCX é a ferramenta mais rica em recursos atualmente disponível para mobilidade de carga de trabalho do Cloud Foundation.
+* Aproveite o NetApp BlueXP DRaaS
+* A replicação do vSphere com SRM pode ser uma ferramenta de migração do vSphere fácil de usar.
+* Use software de terceiros usando VAIO e VADP
+
+
+
+
+==== Migração de VMs de armazenamento não NetApp para armazenamento ONTAP
+
+O método mais fácil na maioria dos casos é usar o Storage vMotion.  O cluster deve ter acesso ao novo armazenamento de dados ONTAP SAN ou NAS e ao armazenamento do qual você está migrando as VMs (SAN, NAS, etc.).  O processo é simples: selecione uma ou mais VMs no vSphere Web Client, clique com o botão direito do mouse na seleção e clique em Migrar.  Escolha a opção somente armazenamento, selecione o novo armazenamento de dados ONTAP como destino e prossiga com as últimas etapas do assistente de migração. O vSphere copiará os arquivos – VMX, NVRAM, VMDK(s), etc. – do armazenamento antigo para o armazenamento de dados com tecnologia ONTAP .  Observe que o vSphere provavelmente copiará grandes quantidades de dados.  Este método não requer nenhum tempo de inatividade.  As VMs continuam em execução enquanto são migradas.  Outras opções incluem migração baseada em host e replicação de terceiros para realizar a migração.
+
+
+
+==== Recuperação de desastres usando snapshots de armazenamento (otimize ainda mais com replicação de armazenamento)
+
+A NetApp oferece uma solução de recuperação de desastres (DRaaS) baseada em SaaS líder do setor que pode reduzir significativamente os custos e diminuir a complexidade.  Não há necessidade de adquirir e implantar infraestrutura alternativa cara.
+
+Implementar a recuperação de desastres por meio de replicação em nível de bloco do site de produção para o site de recuperação de desastres é um método resiliente e econômico para proteger cargas de trabalho contra interrupções do site e eventos de corrupção de dados, como ataques de ransomware. Usando a replicação do NetApp SnapMirror , as cargas de trabalho do VMware em execução em sistemas ONTAP locais com datastores NFS ou VMFS podem ser replicadas para outro sistema de armazenamento ONTAP localizado em um data center de recuperação designado onde o VMware também está implantado.
+
+Use o serviço de BlueXP disaster recovery , que é integrado ao console NetApp BlueXP , onde os clientes podem descobrir seus VMware vCenters locais junto com o armazenamento ONTAP , criar agrupamentos de recursos, criar um plano de recuperação de desastres, associá-lo a grupos de recursos e testar ou executar failover e failback.  O SnapMirror fornece replicação de bloco em nível de armazenamento para manter os dois sites atualizados com alterações incrementais, resultando em um RPO de até 5 minutos. Também é possível simular procedimentos de DR como um exercício regular sem impactar a produção e os armazenamentos de dados replicados ou incorrer em custos adicionais de armazenamento.  A BlueXP disaster recovery aproveita a tecnologia FlexClone da ONTAP para criar uma cópia com eficiência de espaço do armazenamento de dados NFS ou VMFS a partir do último Snapshot replicado no site de DR.  Após a conclusão do teste de DR, basta excluir o ambiente de teste, novamente sem qualquer impacto nos recursos de produção replicados reais. Quando houver necessidade (planejada ou não) de failover real, com apenas alguns cliques, o serviço de BlueXP disaster recovery orquestrará todas as etapas necessárias para colocar automaticamente as máquinas virtuais protegidas no site de recuperação de desastres designado. O serviço também reverterá o relacionamento do SnapMirror com o site principal e replicará quaisquer alterações do secundário para o primário para uma operação de failback, quando necessário.  Tudo isso pode ser alcançado por uma fração do custo em comparação a outras alternativas bem conhecidas.
+
+
+NOTE: Produtos de backup de terceiros que oferecem suporte à funcionalidade de replicação e o VMware Live Recovery com SRA são outras opções alternativas importantes.
+
+
+
+==== Ransomware
+
+Detectar ransomware o mais cedo possível é crucial para impedir sua disseminação e evitar tempos de inatividade dispendiosos.  Uma estratégia eficaz de detecção de ransomware deve incorporar várias camadas de proteção nos níveis de host ESXi e VM convidada.  Embora diversas medidas de segurança sejam implementadas para criar uma defesa abrangente contra ataques de ransomware, o ONTAP permite adicionar mais camadas de proteção à abordagem geral de defesa.  Para citar alguns recursos, ele começa com Snapshots, Proteção Autônoma contra Ransomware e snapshots à prova de violação.
+
+Vamos ver como os recursos mencionados acima funcionam com o VMware para proteger e recuperar dados contra ransomware.
+
+Para proteger o vSphere e as VMs convidadas contra ataques, é essencial tomar várias medidas, incluindo segmentação, utilização de EDR/XDR/SIEM para endpoints, instalação de atualizações de segurança e adesão às diretrizes de proteção apropriadas.  Cada máquina virtual que reside em um armazenamento de dados também hospeda um sistema operacional padrão.  Garanta que os conjuntos de produtos antimalware dos servidores corporativos estejam instalados e atualizados regularmente, o que é um componente essencial da estratégia de proteção contra ransomware em várias camadas.  Junto com isso, habilite a Proteção Autônoma contra Ransomware (ARP) no volume NFS que alimenta o armazenamento de dados.  O ARP utiliza o ML integrado que analisa a atividade da carga de trabalho em volume, além da entropia de dados, para detectar ransomware automaticamente.  O ARP pode ser configurado por meio da interface de gerenciamento integrada do ONTAP ou do gerenciador do sistema e é ativado por volume.
+
+Além da abordagem em múltiplas camadas, há também uma solução ONTAP nativa integrada para proteger contra exclusão não autorizada de cópias de backup do Snapshot.  É conhecido como verificação multiadministradora ou MAV, que está disponível no ONTAP 9.11.1 e posteriores.  A abordagem ideal será usar consultas para operações específicas do MAV.
+
+
+NOTE: Com o novo NetApp ARP/AI, não há necessidade de um modo de aprendizagem.  Em vez disso, ele pode ir direto para o modo ativo com sua capacidade de detecção de ransomware alimentada por IA.
+
+
+
+==== Conclusão principal
+
+Com o ONTAP One, todos os conjuntos de recursos de segurança que atuam como uma camada adicional são totalmente gratuitos.  Acesse o robusto conjunto de proteção de dados, segurança e todos os recursos que o ONTAP oferece da NetApp sem se preocupar com barreiras de licenciamento.
+
+
+
+== Alternativas à VMware a serem consideradas
+
+Cada organização está avaliando uma abordagem multi-hipervisor, que dá suporte a uma estratégia de hipervisor de vários fornecedores, fortalecendo assim a flexibilidade operacional, reduzindo a dependência de fornecedores e otimizando o posicionamento da carga de trabalho.  Ao combinar vários hipervisores, as organizações podem adaptar a infraestrutura para atender a diversas demandas de carga de trabalho e, ao mesmo tempo, gerenciar custos.  As organizações então otimizam o gerenciamento de vários hipervisores aproveitando a interoperabilidade, o licenciamento econômico e a automação.  ONTAP é a plataforma ideal para qualquer plataforma de hipervisor.  E um requisito fundamental nessa abordagem é a mobilidade dinâmica da máquina virtual com base nos SLAs e na estratégia de posicionamento da carga de trabalho.
+
+
+
+=== Principais considerações para a adoção de multi-hipervisores
+
+* *Otimização estratégica de custos:* Reduzir a dependência de um único fornecedor otimiza as despesas operacionais e de licenciamento.
+* *Distribuição da carga de trabalho:* implantar o hipervisor certo para a carga de trabalho certa maximiza a eficiência.
+* *Flexibilidade:* Oferece suporte à otimização de VMs com base nos requisitos de aplicativos de negócios, juntamente com a modernização e consolidação do data center.
+
+
+Nesta seção, vamos abordar um rápido resumo dos diferentes hipervisores considerados pelas organizações em sua ordem de prioridade.
+
+
+NOTE: Essas são as opções alternativas comuns consideradas pelas organizações, no entanto, a ordem de prioridade difere para cada cliente com base em sua avaliação, conjunto de habilidades e requisitos de carga de trabalho.
+
+image:virt-options-002.png["Diagrama das opções de virtualização suportadas pela NetApp"]
+
+
+
+=== Hyper-V (Windows Server)
+
+Vamos explorar:
+
+* Um recurso integrado e bem conhecido nas versões do Windows Server.
+* Habilita recursos de virtualização para máquinas virtuais no Windows Server.
+* Quando integrado aos recursos do pacote System Center (incluindo SCVMM e SCOM), o Hyper-V oferece um conjunto abrangente de recursos que rivalizam com outras soluções de virtualização.
+
+
+
+
+==== Integrações
+
+* O NetApp SMI-S Provider integra o gerenciamento de armazenamento dinâmico para SAN e NAS com o System Center Virtual Machine Manager (SCVMM).
+* Muitos parceiros de backup terceirizados também oferecem suporte à integração de snapshots ONTAP e SnapMirror para backup e recuperação nativos de array totalmente otimizados.
+* O ONTAP continua sendo o único sistema de infraestrutura de dados que permite o descarregamento de cópias nativas entre SAN e NAS para flexibilidade e consumo de armazenamento, e o ONTAP também oferece recuperação de espaço nativo nos protocolos NAS (SMB3 TRIM sobre SMB/CIFS) e SAN (iSCSI e FCP com SCSI UNMAP).
+* SnapManager for Hyper-V para backup e recuperação granulares (suporte a PVR necessário).  O Hyper-V pode ser uma escolha viável se:
+* Atualizou recentemente para um novo hardware ou fez investimentos significativos em infraestrutura local.
+* Usando um SAN ou NAS para armazenamento (Azure Stack HCI não será uma opção)
+* Precisa de armazenamento e computação para crescer de forma independente. Não é possível modernizar devido a fatores como investimentos em hardware, cenários políticos, conformidade regulatória, desenvolvimento de aplicativos ou outros obstáculos existentes.
+
+
+
+
+=== Virtualização OpenShift (implementação RedHat KubeVirt)
+
+Vamos explorar:
+
+* Usando o hipervisor KVM, executando em contêineres, gerenciado como Pods
+* Agendado, implantado e gerenciado pelo Kubernetes
+* Crie, modifique e destrua máquinas virtuais e seus recursos usando a interface da web OpenShift
+* Integrado com recursos e serviços do orquestrador de contêineres para paradigma de armazenamento persistente.
+
+
+
+
+==== Integrações
+
+* O Trident CSI permite gerenciar dinamicamente o armazenamento por NFS, FC, iSCSI e NVMe/TCP de uma forma granular à VM e baseada em classes.
+* Trident CSI para provisionamento, criação de snapshots, expansão de volume e criação de clones
+* O Trident Protect oferece suporte a backups e restaurações consistentes em caso de falhas de VMs do OpenShift Virtualization, armazenando-os em qualquer bucket de armazenamento de objetos compatível com S3.
+* O Trident Protect também fornece recuperação de desastres com replicação de armazenamento e failover e failback automatizados para VMs de virtualização OpenShift.
+
+
+A virtualização OpenShift pode fazer sentido se:
+
+* Consolidando máquinas virtuais e contêineres em uma única plataforma.
+* Reduza a sobrecarga de licenciamento, pois a virtualização do OpenShift faz parte do OpenShift, que pode já estar licenciado para cargas de trabalho de contêiner.
+* Mova VMs legadas para o ecossistema nativo da nuvem sem refatoração completa no primeiro dia.
+
+
+
+
+=== Ambiente Virtual Proxmox (Proxmox VE)
+
+Vamos explorar:
+
+* Plataforma de virtualização abrangente de código aberto para Qemu KVM e LXC
+* Baseado na distribuição Linux Debian
+* Pode ser operado como uma máquina independente ou em um cluster composto por várias máquinas
+* Implantação descomplicada e eficiente de máquinas virtuais e contêineres
+* Interface de gerenciamento baseada na web e recursos fáceis de usar, como migração ao vivo e opções de backup.
+
+
+
+
+==== Integrações
+
+* Use iSCSI, NFS v3, v4.1 e v4.2.
+* Todas as excelentes coisas que o ONTAP tem a oferecer, como clonagem rápida, snapshots e replicação.
+* Com a opção nconnect, o número de conexões TCP por servidor pode ser aumentado para até 16 conexões para altas cargas de trabalho NFS
+
+
+Proxmox pode fazer sentido se:
+
+* Código aberto, eliminando custos de licenciamento.
+* Interface web fácil de usar simplifica o gerenciamento.
+* Suporta máquinas virtuais e contêineres, oferecendo flexibilidade.
+* Interface única para gerenciar VMs, contêineres, armazenamento e rede
+* Acesso total aos recursos sem restrições
+* Serviço e suporte profissional via Credativ
+
+
+
+
+=== Ofertas do VMware Cloud (Azure VMWare Solution, Google Cloud VMware Engine, VMware Cloud na AWS, Elastic VMware Service)
+
+Vamos explorar:
+
+* O VMware in the Cloud oferece uma "nuvem privada" hospedada no respectivo data center do hiperescalador que faz uso de uma infraestrutura bare-metal dedicada para hospedar a infraestrutura VMware.
+* Permite até 16 hosts por cluster, com recursos VMware, incluindo vCenter, vSphere, vSAN e NSX
+* Implantação rápida e ampliação/redução
+* Opções de compra flexíveis: instâncias reservadas por hora sob demanda, de 1 e 3 anos, com opção de 5 anos disponível em certos hiperescaladores.
+* Oferece ferramentas e processos familiares para ajudar na migração do VMware local para o VMware na nuvem.
+
+
+
+
+==== Integrações
+
+
+NOTE: A NetApp é o único fornecedor de armazenamento externo com armazenamento de alto desempenho integrado de primeira linha, compatível com VMware na nuvem em todos os três principais hiperescaladores.
+
+* O armazenamento com tecnologia NetApp (Azure NetApp Files, FSx for ONTAP, volumes do Google Cloud NetApp ) em cada nuvem complementa o armazenamento vSAN em vez de precisar adicionar nós de computação extras.
+* Desempenho consistente, serviço de armazenamento de arquivos medido
+* Snapshots e clones eficientes para criar rapidamente cópias e alterações de pontos de verificação em escala
+* Replicação eficiente baseada em transferência de bloco incremental para DR e backup regionais
+* Os aplicativos com uso intensivo de armazenamento custarão menos para serem executados usando o armazenamento em nuvem da NetApp como armazenamentos de dados
+* Capacidade de montar sistemas de arquivos de propriedade do convidado, como NFS ou iSCSI gerenciados pelo convidado para cargas de trabalho de alto desempenho, além da conectividade de armazenamento de dados externo
+
+
+Motivos para migrar para as ofertas do VMware Cloud:
+
+* Implantações com uso intensivo de armazenamento economizam dinheiro ao descarregar a capacidade de armazenamento em vez de adicionar mais nós de computação
+* Requer menos qualificação em comparação à transição para Hyper-V, Azure Stack ou até mesmo formatos de VM nativos
+* Bloqueia preços que não serão afetados por alterações em outros custos de licenciamento por até 3 ou 5 anos (dependendo do provedor de nuvem).
+* Oferece cobertura BYOL (traga sua própria licença)
+* A transferência e o levantamento de dados no local ajudam a reduzir potencialmente os custos em áreas-chave.
+* Crie ou transfira recursos de recuperação de desastres para a nuvem, reduza custos e elimine a carga operacional
+
+
+Para os clientes que buscam usar o VMware Cloud em qualquer hiperescalador como destino de recuperação de desastres, os datastores com armazenamento ONTAP (Azure NetApp Files, FSx ONTAP, volumes do Google Cloud NetApp ) podem ser usados para replicar dados locais usando qualquer solução de terceiros validada que forneça capacidade de replicação de VM.  Ao adicionar datastores com armazenamento ONTAP , será possível uma recuperação de desastres com custo otimizado no destino, com um número menor de hosts ESXi.  Isso também permite desativar o site secundário no ambiente local, possibilitando assim uma economia de custos significativa.
+
+* Veja orientações detalhadas paralink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-aws-fsxn-vmc-ds-dr-veeam.html["Recuperação de desastres para armazenamento de dados FSx ONTAP"^] .
+* Veja orientações detalhadas paralink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-azure-avs-dr-jetstream.html["Recuperação de desastres para armazenamento de dados do Azure NetApp Files"^] .
+* Veja orientações detalhadas paralink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-gcp-gcve-app-dr-ds-veeam.html["Recuperação de desastres para o armazenamento de dados do Google Cloud NetApp Volumes"^] .
+
+
+
+
+=== Máquinas virtuais nativas da nuvem
+
+
+NOTE: A NetApp é a única fornecedora com armazenamento multiprotocolo de alto desempenho integrado de primeira linha na nuvem em todos os três principais hiperescaladores.
+
+Vamos explorar:
+
+* Otimize os recursos de computação com tamanhos flexíveis de máquinas virtuais para atender a necessidades comerciais específicas e eliminar despesas desnecessárias.
+* Transição suave para o futuro com flexibilidade na Nuvem.  Motivos para migrar para máquinas virtuais nativas da nuvem com armazenamento com tecnologia NetApp :
+* Aproveite os recursos de armazenamento empresarial, como provisionamento fino, eficiência de armazenamento, clones de pegada zero, backups integrados, replicação em nível de bloco, hierarquização e, assim, otimize os esforços de migração e tenha uma implantação à prova do futuro desde o primeiro dia.
+* Otimizar a implantação de armazenamento atual usada em instâncias de nuvem nativas dentro da nuvem, incorporando o ONTAP e usando os recursos de otimização de custos que ele fornece
+* Capacidade de economizar custos
++
+** usando técnicas de gerenciamento de dados ONTAP
+** por meio de reservas em vários recursos
+** por meio de máquinas virtuais burstable e spot
+
+
+* Aproveite as vantagens das tecnologias modernas, como IA/ML
+* Reduza o custo total de propriedade (TCO) da instância em comparação às soluções de armazenamento em bloco, dimensionando corretamente as instâncias de nuvem para atender aos IOPs e parâmetros de taxa de transferência necessários.
+
+
+
+
+=== Azure Local ou AWS Outpost ou qualquer outro modelo HCI
+
+Vamos explorar:
+
+* Executa em uma solução validada
+* Solução empacotada que pode ser implantada dentro das instalações para servir como núcleo para nuvem híbrida ou múltipla.
+* Fornece aos usuários acesso à infraestrutura de nuvem, serviços, APIs e ferramentas personalizadas para qualquer ambiente: local, na nuvem ou híbrido.
+
+
+
+NOTE: É necessário ter ou alugar/comprar hardware compatível com HCI.
+
+
+NOTE: O Azure local não oferece suporte a armazenamento externo, no entanto, o AWS Outpost oferece suporte ao ONTAP
+
+Motivos para migrar para o Azure Local ou AWS Outpost:
+
+* Se o hardware compatível com HCI já for de propriedade
+* Controle a execução da carga de trabalho e o armazenamento de dados.
+* Conheça a residência de dados locais e processe dados em regiões locais usando os respectivos serviços, ferramentas e APIs
+* Use armazenamento conectado ao convidado para conectividade iSCSI, NFS e SMB para VMs convidadas.
+
+
+Contras:
+
+* Nem todas as opções oferecem suporte a SAN, NAS ou configuração de armazenamento autônomo
+* Não oferece suporte ao dimensionamento independente de armazenamento e computação
+
+
+
+
+=== Outras opções de hipervisor que estão sendo consideradas em ambientes de clientes
+
+* *KVM* geralmente é suportado no ONTAP pela distribuição Linux pai, basta consultar o IMT para o Linux de referência.
+* *SUSE Harvester* é uma solução moderna de infraestrutura hiperconvergente (HCI) criada para servidores bare metal usando tecnologias de código aberto de nível empresarial, incluindo Linux, KVM, Kubernetes, KubeVirt e Longhorn.  Projetado para usuários que buscam uma solução flexível e acessível para executar cargas de trabalho nativas da nuvem e de máquina virtual (VM) em seu data center e na borda, o Harvester fornece um painel único para virtualização e gerenciamento de cargas de trabalho nativas da nuvem.  O driver NetApp Astra Trident CSI em um cluster Harvester permite que os sistemas de armazenamento NetApp armazenem volumes de armazenamento utilizáveis por máquinas virtuais em execução no Harvester.
+* *Red Hat OpenStack Platform*, e o OpenStack em geral, também é uma solução de nuvem privada incrível, e o fato de o NetApp Unified Driver estar incorporado ao código upstream do OpenStack significa que a integração do gerenciamento de dados do NetApp é integrada. Ou seja, não há nada para instalar!  As funções de gerenciamento de armazenamento oferecem suporte a NVMe, iSCSI ou FC para protocolos de bloco e NFS para NAS.  Provisionamento fino, gerenciamento de armazenamento dinâmico, descarregamento de cópias e snapshots são todos suportados nativamente.
+
+
+
+
+==== Conclusão principal
+
+ONTAP é a plataforma certa para qualquer hipervisor local ou para qualquer carga de trabalho na nuvem.  O ONTAP oferece suporte a hipervisores importantes em ambientes locais e adotou amplamente ofertas próprias em cada nuvem.  Isso permite que os clientes lidem com as alterações de licenciamento facilmente, navegando pelo modelo de implantação apropriado.
+
+image:virt-options-003.png["Diagrama mostrando a abordagem Any to Any da NetApp para virtualização"]
+
+Para resumir, o VMware continua sendo o hipervisor de fato para organizações.  No entanto, cada organização de TI está avaliando opções alternativas e o ONTAP desempenhará um papel importante em qualquer opção selecionada.
+
+
+
+== Migrações Wicked Fast (100x mais rápidas)
+
+
+
+=== Kit de ferramentas de mudança
+
+Conforme abordado acima, soluções como VMware, Microsoft Hyper-V, Proxmox e OpenShift Virtualization se tornaram escolhas robustas e confiáveis para necessidades de virtualização.  Dado que os requisitos de negócios são dinâmicos, a seleção de uma plataforma de virtualização também deve ser adaptável e a mobilidade instantânea da máquina virtual se torna importante.
+
+A migração de um hipervisor para outro envolve um processo complexo de tomada de decisão para as empresas.  As principais considerações incluem dependências de aplicativos, cronograma de migração, criticidade da carga de trabalho e o impacto do tempo de inatividade do aplicativo nos negócios.  No entanto, com o armazenamento ONTAP e o kit de ferramentas Shift, isso é muito fácil.
+
+O kit de ferramentas NetApp Shift é uma solução de interface gráfica de usuário (GUI) fácil de usar que permite migrar máquinas virtuais (VMs) entre diferentes hipervisores e converter formatos de disco virtual.  Ele utiliza a tecnologia NetApp FlexClone para converter rapidamente discos rígidos de VM.  Além disso, o kit de ferramentas gerencia a criação e a configuração de VMs de destino.
+
+Para obter informações detalhadas, consultelink:../migration/shift-toolkit-overview.html["Migração de máquinas virtuais (VMs) entre ambientes de virtualização (Shift Toolkit)"] .
+
+image:virt-options-004.png["Diagrama mostrando as opções de conversão do NetApp Shift Toolkit"]
+
+
+NOTE: O pré-requisito para o Shift toolkit é ter VMs em execução no volume NFS residindo no armazenamento ONTAP .  Isso significa que se as VMs estiverem hospedadas em armazenamento ONTAP baseado em bloco (especificamente ASA) ou em armazenamento de terceiros, as VMs deverão ser movidas usando o Storage vMotion para os armazenamentos de dados NFS baseados em ONTAP designados.  O Shift toolkit pode ser baixado aqui e está disponível somente para sistemas Windows.
+
+
+
+=== Migração de dados CirrusOps
+
+Uma alternativa ao Shift toolkit é uma solução baseada em parceiros que depende da replicação em nível de bloco.  A Cirrus Data pode migrar facilmente cargas de trabalho de hipervisores tradicionais para plataformas modernas, permitindo cargas de trabalho híbridas mais flexíveis, esforços de modernização acelerados e melhor utilização de recursos. link:https://action.cirrusdata.com/virtualization-optimization#:~:text=Migrate%20from%20leading%20hypervisors%20with%20just%20a%20click.,from%20Amazon%20Web%20Services%20%28AWS%29%20and%20Microsoft%20Azure.["Cirrus Migrate Cloud"] , juntamente com o MigrateOps, possibilitam que as organizações automatizem a mudança de um hipervisor para outro com uma solução segura, fácil de usar e confiável.
+
+*Principal conclusão:* Existem várias alternativas para migrar uma VM do VMware para outro hipervisor.  Para citar alguns – Veeam, Commvault, StarWind, SCVMM e assim por diante.  O objetivo aqui é mostrar as opções possíveis, no entanto, o Shift Toolkit forneceria a opção de migração mais rápida em ordens de magnitude.  Dependendo do cenário, opções alternativas de migração podem ser adotadas.
+
+
+
+== Modelo de Implantação Projetada Comum (em um ambiente multi-hipervisor)
+
+Um cliente tinha um ambiente virtualizado em larga escala com 10.000 VMs (uma mistura de cargas de trabalho do Windows e Linux).  Para otimizar o custo de licenciamento e simplificar o futuro da infraestrutura de virtualização, a estratégia de posicionamento de vários hipervisores e máquinas virtuais era importante.  Eles escolheram a estratégia de posicionamento da VM com base na criticidade da carga de trabalho, tipo de sistema operacional, requisito de desempenho, funcionalidade do hipervisor e custo de licenciamento.
+
+A estratégia de organização foi dividida em três hipervisores:
+
+* VMware vSphere → Cargas de trabalho críticas que dão suporte a aplicativos essenciais aos negócios permanecem no VMware
+* Microsoft Hyper-V → 5.000 VMs do Windows migram para o Hyper-V, aproveitando os benefícios do licenciamento do Windows
+* OpenShift Virtualization → 3.000 VMs Linux migram para cá, para eficiência de custos e gerenciamento nativo do Kubernetes.
+
+
+Essa abordagem de vários hipervisores equilibra custo, desempenho e flexibilidade, garantindo que cargas de trabalho críticas permaneçam no VMware, enquanto cargas de trabalho do Windows e Linux migram para plataformas de hipervisor otimizadas usando o kit de ferramentas Shift para eficiência e escalabilidade.  O exemplo acima é um exemplo, no entanto há diferentes permutações e combinações que podem ser aplicadas em cada nível de aplicação para otimizar o ambiente.
+
+
+
+== Conclusão
+
+Após a aquisição da Broadcom, os clientes da VMware estão navegando em um cenário complexo de integração, otimização de desempenho e gerenciamento de custos.  A NetApp oferece um poderoso conjunto de ferramentas e recursos para superar esses desafios, proporcionando maior visibilidade, integração perfeita, eficiência de custos e segurança robusta.  Ao usar esses recursos, você pode permanecer com a VMware, habilitar uma abordagem de vários fornecedores e se preparar para futuras interrupções.
+
+Aproveitar o VMware Cloud Foundation 5.2.1 e versões posteriores permite que as empresas adotem práticas modernas de nuvem privada sem se limitar ao vSAN.  Isso facilita a migração perfeita de ambientes vSphere existentes, ao mesmo tempo que protege os investimentos em armazenamento ONTAP .
+
+Além disso, a integração de uma estratégia multi-hipervisor garante que as organizações mantenham o controle sobre seu roteiro de virtualização, reduzam custos e adaptem sua infraestrutura às necessidades exclusivas de cada carga de trabalho.  Hyper-V, OpenShift Virtualization, Proxmox e KVM oferecem vantagens exclusivas.  Para determinar a melhor opção, avalie fatores como orçamento, infraestrutura existente, requisitos de desempenho e necessidades de suporte.  Não importa qual plataforma de hipervisor seja selecionada ou onde ela esteja – no local ou na nuvem, o ONTAP é o melhor armazenamento.
