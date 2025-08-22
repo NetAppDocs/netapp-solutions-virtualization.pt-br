@@ -41,6 +41,10 @@ entries:
   entries:
   - title: Sobre a VMware Cloud Foundation e a ONTAP
     url: "/vmware/vmw-vcf-overview.html"
+  - title: Opções de design VCF 9 com ONTAP
+    url: "/vmware/vmw-vcf-design.html"
+  - title: Implantação do VCF 9 com ONTAP
+    url: "/vmware/vmw-vcf-deployment.html"
   - title: Converter clusters vSphere existentes em VCF
     entries:
     - title: Sobre a conversão de clusters vSphere existentes em VCF

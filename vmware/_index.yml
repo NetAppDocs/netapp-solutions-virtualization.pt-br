@@ -14,6 +14,10 @@ indexpage:
       url: vmw-getting-started-overview.html
     - title: Sobre plataformas NetApp para VMware
       url: vmw-getting-started-ntap-options.html
+    - title: Opções de design VCF 9 com ONTAP
+      url: vmw-vcf-design.html
+    - title: Desenvolvimento VCF 9 com ONTAP
+      url: vmw-vcf-deployment.html
     - title: Blogs
       url: "../blogs.html"
     - title: Vídeos

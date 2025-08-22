@@ -7162,4 +7162,151 @@
   <block id="7b3d5a145c3f76308664a64408c99eaa" category="sidebar">NetApp e VMware Sovereign Cloud</block>
   <block id="55bd65f05776cdd05a9fb927d9835206" category="sidebar">Sobre a Sovereign Cloud</block>
   <block id="cd048e95761db719bdba41eb37a4b0d9" category="sidebar">Integrações da NetApp com a Sovereign Cloud</block>
+  <block id="c6215902c114efb89d5447ed2e7f9335" category="summary">Implante, integre ou atualize ambientes VMware Cloud Foundation 9 com o ONTAP.  Aprenda a configurar novos ambientes do VCF 9.0, integrar instâncias existentes do vCenter e datastores ONTAP e atualizar implantações anteriores do VCF.</block>
+  <block id="387581f1d6573d1818e62d62852ab219" category="doc">Configure ambientes de nuvem privada com VMware Cloud Foundation e ONTAP</block>
+  <block id="a72bceb4e1132784448690c407c3609e" category="paragraph">Implante, converta ou atualize ambientes do VMware Cloud Foundation 9 com o ONTAP.  Aprenda a configurar novos ambientes do VCF 9.0, convergir instâncias existentes do vCenter e armazenamentos de dados ONTAP e atualizar implantações anteriores do VCF.</block>
+  <block id="d32067c54b3bac63bd44a03e0ea81140" category="section-title">Implantar uma nova instância do VCF 9</block>
+  <block id="44d27c0a0344f54b95759b7fe85d8e1a" category="paragraph">Use este fluxo de trabalho para implantar um ambiente limpo do VMware Cloud Foundation (VCF) 9.0.  Após a implantação, você pode migrar cargas de trabalho ou começar a provisionar aplicativos e fornecer serviços de infraestrutura.</block>
+  <block id="97fa4819cf2e4392ecbe8064e3274273" category="inline-link-macro">Build Journey – Instale uma nova implantação do VMware Cloud Foundation</block>
+  <block id="32755a71c8f959d4ac7787a078e66ab4" category="paragraph">Para etapas de alto nível, consulte o<block ref="e25816c69554adea5634ef69e530621d" category="inline-link-macro-rx"></block> .</block>
+  <block id="68059df22dc1abc0bdf6287417184424" category="inline-link-macro">Etapas de implantação do Broadcom VCF 9</block>
+  <block id="6f00e63ad17fb9a6904029172c534f2f" category="list-text">Siga o<block ref="eecd5f2ac7f0f13e9cf45a38029c3009" category="inline-link-macro-rx"></block> .</block>
+  <block id="24ca170ce9f7336d95578ee3d1f3ee86" category="list-text">Na etapa de preparação da implantação, conclua as tarefas para sua opção de armazenamento principal.</block>
+  <block id="803eb67d4866057b9c2c6c8f982b2269" category="open-title">VMFS no FC</block>
+  <block id="7bae0c7c422ace44852c1b3ade9a0415" category="list-text">Colete os WWPNs para todos os hosts ESXi.  Você pode correr<block ref="c2a16b08807ab71a8fde996e835d2ed1" prefix=" " category="inline-code"></block> , use o ESXi Host Client ou use o PowerCLI.</block>
+  <block id="c1a33a8a2188d4e7317f1b4e8bcde13c" category="inline-link-macro">Configurações de zoneamento FC recomendadas para sistemas ONTAP</block>
+  <block id="ce197f3a1410adc45d13f4907d6f5e68" category="list-text">Configurar zoneamento. Ver <block ref="5beab4bc15415f19d04fb73f401fc81f" category="inline-link-macro-rx"></block> .</block>
+  <block id="cf6bff07c96d4e89a9d3f3747f09d894" category="admonition">Use os WWPNs das interfaces lógicas (LIFs) do SVM, não os WWPNs do adaptador físico.</block>
+  <block id="52b7c10dd6b2306a9c9f7df60ba9c7d3" category="list-text">Crie um LUN e mapeie-o para os hosts pelo WWPN usando o Gerenciador do Sistema, o ONTAP CLI ou a API.</block>
+  <block id="1f8c3f3951ef4e01e2c5abbd3f72c9d2" category="list-text">Examine novamente o adaptador de armazenamento no ESXi e crie o armazenamento de dados VMFS.</block>
+  <block id="5b12ee0369243579651edca43ff65c85" category="open-title">NFSv3</block>
+  <block id="fb56341c130ce55e22b690ccd62f3d5c" category="list-text">Crie uma interface VMkernel em um host ESXi.</block>
+  <block id="22934a99efc5b841c35971755ae578f0" category="inline-link-macro">O SVM tem NFS habilitado</block>
+  <block id="2367d9834a0034873e06e2332fe8c496" category="inline-link-macro">O vStorage sobre NFS está habilitado</block>
+  <block id="1f92bd5b07cc7307fd2469e633e93d4d" category="list-text">Garantir a<block ref="96f1124c9b5e40d527cc884b95af0c21" category="inline-link-macro-rx"></block> e<block ref="f25b5b849f33fc0b8fb2ed633a01a01c" category="inline-link-macro-rx"></block> .</block>
+  <block id="ff62ead87a8b0ec462af711575546d5a" category="list-text">Crie um volume e exporte-o com uma política que permita os hosts ESXi.</block>
+  <block id="63858332253645c601dc3017c444dd06" category="list-text">Ajuste as permissões conforme necessário.</block>
+  <block id="b26cbfa423e4dbdd39049d4221013e2b" category="list-text">Implante o ONTAP NFS VAAI VIB e inclua-o na imagem vLCM.  Por exemplo:<block ref="73afe7a6acd4a74db996a3fb02511fc6" prefix=" " category="inline-code"></block> .  (Baixe o ZIP do site de suporte da NetApp .)</block>
+  <block id="f397647f4c63cdc8a02924cd51728b7f" category="list-text">Monte o volume NFS no host onde você criou a interface VMkernel.  Por exemplo:<block ref="de490eb31163a6b904883ddd8a7e8488" prefix=" " category="inline-code"></block> .</block>
+  <block id="d0f7e79cc966c79b495d00b5b7618797" category="admonition">O<block ref="18fa343def87f30e3f96b45cf0b59a40" prefix=" " category="inline-code"></block> a contagem de sessões é por host.  Atualize outros hosts após a implantação, conforme necessário.</block>
+  <block id="4a46eaaf404c43e00d3d4c88ff251335" category="list-text">No final de *Verificar resumo da implantação e revisar as próximas etapas* na fase *Implantar frota VCF*, conclua o seguinte:</block>
+  <block id="3d7fe3e43f9f24fffe5ed0d546d12f13" category="list-text">Implantar ferramentas ONTAP</block>
+  <block id="822a5495aa960609265175fb443bdf68" category="inline-link-macro">Baixe as ferramentas ONTAP 10.x</block>
+  <block id="76a81d47dd4c6c2f20e420bba9153e68" category="list-text"><block ref="0ad8f9dcd40fc593bc2059235b67d252" category="inline-link-macro-rx"></block>do site de suporte da NetApp .</block>
+  <block id="c2a6e0e73d239e16d504bdbc611ca9ad" category="list-text">Crie registros DNS para o Gerenciador de ferramentas ONTAP , nó(s) e o IP virtual usado para comunicação interna.</block>
+  <block id="995f383a655fb7d0a0afbdcce5d18a4d" category="list-text">Implante o OVA no vCenter Server de gerenciamento.</block>
+  <block id="9f601bd2daf1651582a1383821b9afc3" category="inline-link-macro">Registre o domínio de gerenciamento vCenter</block>
+  <block id="2c77169fbe649eb2b92af40c3c6f3695" category="list-text"><block ref="4954c7d20f0d22568753d8d00cffbfc3" category="inline-link-macro-rx"></block>com o Gerenciador de ferramentas ONTAP .</block>
+  <block id="b7b548cca311da161065ba4f767b95a7" category="inline-link-macro">Adicione o backend de armazenamento</block>
+  <block id="dcedcf827a87c8e90fb1ce8725777212" category="list-text"><block ref="d7bef56968aee47db4adb8a14a981251" category="inline-link-macro-rx"></block>usando a interface do usuário do vSphere Client.</block>
+  <block id="74c6629d6758f3953243df0af0d36910" category="inline-link-macro">Crie um armazenamento de dados suplementar</block>
+  <block id="c274967a56cc8c2192846897048bf284" category="list-text"><block ref="bf4864d276cd873bf4878589e9faac9f" category="inline-link-macro-rx"></block>(inclua um para o registro de conteúdo).</block>
+  <block id="3129ccd6abb1c6f28e9cded466a59dae" category="list-text">Crie o registro de conteúdo se você planeja uma implantação de HA.</block>
+  <block id="626a39bf99aea8d864004319ffc66b9e" category="inline-link-macro">Habilitar HA</block>
+  <block id="b65361593891273a9a3a04902faee73d" category="list-text"><block ref="d25937ee88ed725a5a2b38e0f4dc9473" category="inline-link-macro-rx"></block>no Gerenciador de ferramentas ONTAP .</block>
+  <block id="289b1e355098d29bd11363a593f0dc76" category="list-text">Implantar o plug-in SnapCenter</block>
+  <block id="9beedbcb12b97ab44bb9c704d822b5d1" category="list-text"><block ref="e571a06e08f51cdb7ad1c593eaa7ed6d" category="inline-link-macro-rx"></block> .</block>
+  <block id="2548cfcfac956c46c8a3a89495d1a46a" category="list-text"><block ref="cc1500d76361c72cf779abe48f0fc35a" category="inline-link-macro-rx"></block> .</block>
+  <block id="c53d877e510b11baafe9977012350927" category="list-text"><block ref="cb0dead520e90c499c96670f780765a6" category="inline-link-macro-rx"></block> .</block>
+  <block id="1d39d40690c6b0438c6754882aff3298" category="list-text"><block ref="4d5b4b1a7d4a800c0f6172c83d21c237" category="inline-link-macro-rx"></block> .</block>
+  <block id="3b577205e13f15e3e92d7f8ae09ce62c" category="list-text">Implantar o conector BlueXP</block>
+  <block id="ca7619b24630485fd04911d2a495defd" category="inline-link-macro">Revise o que você pode fazer sem um conector</block>
+  <block id="1a3c4e40213fe6b9790fb434adc5745e" category="list-text"><block ref="c78b9a9b3712f648550c534d47359e82" category="inline-link-macro-rx"></block> .</block>
+  <block id="c4221a876311b977e621fffb89b02613" category="inline-link-macro">Implantar o conector</block>
+  <block id="47650d5e720017f803a359e378200a94" category="list-text"><block ref="c3a6ec4f72766dc4f2bf2ee91acf8029" category="inline-link-macro-rx"></block> .</block>
+  <block id="824dbf9a0911f671580becced56fe7f6" category="list-text">Use BlueXP para backup e recuperação</block>
+  <block id="342e48c14f539eca38e981c5bea831ed" category="inline-link-macro">Proteja cargas de trabalho VM</block>
+  <block id="c93ad43108552b957cc3e28d1be2188c" category="list-text"><block ref="9e814f036a9560076b7c3082866cb88f" category="inline-link-macro-rx"></block> .</block>
+  <block id="baa9e11c89bfdddbdc4cf3eddf1251c3" category="inline-link-macro">Proteja cargas de trabalho VKS</block>
+  <block id="2660b5087d0e5c735cc8078a3b0510f4" category="list-text"><block ref="9f08986fdec0abdc78ad8282677ce19e" category="inline-link-macro-rx"></block> .</block>
+  <block id="4dbaeefdde49c53aef6af40802f8c050" category="list-text">Depois de importar o vCenter como um domínio de carga de trabalho na instância do VCF, conclua o seguinte:</block>
+  <block id="3479582d3853d35537049bf157941078" category="list-text">Registrar ferramentas ONTAP</block>
+  <block id="4f3eda0c91ccb5ee6dd6cb20afe9fe6d" category="inline-link-macro">Registre o domínio de carga de trabalho vCenter</block>
+  <block id="14ea68422db5e51ea43b30a09cf0d77b" category="list-text"><block ref="b19ab33e68a1104b2bf877feedb68fc8" category="inline-link-macro-rx"></block>com o Gerenciador de ferramentas ONTAP .</block>
+  <block id="bdfbb9b18654c0d11414bfe7c65cb78b" category="list-text"><block ref="bf4864d276cd873bf4878589e9faac9f" category="inline-link-macro-rx"></block> .</block>
+  <block id="05dbe8c4e6a9bac744f4406531d2061b" category="paragraph">Você pode reutilizar essas etapas sempre que criar um novo domínio de carga de trabalho.</block>
+  <block id="b3c82f59eab80fb8d633c96337cb27e3" category="section-title">Convergir componentes existentes no VCF 9</block>
+  <block id="89665820708d6f1603420843a2ef8fca" category="paragraph">Talvez você já tenha alguns componentes da frota VCF e prefira reutilizá-los.  Ao reutilizar uma instância do vCenter, os armazenamentos de dados são frequentemente provisionados com ferramentas ONTAP , que podem servir como armazenamento principal para VCF.</block>
+  <block id="da11788e0580a75793b3c6e5a0fb93f6" category="list-text">Confirme se as instâncias existentes do vCenter estão funcionais.</block>
+  <block id="2cb537a71661b7c2a7a6968059397cec" category="list-text">Verifique se os armazenamentos de dados provisionados ONTAP estão disponíveis.</block>
+  <block id="dc351b2abbd920b35cff990b6582b9d7" category="inline-link-macro">Matriz de Interoperabilidade</block>
+  <block id="6c68da430cde6e2e273552418701d51c" category="list-text">Garantir o acesso ao<block ref="9d206e7d8b64697e7ff10e2e8517d1e9" category="inline-link-macro-rx"></block> .</block>
+  <block id="e21a963d536c490dd477ddb6dc84ff36" category="inline-link-macro">cenários suportados para convergir para VCF</block>
+  <block id="f89ac32b53262414797b94b331102610" category="list-text">Revise o<block ref="95029b5aaf98b1cee4c885d0fa7b7b03" category="inline-link-macro-rx"></block> .</block>
+  <block id="78edfe40594fa4634576d2deee259a0f" category="list-text">Convergir uma instância do vCenter com armazenamentos de dados provisionados ONTAP como armazenamento principal.</block>
+  <block id="edfd92b3bc32f867012c03ba5d9b001f" category="list-text">Verifique as versões suportadas usando o<block ref="9d206e7d8b64697e7ff10e2e8517d1e9" category="inline-link-macro-rx"></block> .</block>
+  <block id="b41e61c996bc663e3cbbb770b4e73f3e" category="inline-link-macro">Ferramentas ONTAP</block>
+  <block id="e6c5a48523776f7389cfd125a6d9c099" category="list-text">Atualizar<block ref="cfaafa9d0a3b20dee499513a7199b5a0" category="inline-link-macro-rx"></block> se necessário.</block>
+  <block id="8500a2d8b9b445512a10133732ed6a8e" category="inline-link-macro">Plug-in SnapCenter para VMware vSphere</block>
+  <block id="a03edb2c62782c7126ce2be92e3a06a4" category="list-text">Atualizar o<block ref="ec61ce0fc18581edeac6d4f1c992e3e0" category="inline-link-macro-rx"></block> se necessário.</block>
+  <block id="b03ae05da839ba2aeda878b573b5fa07" category="section-title">Atualizar um ambiente VCF existente para VCF 9</block>
+  <block id="f70df6a7da4896646127dd428b5da982" category="paragraph">Atualize uma implantação anterior do VCF para a versão 9.0 usando o processo de atualização padrão.  O resultado é um ambiente VCF executando a versão 9.0 com domínios de gerenciamento e carga de trabalho atualizados.</block>
+  <block id="410c53f907a2c476256c7cb81ff354cb" category="list-text">Faça backup do domínio de gerenciamento e dos domínios de carga de trabalho.</block>
+  <block id="3b36c2c506f0a351293e16aabf9f5c4e" category="inline-link-macro">atualizar ferramentas ONTAP</block>
+  <block id="0bd5bfedcbb622fc43c9d100a8c8a813" category="list-text">Verifique a compatibilidade das ferramentas ONTAP e do plug-in SnapCenter com o VCF 9.0.  Siga o<block ref="9d206e7d8b64697e7ff10e2e8517d1e9" category="inline-link-macro-rx"></block> para<block ref="d875e42dccfc992261af149190d03bac" category="inline-link-macro-rx"></block> e<block ref="ec61ce0fc18581edeac6d4f1c992e3e0" category="inline-link-macro-rx"></block> que são suportados pelo VCF 9.</block>
+  <block id="f9089a257f7ed15d274a9bc31bff6caa" category="inline-link-macro">Atualizar o domínio de gerenciamento do VCF para VCF 9</block>
+  <block id="3eb41dbce4b13907427be772aa2f855c" category="list-text">Atualize o domínio de gerenciamento do VCF.  Ver<block ref="dabaa90d503550b7c9321e223927d88a" category="inline-link-macro-rx"></block> para obter instruções.</block>
+  <block id="a8bb023710bfedd7e42a5470f8b79bcf" category="inline-link-macro">Atualizar o domínio de carga de trabalho do VCF 5.x para o VCF 9</block>
+  <block id="895af0c34b67dcec4c9bd5dd5a263d4d" category="list-text">Atualize qualquer domínio de carga de trabalho do VCF 5.x.  Ver<block ref="a23caeadd25977c373e6107b0cd023d3" category="inline-link-macro-rx"></block> para obter instruções.</block>
+  <block id="d0a4cf1a7c82fcde1b2cf85329cb1d0b" category="summary">Você pode começar do zero com o VCF 9 ou reutilizar implantações existentes para criar um ambiente de Nuvem Privada usando o VCF 9 e o ONTAP.  Saiba mais sobre projetos de design populares para o VCF 9 e como os produtos NetApp agregam valor.</block>
+  <block id="827930e44738b199c1c5b242c8ed3889" category="doc">Opções de design com VMware Cloud Foundation e ONTAP</block>
+  <block id="a74077e2e89fe826075fc1050da6c5ec" category="section-title">Opções de armazenamento</block>
+  <block id="cc191e02cd18d9f35c2ce6fd1f979099" category="paragraph">O VMware Cloud Foundation com ONTAP oferece suporte a uma variedade de configurações de armazenamento para atender a diferentes requisitos de desempenho, escalabilidade e disponibilidade.  As tabelas a seguir resumem as principais e suplementares opções de armazenamento disponíveis para seu ambiente.</block>
+  <block id="a902e586417987e16e674a7f455cb736" category="cell">Família de produtos</block>
+  <block id="f6e3bf0c5970ea1af691f5d9bb9f1dc1" category="cell">Série A e Série C da ASA</block>
+  <block id="5fc3ef0b0771dce6d035ce448d2604ff" category="cell">Série A e Série C da AFF</block>
+  <block id="149f0ea389848f479bd80af6375b383b" category="cell">FAS</block>
+  <block id="a9776c15476fbff0875f710d7962d556" category="cell">VMFS em iSCSI</block>
+  <block id="58dd3274563c3248052e832c6ae54e5a" category="cell">VMFS em NVMe-oF</block>
+  <block id="de841868c2911da76b8ae2da9fa3166d" category="cell">NFSv4.1</block>
+  <block id="92e9ce04b9db912a9ef4e9e44bda548e" category="paragraph">Os projetos a seguir ilustram modelos comuns de implantação para VMware Cloud Foundation e ONTAP em vários cenários de sites e recursos.</block>
+  <block id="708eaa77450722ee5d243ecf27ef9fcb" category="section-title">Frota VCF em um único local com pegada mínima</block>
+  <block id="ce5162477d4ecb1688d1b01a5f90ed86" category="paragraph">Este projeto de design é para implantar componentes de gerenciamento e carga de trabalho em um único cluster vSphere com recursos mínimos.  Ele suporta VMFS e NFSv3 Principal Datastores e uma opção de implantação simples com uma configuração de dois nós.  Se você planeja usar o VCF Automation com o modelo de organização de todos os aplicativos, precisará de um segundo cluster para implantar o vSphere Supervisor e os nós do NSX Edge.</block>
+  <block id="4f1dd0a9084f938fd993af8c840d2fd6" category="image-alt">Frota VCF em um único local com pegada mínima</block>
+  <block id="6f3ffbc6ff5125b61226e536d7682c87" category="paragraph">Para minimizar o consumo de recursos, use uma instância de ferramentas ONTAP existente, se possível.  Se não estiver disponível, um único nó com um perfil Pequeno é adequado.  O SnapCenter Plug-in for VMware vSphere protege máquinas virtuais e datastores usando snapshots nativos e replicação para outro array de armazenamento ONTAP .</block>
+  <block id="9198bc39b824214d346935ac54123224" category="admonition">Se você não tiver recursos para explorar o VCF, muitos provedores de nuvem oferecem o VCF como um serviço, e o ONTAP está disponível como um serviço próprio de provedores de nuvem.</block>
+  <block id="f7c3e4166c74eba11828df82912d28c0" category="inline-link-macro">Documentação técnica da Broadcom sobre frota VCF em um único local com pegada mínima</block>
+  <block id="eeb745e257315857ce445d8d4b92e037" category="paragraph">Para mais detalhes sobre este projeto, consulte o<block ref="f26ce32448c6478601e808dd35aad5ba" category="inline-link-macro-rx"></block> .</block>
+  <block id="7e50f20ff1e926ef774a6bd015d7d0c2" category="section-title">Frota VCF em um único local</block>
+  <block id="636528e76d417f33afcc87d500bd20d8" category="paragraph">Este projeto de design é para clientes com um único Datacenter Primário que dependem de Alta Disponibilidade de aplicativos.  Normalmente, envolve um único ambiente VCF.  Você pode usar o ASA para cargas de trabalho em bloco e o AFF para cargas de trabalho de arquivo/unificadas.</block>
+  <block id="ea8500bd602504056d6e5d54b536eb85" category="paragraph">O Repositório de Conteúdo compartilha modelos de VM e registros de contêiner entre domínios VCF.  Quando hospedado no FlexGroup Volume, o recurso FlexCache fica disponível para armazenamento de dados de assinatura.</block>
+  <block id="5a461c7900a0cc956f22f0726b924e49" category="admonition">Não há suporte para hospedagem de VMs no FlexCache Datastore.</block>
+  <block id="5f1b05906f88292b30016b23207f4d75" category="image-alt">Frota VCF em um único local</block>
+  <block id="fd2d97cbb2b5784b89c16b0daa81cc3e" category="inline-link-macro">Limites de configuração das ferramentas ONTAP</block>
+  <block id="b0ca03346bc47fb1abae508acdfc942a" category="paragraph">Uma única instância de ferramentas ONTAP no modo HA pode gerenciar todos os vCenters na frota VCF.  Consulte o<block ref="d9a797f78d63c3c01364e4f3a683c385" category="inline-link-macro-rx"></block> para mais informações.  As ferramentas ONTAP integram-se ao VCF SSO e ao agrupamento inteligente VCF OPS para acesso a vários vCenters na mesma interface de usuário.</block>
+  <block id="8944254b90a60f33189bb9db573018c1" category="video-title">Armazenamento de dados suplementar VCF com ferramentas ONTAP</block>
+  <block id="b6fc61200e278cac53ab8b7172493452" category="paragraph">Você deve implantar o SnapCenter Plug-in em cada instância do vCenter para proteção de VM e Datastore.</block>
+  <block id="f86e9af5c15a4ce67ca3a90cf6be6d92" category="paragraph">O gerenciamento baseado em políticas de armazenamento é usado com o vSphere Supervisor para hospedar VMs de controle do VKS.  As tags são gerenciadas centralmente no VCF Ops.  O NetApp Trident CSI é usado com o VKS para proteção de backup de aplicativos usando recursos de array nativos.  Quando você usa o vSphere CSI, os detalhes do volume persistente aparecem no VCF Automation.</block>
+  <block id="970551e49b7ff81699c935a37b6182a3" category="inline-link-macro">Documentação técnica da Broadcom sobre frota VCF em um único site</block>
+  <block id="98e152eb2f5d95de0d1bf7726d46fda0" category="paragraph">Para mais detalhes sobre este projeto, consulte o<block ref="cf85f297faf3a63207c30291d97fbb44" category="inline-link-macro-rx"></block> .</block>
+  <block id="b2bdf254778179f9dc217a3def15b346" category="section-title">Frota VCF com vários locais em uma única região</block>
+  <block id="a3820528f66ad4812ae6f2480ea1f090" category="paragraph">Este design é para clientes que fornecem serviços semelhantes aos da nuvem com maior disponibilidade, distribuindo cargas de trabalho entre diferentes domínios de falhas.</block>
+  <block id="04f6415c229fd7a2008e646578846a5e" category="paragraph">Para armazenamentos de dados VMFS, o SnapMirror Active Sync fornece uma unidade de armazenamento ativa-ativa para uso com o vSphere Metro Storage Cluster.  O modo de acesso uniforme oferece failover de armazenamento transparente, enquanto o modo de acesso não uniforme exige reinicialização da VM em caso de falha de domínio.</block>
+  <block id="95959633abea4dd695b33419cf9e52a0" category="paragraph">Para datastores NFS, o ONTAP MetroCluster com vSphere Metro Storage Cluster garante alta disponibilidade.  Um mediador evita cenários de cérebro dividido e agora pode ser hospedado no BlueXP.</block>
+  <block id="b897d2f9072c14f2df9f080dd4680b8d" category="paragraph">As regras de posicionamento de VM controlam VMs dentro do mesmo domínio de falha para componentes do Domínio de Gerenciamento.</block>
+  <block id="640398205e5c5d3e63b3fcd1c002c53e" category="image-alt">Frota VCF com vários locais em uma única região</block>
+  <block id="73796bf64a7e9b9d1b41d047b8556009" category="paragraph">As ferramentas ONTAP fornecem uma interface de usuário para configurar relacionamentos de sincronização ativa do SnapMirror .  Os sistemas de armazenamento de ambos os domínios de falha devem ser registrados nas ferramentas ONTAP e no SnapCenter Plug-in for VMware vSphere.</block>
+  <block id="542f8587ecf32ca958fbae5d4fd1a4ad" category="paragraph">Você pode implementar políticas de backup 3-2-1 usando o BlueXP Backup and Recovery para VMs via SnapMirror e SnapMirror to Cloud.  Você pode executar restaurações de qualquer um dos três locais.</block>
+  <block id="11cfd568dd78fe0098d5f36bf9676a1b" category="paragraph">O Trident Protect ou o BlueXP Backup and Recovery para Kubernetes protegem aplicativos de cluster VKS.</block>
+  <block id="f02fe719e1873adbd7cea7ccd4c777b9" category="inline-link-macro">Documentação técnica da Broadcom sobre frota VCF com vários sites em uma única região</block>
+  <block id="90f34a885ddfb22d4a676b54cc62c36c" category="paragraph">Para mais informações, consulte o<block ref="5415fcf8d0391007a73bfff7c6e43438" category="inline-link-macro-rx"></block> .</block>
+  <block id="7f53f4071d0e5a82ef8e86cff41ffb79" category="section-title">Frota VCF com vários locais em várias regiões</block>
+  <block id="80d3ea602e3c4a9536986495dd288775" category="paragraph">Este projeto é para clientes espalhados pelo mundo todo, fornecendo serviços de proximidade e soluções de recuperação de desastres.</block>
+  <block id="b4617491da37db66b9471816f2654093" category="paragraph">Você pode gerenciar a recuperação de desastres para VMs com o VMware Live Site Recovery ou o BlueXP Disaster Recovery as a Service.  As ferramentas ONTAP oferecem o SRA (Storage Replication Adapter) para orquestrar operações de armazenamento com o ONTAP.</block>
+  <block id="c0b79db5f258f0c991a383cbdbf001dd" category="cell">Sincronização ativa do SnapMirror</block>
+  <block id="1749d12df3df2319d3eee218a277ff83" category="cell">MetroCluster</block>
+  <block id="fe180aee92ebefcfa83b485f6722e9d7" category="image-alt">Frota VCF com vários locais em várias regiões</block>
+  <block id="54ae787adb65bf8930e964855b741e8c" category="paragraph">As ferramentas ONTAP fornecem uma interface de usuário para configuração de replicação de armazenamento de dados.  O BlueXP também pode ser usado para replicação entre matrizes de armazenamento.  O SnapCenter Plug-in for VMware vSphere utiliza relacionamentos SnapMirror existentes para SnapShots.</block>
+  <block id="629a568c9d01e550bf36c9042dc80e51" category="inline-link-macro">Documentação técnica da Broadcom sobre frota VCF com vários locais em várias regiões</block>
+  <block id="51d909943962ab7a57032828f795608a" category="paragraph">Para mais informações, consulte o<block ref="8398c667500ceea054eb6ecaafdcbc05" category="inline-link-macro-rx"></block> .</block>
+  <block id="061001f508ad66b14119e8c2abe655d5" category="section-title">Frota VCF com vários locais em uma única região, além de regiões adicionais</block>
+  <block id="940d96642171e1e3fa8d8005ef4ffaa2" category="paragraph">Este design aborda tanto a disponibilidade quanto a recuperação de desastres de VMs e aplicativos VKS.</block>
+  <block id="1a736d26ade0397c5d56910ace33e618" category="paragraph">ASA, AFF e FAS suportam esta opção de design.</block>
+  <block id="d3ee4a0fcd185bd9081f96c0778ac589" category="image-alt">Frota VCF com vários locais em uma única região, além de regiões adicionais</block>
+  <block id="8431f1e622f98349837eba3b9fd95b83" category="paragraph">Você pode usar ferramentas ONTAP ou BlueXP para configurar o relacionamento de replicação.</block>
+  <block id="5c99ff7f98b4498b19c458dd8de13442" category="inline-link-macro">Documentação técnica da Broadcom sobre frota VCF com vários sites em uma única região, além de regiões adicionais</block>
+  <block id="135208b317232813f97dea0a66efbf19" category="paragraph">Para obter mais informações, consulte o <block ref="31eb8c8d9029a21fe9fa1aae2bff2d12" category="inline-link-macro-rx"></block> .</block>
+  <block id="38c4a772e4657f7e070cb42e5d30bc10" category="sidebar">Opções de design VCF 9 com ONTAP</block>
+  <block id="b38115bcd9d3089a288de6f78a3c66b8" category="sidebar">Desenvolvimento VCF 9 com ONTAP</block>
+  <block id="a9f5271aaa2449b6c26e0ca16c29015c" category="sidebar">Implantação do VCF 9 com ONTAP</block>
 </blocks>
