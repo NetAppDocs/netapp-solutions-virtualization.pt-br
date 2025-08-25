@@ -63,7 +63,7 @@ Para obter mais informações sobre como usar um ambiente vSphere existente, con
 
 O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com as seguintes opções:
 
-* Tenha um cluster adicional no ambiente vSphere e use a ferramenta de importação brownfield do VCF para converter o ambiente vSphere em domínio de gerenciamento. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-vvols-datastore.html["ONTAP tools for VMware vSphere"] https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] pode ser usado para implantar o armazenamento de dados VMFS no cluster vSphere.
+* Tenha um cluster adicional no ambiente vSphere e use a ferramenta de importação brownfield do VCF para converter o ambiente vSphere em domínio de gerenciamento. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html["ONTAP tools for VMware vSphere"] https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] pode ser usado para implantar o armazenamento de dados VMFS no cluster vSphere.
 * Use a API do SDDC para implantar um cluster adicional.  Os hosts vSphere devem ter o armazenamento de dados VMFS configurado.  Usar https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] para implantar LUN em hosts vSphere.
 * Use a interface de usuário do SDDC Manager para implantar um cluster adicional.  Mas esta opção só cria um armazenamento de dados VSAN até a versão 5.2.x.
 
