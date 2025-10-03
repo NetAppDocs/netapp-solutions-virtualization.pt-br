@@ -1,0 +1,46 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html 
+keywords: netapp, vmware, cloud, foundation, vcf, iscsi, requirements 
+summary: Revise os requisitos para adicionar um armazenamento de dados iSCSI como armazenamento suplementar a um domínio de gerenciamento VCF. 
+---
+= Requisitos de implantação para adicionar um armazenamento de dados iSCSI a um domínio de gerenciamento VCF
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Revise os requisitos para adicionar armazenamentos de dados iSCSI como armazenamento suplementar a um domínio de gerenciamento do VMware Cloud Foundation (VCF).  Para implantar iSCSI vVols em um domínio de gerenciamento do VMware Cloud Foundation, você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado e um domínio de gerenciamento VCF implantado.
+
+
+
+== Requisitos de infraestrutura
+
+Certifique-se de que os seguintes componentes e configurações estejam instalados.
+
+* Um sistema de armazenamento ONTAP AFF ou ASA com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
+* A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
+
+
+
+
+== Projeto de rede iSCSI recomendado
+
+Você deve configurar projetos de rede totalmente redundantes para iSCSI.  O diagrama a seguir mostra um exemplo de configuração redundante, fornecendo tolerância a falhas para sistemas de armazenamento, switches, adaptadores de rede e sistemas host. Consulte o NetApplink:https://docs.netapp.com/us-en/ontap/san-config/index.html["Referência de configuração SAN"] para obter informações adicionais.
+
+image:vmware-vcf-asa-074.png["Projeto de rede iSCSI"]{nbsp}
+
+Para multipathing e failover em vários caminhos, crie no mínimo dois LIFs por nó de armazenamento em redes Ethernet separadas para todas as SVMs em configurações iSCSI.
+
+
+TIP: Em situações em que vários adaptadores VMkernel são configurados na mesma rede IP, é recomendável usar a vinculação de porta iSCSI de software nos hosts ESXi para garantir que o balanceamento de carga entre os adaptadores ocorra. Consulte o artigo da KBlink:https://knowledge.broadcom.com/external/article?legacyId=2038869["Considerações sobre o uso de vinculação de porta iSCSI de software no ESX/ESXi"^] .
+
+
+
+== O que vem a seguir?
+
+Após revisar os requisitos de implantação,link:vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html["criar o SVM e os LIFs"] .

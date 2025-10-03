@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-viwld-supp-nvme-requirements.html 
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
+summary: Para implantar NVMe vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI, você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF completo e um domínio de carga de trabalho VI existente.  Revise o design de rede recomendado e os requisitos de infraestrutura para garantir uma integração de armazenamento confiável e de alto desempenho. 
+---
+= Requisitos de implantação para NVMe vVols em um domínio de carga de trabalho VI
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Revise os requisitos de infraestrutura e design de rede recomendados para implantar NVMe vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI.  Você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF implantado e um domínio de carga de trabalho VI existente.
+
+
+
+== Requisitos de infraestrutura
+
+* Um sistema de armazenamento ONTAP AFF ou ASA com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
+* A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
+* Um domínio de carga de trabalho VI foi implantado anteriormente.
+
+
+
+
+== Projeto de rede NVMe/TCP recomendado
+
+A NetApp recomenda projetos de rede totalmente redundantes para NVMe/TCP. O diagrama a seguir ilustra um exemplo de configuração redundante, fornecendo tolerância a falhas para sistemas de armazenamento, switches, adaptadores de rede e sistemas host.
+
+image:vmware-vcf-asa-074.png["Projeto de rede NVMe-tcp"]
+
+Para multipathing e failover em vários caminhos, configure no mínimo dois LIFs por nó de armazenamento em redes Ethernet separadas para todas as SVMs em configurações NVMe/TCP.
+
+
+
+== O que vem a seguir?
+
+Após revisar os requisitos de implantação,link:vmw-vcf-viwld-supp-nvme-svm-lifs.html["criar o SVM e os LIFs"] .

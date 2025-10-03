@@ -71,18 +71,58 @@ entries:
       url: "/vmware/vmw-vcf-viwld-principal-nfs.html"
   - title: Expanda o VCF com armazenamento suplementar
     entries:
-    - title: Sobre a expansão do armazenamento
+    - title: Saiba mais sobre como expandir o armazenamento
       url: "/vmware/vmw-vcf-expand.html"
     - title: Expanda os domínios de gerenciamento com iSCSI
-      url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi.html"
+      entries:
+      - title: Fluxo de trabalho de implantação
+        url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi.html"
+      - title: Requisitos de revisão
+        url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-requirements.html"
+      - title: Criar SVM e LIFs
+        url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-svm-lifs.html"
+      - title: Configurar rede
+        url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html"
+      - title: Configurar armazenamento
+        url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html"
     - title: Expanda os domínios de gerenciamento com FC
       url: "/vmware/vmw-vcf-mgmt-supplemental-fc.html"
     - title: Expanda os domínios de carga de trabalho do VI com vVols iSCSI
-      url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols.html"
+      entries:
+      - title: Fluxo de trabalho de implantação
+        url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols.html"
+      - title: Requisitos de revisão
+        url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-requirements.html"
+      - title: Criar SVM e LIFs
+        url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html"
+      - title: Configurar rede
+        url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html"
+      - title: Configurar armazenamento
+        url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html"
     - title: Expanda os domínios de carga de trabalho do VI com vVols NFS
-      url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols.html"
+      entries:
+      - title: Fluxo de trabalho de implantação
+        url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols.html"
+      - title: Requisitos de revisão
+        url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html"
+      - title: Criar SVM e LIFs
+        url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-svm-lifs.html"
+      - title: Configurar rede
+        url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html"
+      - title: Configurar armazenamento
+        url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html"
     - title: Expanda os domínios de carga de trabalho do VI com NVMe/TCP
-      url: "/vmware/vmw-vcf-viwld-supp-nvme.html"
+      entries:
+      - title: Fluxo de trabalho de implantação
+        url: "/vmware/vmw-vcf-viwld-supp-nvme.html"
+      - title: Requisitos de revisão
+        url: "/vmware/vmw-vcf-viwld-supp-nvme-requirements.html"
+      - title: Criar SVM e LIFs
+        url: "/vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html"
+      - title: Configurar rede
+        url: "/vmware/vmw-vcf-viwld-supp-nvme-network.html"
+      - title: Configurar armazenamento
+        url: "/vmware/vmw-vcf-viwld-supp-nvme-storage.html"
     - title: Expanda os domínios de carga de trabalho do VI com FC
       url: "/vmware/vmw-vcf-viwld-supp-fc.html"
   - title: Proteja o VCF com o SnapCenter

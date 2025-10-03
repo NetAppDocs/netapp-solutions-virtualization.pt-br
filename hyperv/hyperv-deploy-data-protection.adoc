@@ -109,7 +109,7 @@ image:hyperv-deploy-014.png["Imagem mostrando a seleção de VMs a serem protegi
 . Clique em Salvar.
 
 
-Para obter etapas detalhadas sobre a configuração do array, consultelink:https://documentation.commvault.com/2023e/essential/guided_setup_for_hyper_v.html["Adicionando um hipervisor"] .
+Para obter etapas detalhadas sobre a configuração do array, consultelink:https://documentation.commvault.com/2023e/software/guided_setup_for_hyper_v.html["Configuração guiada para HyperV"] .
 
 *Executando um backup:*
 
@@ -145,7 +145,7 @@ image:hyperv-deploy-018.png["Imagem exibindo as opções de restauração"]
 
 
 
-Para obter etapas detalhadas para todas as opções de restauração suportadas, consultelink:https://documentation.commvault.com/2023e/essential/restores_for_hyper_v.html["Restaurações para Hyper-V"] .
+Para obter etapas detalhadas para todas as opções de restauração suportadas, consultelink:https://documentation.commvault.com/2023e/software/restores_for_hyper_v.html["Restaurações para Hyper-V"] .
 
 
 

@@ -24,6 +24,8 @@ Assista a vídeos e demonstrações sobre a integração do VMware com as soluç
 video::e8071955-f6f1-45a0-a868-b12a010bba44[panopto]
 .Provisionamento de armazenamento de dados VMware iSCSI com ONTAP
 video::5c047271-aecc-437c-a444-b01200f9671a[panopto]
+.VMFS(FC) Datastore como armazenamento suplementar para domínio de gerenciamento VCF
+video::3135c36f-3a13-4c95-aac9-b2a0001816dc[panopto,width=360]
 .Provisionamento de armazenamento de dados VMware NFS com ONTAP
 video::a34bcd1c-3aaa-4917-9a5d-b01200f97f08[panopto]
 

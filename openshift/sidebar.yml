@@ -43,13 +43,15 @@ entries:
     url: "/openshift/osv-rosa-overview.html"
   - title: Reiniciar ou migrar VMs ao vivo
     url: "/openshift/osv-rosa-vm-workflows.html"
-- title: Proteja os dados usando o Trident Protect
+- title: Proteja VMs usando Trident e Trident Protect
   entries:
+  - title: Proteja VMs usando instantâneos de grupos de volumes
+    url: "/openshift/osv-vm-dp-using-vgs.html"
   - title: Proteja VMs com snapshots e backups
     url: "/openshift/osv-vm-dp-using-tp.html"
   - title: Configurar failover e failback
     url: "/openshift/osv-vm-dr-using-tp.html"
-- title: Proteja os dados usando ferramentas de terceiros
+- title: Proteja VMs usando ferramentas de terceiros
   pdf-filename: Proteção de dados de virtualização Red Hat OpenShift
   entries:
   - title: Proteja VMs usando OADP e Velero

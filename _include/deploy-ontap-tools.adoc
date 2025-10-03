@@ -1,0 +1,56 @@
+= 
+:allow-uri-read: 
+
+
+. Obtenha a imagem OVA das ferramentas ONTAP dolink:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Site de suporte da NetApp"] e baixe para uma pasta local.
+. Efetue login no dispositivo vCenter para o domínio de gerenciamento do VCF.
+. Na interface do dispositivo vCenter, clique com o botão direito do mouse no cluster de gerenciamento e selecione *Implantar modelo OVF…*
++
+image:vmware-vcf-aff-021.png["Implantar modelo OVF..."]
+
++
+{nbsp}
+
+. No assistente *Implantar modelo OVF*, clique no botão de opção *Arquivo local* e selecione o arquivo OVA das ferramentas ONTAP baixado na etapa anterior.
++
+image:vmware-vcf-aff-022.png["Selecione o arquivo OVA"]
+
++
+{nbsp}
+
+. Para as etapas 2 a 5 do assistente, selecione um nome e uma pasta para a VM, selecione o recurso de computação, revise os detalhes e aceite o contrato de licença.
+. Para o local de armazenamento dos arquivos de configuração e de disco, selecione o armazenamento de dados vSAN do cluster de domínio de gerenciamento do VCF.
++
+image:vmware-vcf-aff-023.png["Selecione o arquivo OVA"]
+
++
+{nbsp}
+
+. Na página *Selecionar rede*, selecione a rede usada para o tráfego de gerenciamento.
++
+image:vmware-vcf-aff-024.png["Selecione a rede"]
+
++
+{nbsp}
+
+. Na página *Personalizar modelo*, insira todas as informações necessárias:
++
+** Senha a ser usada para acesso administrativo às ferramentas ONTAP .
+** Endereço IP do servidor NTP.
+** Senha da conta de manutenção das ferramentas ONTAP .
+** Ferramentas ONTAP Derby DB senha.
+** Não marque a caixa para *Ativar VMware Cloud Foundation (VCF)*.  O modo VCF não é necessário para implantar armazenamento suplementar.
+** FQDN ou endereço IP do dispositivo vCenter para o *Domínio de Carga de Trabalho VI*
+** Credenciais para o dispositivo vCenter do *Domínio de Carga de Trabalho VI*
+** Propriedades de rede necessárias.
+
+
+. Clique em *Avançar* para continuar.
++
+image:vmware-vcf-aff-025.png["Personalize o modelo OTV 1"]
+
++
+image:vmware-vcf-asa-035.png["Personalize o modelo OTV 2"]
+
+. Revise todas as informações na página *Pronto para concluir* e clique em *Concluir* para começar a implantar o dispositivo ONTAP Tools.
+

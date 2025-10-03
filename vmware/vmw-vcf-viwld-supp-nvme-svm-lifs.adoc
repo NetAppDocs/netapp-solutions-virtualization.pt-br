@@ -1,0 +1,95 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html 
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
+summary: 'Crie uma Máquina Virtual de Armazenamento (SVM) com várias Interfaces Lógicas (LIFs) para fornecer conectividade iSCSI para domínios de gerenciamento do VMware Cloud Foundation.  Você configurará o SVM com suporte ao protocolo NVMe e configurará vários LIFs em redes Ethernet separadas para habilitar multipathing e failover para desempenho e disponibilidade ideais.' 
+---
+= Crie SVM e LIFs e o namespace NVMe para armazenamentos de dados NVMe/TCP vVols em um domínio de carga de trabalho VCF VI
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Crie uma Máquina Virtual de Armazenamento (SVM) com várias Interfaces Lógicas (LIFs) para fornecer conectividade NVMe para domínios de carga de trabalho do VMware Cloud Foundation.  Este procedimento resume a configuração de um SVM e LIFs habilitados para NVMe/TCP e a criação de namespaces NVMe.
+
+
+
+== Etapa 1: criar os SVMs e LIFs
+
+Conclua as etapas a seguir para criar um SVM com vários LIFs para tráfego NVMe/TCP.
+
+Para adicionar novos LIFs a um SVM existente, consulte a documentação do ONTAP :link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html["Criar LIFs ONTAP"^] .
+
+.Passos
+. No ONTAP System Manager, navegue até *VMs de armazenamento* no menu à esquerda e clique em *+ Adicionar*.
++
+image:vmware-vcf-asa-001.png["Clique em +Adicionar para começar a criar SVM"]
+
++
+{nbsp}
+
+. No assistente *Adicionar VM de armazenamento*, insira um *Nome* para a SVM, selecione o *Espaço IP* e, em *Protocolo de acesso*, clique na guia *NVMe* e marque a caixa para *Ativar NVMe/TCP*.
++
+image:vmware-vcf-asa-075.png["Assistente para adicionar VM de armazenamento - habilitar NVMe/TCP"]
+
++
+{nbsp}
+
+. Na seção *Interface de rede*, insira o *endereço IP*, a *máscara de sub-rede* e o *domínio e porta de transmissão* para o primeiro LIF.  Para LIFs subsequentes, você pode usar configurações individuais ou marcar a caixa de seleção para usar configurações comuns em todos os LIFs restantes.
++
+
+NOTE: Para multipathing e failover em vários caminhos, crie no mínimo dois LIFs por nó de armazenamento em redes Ethernet separadas para todas as SVMs em configurações NVMe/TCP.
+
+. Escolha se deseja habilitar a conta de administração da VM de armazenamento (para ambientes multilocação) e clique em *Salvar* para criar a SVM.
++
+image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
+
+
+
+
+
+== Etapa 2: Crie o namespace NVMe
+
+Os namespaces NVMe são análogos aos LUNs para iSCSi ou FC. Você deve criar o Namespace NVMe antes que um armazenamento de dados VMFS possa ser implantado a partir do vSphere Client.  Para criar o namespace NVMe, obtenha o Nome Qualificado NVMe (NQN) de cada host ESXi no cluster.  O ONTAP usa o NQN para fornecer controle de acesso ao namespace.
+
+.Passos
+. Abra uma sessão SSH com um host ESXi no cluster para obter seu NQN.  Use o seguinte comando da CLI:
++
+[source, cli]
+----
+esxcli nvme info get
+----
++
+Uma saída semelhante ao exemplo a seguir deve ser exibida:
+
++
+[source, cli]
+----
+Host NQN: nqn.2014-08.com.netapp.sddc:nvme:vcf-wkld-esx01
+----
+. Registre o NQN para cada host ESXi no cluster.
+. No ONTAP System Manager, navegue até *NVMe Namespaces* no menu à esquerda e clique em *+ Adicionar* para iniciar.
++
+image:vmware-vcf-asa-093.png["Clique em +Adicionar para criar o namespace NVMe"]
+
++
+{nbsp}
+
+. Na página *Adicionar namespace NVMe*, preencha um prefixo de nome, o número de namespaces a serem criados, o tamanho do namespace e o sistema operacional do host que acessará o namespace.
+. Na seção *Host NQN*, crie uma lista separada por vírgulas dos NQNs coletados anteriormente dos hosts ESXi que acessarão os namespaces.
+. Clique em *Mais opções* para configurar itens adicionais, como a política de proteção de instantâneos.
+. Por fim, clique em *Salvar* para criar o Namespace NVMe.
++
+image:vmware-vcf-asa-093.png["Clique em +Adicionar para criar o namespace NVMe"]
+
+
+
+
+
+== O que vem a seguir?
+
+Após criar o SVM e os LIFs,link:vmw-vcf-viwld-supp-nvme-network.html["configurar rede para NVMe/TCP (NVMe/TCP) vVols"] .

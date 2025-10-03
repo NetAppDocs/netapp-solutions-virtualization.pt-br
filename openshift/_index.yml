@@ -40,15 +40,17 @@ indexpage:
       url: osv-workflow-vm-migration-mtv.html
     - title: Migrar VMs entre dois nós de cluster
       url: osv-workflow-vm-live-migration.html
-  - title: Proteja os dados usando o Trident Protect
+  - title: Proteja VMs usando Trident e Trident Protect
     links:
     - title: Instalar Trident
       url: osv-trident-install.html
+    - title: Proteja VMs usando instantâneos de grupos de volumes
+      url: osv-vm-dp-using-vgs.html
     - title: Proteja VMs com snapshots e backups
       url: osv-vm-dp-using-tp.html
     - title: Configurar failover e failback
       url: osv-vm-dr-using-tp.html
-  - title: Proteja os dados usando ferramentas de terceiros
+  - title: Proteja VMs usando ferramentas de terceiros
     links:
     - title: Proteja VMs usando OADP e Velero
       url: osv-vm-dp-using-velero-overview.html
