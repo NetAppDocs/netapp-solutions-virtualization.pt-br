@@ -18,33 +18,40 @@ Para adicionar novos LIFs a um SVM existente, consulte a documentação do ONTAP
 .Passos
 . No ONTAP System Manager, navegue até *VMs de armazenamento* no menu à esquerda e clique em *+ Adicionar* para iniciar.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-001.png["Clique em +Adicionar para começar a criar SVM"]
 
-+
-{nbsp}
-
+====
 . No assistente *Adicionar VM de armazenamento*, forneça um *Nome* para a SVM, selecione o *Espaço IP* e, em *Protocolo de acesso*, clique na guia *iSCSI* e marque a caixa para *Ativar iSCSI*.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-002.png["Assistente para adicionar VM de armazenamento - habilitar iSCSI"]
 
-+
-{nbsp}
-
+====
 . Na seção *Interface de rede*, preencha o *endereço IP*, a *máscara de sub-rede* e o *domínio e porta de transmissão* para o primeiro LIF. Para LIFs subsequentes, você pode usar configurações individuais ou marcar a caixa de seleção para usar configurações comuns em todos os LIFs restantes.
 +
 
 NOTE: Para multipathing e failover em vários caminhos, crie no mínimo dois LIFs por nó de armazenamento em redes Ethernet separadas para todas as SVMs em configurações iSCSI.
 
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-003.png["Preencha as informações de rede para LIFs"]
 
-+
-{nbsp}
-
+====
 . Escolha se deseja habilitar a conta de administração da VM de armazenamento (para ambientes multilocação) e clique em *Salvar* para criar a SVM.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
 
+====
 
 
 

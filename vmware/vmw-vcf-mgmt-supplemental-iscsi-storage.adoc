@@ -22,37 +22,41 @@ Execute as seguintes etapas no cluster de domínio de gerenciamento do VCF usand
 As ONTAP tools for VMware vSphere (OTV) são implantadas como um dispositivo de VM e fornecem uma interface de usuário do vCenter integrada para gerenciar o armazenamento ONTAP .
 
 .Passos
-. Obtenha a imagem OVA das ferramentas ONTAP dolink:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Site de suporte da NetApp"] e baixe para uma pasta local.
+. Obtenha a imagem OVA das ferramentas ONTAP dolink:https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Site de suporte da NetApp"] e baixe-o para uma pasta local.
 . Efetue login no dispositivo vCenter para o domínio de gerenciamento do VCF.
 . Na interface do dispositivo vCenter, clique com o botão direito do mouse no cluster de gerenciamento e selecione *Implantar modelo OVF…*
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-aff-021.png["Implantar modelo OVF..."]
 
+====
+. No assistente *Implantar modelo OVF*, clique no botão de opção *Arquivo local* e selecione o arquivo OVA das ferramentas ONTAP que você baixou na etapa anterior.
 +
-{nbsp}
-
-. No assistente *Implantar modelo OVF*, clique no botão de opção *Arquivo local* e selecione o arquivo OVA das ferramentas ONTAP baixado na etapa anterior.
-+
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-aff-022.png["Selecione o arquivo OVA"]
 
-+
-{nbsp}
-
+====
 . Para as etapas 2 a 5 do assistente, selecione um nome e uma pasta para a VM, selecione o recurso de computação, revise os detalhes e aceite o contrato de licença.
 . Para o local de armazenamento dos arquivos de configuração e de disco, selecione o armazenamento de dados vSAN do cluster de domínio de gerenciamento do VCF.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-aff-023.png["Selecione o arquivo OVA"]
 
-+
-{nbsp}
-
+====
 . Na página *Selecionar rede*, selecione a rede usada para o tráfego de gerenciamento.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-aff-024.png["Selecione a rede"]
 
-+
-{nbsp}
-
+====
 . Na página *Personalizar modelo*, insira todas as informações necessárias:
 +
 ** Senha a ser usada para acesso administrativo às ferramentas ONTAP .
@@ -67,11 +71,14 @@ image:vmware-vcf-aff-024.png["Selecione a rede"]
 
 . Clique em *Avançar* para continuar.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-aff-025.png["Personalize o modelo OTV 1"]
 
-+
 image:vmware-vcf-asa-035.png["Personalize o modelo OTV 2"]
 
+====
 . Revise todas as informações na página *Pronto para concluir* e clique em *Concluir* para começar a implantar o dispositivo ONTAP Tools.
 
 
@@ -84,26 +91,36 @@ Execute as seguintes etapas para adicionar um sistema de armazenamento usando fe
 .Passos
 . No cliente vSphere, navegue até o menu principal e selecione * Ferramentas NetApp ONTAP *.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-014.png["Navegue até as ferramentas ONTAP"]
 
+====
 . Uma vez nas *Ferramentas ONTAP *, na página Introdução (ou em *Sistemas de Armazenamento*), clique em *Adicionar* para adicionar um novo sistema de armazenamento.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-015.png["Adicionar sistema de armazenamento"]
 
-+
-{nbsp}
-
+====
 . Forneça o endereço IP e as credenciais do sistema de armazenamento ONTAP e clique em *Adicionar*.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-016.png["Forneça IP e credenciais do sistema ONTAP"]
 
-+
-{nbsp}
-
+====
 . Clique em *Sim* para autorizar o certificado do cluster e adicionar o sistema de armazenamento.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-017.png["Autorizar certificado de cluster"]
 
+====
 
 
 
@@ -116,30 +133,37 @@ Nos casos em que você preferir usar o armazenamento ONTAP para proteger as VMs 
 . No vSphere Client, navegue até o cluster de domínio de gerenciamento e clique na guia *VMs*.
 . Selecione as VMs a serem migradas para o armazenamento de dados iSCSI, clique com o botão direito e selecione *Migrar..*.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-018.png["Selecione VMs para migrar"]
 
-+
-{nbsp}
-
+====
 . No assistente *Máquinas Virtuais - Migrar*, selecione *Alterar somente armazenamento* como o tipo de migração e clique em *Avançar* para continuar.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-019.png["Selecione o tipo de migração"]
 
-+
-{nbsp}
-
+====
 . Na página *Selecionar armazenamento*, selecione o armazenamento de dados iSCSi e selecione *Avançar* para continuar.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-020.png["Selecione o armazenamento de dados de destino"]
 
-+
-{nbsp}
-
+====
 . Revise as seleções e clique em *Concluir* para iniciar a migração.
 . O status da realocação pode ser visualizado no painel *Tarefas recentes*.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-021.png["Painel de tarefas recentes do cliente vSphere"]
 
+====
 
 
 

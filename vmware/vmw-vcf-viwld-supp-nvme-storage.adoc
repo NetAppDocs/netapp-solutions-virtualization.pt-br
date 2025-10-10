@@ -19,35 +19,39 @@ Configure o armazenamento NVMe/TCP vVols em um domínio de carga de trabalho do 
 .Passos
 . No cliente vSphere, navegue até um dos hosts ESXi no cluster de domínio de carga de trabalho. No menu *Ações*, selecione *Armazenamento > Novo armazenamento de dados...*.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-104.png["Adicionar adaptador NVMe/TCP"]
 
-+
-{nbsp}
-
+====
 . No assistente *Novo armazenamento de dados*, selecione *VMFS* como o tipo. Clique em *Avançar* para continuar.
 . Na página *Seleção de nome e dispositivo*, forneça um nome para o armazenamento de dados e selecione o namespace NVMe na lista de dispositivos disponíveis.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-105.png["Seleção de nome e dispositivo"]
 
-+
-{nbsp}
-
+====
 . Na página *Versão do VMFS*, selecione a versão do VMFS para o armazenamento de dados.
 . Na página *Configuração da partição*, faça as alterações desejadas no esquema de partição padrão. Clique em *Avançar* para continuar.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-106.png["Configuração de partição NVMe"]
 
-+
-{nbsp}
-
+====
 . Na página *Pronto para concluir*, revise o resumo e clique em *Concluir* para criar o armazenamento de dados.
 . Navegue até o novo armazenamento de dados no inventário e clique na guia *Hosts*. Se configurado corretamente, todos os hosts ESXi no cluster deverão ser listados e ter acesso ao novo armazenamento de dados.
 +
+.Mostrar exemplo
+[%collapsible]
+====
 image:vmware-vcf-asa-107.png["Hosts conectados ao armazenamento de dados"]
 
-+
-{nbsp}
-
+====
 
 
 

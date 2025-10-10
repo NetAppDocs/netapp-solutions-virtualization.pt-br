@@ -26,11 +26,39 @@ Conclua as etapas a seguir para criar um novo grupo de portas distribuídas para
 
 .Passos
 . No cliente vSphere, navegue até *Inventário > Rede* para o domínio de carga de trabalho.  Navegue até o Distributed Switch existente e escolha a ação para criar *Novo Grupo de Portas Distribuídas...*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-asa-022.png["Escolha criar um novo grupo de portas"]
+
+====
 . No assistente *Novo grupo de portas distribuídas*, preencha um nome para o novo grupo de portas e clique em *Avançar* para continuar.
 . Na página *Configurar configurações*, preencha todas as configurações. Se VLANs estiverem sendo usadas, certifique-se de fornecer o ID de VLAN correto. Clique em *Avançar* para continuar.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-asa-023.png["Preencha o ID da VLAN"]
+
+====
 . Na página *Pronto para concluir*, revise as alterações e clique em *Concluir* para criar o novo grupo de portas distribuídas.
 . Depois que o grupo de portas for criado, navegue até ele e selecione a ação *Editar configurações...*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-aff-037.png["DPG - editar configurações"]
+
+====
 . Na página *Grupo de portas distribuídas - Editar configurações*, navegue até *Agrupamento e failover* no menu à esquerda. Habilite o agrupamento para que os uplinks sejam usados para tráfego NFS, garantindo que eles estejam juntos na área *Uplinks ativos*. Mova todos os uplinks não utilizados para *Uplinks não utilizados*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-aff-038.png["DPG - uplinks de equipe"]
+
+====
 . Repita esse processo para cada host ESXi no cluster.
 
 
@@ -42,11 +70,46 @@ Crie um adaptador VMkernel em cada host ESXi no domínio de carga de trabalho.
 
 .Passos
 . No cliente vSphere, navegue até um dos hosts ESXi no inventário do domínio de carga de trabalho. Na aba *Configurar* selecione *Adaptadores VMkernel* e clique em *Adicionar Rede...* para começar.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-asa-030.png["Iniciar assistente de adição de rede"]
+
+====
 . Na janela *Selecionar tipo de conexão*, escolha *Adaptador de rede VMkernel* e clique em *Avançar* para continuar.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-asa-008.png["Escolha o adaptador de rede VMkernel"]
+
+====
 . Na página *Selecionar dispositivo de destino*, escolha um dos grupos de portas distribuídas para NFS que foi criado anteriormente.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-aff-039.png["Escolha o grupo de portas de destino"]
+
+====
 . Na página *Propriedades da porta*, mantenha os padrões (sem serviços habilitados) e clique em *Avançar* para continuar.
 . Na página *Configurações IPv4*, preencha o *endereço IP*, a *máscara de sub-rede* e forneça um novo endereço IP de gateway (somente se necessário). Clique em *Avançar* para continuar.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-aff-040.png["Configurações IPv4 do VMkernel"]
+
+====
 . Revise suas seleções na página *Pronto para concluir* e clique em *Concluir* para criar o adaptador VMkernel.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:vmware-vcf-aff-041.png["Revisar as seleções do VMkernel"]
+
+====
 
 
 

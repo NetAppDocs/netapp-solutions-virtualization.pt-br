@@ -14,7 +14,7 @@ summary: Revise os requisitos para adicionar um armazenamento de dados iSCSI com
 
 
 [role="lead"]
-Revise os requisitos para adicionar armazenamentos de dados iSCSI como armazenamento suplementar a um domínio de gerenciamento do VMware Cloud Foundation (VCF).  Para implantar iSCSI vVols em um domínio de gerenciamento do VMware Cloud Foundation, você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado e um domínio de gerenciamento VCF implantado.
+Revise os requisitos para adicionar armazenamentos de dados iSCSI como armazenamento suplementar a um domínio de gerenciamento do VMware Cloud Foundation (VCF).
 
 
 
