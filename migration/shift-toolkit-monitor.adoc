@@ -1,0 +1,52 @@
+---
+sidebar: sidebar 
+permalink: migration/shift-toolkit-monitor.html 
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox 
+summary: Utilize o painel de monitoramento de tarefas do Shift Toolkit para acompanhar operações de migração, conversão e criação de modelos em tempo real, permitindo que os administradores identifiquem rapidamente o status das tarefas e resolvam problemas. 
+---
+= Monitore as tarefas de migração com o painel do Shift Toolkit.
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Utilize o painel de monitoramento de tarefas do Shift Toolkit para acompanhar operações de migração, conversão e criação de projetos em tempo real, permitindo identificar rapidamente o status das tarefas e resolver problemas.
+
+
+
+== Painel de monitoramento de tarefas
+
+O painel de monitoramento de tarefas fornece uma visão centralizada de todas as operações ativas e concluídas dentro do Shift Toolkit.  Use este painel para monitorar o progresso de suas tarefas de migração, conversão e criação de projetos.
+
+image::shift-toolkit-190.png[Painel de monitoramento de tarefas mostrando as tarefas ativas no Shift Toolkit.]
+
+O painel de controle exibe informações importantes para cada vaga:
+
+* Tipo de trabalho (migração, conversão ou projeto)
+* Estado atual (em execução, concluído com sucesso, falhou ou falhou parcialmente)
+* Indicadores de progresso e percentagem de conclusão
+* Número de VMs processadas
+* Horários de início e término
+
+
+
+
+== Entendendo a situação do emprego
+
+A interface intuitiva permite avaliar rapidamente o estado de todas as operações e identificar tarefas que necessitam de atenção.
+
+image::shift-toolkit-191.png[Detalhes do status do trabalho no painel do Shift Toolkit]
+
+Os indicadores de status do trabalho ajudam você a entender o resultado de cada operação:
+
+* *Concluído com sucesso*: Todas as VMs na tarefa foram finalizadas sem erros.
+* *Falha*: A tarefa encontrou erros e não pôde ser concluída.
+* *Falha parcial*: Algumas VMs foram concluídas com sucesso, enquanto outras apresentaram erros.
+* *Em andamento*: O trabalho está atualmente em curso.
+
+
+Utilize as informações de status para priorizar os esforços de resolução de problemas e garantir fluxos de trabalho de migração tranquilos.

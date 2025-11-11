@@ -1,0 +1,527 @@
+---
+sidebar: sidebar 
+permalink: migration/shift-toolkit-migrate-hyperv2esxi.html 
+keywords: netapp, vmware, esxi, vm, migration, virtualization, hyper-v, microsoft 
+summary: Migre máquinas virtuais do Microsoft Hyper-V para o VMware ESXi usando o Shift Toolkit, configurando os sites de origem e destino, criando grupos de recursos e modelos e executando o fluxo de trabalho de migração. 
+---
+= Migre VMs do Microsoft Hyper-V para o VMware ESXi usando o Shift Toolkit.
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Migre máquinas virtuais do Microsoft Hyper-V para o VMware ESXi usando o Shift Toolkit, configurando os sites de origem e destino, criando grupos de recursos e modelos e executando o fluxo de trabalho de migração.
+
+O Shift Toolkit permite a conversão direta de máquinas virtuais entre hipervisores sem a criação de cópias adicionais em disco, proporcionando uma migração sem cópias e com tempo de inatividade mínimo para máquinas virtuais Windows e Linux.
+
+
+
+== Antes de começar
+
+Verifique se os seguintes pré-requisitos foram atendidos antes de iniciar a migração.
+
+.Requisitos da VMware
+* Os hosts vCenter e ESXi estão configurados.
+* Conta do servidor vCenter (usuário RBAC) com os privilégios mínimos necessários
+* Os hosts vCenter e ESXi estão acessíveis a partir do Shift Toolkit e as entradas DNS estão atualizadas.
+* Os grupos de portas distribuídas são configurados com IDs de VLAN apropriados (grupos de portas padrão não são suportados).
+* O compartilhamento NFS (para armazenar as VMs migradas) e o compartilhamento de origem (para as VMs a serem migradas) residem no mesmo volume.
+
+
+.Requisitos do Hyper-V
+* Os arquivos VHDx da VM são colocados em um compartilhamento SMB.
++
+** Se as VMs estiverem em um Volume Compartilhado de Cluster (CSV), execute uma migração dinâmica para um compartilhamento SMB.
+
+
+* Os serviços de integração do Hyper-V estão habilitados e em execução nas máquinas virtuais convidadas.
+* As VMs a serem migradas estão em estado RUNNING para preparação.
+* As máquinas virtuais devem ser desligadas antes de iniciar a migração.
+
+
+.Requisitos da máquina virtual convidada
+* Para VMs Windows: Use credenciais de administrador local ou credenciais de domínio com um perfil de usuário existente na VM.
+* Para VMs Linux: Use um usuário com permissões para executar comandos sudo sem solicitar senha.
+* O Shift Toolkit utiliza o PowerShell Direct para VMs Windows e SSH para VMs Linux.
+
+
+
+
+== Etapa 1: Adicione o site de origem (Hyper-V)
+
+Adicione o ambiente Hyper-V de origem ao Shift Toolkit.
+
+.Passos
+. Abra o Shift Toolkit em um navegador compatível e faça login com as credenciais padrão.
+. Acesse *Descobrir > Adicionar Sites*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-350.png[Menu Adicionar Sites]
+
+====
+. Clique em *Adicionar novo site* e selecione *Fonte*.
+. Insira os detalhes do site de origem:
++
+** *Nome do site*: Forneça um nome para o site.
+** *Hipervisor*: Selecione Hyper-V
+** *Localização do Site*: Selecione a opção padrão
+** *Conector*: Selecione a opção padrão
+
+
+. Clique em *Continuar*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-351.png[Detalhes do site de origem]
+
+====
+. Insira os detalhes do Hyper-V:
++
+** *Gerenciador de cluster Hyper-V autônomo ou de failover*: endereço IP ou FQDN
+** *Nome de usuário*: Nome de usuário no formato UPN (nome de usuário@dominio.com ou domínio\administrador)
+** *Senha*: Senha para acessar o host Hyper-V ou a instância FCI.
+
+
+. Clique em *Continuar*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-352.png[Credenciais do Hyper-V]
+
+====
++
+
+NOTE: O FCI do Hyper-V e a descoberta de host dependem da resolução de DNS. Se a resolução falhar, atualize o arquivo hosts (C:\Windows\System32\drivers\etc\hosts) e tente novamente a operação de descoberta.
+
+. Insira as credenciais do sistema de armazenamento ONTAP .
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-353.png[Credenciais ONTAP]
+
+====
+. Clique em *Criar site*.
+
+
+.Resultado
+O Shift Toolkit realiza a descoberta automática e exibe as VMs com informações de metadados, incluindo redes, switches virtuais e IDs de VLAN.
+
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-354.png[Resultados da descoberta]
+
+====
+
+NOTE: O inventário de máquinas virtuais é atualizado automaticamente a cada 24 horas.  Para atualizar manualmente após as modificações, clique nos três pontos ao lado do nome do site e selecione *Descobrir Site*.
+
+
+
+== Etapa 2: Adicione o site de destino (VMware ESXi)
+
+Adicione o ambiente VMware de destino ao Shift Toolkit.
+
+.Passos
+. Clique em *Adicionar novo local* e selecione *Destino*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-357.png[Adicionar site de destino]
+
+====
+. Insira os detalhes do site de destino:
++
+** *Nome do site*: Forneça um nome para o site.
+** *Hipervisor*: Selecione VMware
+** *Localização do Site*: Selecione a opção padrão
+** *Conector*: Selecione a opção padrão
+
+
+. Clique em *Continuar*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-358.png[Detalhes do local de destino]
+
+====
+. Insira os detalhes do VMware vCenter:
++
+** *Ponto de extremidade*: Endereço IP ou FQDN do servidor vCenter
+** *Nome de usuário*: Nome de usuário no formato UPN (nome de usuário@dominio.com)
+** *Senha do vCenter*: Senha para acessar o vCenter
+** *Impressão digital SSL do vCenter* (opcional)
+
+
+. Selecione *Aceitar certificado autoassinado* e clique em *Continuar*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-359.png[Credenciais do vCenter]
+
+====
+. Clique em *Criar site*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-360.png[Confirmação de criação do site]
+
+====
++
+
+NOTE: O sistema de armazenamento de origem e o de destino devem ser os mesmos, pois a conversão do formato do disco ocorre no nível do volume, dentro do mesmo volume.
+
+
+
+
+
+== Etapa 3: Criar grupos de recursos
+
+Organize as VMs em grupos de recursos para preservar a ordem de inicialização e as configurações de atraso de inicialização.
+
+.Antes de começar
+Certifique-se de que as qtrees estejam provisionadas conforme especificado nos pré-requisitos.
+
+.Passos
+. Acesse *Grupos de Recursos* e clique em *Criar Novo Grupo de Recursos*.
+. Selecione o site de origem no menu suspenso e clique em *Criar*.
+. Forneça os detalhes do grupo de recursos e selecione o fluxo de trabalho:
++
+** *Migração baseada em clones*: Executa a migração de ponta a ponta do hipervisor de origem para o hipervisor de destino.
+** *Conversão baseada em clone*: Converte o formato do disco para o tipo de hipervisor selecionado.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-361.png[Fluxo de trabalho do grupo de recursos]
+
+====
+
+
+. Clique em *Continuar*.
+. Selecione as VMs usando a opção de pesquisa (o filtro padrão é "Datastore").
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-362.png[Seleção de VM]
+
+====
++
+
+NOTE: Antes da conversão, mova as VMs para um compartilhamento SMB designado em uma SVM ONTAP recém-criada para isolar os compartilhamentos de produção da área de preparação.  O menu suspenso de armazenamento de dados exibe apenas compartilhamentos SMB; arquivos CSV não são exibidos.
+
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-363.png[Seleção de armazenamento de dados]
+
+====
+. Atualizar detalhes da migração:
++
+** Selecione *Local de Destino*
+** Selecione *Entrada de destino do VMware*
+** Configurar mapeamento de volume para qtree
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-364.png[Detalhes da migração]
+
+====
++
+
+NOTE: Ao converter máquinas virtuais do Hyper-V para o ESXi, defina o caminho de destino para a qtree apropriada.
+
+
+
+. Configure a ordem de inicialização e o atraso de inicialização para todas as VMs selecionadas:
++
+** *1*: Primeira VM a ser ligada
+** *3*: Padrão
+** *5*: Última VM a ser ligada
+
+
+. Clique em *Criar grupo de recursos*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-365.png[Configuração da ordem de inicialização]
+
+====
+
+
+.Resultado
+O grupo de recursos foi criado e está pronto para a configuração do modelo.
+
+
+
+== Etapa 4: Criar um plano de migração
+
+Crie um plano para definir a migração, incluindo mapeamento de plataformas, configuração de rede e configurações de máquinas virtuais.
+
+.Passos
+. Navegue até *Projetos* e clique em *Criar novo projeto*.
+. Forneça um nome para o modelo e configure os mapeamentos de host:
++
+** Selecione o *Site de Origem* e o hipervisor Hyper-V associado.
+** Selecione o *Site de Destino* e o vCenter associado.
+** Configurar mapeamento de host e cluster
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-366.png[Mapeamentos de host do Blueprint]
+
+====
+
+
+. Selecione os detalhes do grupo de recursos e clique em *Continuar*.
+. Defina a ordem de execução para os grupos de recursos, caso existam vários grupos.
+. Configure o mapeamento de rede para os grupos de portas apropriados.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-367.png[Mapeamento de rede]
+
+====
++
+
+NOTE: No VMware, o Grupo de Portas Distribuídas é a única opção suportada.  Para testes de migração, selecione "Não configurar a rede" para evitar conflitos com a rede de produção; atribua as configurações de rede manualmente após a conversão.
+
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-368.png[Opções de configuração de rede]
+
+====
+. Analise os mapeamentos de armazenamento (selecionados automaticamente com base na seleção da máquina virtual).
++
+
+NOTE: Certifique-se de que as qtrees estejam provisionadas previamente com as permissões necessárias.
+
+. Configure a substituição da preparação da máquina virtual, se necessário, para scripts personalizados ou personalização do endereço IP.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-369.png[Substituição de preparação]
+
+====
+. Em Detalhes da VM, forneça a conta de serviço e as credenciais para cada tipo de sistema operacional:
++
+** *Windows*: Credenciais de administrador local ou de domínio (certifique-se de que o perfil do usuário exista na máquina virtual)
+** *Linux*: Usuário com privilégios sudo sem solicitação de senha
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-370.png[Credenciais da conta de serviço]
+
+====
+
+
+. Configurar as definições de IP:
++
+** *Não configurar*: Opção padrão
+** *Manter IP*: Manter os mesmos IPs do sistema de origem
+** *DHCP*: Atribua DHCP às VMs de destino
++
+Certifique-se de que as máquinas virtuais estejam ligadas durante a fase prepareVM e que os serviços de integração estejam ativados.
+
+
+
+. Configurar as definições da VM:
++
+** Redimensionar parâmetros de CPU/RAM (opcional)
+** Modificar a ordem de inicialização e o atraso de inicialização
+** *Ligar*: Selecione para ligar as VMs após a migração (padrão: LIGADO)
+** *Adicionar ferramentas VMware*: Instalar as ferramentas VMware após a conversão (padrão: selecionado)
+** *Manter MAC*: Guarde os endereços MAC para fins de licenciamento.
+** *Substituição da conta de serviço*: Especifique uma conta de serviço separada, se necessário.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-371.png[Configuração VM]
+
+====
+
+
+. Clique em *Continuar*.
+. (Opcional) Agende a migração selecionando uma data e hora.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-372.png[Cronograma de migração]
+
+====
++
+
+NOTE: Agende as migrações com pelo menos 30 minutos de antecedência para permitir tempo suficiente para a preparação da máquina virtual.
+
+. Clique em *Criar Projeto*.
+
+
+.Resultado
+O Shift Toolkit inicia uma tarefa prepareVM que executa scripts nas VMs de origem para prepará-las para a migração.
+
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-373.png[Tarefa PrepareVM iniciada]
+
+====
+O processo de preparação:
+
+* Para VMs do Windows: Armazena scripts em `C:\NetApp`
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-374.png[Scripts de preparação do Windows]
+
+====
+* Para VMs Linux: Armazena scripts em `/NetApp` e `/opt`
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-375.png[Scripts de preparação do Linux]
+
+====
++
+
+NOTE: Para máquinas virtuais CentOS ou Red Hat, o Shift Toolkit instala automaticamente os drivers necessários antes da conversão do disco para garantir a inicialização bem-sucedida após a conversão.
+
+
+
+Quando o prepareVM for concluído com sucesso, o status do projeto será atualizado para "Ativo".
+
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-376.png[Status ativo do projeto]
+
+====
+
+
+== Etapa 5: Execute a migração
+
+Inicie o fluxo de trabalho de migração para converter máquinas virtuais do Hyper-V para o VMware ESXi.
+
+.Antes de começar
+* Todas as máquinas virtuais são desligadas corretamente, de acordo com o cronograma de manutenção planejado.
+* A máquina virtual do Shift Toolkit faz parte do domínio.
+* O compartilhamento CIFS está configurado com as permissões apropriadas.
+* As árvores Q têm o estilo de segurança correto.
+* Os Serviços de Integração estão habilitados em todas as VMs convidadas.
+* O SSH está habilitado em máquinas virtuais convidadas baseadas em Linux.
+
+
+.Passos
+. Na planta, clique em *Migrar*.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-377.png[Botão Migrar]
+
+====
+. Se as máquinas virtuais permanecerem ligadas, responda à solicitação de desligamento normal.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-378.png[Confirmação de desligamento]
+
+====
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-379.png[Migração em andamento]
+
+====
+
+
+.Resultado
+O Shift Toolkit executa os seguintes passos:
+
+. Desliga as VMs de origem
+. Exclui pontos de controle existentes
+. Aciona pontos de verificação da VM na origem
+. Aciona um snapshot do volume antes da conversão do disco.
+. Clona e converte arquivos VHDx para o formato VMDK.
+. Liga as VMs no site de destino.
+. Registra as configurações de rede.
+. Adiciona as Ferramentas VMware e atribui endereços IP.
+
+
+A conversão é concluída em segundos, minimizando o tempo de inatividade da máquina virtual.
+
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-380.png[Progresso da conversão]
+
+====
+Quando a migração for concluída, o status do projeto mudará para "Migração Concluída".
+
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-381.png[Migração concluída]
+
+====
+
+
+== Etapa 6: Validar a migração
+
+Verifique se as máquinas virtuais estão sendo executadas corretamente no host VMware ESXi.
+
+.Passos
+. Faça login no vCenter ou no host ESXi.
+. Verifique se as máquinas virtuais estão em execução no host ESXi especificado.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image::shift-toolkit-382.png[VMs em execução no ESXi]
+
+====
+. Verificar a conectividade da máquina virtual e a funcionalidade do aplicativo.
+. (Apenas para VMs do Windows) Conecte os discos offline, se necessário:
++
+[listing]
+----
+Set-StorageSetting -NewDiskPolicy OnlineAll
+----
++
+
+NOTE: Após a conversão, todos os discos da máquina virtual no sistema operacional Windows, exceto o disco do sistema operacional, ficarão offline devido à política SAN padrão do Microsoft Windows (offlineALL).  Isso evita a corrupção de dados quando os LUNs são acessados por vários servidores.
+
+
+
+.Resultado
+A migração do Hyper-V para o VMware ESXi foi concluída.
+
+
+NOTE: O Shift Toolkit utiliza tarefas cron (Linux) e tarefas agendadas (Windows) para operações pós-migração.  Nenhuma conexão SSH ou equivalente é criada depois que as máquinas virtuais estão em execução nos hosts ESXi.

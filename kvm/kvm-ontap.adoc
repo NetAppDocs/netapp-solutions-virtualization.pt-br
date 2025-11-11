@@ -122,29 +122,32 @@ Em essência, usar o Libvirt com o ONTAP permite combinar a flexibilidade e a es
 
 O pool de armazenamento do tipo dir e netfs é aplicável para armazenamento baseado em arquivo.
 
-[cols="20% 10% 10% 10% 10% 10% 10% 10%"]
+[cols="30%, 10%, 10% ,10%, 10%, 10,% 10%, 10%"]
 |===
-| Protocolo de Armazenamento | diretório | fs | netfs | lógico | disco | iscsi | iscsi-direto | mpath 
+| Protocolo de Armazenamento | diretório | fs | netfs | lógico | disco | iscsi 
 
 
-| PME/CIFS | Sim | Não | Sim | Não | Não | Não | Não | Não 
+| iscsi-direto | mpath | PME/CIFS | Sim | Não | Sim | Não 
 
 
-| NFS | Sim | Não | Sim | Não | Não | Não | Não | Não 
+| Não | Não | Não | Não | NFS | Sim | Não 
 |===
 Com o netfs, o libvirt montará o sistema de arquivos e as opções de montagem suportadas são limitadas.  Com o pool de armazenamento dir, a montagem do sistema de arquivos precisa ser feita externamente no host. O fstab ou o automounter podem ser utilizados para essa finalidade.  Para utilizar o automounter, o pacote autofs precisa ser instalado.  O Autofs é particularmente útil para montar compartilhamentos de rede sob demanda, o que pode melhorar o desempenho do sistema e a utilização de recursos em comparação com montagens estáticas no fstab.  Ele desmonta compartilhamentos automaticamente após um período de inatividade.
 
 Com base no protocolo de armazenamento usado, valide se os pacotes necessários estão instalados no host.
 
-[cols="40% 20% 20% 20%"]
+[cols="40%, 20,% 20%, 20%"]
 |===
-| Protocolo de Armazenamento | Fedora | Debian | Pac-Man 
+| Protocolo de Armazenamento | Fedora | Debian 
 
 
-| PME/CIFS | cliente-samba/utilitários-cifs | smbclient/cifs-utils | smbclient/cifs-utils 
+| Pac-Man | PME/CIFS | cliente-samba/utilitários-cifs 
 
 
-| NFS | nfs-utils | nfs-comum | nfs-utils 
+| smbclient/cifs-utils | smbclient/cifs-utils | NFS 
+
+
+| nfs-utils | nfs-comum | nfs-utils 
 |===
 O NFS é uma escolha popular devido ao seu suporte nativo e desempenho no Linux, enquanto o SMB é uma opção viável para integração com ambientes Microsoft.  Sempre verifique a matriz de suporte antes de usá-la na produção.
 
@@ -241,7 +244,7 @@ Um tipo de pool de diretórios é frequentemente usado no topo de um sistema de 
 
 Valide se o host tem os pacotes necessários instalados com base no protocolo de armazenamento usado.
 
-[cols="40% 20% 20% 20%"]
+[cols="40%, 20%, 20%, 20%"]
 |===
 | Protocolo de Armazenamento | Fedora | Debian | Pac-Man 
 

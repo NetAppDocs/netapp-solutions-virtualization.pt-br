@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: migration/shift-toolkit-san.html 
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox 
+summary: Migre máquinas virtuais de datastores baseados em SAN para NAS antes de convertê-las com o Shift Toolkit, usando o VMware Storage vMotion e o Hyper-V Storage Live Migration para manter a continuidade dos negócios. 
+---
+= Migre VMs de ambientes SAN para conversão com o Shift Toolkit.
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Migre máquinas virtuais de datastores baseados em SAN para NAS antes de convertê-las com o Shift Toolkit, usando o VMware Storage vMotion e o Hyper-V Storage Live Migration para manter a continuidade dos negócios.
+
+
+
+== Requisitos para VMs baseadas em SAN
+
+O Shift Toolkit exige que as VMs residam em um ambiente NAS (NFS para VMware ESXi) antes da conversão.  Se suas VMs estiverem armazenadas atualmente em datastores baseados em SAN usando iSCSI, Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) ou NVMe over Fibre Channel (NVMe/FC), você deverá primeiro migrá-las para um datastore NFS.
+
+
+
+== Fluxo de trabalho de migração para ambientes SAN
+
+O diagrama a seguir ilustra o fluxo de trabalho completo de migração para máquinas virtuais armazenadas em um ambiente SAN.
+
+image::shift-toolkit-260.png[Diagrama do fluxo de trabalho de migração mostrando a movimentação de máquinas virtuais (VMs) de SAN para NAS e de volta para SAN.]
+
+O processo de migração consiste em três fases principais:
+
+.Migrar de SAN para NAS (ambiente VMware)*
+Utilize o VMware vSphere Storage vMotion para migrar máquinas virtuais e seus discos do armazenamento de dados SAN para um armazenamento de dados NFS.  Esta operação pode ser realizada sem interrupção do serviço da máquina virtual.
+
+.Converter VMs com o Shift Toolkit*
+Após as VMs serem alocadas no armazenamento de dados NFS, o Shift Toolkit utiliza a tecnologia NetApp FlexClone para converter as VMs do VMware ESXi para o Hyper-V. As VMs convertidas e seus discos são colocados em um compartilhamento CIFS acessível pelo host Hyper-V.
+
+.Migrar de volta para SAN (ambiente Hyper-V)*
+Após a conversão, use a Migração Dinâmica de Armazenamento do Hyper-V para mover as VMs convertidas e seus discos do compartilhamento CIFS para um Volume Compartilhado de Cluster (CSV) habilitado para SAN.  Isso permite que você mantenha sua infraestrutura SAN no ambiente Hyper-V.
+
+
+
+== Lidar com problemas de compatibilidade do processador
+
+Ao realizar a migração de máquinas virtuais (VMs) em tempo real entre nós com diferentes capacidades de processador, a migração pode falhar devido a verificações de compatibilidade do processador.
+
+Para resolver esse problema:
+
+. Ative a opção "Migrar para um computador físico com um processador diferente" no Hyper-V.
+. Utilize o script de compatibilidade de processador disponível no bloco de script do Shift Toolkit para configurar as VMs para migração entre processadores.
+
+
+Essa configuração permite que as máquinas virtuais migrem entre hosts com diferentes conjuntos de recursos de processador, mantendo a compatibilidade.
