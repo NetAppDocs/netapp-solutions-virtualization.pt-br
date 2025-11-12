@@ -14,7 +14,7 @@ summary: Migre máquinas virtuais de datastores baseados em SAN para NAS antes d
 
 
 [role="lead"]
-Migre máquinas virtuais de datastores baseados em SAN para NAS antes de convertê-las com o Shift Toolkit, usando o VMware Storage vMotion e o Hyper-V Storage Live Migration para manter a continuidade dos negócios.
+Migre VMs de datastores baseados em SAN para NAS antes de convertê-las com o Shift Toolkit, usando o VMware Storage vMotion e o Storage Live Migration para manter a continuidade dos negócios.
 
 
 
@@ -32,14 +32,14 @@ image::shift-toolkit-260.png[Diagrama do fluxo de trabalho de migração mostran
 
 O processo de migração consiste em três fases principais:
 
-.Migrar de SAN para NAS (ambiente VMware)*
+.Migrar de SAN para NAS (ambiente VMware)
 Utilize o VMware vSphere Storage vMotion para migrar máquinas virtuais e seus discos do armazenamento de dados SAN para um armazenamento de dados NFS.  Esta operação pode ser realizada sem interrupção do serviço da máquina virtual.
 
-.Converter VMs com o Shift Toolkit*
-Após as VMs serem alocadas no armazenamento de dados NFS, o Shift Toolkit utiliza a tecnologia NetApp FlexClone para converter as VMs do VMware ESXi para o Hyper-V. As VMs convertidas e seus discos são colocados em um compartilhamento CIFS acessível pelo host Hyper-V.
+.Converter VMs com o Shift Toolkit
+Após as máquinas virtuais serem alocadas no armazenamento de dados NFS, o Shift Toolkit utiliza a tecnologia NetApp FlexClone para converter as máquinas virtuais do VMware ESXi para qualquer hipervisor. As VMs convertidas e seus discos são colocados em uma qtree acessível pelo respectivo host do hipervisor.
 
-.Migrar de volta para SAN (ambiente Hyper-V)*
-Após a conversão, use a Migração Dinâmica de Armazenamento do Hyper-V para mover as VMs convertidas e seus discos do compartilhamento CIFS para um Volume Compartilhado de Cluster (CSV) habilitado para SAN.  Isso permite que você mantenha sua infraestrutura SAN no ambiente Hyper-V.
+.Migrar de volta para SAN
+Após a conversão, use a migração de armazenamento para mover as VMs convertidas e seus discos da qtree para um volume habilitado para SAN. Isso permite que você mantenha sua infraestrutura SAN no respectivo ambiente de hipervisor.
 
 
 
