@@ -1,0 +1,90 @@
+---
+sidebar: sidebar 
+permalink: migration/shift-toolkit-supported-versions.html 
+keywords: netapp, vmware, esxi, vm, migration, openshift, virtualization, hyper-v, proxmox, software, support, shift, toolkit 
+summary: Verifique se seus sistemas operacionais convidados Windows e Linux, a versão do ONTAP e os hipervisores são compatíveis com o NetApp Shift Toolkit. 
+---
+= Versões suportadas para o NetApp Shift Toolkit
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verifique se seus sistemas operacionais convidados Windows e Linux, a versão do ONTAP e os hipervisores são compatíveis com o NetApp Shift Toolkit.
+
+
+
+== Sistemas operacionais convidados de máquinas virtuais suportados
+
+O Shift Toolkit oferece suporte aos seguintes sistemas operacionais convidados Windows e Linux para conversão de máquinas virtuais.
+
+.sistemas operacionais Windows
+* Windows 10
+* Windows 11
+* Servidor Windows 2016
+* Servidor Windows 2019
+* Servidor Windows 2022
+* Servidor Windows 2025
+
+
+.Sistemas operacionais Linux
+* CentOS Linux 7.x
+* Alma Linux 7.x
+* Red Hat Enterprise Linux 7.2 ou posterior
+* Red Hat Enterprise Linux 8.x
+* Red Hat Enterprise Linux 9.x
+* Ubuntu 2018
+* Ubuntu 2022
+* Ubuntu 2024
+* Debian 12
+* SUSE Linux Enterprise Server 12
+* SUSE Linux Enterprise Server 15
+
+
+
+NOTE: As versões 5 e 6 do CentOS Linux e do Red Hat Enterprise Linux não são suportadas.
+
+
+NOTE: O Windows Server 2008 não tem suporte oficial. No entanto, o processo de conversão pode funcionar, e alguns clientes já converteram com sucesso máquinas virtuais do Windows Server 2008. Após a migração, atualize manualmente o endereço IP, pois a versão do PowerShell usada para a atribuição automática de IP não é compatível com o Windows Server 2008.
+
+
+
+== Versões ONTAP suportadas
+
+O Shift Toolkit é compatível com ONTAP 9.14.1 ou posterior.
+
+
+
+== Hipervisores suportados
+
+O Shift Toolkit oferece suporte às seguintes plataformas de hipervisor para migração e conversão de máquinas virtuais.
+
+
+NOTE: Na versão atual, a migração completa de máquinas virtuais é suportada apenas com Hyper-V, VMware, OpenShift e Oracle Virtualization. Para destinos KVM, apenas a conversão de disco é suportada.
+
+.VMware vSphere
+O kit de ferramentas Shift é validado para o vSphere 7.0.3 ou posterior.
+
+.Microsoft Hyper-V
+O conjunto de ferramentas Shift é validado em relação às seguintes funções do Hyper-V:
+
+* Função Hyper-V em execução no Windows Server 2019
+* Função Hyper-V em execução no Windows Server 2022
+* Função Hyper-V em execução no Windows Server 2025
+
+
+.Red Hat OpenShift
+O kit de ferramentas Shift foi validado para uso com o Red Hat OpenShift e o OpenShift Virtualization, versões 4.17 e posteriores.
+
+.Gerenciador de Virtualização do Oracle Linux
+O kit de ferramentas Shift é validado nas seguintes versões do Oracle Linux Virtualization Manager:
+
+* Oracle Linux Virtualization Manager 4.5 ou posterior
+* O host do Oracle Linux Virtualization Manager deve ter o pacote ovirt-engine-4.5.4-1.el8 RPM ou posterior instalado.
+
+
+.KVM
+Para destinos KVM, o Shift Toolkit suporta apenas conversão de formato de disco (VMDK para QCOW2 ou RAW). Não são necessários detalhes de conexão do hipervisor ao selecionar KVM na lista suspensa de destino. Após a conversão, utilize os discos QCOW2 para provisionar máquinas virtuais em plataformas baseadas em KVM.
