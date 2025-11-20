@@ -831,7 +831,6 @@
   <block id="a7e944e3b289a0cc40fa523d2f309b3d" category="list-text">Proteção autônoma contra ransomware.</block>
   <block id="e349d95af5f86ccf74a9346800e3f55d" category="list-text">Análise do sistema de arquivos.</block>
   <block id="54d1b3917151f3d89ddbd7aef9f811dd" category="paragraph">*SAN*</block>
-  <block id="3f1ebac34c257ad0e2052f6fe693b898" category="list-text">Amplie o cluster em domínios de falhas com a sincronização ativa do SnapMirror .</block>
   <block id="b307eeff4972f33ddee68641c599e7fd" category="list-text">Os modelos ASA fornecem multicaminhos ativo/ativo e failover de caminho rápido.</block>
   <block id="717b83d4b077b1876a8833779607ac19" category="list-text">Suporte para protocolos FC, iSCSI, NVMe-oF.</block>
   <block id="f7c9512e8b2751806d55c35032ad9c1b" category="list-text">Suporte para autenticação mútua iSCSI CHAP.</block>
@@ -2572,12 +2571,6 @@
   <block id="806aaadb95e3a8393823ebee62a2be27" category="list-text">Preencha os detalhes. Depois de fornecer as informações do servidor, as exportações NFS devem ser preenchidas e selecionadas na lista.  Lembre-se de selecionar as opções de conteúdo.</block>
   <block id="b6713e4a099d16458859b6f724dd584f" category="inline-image-macro">Adição de armazenamento NFS</block>
   <block id="9f359905197ffa4ab648a9185a236838" category="paragraph"><block ref="9f359905197ffa4ab648a9185a236838" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="089679585327c9a752c54982a68a19e1" category="list-text">Para entroncamento de sessão, em todos os hosts Proxmox VE, atualize o arquivo /etc/fstab para montar a mesma exportação NFS usando endereços lif diferentes, juntamente com max_connect e opção de versão NFS.</block>
-  <block id="e0368c95980a497a397d1ba864ef07c6" category="inline-image-macro">entradas fstab para tronco de sessão</block>
-  <block id="310cfc3952419b0bce4cefdb2dd56f4b" category="paragraph"><block ref="310cfc3952419b0bce4cefdb2dd56f4b" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="56210fc6ca5cd165a3679bdc3f9aed5b" category="list-text">Aqui está o conteúdo em /etc/pve/storage.cfg para NFS.</block>
-  <block id="b53457dfc571fe98017812a0f84ef394" category="inline-image-macro">arquivo de configuração de armazenamento para NFS</block>
-  <block id="82de9417812917d25da3862eb8206ebb" category="paragraph"><block ref="82de9417812917d25da3862eb8206ebb" category="inline-image-macro-rx" type="image"></block></block>
   <block id="21b3bf9403041f9d09b0e69368b9b151" category="section-title">LVM com iSCSI</block>
   <block id="37eed020511d831c82db16bf1a62cce6" category="video-title">Pool compartilhado LVM com iSCSI usando ONTAP</block>
   <block id="ab39921a24a29c2606bf32bd0ebece00" category="paragraph">Para configurar o Logical Volume Manager para armazenamento compartilhado entre hosts Proxmox, conclua as seguintes tarefas:</block>
@@ -8322,4 +8315,6 @@
   <block id="f76aaf3aaa7b30238e7a3e2b1a04493b" category="sidebar">Preparar para instalar</block>
   <block id="beec6318942ca08bdda507299633ce3d" category="sidebar">Analise os requisitos de instalação.</block>
   <block id="b6eec573aa3c42f73db5c0d756b8af5a" category="sidebar">Instale ou atualize o Shift Toolkit.</block>
+  <block id="752e67a6b4916807acf40a3d0f4d607d" category="list-text">Amplie o cluster em domínios de falhas com a sincronização ativa do SnapMirror . Verifique sempre<block ref="8d006c87830f7172fd7400f1c17c0928" category="inline-link-rx"></block> para configurações suportadas.</block>
+  <block id="0fa5490665357157f44ef8e560981bff" category="list-text">Para habilitar a opção nConnect, acesse o shell em qualquer um dos nós do cluster e digite `pvesm set pvenfs01 --options nconnect=4`, onde `pvenfs01` é o ID de armazenamento criado na etapa anterior. Observe que, se você planeja usar o recurso de trunking, certifique-se de que pelo menos o NFS v4.1 esteja sendo usado e defina a opção trunkdiscovery. `pvesm set pvenfs01 --options vers=4.1,trunkdiscovery`</block>
 </blocks>
