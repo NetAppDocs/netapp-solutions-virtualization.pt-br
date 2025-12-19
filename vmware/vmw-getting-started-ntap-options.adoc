@@ -88,7 +88,7 @@ Com o caminho ativo-ativo, as aquisições planejadas e não planejadas têm tem
 
 Para mais informações, consulte https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf["TR-4968, NetApp All-SAS Array – Disponibilidade e integridade de dados com o NetApp ASA"] . {nbsp}
 
-Para obter informações detalhadas, consulte o https://www.netapp.com/data-storage/all-flash-san-storage-array["Página inicial do NetApp ASA"] . {nbsp}
+Para obter informações detalhadas, consulte o https://www.netapp.com/asa/["Página inicial do NetApp ASA"]. {nbsp}
 
 
 

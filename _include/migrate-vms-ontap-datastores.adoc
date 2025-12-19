@@ -387,7 +387,7 @@ $targetvm, $targetvmdisk | Get-SPBMEntityConfiguration
 * https://docs.vmware.com/en/Site-Recovery-Manager/index.html["Gerenciador de Recuperação de Site (SRM)"]é normalmente destinado a fins de recuperação de desastres e também frequentemente usado para migração planejada utilizando replicação baseada em matriz de armazenamento.
 * Uso de produtos de Proteção Contínua de Dados (CDP) https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/filtering-virtual-machine-i-o-in-vsphere/about-i-o-filters/classes-of-vaio-filters.html["API vSphere para E/S (VAIO)"] para interceptar os dados e enviar uma cópia para um local remoto para uma solução de RPO próxima de zero.
 * Produtos de backup e recuperação também podem ser utilizados.  Mas muitas vezes resulta em um RTO mais longo.
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html["Recuperação de Desastres BlueXP como Serviço (DRaaS)"]utiliza replicação baseada em matriz de armazenamento e automatiza determinadas tarefas para recuperar as VMs no site de destino.
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html["Recuperação de desastres da NetApp"] Utiliza replicação baseada em arrays de armazenamento e automatiza determinadas tarefas para recuperar as VMs no site de destino.
 
 
 ====
@@ -402,7 +402,7 @@ $targetvm, $targetvmdisk | Get-SPBMEntityConfiguration
 ** link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-gcp-gcve-migrate-hcx.html["Migrar cargas de trabalho para o armazenamento de dados do Google Cloud NetApp Volumes no Google Cloud VMware Engine usando o VMware HCX - Guia de início rápido"^]
 
 
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html["Recuperação de Desastres BlueXP como Serviço (DRaaS)"]utiliza replicação baseada em matriz de armazenamento e automatiza determinadas tarefas para recuperar as VMs no site de destino.
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html["NetApp Disaster Recovery"] Utiliza replicação baseada em arrays de armazenamento e automatiza determinadas tarefas para recuperar as VMs no site de destino.
 * Com produtos de Proteção Contínua de Dados (CDP) suportados que usam https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/filtering-virtual-machine-i-o-in-vsphere/about-i-o-filters/classes-of-vaio-filters.html["API vSphere para E/S (VAIO)"] para interceptar os dados e enviar uma cópia para um local remoto para uma solução de RPO próxima de zero.
 
 
@@ -534,5 +534,5 @@ NOTE: Para permitir a comunicação de rede com VMs existentes em outros cluster
 * https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/administration-guide/managing-nsx-t-in-multiple-locations/nsx-t-federation/networking-topologies-in-nsx-federation/tier-0-in-federation.html["Configurações de gateway de nível 0 na NSX Federation"]
 * https://techdocs.broadcom.com/us/en/vmware-cis/hcx/vmware-hcx/4-11/vmware-hcx-user-guide-4-11.html["Guia do usuário do HCX 4.8"]
 * https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery.html["Documentação do VMware Live Recovery"]
-* https://docs.netapp.com/us-en/bluexp-disaster-recovery/get-started/dr-intro.html["BlueXP disaster recovery para VMware"]
+* https://docs.netapp.com/us-en/data-services-disaster-recovery/get-started/dr-intro.html["NetApp Disaster Recovery para VMware"]
 

@@ -72,7 +72,7 @@ image:hyperv-deploy-011.png["Imagem exibindo a opção Habilitar IntelliSnap"]
 
 
 
-Para obter etapas detalhadas sobre a configuração do array, consultelink:https://documentation.commvault.com/11.20/configuring_netapp_array_using_array_management.html["Configurando o NetApp Array"] elink:https://documentation.commvault.com/11.20/configure_storage_virtual_machine_on_netapp_storage_array.html["Configurando máquinas virtuais de armazenamento em matrizes NetApp"]
+Para obter instruções detalhadas sobre como configurar o array, consulte link:https://documentation.commvault.com/v11/commcell-console/configuring_netapp_array_using_array_management.html["Configurando o NetApp Array"] e link:https://documentation.commvault.com/v11/commcell-console/configure_storage_virtual_machine_on_netapp_storage_array.html["Configurando máquinas virtuais de armazenamento em matrizes NetApp"]
 
 *Adicione o Hyper-V como o hipervisor*
 

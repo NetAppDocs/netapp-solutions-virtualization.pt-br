@@ -23,5 +23,4 @@ Consulte as soluções a seguir para obter mais detalhes.
 * link:vmw-vcf-scv-viwld.html["Proteger o domínio de carga de trabalho do VCF"]
 * link:vmw-vcf-scv-multiwkld-protection.html["Proteja múltiplos domínios de carga de trabalho do VCF"]
 * link:vmw-vcf-scv-nvme.html["Proteja o domínio de carga de trabalho VCF com NVMe"]
-* link:vmw-vcf-321-data-protection.html["Proteção de dados 3-2-1 para VMware com plug-in SnapCenter e BlueXP backup and recovery para VMs"]
 

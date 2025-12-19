@@ -171,7 +171,7 @@ image:vmware-vcf-asa-021.png["Painel de tarefas recentes do cliente vSphere"]
 == Informações adicionais
 
 * Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consultelink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"^] .
-* Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us-en/vmware-cis/vcf.html["Documentação do VMware Cloud Foundation"^] .
+* Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html["Documentação do VMware Cloud Foundation"^] .
 * Para obter informações sobre o uso de datastores VMFS iSCSI com VMware, consultelink:vmw-vmfs-iscsi.html["Armazenamento de dados vSphere VMFS - backend de armazenamento iSCSI com ONTAP"] .
 * Para demonstrações em vídeo desta solução, consultelink:../videos/vmware-videos.html#vmware-datastore-provisioning-with-ontap["Provisionamento de armazenamento de dados VMware"] .
 

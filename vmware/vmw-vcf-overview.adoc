@@ -108,7 +108,7 @@ Para obter mais informações sobre os principais benefícios do ONTAP para VMwa
 * link:vmw-getting-started-hmc.html["Multicloud híbrida com VMware e NetApp"]
 * link:vmw-getting-started-security.html["Segurança e proteção contra ransomware"]
 * link:vmw-getting-started-migration.html["Migração fácil de cargas de trabalho VMware para NetApp"]
-* link:vmw-dr-gs.html["Recuperação de Desastres BlueXP"]
+* link:vmw-dr-gs.html["NetApp Disaster Recovery"]
 * link:vmw-getting-started-dii.html["Insights sobre infraestrutura de dados"]
 * link:vmw-getting-started-vmdc.html["Coletor de dados de VM"]
 

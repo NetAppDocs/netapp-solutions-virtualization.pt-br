@@ -73,7 +73,7 @@ Os principais recursos de continuidade de negócios do ONTAP incluem:
 ** Replicação de dados com SnapMirror: aproveitando as cópias de instantâneos, o SnapMirror permite a replicação assíncrona e síncrona de dados para sites remotos ou ambientes de nuvem para recuperação de desastres.
 ** MetroCluster: a tecnologia MetroCluster da ONTAP fornece replicação síncrona entre sites separados geograficamente, garantindo perda zero de dados e recuperação rápida em caso de falha do site.
 ** Hierarquização da nuvem: a hierarquização da nuvem identifica automaticamente dados inativos (dados acessados com pouca frequência) no armazenamento primário e os move para um armazenamento de objetos de menor custo, na nuvem ou no local.
-** BlueXP DRaaS: O NetApp BlueXP Disaster Recovery as a Service (DRaaS) é uma solução abrangente projetada para fornecer recursos robustos de recuperação de desastres para empresas, garantindo proteção de dados, recuperação rápida e continuidade dos negócios em caso de desastre.
+** NetApp Disaster Recovery: O NetApp Disaster Recovery é uma solução abrangente projetada para fornecer recursos robustos de recuperação de desastres para empresas, garantindo proteção de dados, recuperação rápida e continuidade dos negócios em caso de desastre.
 
 
 

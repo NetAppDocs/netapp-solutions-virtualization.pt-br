@@ -37,7 +37,7 @@ Os hosts Proxmox VE precisam ter interfaces FC, Ethernet ou outras interfaces su
 * Bloqueio de cópia de instantâneo à prova de violação
 * Suporte de criptografia
 * FabricPool para hierarquizar dados frios no armazenamento de objetos.
-* Integração do BlueXP e do CloudInsights.
+* Integração do NetApp Console com o Data Infrastructure Insights .
 * Transferência de dados descarregada da Microsoft (ODX)
 
 

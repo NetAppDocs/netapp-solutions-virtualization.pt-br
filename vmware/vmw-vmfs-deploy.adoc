@@ -425,7 +425,7 @@ Ao integrar serviços 1P fornecidos pela NetApp em cada hiperescalar, as organiz
 
 === Recuperação de desastres entre sites locais
 
-Para mais detalhes, visitelink:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html["DR usando BlueXP DRaaS para datastores VMFS"^]
+Para obter mais detalhes, visite link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html["NetApp Disaster Recovery para datastores VMFS"^]
 
 
 

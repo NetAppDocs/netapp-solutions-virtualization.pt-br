@@ -94,7 +94,7 @@ A seguir está um exemplo de um arquivo JSON para implantação do NSX.
 . Copie o arquivo JSON para um diretório no SDDC Manager.
 +
 
-NOTE: Ao implantar um cluster do NSX Manager em uma operação de conversão ou importação, a rede NSX-VLAN é utilizada. Para obter informações sobre as limitações de rede NSX-VLAN, consulte https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html["Considerações antes de converter ou importar ambientes vSphere existentes para o VMware Cloud Foundation"] .
+NOTE: Ao implantar um cluster do NSX Manager em uma operação de conversão ou importação, utiliza-se a rede NSX-VLAN. Para obter informações sobre as limitações de rede VLAN do NSX, consulte: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html["Considerações antes de converter ou importar ambientes vSphere existentes para o VMware Cloud Foundation"].
 
 
 

@@ -72,7 +72,7 @@ Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS
 
 * link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/ontap-tools-deployment.html["Implantar ferramentas ONTAP no domínio de gerenciamento"]
 * link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html["Definir backend de armazenamento usando a interface do cliente vSphere"]
-* link: https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.htmlProvision VMFS no FC]
+* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html["Provisionar VMFS no FC"]
 
 
 
@@ -83,7 +83,7 @@ Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS
 
 * link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-vcenter.html["Registre a carga de trabalho VI vCenter para habilitar o plug-in vCenter"]
 * link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/add-storage-backend.html["Definir backend de armazenamento usando a interface do cliente vSphere"]
-* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-vvols-datastore.html["Provisionar VMFS no FC"]
+* link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html["Provisionar VMFS no FC"]
 
 
 

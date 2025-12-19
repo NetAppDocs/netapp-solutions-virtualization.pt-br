@@ -82,16 +82,16 @@ NOTE: O `nConnect` a contagem de sessões é por host.  Atualize outros hosts ap
 *** link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_resource_groups.html["Criar grupos de recursos"] .
 
 
-.. Implantar o conector BlueXP
+.. Implante o agente do NetApp Console
 +
-*** link:https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html#what-you-can-do-without-a-connector["Revise o que você pode fazer sem um conector"] .
-*** link:https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html#overview["Implantar o conector"] .
+*** link:https://docs.netapp.com/us-en/console-setup-admin/concept-agents.html["Veja o que você pode fazer sem um agente de console."].
+*** link:https://docs.netapp.com/us-en/console-setup-admin/concept-modes.html#overview["Modos de implantação do agente"].
 
 
-.. Use BlueXP para backup e recuperação
+.. Use o NetApp Backup and Recovery
 +
-*** link:https://docs.netapp.com/us-en/bluexp-backup-recovery/prev-vmware-protect-overview.html["Proteja cargas de trabalho VM"] .
-*** link:https://docs.netapp.com/us-en/bluexp-backup-recovery/br-use-kubernetes-protect-overview.html["Proteja cargas de trabalho VKS"] .
+*** link:https://docs.netapp.com/us-en/data-services-backup-recovery/prev-vmware-protect-overview.html["Proteja cargas de trabalho VM"].
+*** link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html["Proteja cargas de trabalho VKS"].
 
 
 
@@ -113,10 +113,10 @@ NOTE: O `nConnect` a contagem de sessões é por host.  Atualize outros hosts ap
 *** link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_create_resource_groups.html["Criar grupos de recursos"] .
 
 
-.. Use BlueXP para backup e recuperação
+.. Use o NetApp Backup and Recovery
 +
-*** link:https://docs.netapp.com/us-en/bluexp-backup-recovery/prev-vmware-protect-overview.html["Proteja cargas de trabalho VM"] .
-*** link:https://docs.netapp.com/us-en/bluexp-backup-recovery/br-use-kubernetes-protect-overview.html["Proteja cargas de trabalho VKS"] .
+*** link:https://docs.netapp.com/us-en/data-services-backup-recovery/prev-vmware-protect-overview.html["Proteja cargas de trabalho VM"].
+*** link:https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-kubernetes-protect-overview.html["Proteja cargas de trabalho VKS"].
 
 
 
