@@ -1,0 +1,94 @@
+---
+sidebar: sidebar 
+permalink: proxmox/proxmox-storage-types.html 
+keywords: netapp, proxmox, proxmox ve, ontap, storage, nfs, smb, cifs, iscsi, fc, nvme, content types, vm disks, backups, templates 
+summary: O Proxmox VE suporta vários tipos de armazenamento com ONTAP , incluindo NFS e SMB para protocolos NAS e FC, iSCSI e NVMe-oF para protocolos SAN. Cada protocolo suporta diferentes tipos de conteúdo, incluindo discos de máquinas virtuais, backups, volumes de contêineres, imagens ISO e modelos. 
+---
+= Tipos de armazenamento suportados para o ambiente virtual Proxmox
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O Proxmox Virtual Environment (VE) suporta múltiplos protocolos de armazenamento com o NetApp ONTAP, incluindo NFS e SMB para NAS e FC, iSCSI e NVMe-oF para SAN. Cada protocolo suporta diferentes tipos de conteúdo do Proxmox VE, incluindo discos de máquinas virtuais, backups, volumes de contêineres, imagens ISO e modelos.
+
+
+
+== Suporte ao protocolo NAS
+
+Os protocolos NAS (NFS e SMB) são compatíveis com todos os tipos de conteúdo do Proxmox VE e geralmente são configurados uma única vez no nível do datacenter. As máquinas virtuais convidadas podem usar formatos de disco raw, qcow2 ou VMDK no armazenamento NAS. Os snapshots do ONTAP podem ser disponibilizados aos clientes para acesso a cópias de dados em um determinado momento.
+
+
+
+== Suporte ao protocolo SAN
+
+Os protocolos SAN (FC, iSCSI e NVMe-oF) são normalmente configurados por host e suportam tipos de conteúdo de disco de máquina virtual e imagem de contêiner no Proxmox VE. As máquinas virtuais convidadas podem usar formatos de disco raw, VMDK ou qcow2 no armazenamento em blocos.
+
+
+
+== Matriz de compatibilidade de tipos de armazenamento
+
+[cols="25% 15% 15% 15% 15% 15%"]
+|===
+| Tipo de conteúdo | NFS | PME/CIFS | FC | iSCSI | NVMe-oF 
+
+
+| Backups | Sim | Sim  a| 
+Não^1^
+ a| 
+Não^1^
+ a| 
+Não^1^
+
+
+
+| Discos de VM | Sim | Sim  a| 
+Sim^2^
+ a| 
+Sim^2^
+ a| 
+Sim^2^
+
+
+
+| Volumes de TC | Sim | Sim  a| 
+Sim^2^
+ a| 
+Sim^2^
+ a| 
+Sim^2^
+
+
+
+| Imagens ISO | Sim | Sim  a| 
+Não^1^
+ a| 
+Não^1^
+ a| 
+Não^1^
+
+
+
+| Modelos de TC | Sim | Sim  a| 
+Não^1^
+ a| 
+Não^1^
+ a| 
+Não^1^
+
+
+
+| Trechos | Sim | Sim  a| 
+Não^1^
+ a| 
+Não^1^
+ a| 
+Não^1^
+
+|===
+*Notas:*
+
+. Requer um sistema de arquivos em cluster para criar a pasta compartilhada e usar o tipo de armazenamento Diretório.
+. Use o tipo de armazenamento LVM.
+

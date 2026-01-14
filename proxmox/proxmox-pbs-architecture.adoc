@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: proxmox/proxmox-pbs-architecture.html 
+keywords: netapp, proxmox, proxmox ve, proxmox backup server, ontap, storage, architecture, backup, data protection, snapmirror, s3 
+summary: O Proxmox Backup Server integra-se com o armazenamento NetApp ONTAP para fornecer recursos de backup corporativos para cargas de trabalho do Proxmox Virtual Environment. Essa arquitetura oferece backups incrementais, deduplicação, compressão e recuperação de desastres usando a replicação ONTAP SnapMirror . 
+---
+= Aprenda sobre a arquitetura do servidor de backup Proxmox com NetApp ONTAP.
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O Proxmox Backup Server (PBS) integra-se ao armazenamento NetApp ONTAP para fornecer recursos de backup corporativos para cargas de trabalho do Proxmox Virtual Environment (VE). Essa arquitetura oferece backups incrementais, deduplicação, compressão, criptografia e recuperação de desastres usando a replicação ONTAP SnapMirror .
+
+O Proxmox Backup Server oferece recursos de backup corporativos projetados para o ambiente virtual Proxmox. O PBS oferece operações de backup e restauração eficientes e confiáveis para máquinas virtuais e contêineres, com recursos como backups incrementais, deduplicação, compactação e criptografia.
+
+O PBS suporta diversos sistemas de armazenamento, incluindo armazenamento local, NFS, iSCSI e armazenamento de objetos compatível com S3. Quando integrado ao armazenamento NetApp ONTAP , o PBS pode aproveitar o armazenamento escalável e de alto desempenho para datastores de backup e destinos de backup externos.
+
+
+
+== Arquitetura da solução
+
+A solução inclui os seguintes componentes:
+
+* *Cluster Proxmox VE* - Oferece recursos de virtualização e gerencia máquinas virtuais (VMs) e contêineres em vários nós.
+* *Servidor de Backup Proxmox* - Oferece recursos dedicados de backup e restauração para cargas de trabalho Proxmox VE com integração ao armazenamento ONTAP .
+* *Armazenamento NetApp ONTAP * - Oferece armazenamento escalável e de alto desempenho para o cluster Proxmox VE e datastores de backup PBS.
+* *Infraestrutura de rede* - Garante conectividade de baixa latência e alta taxa de transferência entre os nós Proxmox VE, PBS e armazenamento ONTAP .
+* * NetApp Console* - Oferece gerenciamento centralizado para múltiplos sistemas de armazenamento e serviços de dados da NetApp .
+
+
+O diagrama a seguir mostra a arquitetura de alto nível da configuração do servidor Proxmox Backup com armazenamento ONTAP :
+
+image::proxmox-pbs-architecture-001.png[Proteção de dados de carga de trabalho do Proxmox VE com arquitetura PBS e NetApp ONTAP]
