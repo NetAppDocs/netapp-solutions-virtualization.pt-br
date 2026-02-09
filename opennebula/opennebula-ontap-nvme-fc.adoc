@@ -1,0 +1,192 @@
+---
+sidebar: sidebar 
+permalink: opennebula/opennebula-ontap-nvme-fc.html 
+keywords: netapp, opennebula, lvm thin, nvme, nvme-fc, lvm, ontap, storage 
+summary: 'Configure um datastore Logical Volume Manager (LVM) com NVMe sobre Fibre Channel para OpenNebula usando ONTAP. Este procedimento inclui a instalação do nvme-cli, o provisionamento de namespaces, a configuração do subsistema e a criação de grupo de volume para datastores compartilhados.' 
+---
+= Configurar o LVM Thin com ONTAP NVMe/FC para OpenNebula
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configure o Logical Volume Manager (LVM) para datastore compartilhado entre OpenNebula hosts usando o protocolo NVMe sobre Fibre Channel com NetApp ONTAP. Essa configuração proporciona acesso ao storage em nível de bloco de alto desempenho com baixa latência utilizando o moderno protocolo NVMe.
+
+
+
+== Tarefas iniciais do administrador de virtualização
+
+Conclua estas tarefas iniciais para preparar os hosts OpenNebula para a conectividade NVMe/FC e coletar as informações necessárias para o administrador de storage.
+
+. Verifique se há duas interfaces HBA disponíveis.
+. Em cada OpenNebula host do cluster, execute os seguintes comandos para coletar as informações do WWPN e verificar se o pacote nvme-cli está instalado.
++
+[role="tabbed-block"]
+====
+.Debian/Ubuntu
+--
+[source, shell]
+----
+apt update
+apt install nvme-cli
+cat /sys/class/fc_host/host*/port_name
+nvme show-hostnqn
+----
+--
+.RHEL/AlmaLinux
+--
+[source, shell]
+----
+dnf update
+dnf install nvme-cli
+cat /sys/class/fc_host/host*/port_name
+nvme show-hostnqn
+----
+--
+====
+. Forneça as informações coletadas de NQN e WWPN do host ao administrador de storage e solicite um namespace NVMe do tamanho necessário. WWPNs são necessários para o zoneamento da malha. Forneça essas informações ao administrador responsável pelo zoneamento da malha.
+
+
+
+
+== Tarefas do administrador de armazenamento
+
+Se você é novo no ONTAP, use o Gerenciador de Sistemas para uma melhor experiência.
+
+. Certifique-se de que o SVM esteja disponível com o protocolo NVMe ativado. Consulte link:https://docs.netapp.com/us-en/ontap/san-admin/create-nvme-namespace-subsystem-task.html["Tarefas NVMe na documentação do ONTAP 9"].
+. Certifique-se de que duas LIFs por controlador sejam criadas e dedicadas para NVMe/FC. Reúna os endereços WWPN das LIFs NVMe/FC criadas e forneça-os ao administrador que cuida do zoneamento da malha.
+. Crie o namespace NVMe.
+. Crie o subsistema e atribua os NQNs do host.
+. Certifique-se de que a proteção antiransomware esteja ativada na guia de segurança.
+. Informe ao administrador de virtualização que o namespace NVMe foi criado.
+
+
+
+
+== Tarefas finais do administrador de virtualização
+
+Conclua estas tarefas para configurar o namespace NVMe como storage LVM compartilhado em OpenNebula.
+
+. Acesse um shell em cada OpenNebula host no cluster e verifique se o novo namespace está visível.
+. Verifique os detalhes do namespace.
++
+[source, shell]
+----
+nvme list
+----
+. Inspecione e colete detalhes do dispositivo.
++
+[source, shell]
+----
+nvme list
+nvme netapp ontapdevices
+nvme list-subsys
+lsblk -N
+----
+. Conecte-se via SSH a um dos servidores front-end e crie um arquivo de configuração com base no tipo de Datastore desejado. Para obter a lista completa de atributos, consulte  https://docs.opennebula.io/7.0/product/cluster_configuration/san_storage/lvm_drivers/["OpenNebula documentação LVM"]. Exemplos de arquivos são mostrados abaixo:
++
+[role="tabbed-block"]
+====
+.Backup
+--
+.. Para Restic,
+
+
+[listing]
+----
+$cat nvmefc-restic.conf
+NAME = "Backup-Restic-NVMEFC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
+----
+.. Para Rsync,
+
+
+[listing]
+----
+$cat nvmefc-rsync.conf
+NAME = "Backup-Rsync-NVMEFC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
+----
+--
+.Arquivo
+[source, shell]
+----
+$cat nvmefc-kernel.conf
+NAME = "File-Kernel-NVMEFC"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+----
+.Imagem
+[source, shell]
+----
+$cat nvmefc-image.conf
+NAME = "Image-NVMEFC01"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+LVM_THIN_ENABLE = "yes"
+----
+.Sistema
+[source, shell]
+----
+$cat nvmefc-system.conf
+NAME = "System-NVMEFC02"
+TYPE = "SYSTEM_DS"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+BRIDGE_LIST = "<space-separated list of OpenNebula hosts>" # If NVMe namespace not presented to frontend hosts
+LVM_THIN_ENABLE = "yes"
+----
+====
+. Execute `onedatastore create <configuration file>`. Observe o ID do datastore retornado após a criação.
++
+[]
+====
+onedatastore create nvmefc-system.conf ID: 108
+
+====
+. Crie grupo de volume no namespace NVMe usando  `vgcreate <vg_name> <nvme_device>` comando. Para datastores de imagem, o nome do grupo de volume pode ser qualquer um desejado. Para datastores de sistema, o nome do grupo de volume deve estar no formato  `vg-one-<datastore id>`. Isso é necessário para OpenNebula identificar o grupo de volume correto para datastores de sistema. Prossiga com os seguintes passos se estiver criando um datastore de backup/arquivo/imagem. Para datastores de sistema, pare aqui.
+. Crie um pool de volumes lógicos finos usando  `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` comando. Para datastores do sistema, OpenNebula cria automaticamente o pool de volumes lógicos finos LVM quando necessário.
+. Crie o sistema de arquivos no volume lógico usando o comando  `mkfs.ext4 /dev/<volume group>/<logical volume>`. Os datastores do sistema não exigem a criação de sistema de arquivos.
+. Atualize /etc/fstab ou a configuração de automount para montar o datastore com as opções de montagem desejadas. Assumindo o local padrão do datastore como /var/lib/one/datastores. Pode ser validado com `onedatastore show <datastore_id>`. Se não, verifique o parâmetro DATASTORE_LOCATION em /etc/one/oned.conf. Certifique-se de que a pasta <datastore_id> exista sob o local dos datastores. Entradas de exemplo são mostradas abaixo:
++
+[role="tabbed-block"]
+====
+.Usando /etc/fstab
+--
+[source, shell]
+----
+/dev/<vg name>/<logical volume> /var/lib/one/datastores/<datastore_id> ext4 _netdev,noauto,x-systemd.automount,nofail 0 2
+----
+--
+.Usando automount
+--
+[source, shell]
+----
+/var/lib/one/datastores/<datastore_id> -fstype=ext4,_netdev,noauto,x-systemd.automount,nofail,rw :/dev/<vg name>/<logical volume>
+----
+--
+====
+. Monte o datastore usando  `mount -a` ou  `systemctl reload autofs` comando.
+. Verifique se o datastore está montado com o comando mount e verifique a capacidade do datastore com o comando  `onedatastore show <datastore_id>`.
+. Certifique-se de que o usuário e o grupo oneadmin sejam os proprietários da pasta datastore. Ajuste as permissões usando o comando  `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>`.
+

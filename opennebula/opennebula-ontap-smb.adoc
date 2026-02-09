@@ -1,0 +1,182 @@
+---
+sidebar: sidebar 
+permalink: opennebula/opennebula-ontap-smb.html 
+keywords: netapp, opennebula, opennebula ve, smb, cifs, ontap, storage 
+summary: Configure o armazenamento SMB/CIFS para OpenNebula Virtual Environment usando ONTAP. Este procedimento inclui a capacitação da SVM, a criação da LIF, a configuração do Active Directory, a criação de volumes e a configuração multicanal para tolerância de falhas e desempenho aprimorado. 
+---
+= Configurar o storage de datastore SMB/CIFS para OpenNebula
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configure o armazenamento de dados SMB/CIFS para OpenNebula usando NetApp ONTAP. O SMB multicanal oferece tolerância de falhas e aumenta o desempenho com várias conexões de rede ao sistema de storage.
+
+O compartilhamento de arquivos SMB/CIFS requer tarefas de configuração tanto por parte dos administradores de armazenamento quanto dos administradores de virtualização. Para obter mais detalhes, consulte link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf["TR4740 - SMB 3.0 Multicanal"].
+
+
+NOTE: As senhas são salvas em arquivos de texto simples e acessíveis apenas ao usuário raiz. Certifique-se de que medidas de segurança adequadas estejam em vigor para proteger informações confidenciais.
+
+
+
+== Tarefas do administrador de armazenamento
+
+Se você é novo no ONTAP, use a Interface do Gerenciador de Sistemas para concluir essas tarefas.
+
+. Ative o SVM para SMB. Seguir link:https://docs.netapp.com/us-en/ontap/smb-config/configure-access-svm-task.html["Documentação do ONTAP 9"] Para obter mais informações.
+. Crie pelo menos duas LIFs por controlador. Siga os passos indicados na documentação. Para referência, segue uma captura de tela das LIFs usadas nesta solução.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:opennebula-ontap-smb-001.png["detalhes da interface nas"]
+
+====
+. Configure a autenticação baseada no Active Directory ou em grupos de trabalho. Siga os passos indicados na documentação.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:opennebula-ontap-smb-002.png["Junte-se às informações do domínio"]
+
+====
+. Criar um volume. Marque a opção para distribuir os dados pelo cluster para usar o FlexGroup. Certifique-se de que a proteção antiransomware esteja ativada no volume.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:opennebula-ontap-smb-003.png["Opção FlexGroup"]
+
+====
+. Crie um compartilhamento SMB e ajuste as permissões.  Seguirlink:https://docs.netapp.com/us-en/ontap/smb-config/configure-client-access-shared-storage-concept.html["Documentação do ONTAP 9"] para maiores informações.
++
+.Mostrar exemplo
+[%collapsible]
+====
+image:opennebula-ontap-smb-004.png["Informações de compartilhamento de PMEs"]
+
+====
+. Forneça ao administrador de virtualização o servidor SMB, o nome do compartilhamento e as credenciais.
+
+
+
+
+== Tarefas do administrador de virtualização
+
+Conclua essas tarefas para adicionar o compartilhamento SMB como Datastore em OpenNebula e habilitar o multicanal para melhor desempenho e tolerância de falhas.
+
+. Colete o servidor SMB, o nome do compartilhamento e as credenciais para autenticação do compartilhamento.
+. Certifique-se de que os seguintes pacotes estejam instalados no Fedora sssd realmd adcli oddjob oddjob-mkhomedir samba-common-tools krb5-workstation cifs-utils para integração com Active Directory e suporte à montagem SMB. Os pacotes do Debian são realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin packagekit krb5-user cifs-utils.
+. Garanta que pelo menos duas interfaces estejam configuradas em VLANs diferentes para tolerância a falhas. Verifique se a placa de rede suporta RSS.
+. Acesse um dos servidores frontend via SSH e crie um arquivo de configuração com base no tipo de Datastore desejado. Arquivos de exemplo são mostrados abaixo:
++
+[role="tabbed-block"]
+====
+.Backup
+--
+.. Para Restic,
+
+
+[listing]
+----
+$cat smb-restic.conf
+NAME = "Backup-Restic-SMB"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
+----
+.. Para Rsync,
+
+
+[listing]
+----
+$cat smb-rsync.conf
+NAME = "Backup-Rsync-SMB"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
+----
+--
+.Arquivo
+[source, shell]
+----
+$cat smb-kernel.conf
+NAME = "File-Kernel-SMB"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+----
+.Imagem
+[source, shell]
+----
+$cat smb-image.conf
+NAME = "Image-SMB"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "shared"
+----
+.Sistema
+[source, shell]
+----
+$cat smb-system.conf
+NAME = "System-SMB"
+TYPE = "SYSTEM_DS"
+TM_MAD = "shared"
+----
+====
+. Execute `onedatastore create <configuration file>`. Observe o ID do datastore retornado após a criação.
++
+[]
+====
+onedatastore create smb-system.conf ID: 100
+
+====
+. Crie um arquivo de credencial smb em /etc/. Esta etapa não é necessária se estiver usando autenticação kerberos (host KVM associado a <domain>).
++
+[source, shell]
+----
+$cat /etc/smb-credentials-<datastore_id>.cfg
+username=<smb_username>
+password=<smb_password>
+domain=<smb_domain>
+----
+. Defina as permissões adequadas (640) no arquivo de credencial. Altere a propriedade para o usuário e grupo oneadmin, se necessário.
+. Obtenha o uid e gid do usuário oneadmin usando o comando  `id oneadmin`.
+. Atualize /etc/fstab ou a configuração de automount para habilitar multicanal. Assumindo o local padrão do datastore como /var/lib/one/datastores. Se não, verifique o parâmetro DATASTORE_LOCATION em /etc/one/oned.conf. Certifique-se de que a pasta <datastore_id> exista sob o local dos datastores. Exemplos de entradas são mostrados abaixo:
++
+[role="tabbed-block"]
+====
+.Usando /etc/fstab
+--
+[source, shell]
+----
+# credentials mapping to file option is not required when using kerberos authentication
+//<smb_server>/<smb_share> /var/lib/one/datastores/<datastore_id> cifs credentials=/etc/smb-credentials-<datastore_id>.cfg,_netdev,noauto,x-systemd.automount,vers=3.0,multichannel,max_channels=16,nofail,uid=<oneadmin uid>,gid=<oneadmin gid> 0 0
+----
+--
+.Usando automount
+--
+[source, shell]
+----
+# credentials mapping to file option is not required when using kerberos authentication
+/var/lib/one/datastores/<datastore_id> -fstype=cifs,credentials=/etc/smb-credentials-<datastore_id>.cfg,vers=3.0,multichannel,max_channels=16,uid=<oneadmin uid>,gid=<oneadmin gid> ://<smb_server>/<smb_share>
+----
+--
+====
+. Monte o datastore usando  `mount -a` ou  `systemctl reload autofs` comando.
+. Verifique se o datastore está montado com o comando mount e verifique a capacidade do datastore com o comando  `onedatastore show <datastore_id>`.
+. Certifique-se de que o usuário e o grupo oneadmin sejam os proprietários da pasta datastore. Ajuste as permissões usando o comando  `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>`.
+

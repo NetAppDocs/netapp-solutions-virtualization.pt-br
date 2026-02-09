@@ -1,0 +1,186 @@
+---
+sidebar: sidebar 
+permalink: opennebula/opennebula-ontap-fc.html 
+keywords: netapp, opennebula, lvm thin, fc, fibre channel, lvm, ontap, storage 
+summary: 'Configure o datastore Logical Volume Manager (LVM) com Fibre Channel para OpenNebula usando ONTAP. Este procedimento inclui configuração de multipath, provisionamento de LUN, configuração de igroup e criação de grupo de volumes para datastore compartilhado.' 
+---
+= Configurar o LVM Thin com ONTAP FC para OpenNebula
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configurar o Datastore do Logical Volume Manager (LVM) para storage compartilhado entre OpenNebula hosts usando o protocolo Fibre Channel com NetApp ONTAP. Essa configuração permite acesso ao storage em nível de bloco com alto desempenho e baixa latência.
+
+
+
+== Tarefas iniciais do administrador de virtualização
+
+Conclua estas tarefas iniciais para preparar os hosts OpenNebula para a conectividade FC e coletar as informações necessárias para o administrador de storage.
+
+. Verifique se há duas interfaces HBA disponíveis.
+. Certifique-se de que o multipath-tools esteja instalado em todos os hosts OpenNebula e seja iniciado na inicialização.
++
+[role="tabbed-block"]
+====
+.Debian/Ubuntu
+--
+[source, shell]
+----
+apt list | grep multipath-tools
+# If need to install, execute the following line.
+apt-get install multipath-tools
+# If /etc/multipath.conf is not present, first make sure the multipathd service is started.
+systemctl enable --now multipathd
+----
+--
+.RHEL/AlmaLinux
+--
+[source, shell]
+----
+dnf list installed | grep device-mapper-multipath
+# If need to install, execute the following line.
+dnf install device-mapper-multipath
+# If /etc/multipath.conf is not present, first make sure the multipathd service is started.
+systemctl enable --now multipathd
+----
+--
+====
+. Colete o WWPN de todos os hosts OpenNebula e forneça-o ao administrador de storage e ao administrador responsável pelo zoneamento da malha.
++
+[source, shell]
+----
+cat /sys/class/fc_host/host*/port_name
+----
+
+
+
+
+== Tarefas do administrador de armazenamento
+
+Se você é novo no ONTAP, use o Gerenciador de Sistemas para uma melhor experiência.
+
+. Certifique-se de que a SVM esteja disponível com o protocolo FC ativado. Seguir link:https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Documentação do ONTAP 9"].
+. Crie duas LIFs por controlador dedicadas para FC. Reúna os endereços WWPN das LIFs de FC criadas e forneça-os ao administrador responsável pelo zoneamento da fabric.
+. Crie um igroup e preencha os iniciadores FC dos hosts. Normalmente, um igroup é criado para um OpenNebula cluster. Inclua servidores frontend e hosts hipervisor no mesmo igroup para suportar tanto datastores de Imagem quanto de Sistema.
+. Crie o LUN com o tamanho desejado na SVM e apresente-o ao igroup criado na etapa anterior. Certifique-se de que a proteção antiransomware esteja ativada na guia de segurança para sistemas ASA e na guia de segurança de volume para sistemas AFF/ FAS .
+. Informe ao administrador de virtualização que o LUN foi criado.
+
+
+
+
+== Tarefas finais do administrador de virtualização
+
+Conclua estas tarefas para configurar o FC LUN como datastore LVM compartilhado em OpenNebula.
+
+. SSH em todos os servidores OpenNebula e complete as seguintes etapas em cada host.
+. Execute  `rescan-scsi-bus.sh`ou  `echo "- - -" > /sys/class/scsi_host/host*/scan`para reanalisar o barramento SCSI e detectar novos LUNs.
+. Verifique se o LUN está visível em todos os hosts OpenNebula usando  `lsblk -S` ou o comando fdisk -l. Anote o nome do dispositivo (por exemplo, sde, sdf) para o LUN criado.
+. Adicione o dispositivo à configuração multipath executando  `multipath -a /dev/<device_name>`. Em seguida, execute  `multipath -r` para recarregar a configuração multipath. Verifique a configuração multipath executando o comando  `multipath -ll`.
+. Conecte-se via SSH a um dos servidores front-end e crie um arquivo de configuração com base no tipo de Datastore desejado. Para obter a lista completa de atributos, consulte  https://docs.opennebula.io/7.0/product/cluster_configuration/san_storage/lvm_drivers/["OpenNebula documentação LVM"]. Exemplos de arquivos são mostrados abaixo:
++
+[role="tabbed-block"]
+====
+.Backup
+--
+.. Para Restic,
+
+
+[listing]
+----
+$cat fc-restic.conf
+NAME = "Backup-Restic-FC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "restic"
+TM_MAD = "-"
+
+RESTIC_PASSWORD = "<restic_password>"
+RESTIC_SFTP_SERVER = "<backup server>"
+----
+.. Para Rsync,
+
+
+[listing]
+----
+$cat fc-rsync.conf
+NAME = "Backup-Rsync-FC"
+TYPE = "BACKUP_DS"
+
+DS_MAD = "rsync"
+TM_MAD = "-"
+
+RSYNC_USER = "<rsync_user>"
+RSYNC_HOST = "<backup server>"
+----
+--
+.Arquivo
+[source, shell]
+----
+$cat fc-kernel.conf
+NAME = "File-Kernel-FC"
+TYPE = "FILE_DS"
+DS_MAD = "fs"
+TM_MAD = "local"
+SAFE_DIRS = "/var/tmp/files"
+----
+.Imagem
+[source, shell]
+----
+$cat fc-image.conf
+NAME = "Image-FC01"
+TYPE = "IMAGE_DS"
+DS_MAD = "fs"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+LVM_THIN_ENABLE = "yes"
+----
+.Sistema
+[source, shell]
+----
+$cat fc-system.conf
+NAME = "System-FC02"
+TYPE = "SYSTEM_DS"
+TM_MAD = "fs_lvm_ssh"
+DISK_TYPE = "block"
+BRIDGE_LIST = "<space-separated list of OpenNebula hosts>" # If LUN not presented to frontend hosts
+LVM_THIN_ENABLE = "yes"
+----
+====
+. Execute `onedatastore create <configuration file>`. Observe o ID do datastore retornado após a criação.
++
+[]
+====
+onedatastore create fc-system.conf ID: 107
+
+====
+. Crie grupo de volume no LUN FC usando  `vgcreate <vg_name> <multipath_device>` comando. Para datastores de imagem, o nome do grupo de volume pode ser qualquer um desejado. Para datastores de sistema, o nome do grupo de volume deve estar no formato  `vg-one-<datastore id>`. Isso é necessário para OpenNebula identificar o grupo de volume correto para datastores de sistema. Prossiga com os seguintes passos se estiver criando um datastore de backup/arquivo/imagem. Para datastores de sistema, pare aqui.
+. Crie um pool de volumes lógicos finos usando  `lvcreate -l 100%FREE -n <logical volume name> <volume group name>` comando. Para datastores do sistema, OpenNebula cria automaticamente o pool de volumes lógicos finos LVM quando necessário.
+. Crie o sistema de arquivos no volume lógico usando o comando  `mkfs.ext4 /dev/<volume group>/<logical volume>`. Os datastores do sistema não exigem a criação de sistema de arquivos.
+. Atualize /etc/fstab ou a configuração de automount para montar o datastore com as opções de montagem desejadas. Assumindo o local padrão do datastore como /var/lib/one/datastores. Pode ser validado com `onedatastore show <datastore_id>`. Se não, verifique o parâmetro DATASTORE_LOCATION em /etc/one/oned.conf. Certifique-se de que a pasta <datastore_id> exista sob o local dos datastores. Entradas de exemplo são mostradas abaixo:
++
+[role="tabbed-block"]
+====
+.Usando /etc/fstab
+--
+[source, shell]
+----
+/dev/<vg name>/<logical volume> /var/lib/one/datastores/<datastore_id> ext4 _netdev,noauto,x-systemd.automount,nofail 0 2
+----
+--
+.Usando automount
+--
+[source, shell]
+----
+/var/lib/one/datastores/<datastore_id> -fstype=ext4,_netdev,noauto,x-systemd.automount,nofail,rw :/dev/<vg name>/<logical volume>
+----
+--
+====
+. Monte o datastore usando  `mount -a` ou  `systemctl reload autofs` comando.
+. Verifique se o datastore está montado com o comando mount e verifique a capacidade do datastore com o comando  `onedatastore show <datastore_id>`.
+. Certifique-se de que o usuário e o grupo oneadmin sejam os proprietários da pasta datastore. Ajuste as permissões usando o comando  `chown -R oneadmin:oneadmin /var/lib/one/datastores/<datastore_id>`.
+

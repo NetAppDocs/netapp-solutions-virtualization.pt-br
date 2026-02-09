@@ -14,6 +14,18 @@ indexpage:
       url: kvm-overview.html
     - title: Armazenamento NetApp ONTAP para ambientes de virtualização KVM
       url: kvm-ontap.html
+  - title: OpenNebula recursos para KVM
+    links:
+    - title: Saiba mais sobre OpenNebula
+      url: "../opennebula/opennebula-overview.html"
+    - title: Instalando OpenNebula
+      url: https://docs.opennebula.io/7.0/software/installation_process/
+    - title: OpenNebula e NetApp arquitetura
+      url: "../opennebula/opennebula-netapp-architecture.html"
+    - title: Tipos de armazenamento suportados
+      url: "../opennebula/opennebula-storage-types.html"
+    - title: Configurar protocolos de armazenamento
+      url: "../opennebula/opennebula-netapp-protocols.html"
   - title: Recursos adicionais
     links:
     - title: Configurar libvirt no Rocky Linux

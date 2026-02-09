@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: opennebula/opennebula-netapp-protocols.html 
+keywords: netapp, opennebula, all-flash, nfs, iscsi, ontap, storage, aff 
+summary: 'Provisione o storage ONTAP para OpenNebula usando protocolos NAS (NFS, SMB) e SAN (FC, iSCSI, NVMe). Selecione o procedimento específico do protocolo apropriado para configurar storage compartilhado para seu ambiente OpenNebula.' 
+---
+= Saiba mais sobre protocolos de armazenamento para OpenNebula com NetApp ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Provisione o storage ONTAP para OpenNebula usando protocolos NAS (NFS, SMB) e SAN (FC, iSCSI, NVMe). Selecione o procedimento específico do protocolo apropriado para configurar storage compartilhado para seu ambiente OpenNebula.
+
+Certifique-se de que os hosts frontend OpenNebula e hipervisor possuam interfaces FC, Ethernet ou outras suportadas conectadas por cabos a switches com comunicação com as interfaces lógicas do ONTAP. Sempre verifique o  https://mysupport.netapp.com/matrix/#welcome["Ferramenta de Matriz de Interoperabilidade"] para configurações suportadas. Os cenários de exemplo são criados com a suposição de que duas placas de interface de rede de alta velocidade estão disponíveis em cada host OpenNebula, que são conectadas entre si para criar interfaces agregadas para tolerância de falhas e desempenho. As mesmas conexões de uplink são usadas para todo o tráfego de rede, incluindo gerenciamento de host, tráfego de máquina virtual/container e acesso ao storage. Quando houver mais interfaces de rede disponíveis, considere separar o tráfego de storage dos outros tipos de tráfego.
+
+Para obter informações sobre a arquitetura de storage ONTAP e os tipos de storage suportados, consulte link:opennebula-netapp-architecture.html["Aprenda sobre a arquitetura de storage da NetApp para OpenNebula"] e link:opennebula-storage-types.html["Saiba mais sobre os tipos de storage compatíveis para OpenNebula"].
+
+
+NOTE: Ao usar LVM com protocolos SAN (FC, iSCSI, NVMe-oF), o grupo de volumes pode conter vários LUNs ou namespaces NVMe. Nesse caso, todos os LUNs ou namespaces devem fazer parte do mesmo grupo de consistência para garantir a integridade dos dados. Não oferecemos suporte a grupos de volumes que abranjam várias SVMs do ONTAP . Cada grupo de volumes deve ser criado a partir de LUNs ou namespaces da mesma SVM.
+
+
+
+== Escolha um protocolo de armazenamento
+
+Selecione o protocolo que melhor se adequa ao seu ambiente e às suas necessidades:
+
+* link:opennebula-netapp-iscsi.html["Configurar NetApp driver com iSCSI"] - Configure OpenNebula NetApp driver com iSCSI para acesso ao storage em redes Ethernet padrão com suporte a multipath. Este recurso é exclusivo da Enterprise Edition. Ele utiliza clones nativos do ONTAP para provisionamento eficiente de máquinas virtuais.
+* link:opennebula-ontap-smb.html["Configurar armazenamento SMB/CIFS"] - Configure compartilhamentos de arquivos SMB/CIFS para OpenNebula com suporte multicanal para tolerância de falhas e desempenho aprimorado em várias conexões de rede.
+* link:opennebula-ontap-nfs.html["Configurar armazenamento NFS"] - Configure o armazenamento NFS para OpenNebula com nConnect ou session trunking para tolerância de falhas e melhorias de desempenho usando várias conexões de rede.
+* link:opennebula-ontap-fc.html["Configurar LVM Thin com FC"] - Configure o Logical Volume Manager (LVM) com Fibre Channel para acesso de blocos ao storage de alto desempenho e baixa latência entre hosts OpenNebula.
+* link:opennebula-ontap-iscsi.html["Configurar LVM Thin com iSCSI"] - Configure o Logical Volume Manager (LVM) com iSCSI para acesso ao storage em redes Ethernet padrão com suporte a multipath.
+* link:opennebula-ontap-nvme-fc.html["Configurar o LVM Thin com NVMe/FC"] - Configure o Logical Volume Manager (LVM) com NVMe sobre Fibre Channel para armazenamento em bloco de alto desempenho usando o protocolo NVMe moderno.
+* link:opennebula-ontap-nvme-tcp.html["Configurar LVM Thin com NVMe/TCP"] - Configure o Logical Volume Manager (LVM) com NVMe sobre TCP para armazenamento em bloco de alto desempenho em redes Ethernet padrão usando o protocolo NVMe moderno.
+
+
+
+NOTE: Caso precise de ajuda com os protocolos de armazenamento E-Series ou EF-Series, consulte o link https://docs.netapp.com/us-en/e-series/config-linux/index.html["NetApp E-Series e EF-Series documentação para configurar o LVM em ambientes Linux"] juntamente com uma das documentações do LVM Thin para referência.

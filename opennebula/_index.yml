@@ -1,0 +1,36 @@
+---
+indexpage:
+  title: Soluções NetApp OpenNebula
+  summary: NetApp OpenNebula soluções são um conjunto de recursos tecnológicos que
+    demonstram as capacidades do armazenamento NetApp para virtualização usando OpenNebula.
+  lead: NetApp OpenNebula soluções são um conjunto de recursos tecnológicos que demonstram
+    as capacidades do armazenamento NetApp para virtualização usando OpenNebula.
+  tiles:
+  - title: Começar
+    links:
+    - title: Saiba mais sobre OpenNebula
+      url: opennebula-overview.html
+    - title: Instalando OpenNebula
+      url: https://docs.opennebula.io/7.0/software/installation_process/
+  - title: Provisionar NetApp storage para OpenNebula
+    links:
+    - title: OpenNebula e NetApp arquitetura
+      url: opennebula-netapp-architecture.html
+    - title: Tipos de armazenamento suportados
+      url: opennebula-storage-types.html
+    - title: Configurar protocolos de armazenamento
+      url: opennebula-netapp-protocols.html
+  - title: Recursos adicionais
+    links:
+    - title: OpenNebula 7.0 documentação
+      url: https://docs.opennebula.io/7.0/getting_started/
+    - title: Configurando o Datastore SAN da NetApp para OpenNebula Enterprise Edition
+      url: https://docs.opennebula.io/7.0/integrations/storage_extensions/netapp/
+    - title: OpenNebula documentation (Versões anteriores - 4.x a 6.x)
+      url: https://docs.opennebula.io/6.10/
+    - title: Canal do YouTube da OpenNebula
+      url: https://www.youtube.com/@OpenNebula/playlists
+    - title: Fórum do OpenNebula
+      url: https://forum.opennebula.io/
+    - title: OpenNebula GitHub repositório
+      url: https://github.com/OpenNebula/
