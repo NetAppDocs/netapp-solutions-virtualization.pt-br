@@ -75,6 +75,7 @@ O ONTAP oferece um conjunto abrangente de recursos de armazenamento corporativo 
 * Mapeamento de nomes entre identidades Windows e Unix
 * Proteção autônoma contra ransomware com detecção de ameaças integrada.
 * Análise do sistema de arquivos para insights de capacidade e uso
+* Suporte a Metrocluster para alta disponibilidade.
 
 
 
@@ -82,6 +83,7 @@ O ONTAP oferece um conjunto abrangente de recursos de armazenamento corporativo 
 === Características do protocolo SAN
 
 * Estenda clusters por domínios de falha com o SnapMirror ActiveSync (verifique sempre o https://mysupport.netapp.com/matrix/#welcome["Ferramenta de Matriz de Interoperabilidade"] (para configurações suportadas)
+* Suporte a Metrocluster para alta disponibilidade.
 * Os modelos ASA oferecem multipathing ativo-ativo e failover de caminho rápido.
 * Suporte aos protocolos FC, iSCSI e NVMe-oF.
 * autenticação mútua iSCSI CHAP
