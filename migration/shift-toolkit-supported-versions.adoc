@@ -88,3 +88,6 @@ O kit de ferramentas Shift é validado nas seguintes versões do Oracle Linux Vi
 
 .KVM
 Para destinos KVM, o Shift Toolkit suporta apenas conversão de formato de disco (VMDK para QCOW2 ou RAW). Não são necessários detalhes de conexão do hipervisor ao selecionar KVM na lista suspensa de destino. Após a conversão, utilize os discos QCOW2 para provisionar máquinas virtuais em plataformas baseadas em KVM.
+
+.Proxmox VE
+O kit de ferramentas Shift foi validado para o Proxmox VE executando a versão 9.X e posteriores.
