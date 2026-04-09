@@ -41,3 +41,5 @@ entries:
     url: "/proxmox/proxmox-pbs-requirements.html"
   - title: Configure a proteção de dados com o Proxmox Backup Server.
     url: "/proxmox/proxmox-wkld-dp-pbs.html"
+- title: Configurar e utilizar o Storage Manager para Proxmox
+  url: "/proxmox/proxmox-smp.html"
