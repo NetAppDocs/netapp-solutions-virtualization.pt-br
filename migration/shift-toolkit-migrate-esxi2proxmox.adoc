@@ -56,9 +56,9 @@ NOTE: As máquinas virtuais devem ser desligadas antes de iniciar a migração
 NOTE: A remoção das ferramentas VMware ocorre no hipervisor de destino assim que as VMs são ligadas
 
 * Ao executar o comando Invoke-VMScript para preparar máquinas virtuais Windows, utilize uma conta de administrador local ou uma conta do Active Directory que faça parte do grupo Administradores local. Para sistemas Linux, utilize uma conta que possa executar comandos sem exigir senha (por exemplo, via sudo sem senha).
-* Para máquinas virtuais Windows, certifique-se de que a ISO do VirtIO esteja montada; caso contrário, o processo de preparação falhará. O driver ISO do VirtIO pode ser baixado aqui. O script detectará a unidade montada e copiará os arquivos necessários automaticamente.
+* Para máquinas virtuais Windows, certifique-se de que a ISO do VirtIO esteja montada; caso contrário, o processo de preparação falhará. O driver ISO do VirtIO pode ser baixado em link:https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win-0.1.271.iso["aqui"]. O script detectará a unidade montada e copiará os arquivos necessários automaticamente.
 +
-** Certifique-se de que a ISO especificada no link seja usada, pois o script de preparação utiliza o pacote .msi para instalar os drivers e o qemu-guest-agents. Após os pré-requisitos estarem em vigor, faça login na interface do Shift toolkit e configure o site com Proxmox VE como o hipervisor de destino. Para adicionar, clique em “Add New Site” e selecione “Destination”.
+** Certifique-se de usar a ISO especificada no link, pois o script de preparação utiliza o pacote .msi para instalar os drivers e o qemu-guest-agents. Após atender aos pré-requisitos, faça login na interface do Shift toolkit e configurar o site com Proxmox VE como o hipervisor de destino. Para adicionar, clique em “Adicionar Novo Site” e selecione “Destino”.
 
 
 
