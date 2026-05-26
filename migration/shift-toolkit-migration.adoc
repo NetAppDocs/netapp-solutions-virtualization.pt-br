@@ -26,6 +26,8 @@ O Shift Toolkit oferece flexibilidade em ambientes com múltiplos hipervisores, 
 * link:shift-toolkit-migrate-hyperv2esxi.html["Microsoft Hyper-V para VMware ESXi"]
 * link:shift-toolkit-migrate-esxi2olvm.html["VMware ESXi para Oracle Linux Virtualization Manager (OLVM)"]
 * link:shift-toolkit-migrate-esxi2osv.html["Virtualização de VMware ESXi para Red Hat OpenShift"]
+* link:shift-toolkit-migrate-esxi2osvmtv.html["VMware ESXi para Red Hat OpenShift Virtualization usando Migration Toolkit for Virtualization (MTV)"]
+* link:shift-toolkit-migrate-esxi2proxmox.html["VMware ESXi para Proxmox VE"]
 
 
 
