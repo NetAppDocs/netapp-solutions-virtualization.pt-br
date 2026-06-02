@@ -1,0 +1,24 @@
+---
+indexpage:
+  title: Computação do usuário final com NetApp
+  summary: NetApp soluções de computação para usuário final ajudam as organizações
+    a fornecer desktops e aplicativos virtuais seguros e escaláveis para usuários
+    em qualquer dispositivo.
+  lead: NetApp soluções de computação para usuário final ajudam as organizações a
+    fornecer desktops e aplicativos virtuais seguros e escaláveis para usuários em
+    qualquer dispositivo.
+  tiles:
+  - title: Começar
+    links:
+    - title: Aprenda sobre Computação do Usuário Final com NetApp
+      url: euc-overview.html
+    - title: Benefícios do armazenamento NetApp para computação do usuário final
+      url: euc-benefits.html
+  - title: Computação do usuário final com Omnissa Horizon e NetApp
+    links:
+    - title: Omnissa Horizon e NetApp arquitetura
+      url: omnissa-netapp-architecture.html
+  - title: Recursos adicionais
+    links:
+    - title: Omnissa Tech Zone
+      url: https://techzone.omnissa.com
