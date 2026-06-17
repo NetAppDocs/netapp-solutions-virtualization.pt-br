@@ -38,14 +38,14 @@ Verifique se os seguintes pré-requisitos foram atendidos antes de iniciar a mig
 
 .Requisitos da VMware
 * Conta com permissões mínimas. Consulte esta seçãolink:https://docs.netapp.com/us-en/netapp-solutions-virtualization/migration/shift-toolkit-summary.html#minimum-permissions-role-required-on-vmware["para os privilégios mínimos necessários"]
-* Os VMDKs devem ser colocados em volumes individuais (simulando a colocação de um VMDK em uma construção PVC/PV) usando o svmotion.
+* Os VMDKs podem ser configurados de várias maneiras: todos os VMDKs podem residir em um único volume (eliminando a necessidade de Storage vMotion), cada VMDK pode ser colocado em seu próprio volume individual ou vários VMDKs podem ser organizados em uma qtree dentro de um volume.
++
 
+NOTE: O kit de ferramentas Shift detecta automaticamente o layout e seleciona o método de clonagem e os drivers de armazenamento NAS apropriados.
 
++
 
-NOTE: Essa limitação será removida na próxima versão, onde o driver NAS-economy poderá ser usado para o provisionamento de PVC.
-
-
-NOTE: Use o script disponível no bloco de script (**Configurações > Acesso do desenvolvedor > Bloco de script**) para habilitar a colocação de PVC em uma qtree, ou permite importar o volume tal como está, ou clonar e importar o volume, eliminando a necessidade de operações manuais de vMotion.
+NOTE: Quando os VMDKs são colocados dentro de uma qtree, o Shift Toolkit utiliza o driver ONTAP-NAS-economy.
 
 * As ferramentas da VMware estão sendo executadas em máquinas virtuais convidadas.
 * O sistema operacional de cada máquina virtual é certificado e suportado como sistema operacional convidado para conversões.
@@ -332,5 +332,4 @@ NOTE: As VMs são criadas no projeto "Padrão" para máquinas virtuais, porém i
 
 O Shift Toolkit acelera a migração simplificando o processo, minimizando o tempo de inatividade e eliminando a necessidade de acesso ao host ESXi ou abordagens baseadas em VDDK.
 
-
-NOTE: Antes de iniciar essa integração específica, entre em contato com sua equipe de contas da Red Hat.
+Após a conclusão da migração, o volume clone precisa ser desanexado. O método utilizado depende da versão do ONTAP: use divisão de clones para ONTAP 9.17.1 e versões posteriores, ou vol move para versões anteriores. Um script para iniciar o processo de desanexação está disponível na pasta "Post migrate" dentro do pacote ZIP fornecido.
