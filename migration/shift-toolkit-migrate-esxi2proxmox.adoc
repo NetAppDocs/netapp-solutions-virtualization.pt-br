@@ -20,6 +20,7 @@ O Shift Toolkit permite a migração de máquinas virtuais entre plataformas de 
 
 
 
+[[before-you-begin]]
 == Antes de começar
 
 Verifique se os seguintes pré-requisitos foram atendidos antes de iniciar a migração.
@@ -65,6 +66,7 @@ NOTE: A remoção das ferramentas VMware ocorre no hipervisor de destino assim q
 
 
 
+[[step-1-add-the-destination-site-proxmox-ve]]
 == Passo 1: Adicione o site de destino (Proxmox VE)
 
 Adicione o ambiente Proxmox VE de destino ao Shift Toolkit.
@@ -118,6 +120,7 @@ NOTE: O volume de origem e o volume de destino serão os mesmos, pois a convers�
 
 
 
+[[step-2-create-resource-groups]]
 == Etapa 2: Criar grupos de recursos
 
 Organize as VMs em grupos de recursos para preservar a ordem de inicialização e as configurações de atraso de inicialização.
@@ -203,6 +206,7 @@ O grupo de recursos foi criado e está pronto para a configuração do modelo.
 
 
 
+[[step-3-create-a-migration-blueprint]]
 == Etapa 3: Criar um plano de migração
 
 Crie um plano para definir a migração, incluindo mapeamento de plataformas, configuração de rede e configurações de máquinas virtuais.
@@ -345,6 +349,7 @@ Quando o prepareVM for concluído com sucesso, o status do projeto será atualiz
 
 
 
+[[step-4-execute-the-migration]]
 == Etapa 4: Execute a migração
 
 Acione o fluxo de trabalho de migração para converter VMs do VMware ESXi para Proxmox VE.
@@ -391,6 +396,7 @@ image::shift-toolkit-468.png[VMs no Proxmox VE]
 ====
 
 
+[[shift-toolkit-workflow]]
 == Fluxo de trabalho do Shift toolkit
 
 As seções abaixo descrevem as etapas acionadas pelo Shift toolkit para converter o VMDK e criar máquinas virtuais no Proxmox VE.
@@ -419,6 +425,7 @@ image::shift-toolkit-470.png[Detalhes da VM Proxmox VE]
 
 
 
+[[minimum-permissions-for-migrating-and-creating-vms-in-proxmox-ve]]
 == Permissões mínimas para migrar e criar VMs no Proxmox VE
 
 Esta seção descreve os passos necessários para criar uma conta de usuário dedicada com os privilégios mínimos necessários para realizar migrações de VM.

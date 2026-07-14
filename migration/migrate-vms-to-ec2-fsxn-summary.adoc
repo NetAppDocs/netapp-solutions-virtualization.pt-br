@@ -18,6 +18,7 @@ Explore opções para migrar VMs para o Amazon EC2 usando o Amazon FSx for NetAp
 
 
 
+[[other-possibilities]]
 == Outras possibilidades
 
 A mesma abordagem pode ser estendida para migrar VMs usando armazenamento no guest em VMs locais.  O VMDK do sistema operacional pode ser migrado usando o CMC e os LUNs iSCSI no guest podem ser replicados usando o SnapMirror.  O processo requer quebrar o espelho e anexar o LUN à instância do Amazon EC2 recém-migrada, conforme ilustrado no diagrama abaixo.
@@ -26,6 +27,7 @@ image:migrate-ec2-fsxn-013.png["Imagem mostrando uma possibilidade adicional par
 
 
 
+[[conclusion]]
 == Conclusão
 
 Este documento fornece um passo a passo completo sobre o uso do recurso MigrateOps do CMC para migrar dados armazenados em repositórios VMware locais para a AWS usando instâncias do Amazon EC2 e FSx ONTAP.

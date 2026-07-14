@@ -18,6 +18,7 @@ Configure o Shift Toolkit para automatizar a migração ou conversão de VMs. Es
 
 
 
+[[run-shift-toolkit]]
 == Kit de ferramentas Run Shift
 
 * Usando o navegador, acesse a interface do usuário do Shift Toolkit digitando o seguinte: `http://<IP address specified during installation>:3001`
@@ -50,12 +51,14 @@ image::shift-toolkit-052.png[Captura de tela do Contrato de Licença de Usuário
 
 
 
+[[shift-toolkit-configuration]]
 == Configuração do Shift Toolkit
 
 Após configurar corretamente o armazenamento e a conectividade com os hipervisores de origem e destino, comece a configurar o Shift Toolkit para automatizar a migração ou conversão das máquinas virtuais para o formato apropriado, aproveitando a funcionalidade FlexClone .
 
 
 
+[[add-sites]]
 === Adicionar sites
 
 O primeiro passo é descobrir e adicionar os detalhes do hipervisor de origem e, em seguida, do hipervisor de destino (tanto hipervisores quanto armazenamento) ao kit de ferramentas Shift.  Abra o Shift Toolkit em um navegador compatível, use o nome de usuário e a senha padrão e clique em “Adicionar Sites”.
@@ -175,6 +178,7 @@ O próximo passo é agrupar as VMs necessárias em seus grupos de migração com
 
 
 
+[[resource-groupings]]
 === Agrupamentos de Recursos
 
 Depois que as plataformas forem adicionadas, agrupe as VMs que você deseja migrar ou converter em grupos de recursos.  Os grupos de recursos do Shift Toolkit permitem que você agrupe conjuntos de VMs dependentes em grupos lógicos que contêm suas ordens de inicialização e atrasos de inicialização.
@@ -256,6 +260,7 @@ NOTE: Caso seja necessário modificar o grupo de recursos para adicionar ou remo
 
 
 
+[[blueprints]]
 === Projetos
 
 Para migrar ou converter máquinas virtuais, é necessário um plano. Selecione as plataformas de hipervisor de origem e destino no menu suspenso e escolha os grupos de recursos a serem incluídos neste projeto, juntamente com o agrupamento de como os aplicativos devem ser ligados (por exemplo, controladores de domínio, depois nível 1, depois nível 2, etc.). Muitas vezes, eles também são chamados de planos de migração. Para definir o projeto, acesse a aba “Projetos” e clique em “Criar novo projeto”.

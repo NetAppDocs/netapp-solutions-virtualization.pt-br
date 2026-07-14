@@ -15,6 +15,7 @@ Antes da implementação, revise os requisitos e considerações de implantaçã
 
 
 
+[[deployment-considerations]]
 == Considerações sobre a implantação
 
 Implante o PBS em hardware dedicado ou como uma máquina virtual no Proxmox VE. Ao implementar o PBS como uma máquina virtual, considere a disponibilidade do servidor de backup caso o host Proxmox VE fique inativo. Implante o PBS em hardware dedicado ou em um host ou cluster Proxmox VE separado para garantir a disponibilidade do servidor de backup durante falhas do host primário.
@@ -23,6 +24,7 @@ O conteúdo do backup fica armazenado de forma independente no próprio armazena
 
 
 
+[[storage-backend-support]]
 == Suporte ao backend de armazenamento
 
 O PBS suporta vários sistemas de armazenamento, incluindo armazenamento local, NFS, iSCSI, FC, NVMe-oF e S3 (versão prévia técnica). A integração com o armazenamento NetApp ONTAP permite que as organizações aproveitem recursos avançados de gerenciamento de dados para melhor proteção e recuperação de dados.
@@ -31,6 +33,7 @@ Utilize o ONTAP SnapMirror para replicar o armazenamento de dados PBS em outro s
 
 
 
+[[multi-cluster-management]]
 == Gestão de múltiplos clusters
 
 Uma única instância do PBS pode gerenciar vários clusters Proxmox VE, fornecendo backup centralizado para implantações em larga escala. Utilize namespaces para separar logicamente os dados de backup de diferentes clusters ou tenants, garantindo o isolamento e a segurança dos dados.
@@ -39,12 +42,14 @@ Configure políticas de retenção de dados para gerenciar automaticamente o cic
 
 
 
+[[management-interfaces]]
 == Interfaces de gerenciamento
 
 Gerencie o PBS por meio de uma interface baseada na web, ferramentas de linha de comando ou API REST. Acesse a interface web na porta 8007 usando o URL `https://<pbs-ip-address>:8007`.
 
 
 
+[[network-configuration-best-practices]]
 == Melhores práticas de configuração de rede
 
 Garanta caminhos de rede redundantes entre o PBS e o armazenamento ONTAP para alta disponibilidade e desempenho. Considere a agregação de links (LACP) para aumentar a largura de banda e a redundância. Configure quadros jumbo (MTU 9000) em todos os dispositivos de rede para melhorar o desempenho do tráfego de armazenamento.

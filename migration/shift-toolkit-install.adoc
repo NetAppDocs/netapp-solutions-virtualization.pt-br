@@ -17,6 +17,7 @@ Instale ou atualize o NetApp Shift Toolkit após verificar se seu ambiente atend
 
 
 
+[[install-the-shift-toolkit]]
 == Instale o Shift Toolkit
 
 Baixe e execute o instalador para configurar o Shift Toolkit em seu servidor Windows.
@@ -137,6 +138,7 @@ NOTE: Para máquinas virtuais sem acesso à internet, o instalador offline execu
 
 
 
+[[upgrade-the-shift-toolkit]]
 == Atualize o Shift Toolkit
 
 As atualizações são totalmente automatizadas e podem ser concluídas com um único clique.

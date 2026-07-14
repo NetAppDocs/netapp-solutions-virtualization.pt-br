@@ -18,12 +18,14 @@ Migre VMs de datastores baseados em SAN para NAS antes de convertê-las com o Sh
 
 
 
+[[requirements-for-san-based-vms]]
 == Requisitos para VMs baseadas em SAN
 
 O Shift Toolkit exige que as VMs residam em um ambiente NAS (NFS para VMware ESXi) antes da conversão.  Se suas VMs estiverem armazenadas atualmente em datastores baseados em SAN usando iSCSI, Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) ou NVMe over Fibre Channel (NVMe/FC), você deverá primeiro migrá-las para um datastore NFS.
 
 
 
+[[migration-workflow-for-san-environments]]
 == Fluxo de trabalho de migração para ambientes SAN
 
 O diagrama a seguir ilustra o fluxo de trabalho completo de migração para máquinas virtuais armazenadas em um ambiente SAN.
@@ -43,6 +45,7 @@ Após a conversão, use a migração de armazenamento para mover as VMs converti
 
 
 
+[[handling-processor-compatibility-issues]]
 == Lidar com problemas de compatibilidade do processador
 
 Ao realizar a migração de máquinas virtuais (VMs) em tempo real entre nós com diferentes capacidades de processador, a migração pode falhar devido a verificações de compatibilidade do processador.

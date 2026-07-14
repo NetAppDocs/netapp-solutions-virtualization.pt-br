@@ -1,0 +1,178 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-disaster-recovery-source-cluster-setup.html 
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization 
+summary: Virtualização Red Hat OpenShift 
+---
+= Configuração do cluster de origem para recuperação de desastres do Red Hat OpenShift Virtualization
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta seção fornece informações sobre como configurar o cluster de origem para recuperação de desastres de cargas de trabalho de virtualização do OpenShift usando NetApp Trident Protect e AppMirror. Isso inclui criar um AppVault usando ONTAP S3, criar um aplicativo Trident Protect para a VM de origem e criar snapshots sob demanda e agendados da VM usando Trident Protect. Essas etapas são essenciais para garantir que o cluster de origem esteja configurado corretamente para replicar dados para o cluster de destino de recuperação de desastres e permitir a recuperação de VMs em caso de desastre.
+
+
+
+[[setup-disaster-recovery-source-cluster-for-openshift-virtualization]]
+== Configurar cluster de origem de recuperação de desastres para OpenShift Virtualization
+
+Todas as etapas a seguir são executadas no cluster de origem, que é o cluster onde a VM protegida está em execução no momento.
+
+
+
+[[create-appvault-using-ontap-s3]]
+== Criar AppVault usando ONTAP S3
+
+Esta seção mostra como configurar um objeto AppVault no Trident Protect usando o storage de objetos ONTAP S3. O AppVault criado nesta etapa será usado para armazenar dados replicados do cluster de origem, e esses dados serão usados para recuperação no cluster de destino de recuperação de desastres.
+
+Utilize os comandos oc e os arquivos yaml mostrados abaixo para criar um segredo e o recurso personalizado AppVault para ONTAP s3. Certifique-se de criá-los no namespace trident-protect.
+
+.Mostrar exemplo
+[%collapsible]
+====
+[source, yaml]
+----
+apiVersion: v1
+# You can provide the keys either as stringData or base 64 encoded data
+stringData:
+  accessKeyID: "<access key id as obtained from ONTAP>"
+  secretAccessKey: "<secret access key as obtained from ONTAP>"
+#data:
+  #accessKeyID: <base 64 encoded value of access key>
+  #secretAccessKey: <base 64 encoded value of secret access key>
+kind: Secret
+metadata:
+  name: appvault-secret
+  namespace: trident-protect
+type: Opaque
+
+----
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: ontap-s3-appvault
+  namespace: trident-protect
+spec:
+  providerConfig:
+    s3:
+      bucketName: oc-dr
+      endpoint: <data lif to use to access S3>
+      secure: "false" # Setting this to "false" will disable TLS, which is not recommended for production environments.
+      skipCertValidation: "true" # When TLS is enabled, setting skipCertValidation to "true" will skip TLS certificate validation, which is not recommended for production environments.
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: appvault-secret
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: appvault-secret
+  providerType: OntapS3
+----
+Certifique-se de que o cofre S3 do ONTAP foi criado e está no estado Disponível
+
+[source, cli]
+----
+oc create -f app-vault-secret.yaml -n trident-protect
+oc create -f app-vault.yaml -n trident-protect
+----
+image:osv-disaster-recovery-003.png["OCP-v AppVault no namespace trident-protect"]
+
+====
+
+
+[[create-a-trident-protect-app-for-the-source-vm]]
+== Crie um aplicativo Trident Protect para a VM de origem
+
+Crie um recurso personalizado de Application no namespace onde a VM de origem está localizada.
+
+.Mostrar exemplo
+[%collapsible]
+====
+[source, yaml]
+----
+# cat app.yaml
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  creationTimestamp: null
+  name: test-source-app
+  namespace: test-dr-ns
+spec:
+  includedNamespaces:
+  - namespace: test-dr-ns
+----
+[source, cli]
+----
+tridentctl-protect create app <source-vm> -n <source-ns> --namespaces <source-ns>
+----
+image:osv-disaster-recovery-004.png["Aplicativo OCP-v no namespace source-ns"]
+
+A VM e seu PVC no namespace incluído no recurso personalizado do App são mostrados abaixo.
+
+image:osv-disaster-recovery-005.png["VM e seu PVC no namespace incluído no recurso personalizado do App"]
+
+====
+
+
+[[create-a-snapshot-of-the-vm-using-trident-protect]]
+== Crie um Snapshot da VM usando Trident Protect
+
+Você pode criar um snapshot sob demanda da VM usando o Trident Protect CLI ou API. Esse snapshot será armazenado no AppVault criado na etapa anterior e poderá ser usado para recuperação no cluster de destino de recuperação de desastres.
+
+.Mostrar exemplo
+[%collapsible]
+====
+[source, yaml]
+----
+# snapshot.yaml
+apiVersion: protect.trident.netapp.io/v1
+kind: Snapshot
+metadata:
+  name: test-source-dr-init-snapshot
+  namespace: test-dr-ns
+spec:
+  applicationRef: test-source-app
+  appVaultRef: ontap-s3-appvault
+  reclaimPolicy: Delete
+
+----
+image:osv-disaster-recovery-006.png["Snapshot OCP-v sob demanda da máquina virtual criada usando o Trident Protect CLI"]
+
+====
+
+
+[[create-a-scheduled-snapshot-of-the-vm-using-trident-protect]]
+== Crie um snapshot agendado da VM usando Trident Protect
+
+Você também pode criar um snapshot agendado criando um recurso personalizado de Agendamento no mesmo namespace do recurso personalizado de Aplicativo. O agendamento criará automaticamente snapshots da máquina virtual no cronograma especificado e os armazenará no AppVault.
+
+.Mostrar exemplo
+[%collapsible]
+====
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  name: appmirror-sched1
+spec:
+  appVaultRef: ontap-s3-appvault
+  applicationRef: test-source-app
+  backupRetention: "0"
+  enabled: true
+  granularity: Custom
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  snapshotRetention: "2"
+----
+====

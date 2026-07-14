@@ -15,6 +15,7 @@ Implante ONTAP tools for VMware vSphere 10 e provisione um armazenamento de dado
 
 
 
+[[step-1-deploy-ontap-tools-for-vmware-vsphere]]
 == Etapa 1: implantar ONTAP tools for VMware vSphere
 
 Nesta etapa, as ferramentas ONTAP são implantadas em uma configuração não HA. Para obter detalhes adicionais de implantação em configurações HA e não HA, consulte https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/ontap-tools-deployment.html["Implantar ONTAP tools for VMware vSphere"] .
@@ -71,6 +72,7 @@ image::vmware-vcf-import-nfs-003.png[Personalizar modelo]
 
 
 
+[[step-2-configure-ontap-tools]]
 == Etapa 2: Configurar ferramentas ONTAP
 
 Depois que a VM das ferramentas ONTAP estiver instalada e ligada, adicione os servidores vCenter e os sistemas de armazenamento ONTAP que você deseja gerenciar.
@@ -102,6 +104,7 @@ TIP: Para permitir o gerenciamento total de todas as SVMs no sistema de armazena
 
 
 
+[[step-3-provision-the-nfs-datastore]]
 == Etapa 3: provisionar o armazenamento de dados NFS
 
 As ferramentas ONTAP integram funcionalidades em toda a interface do cliente vSphere. Nesta etapa, um armazenamento de dados NFS é provisionado a partir da página de inventário de armazenamento.
@@ -149,6 +152,7 @@ image::vmware-vcf-import-nfs-009.png[Página de resumo]
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Depois de implantar as ferramentas ONTAP e provisionar o armazenamento de dados NFS,link:vmw-vcf-mgmt-nfs-conversion.html["converter o cluster vSphere para o domínio de gerenciamento VCF"] .

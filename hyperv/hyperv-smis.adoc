@@ -20,6 +20,7 @@ Esta solução abrangente fornece uma interface padronizada para gerenciamento d
 
 
 
+[[introduction]]
 == Introdução
 
 A NetApp Storage Management Initiative Specification (SMI-S) é uma ferramenta poderosa para gerenciar e monitorar sistemas de armazenamento.  O NetApp SMI-S utiliza os protocolos Web-Based Enterprise Management (WBEM) para fornecer uma interface unificada para várias tarefas de gerenciamento, incluindo o manuseio de LUNs, volumes, definições de configuração CIMOM e usuários do servidor CIM.
@@ -28,6 +29,7 @@ O SCVMM é uma solução de gerenciamento abrangente para data centers virtualiz
 
 
 
+[[benefits-of-using-netapp-smi-s-provider-with-scvmm]]
 === Benefícios de usar o NetApp SMI-S Provider com o SCVMM
 
 A integração do NetApp SMI-S Provider com o SCVMM permite que as organizações gerenciem recursos de armazenamento de forma mais eficaz em um data center virtualizado, fornecendo uma interface padronizada para gerenciamento de armazenamento.
@@ -43,6 +45,7 @@ image:hyperv-smis-001.png["NetApp SMI-S com arquitetura Hyper-V"]
 
 
 
+[[get-ready-for-smi-s-provider-deployment]]
 == Prepare-se para a implantação do Provedor SMI-S
 
 Uma integração perfeita com sistemas de armazenamento existentes requer instalação e configuração adequadas do NetApp SMI-S Provider.
@@ -61,6 +64,7 @@ Uma integração perfeita com sistemas de armazenamento existentes requer instal
 
 
 
+[[smi-s-virtual-machine-hardware-requirements]]
 === Requisitos de hardware da máquina virtual SMI-S
 
 A tabela abaixo mostra os requisitos de hardware da VM do provedor NetApp SMI-S.
@@ -69,6 +73,7 @@ image:hyperv-smis-002.png["Requisitos de hardware do provedor SMI-S"]
 
 
 
+[[install-smi-s-provider]]
 === Instalar o Provedor SMI-S
 
 Antes de iniciar a implantação do provedor SMI-S, você precisa implantar o Microsoft Hyper-V com SCVMM e NetApp 9 acima do sistema de armazenamento FAS ou AFF .  É importante entender a interface baseada em comandos para executar várias tarefas de gerenciamento, verificarlink:https://docs.netapp.com/us-en/smis-provider/concept-smi-s-provider-commands-overview.html["Comandos do NetApp SMI-S Provider ."]
@@ -87,6 +92,7 @@ Prática recomendada: a NetApp recomenda usar um servidor Windows dedicado para 
 
 
 
+[[connect-smi-s-provider-with-scvmm]]
 === Conecte o Provedor SMI-S com o SCVMM
 
 Para adicionar um dispositivo de armazenamento remoto no SCVMM e conectar-se a um provedor SMI-S, você precisa garantir que os seguintes pré-requisitos e etapas sejam atendidos:
@@ -114,6 +120,7 @@ Um certificado desatualizado é colocado durante a instalação do Provedor SMI-
 
 
 
+[[provisioning-storage-with-scvmm-using-an-smi-s-provider]]
 === Provisionamento de armazenamento com SCVMM usando um provedor SMI-S
 
 O SCVMM usa o Provedor SMI-S para interagir com sistemas de armazenamento, permitindo que você crie e gerencie recursos de armazenamento diretamente do SCVMM.
@@ -135,12 +142,14 @@ O SCVMM usa o Provedor SMI-S para interagir com sistemas de armazenamento, permi
 
 
 
+[[logs-and-traces]]
 == Registros e Rastros
 
 Você pode configurar como o SMI-S Provider gerencia logs e arquivos de rastreamento, como especificar os níveis de mensagens a serem registradas e o diretório no qual os logs são salvos.  Você também especifica os componentes a serem rastreados, o destino para o qual as mensagens de rastreamento são gravadas, o nível de rastreamento e o local do arquivo de rastreamento.
 
 
 
+[[logs-setting]]
 === Configuração de logs
 
 Por padrão, todas as mensagens do sistema são registradas e os logs de mensagens do sistema ficam localizados no diretório de logs no diretório em que o NetApp SMI-S Provider está instalado.  Você pode alterar o local e o nível das mensagens do sistema que são gravadas no log do servidor CIM.
@@ -169,6 +178,7 @@ image:hyperv-smis-012.png["Configuração de rastreamento"]
 
 
 
+[[conclusion]]
 == Conclusão
 
 O NetApp SMI-S Provider é uma ferramenta essencial para administradores de armazenamento, fornecendo uma solução padronizada, eficiente e abrangente para gerenciar e monitorar sistemas de armazenamento.  Ao utilizar protocolos e esquemas padrão do setor, ele garante a compatibilidade e simplifica as complexidades associadas ao gerenciamento da rede de armazenamento.

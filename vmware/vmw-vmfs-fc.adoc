@@ -18,6 +18,7 @@ Esta seção aborda a criação de um armazenamento de dados VMFS com armazename
 
 
 
+[[what-you-need]]
 == O que você precisa
 
 * As habilidades básicas necessárias para gerenciar um ambiente vSphere e ONTAP
@@ -48,6 +49,7 @@ Esta seção aborda a criação de um armazenamento de dados VMFS com armazename
 
 
 
+[[provisioning-a-vmfs-datastore]]
 == Provisionando um armazenamento de dados VMFS
 
 Para provisionar um armazenamento de dados VMFS, conclua as seguintes etapas:
@@ -58,6 +60,7 @@ Para provisionar um armazenamento de dados VMFS, conclua as seguintes etapas:
 
 
 
+[[ontap-tasks]]
 === Tarefas ONTAP
 
 . link:https://docs.netapp.com/us-en/ontap-cli-98/system-license-show.html["Verifique se você tem uma licença ONTAP para FCP."]
@@ -85,6 +88,7 @@ Para provisionar um armazenamento de dados VMFS, conclua as seguintes etapas:
 
 
 
+[[vmware-vsphere-tasks]]
 === Tarefas do VMware vSphere
 
 . Verifique se os drivers HBA estão instalados.  Os HBAs com suporte da VMware têm drivers implantados prontos para uso e devem estar visíveis nolink:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/getting-started-with-a-traditional-storage-model-in-vsphere-environment/supported-storage-adapters/view-storage-adapters-available-on-an-esxi-host.html++["Informações do adaptador de armazenamento"] .

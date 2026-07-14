@@ -18,6 +18,7 @@ Revise os requisitos de infraestrutura e design de rede recomendados para implan
 
 
 
+[[infrastructure-requirements]]
 == Requisitos de infraestrutura
 
 Certifique-se de que os seguintes componentes e configurações estejam instalados.
@@ -29,6 +30,7 @@ Certifique-se de que os seguintes componentes e configurações estejam instalad
 
 
 
+[[recommended-iscsi-network-design]]
 == Projeto de rede iSCSI recomendado
 
 Você deve configurar projetos de rede totalmente redundantes para iSCSI.  O diagrama a seguir ilustra um exemplo de configuração redundante.  Ele fornece tolerância a falhas para sistemas de armazenamento, switches, adaptadores de rede e sistemas host.  Para obter informações adicionais, consulte o NetApplink:https://docs.netapp.com/us-en/ontap/san-config/index.html["Referência de configuração SAN"^] .
@@ -44,6 +46,7 @@ NOTE: Em situações em que vários adaptadores VMkernel são configurados na me
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Após revisar os requisitos de implantação,link:vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html["criar o SVM e os LIFs"] .

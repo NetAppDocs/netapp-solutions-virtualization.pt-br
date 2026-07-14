@@ -18,6 +18,7 @@ OpenNebula é uma plataforma de gerenciamento de nuvem open-source para gerencia
 
 
 
+[[overview]]
 == Visão geral
 
 OpenNebula fornece um conjunto abrangente de recursos para gerenciar todo o ciclo de vida de máquinas virtuais e contêineres, incluindo implantação, monitoramento, escalonamento e desativação. Ele suporta uma ampla gama de opções de storage e rede, tornando-o flexível para diversos casos de uso.
@@ -32,6 +33,7 @@ OpenNebula possui uma arquitetura modular que permite fácil integração com fe
 
 
 
+[[frontend-user-interface]]
 == Interface de usuário do frontend
 
 OpenNebula fornece uma interface de usuário baseada na Web chamada Sunstone, que permite aos usuários gerenciar suas máquinas virtuais e contêineres com facilidade. A interface é intuitiva e amigável, facilitando a navegação e a execução de tarefas tanto para administradores quanto para usuários finais. Por padrão, ela é executada na porta 2616. Os dados persistentes são armazenados em um banco de dados de backend, que pode ser SQLite (padrão para cargas de trabalho pequenas) ou MySQL/MariaDB (para ambientes de produção). Múltiplas instâncias de servidores frontend podem ser implantadas para garantir alta disponibilidade e balanceamento de carga.
@@ -46,6 +48,7 @@ Os recursos de federação permitem que várias instâncias do OpenNebula (Zonas
 
 
 
+[[compute]]
 == Calcular
 
 OpenNebula suporta KVM para máquinas virtuais e LXC para contêineres Linux. Os sistemas operacionais suportados incluem Ubuntu, Debian, RHEL e AlmaLinux. As máquinas virtuais podem ser implantadas a partir de modelos pré-configurados ou imagens personalizadas. Um conjunto de máquinas virtuais (serviço) também pode ser implantado usando modelos de serviço. OneFlow permite definir e gerenciar aplicações de múltiplas camadas compostas por várias máquinas virtuais interconectadas. OneGate possibilita a comunicação com o backend do OpenNebula a partir das máquinas virtuais, permitindo recursos avançados de monitoramento e gerenciamento.
@@ -75,6 +78,7 @@ OpenNebula suporta NVIDIA vGPU e MIG (Multi Instance GPU) para máquinas virtuai
 
 
 
+[[storage]]
 == Armazenar
 
 OpenNebula fornece quatro tipos de datastores para gerenciar recursos de storage: System, Image, File e Backup datastores. System datastores são usados para armazenar os discos de máquina virtual e arquivos de configuração. Image datastores são usados para armazenar imagens de máquina virtual, ISOs e discos de dados. File datastores são usados para armazenar arquivos que podem ser acessados por máquinas virtuais. Backup datastores são usados para armazenar backups de máquinas virtuais e seus dados.
@@ -102,6 +106,7 @@ O driver Trident CSI é utilizado para criar volumes persistentes em clusters Ku
 
 
 
+[[network]]
 == Rede
 
 OpenNebula se integra à infraestrutura de rede existente para fornecer recursos de rede para máquinas virtuais e contêineres. Ele suporta vários modelos de rede, incluindo bridge Linux, VLAN 802.1Q, VXLAN e redes Open vSwitch. Para rede do tipo VPC, o VXLAN com EVPN pode ser usado para isolar redes de clientes.
@@ -120,6 +125,7 @@ Roteadores virtuais podem ser implementados para fornecer serviços de roteament
 
 
 
+[[monitoring-and-operations]]
 == Monitoramento e operações
 
 OpenNebula inclui um sistema de monitoramento abrangente que fornece informações em tempo real sobre o desempenho e a integridade da infraestrutura de nuvem. Ele coleta métricas de hipervisores, máquinas virtuais, armazenamento e componentes de rede, permitindo que os administradores monitorem a utilização de recursos e identifiquem possíveis problemas.
@@ -142,6 +148,7 @@ https://github.com/OpenNebula/one-swap["Ferramenta OneSwap"]permite migrar máqu
 
 
 
+[[data-protection]]
 == Proteção de Dados
 
 OpenNebula fornece suporte para backup usando rsync, restic e Veeam. A integração com Veeam está disponível apenas na edição Enterprise. Os datastores de backup são usados para armazenar backups de máquinas virtuais e seus dados. Os trabalhos de backup podem ser agendados para serem executados em intervalos específicos, garantindo que as máquinas virtuais sejam regularmente copiadas.

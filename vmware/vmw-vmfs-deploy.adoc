@@ -18,6 +18,7 @@ As soluções e ofertas de armazenamento da NetApp permitem que os clientes apro
 
 
 
+[[introduction]]
 == Introdução
 
 Cargas de trabalho virtualizadas são móveis.  Portanto, os administradores usam o VMware Storage vMotion para mover VMs entre os repositórios de dados VMware Virtual Machine File System (VMFS), NFS ou vVols , todos residindo no mesmo sistema de armazenamento e, assim, explorar diferentes abordagens de armazenamento se usarem um sistema All-Flash ou usarem os modelos ASA mais recentes com inovação SAN para maior eficiência de custos.
@@ -33,12 +34,14 @@ A mensagem principal aqui é que a migração para o ONTAP melhora a experiênci
 
 
 
+[[rightsize-and-optimize]]
 == Redimensione e otimize
 
 Com as mudanças iminentes no licenciamento, as organizações estão abordando proativamente o potencial aumento no Custo Total de Propriedade (TCO).  Eles estão otimizando estrategicamente sua infraestrutura VMware por meio de gerenciamento agressivo de recursos e dimensionamento correto para melhorar a utilização de recursos e simplificar o planejamento de capacidade.  Por meio do uso eficaz de ferramentas especializadas, as organizações podem identificar e recuperar recursos desperdiçados de forma eficiente, reduzindo subsequentemente as contagens de núcleos e as despesas gerais de licenciamento.  É importante destacar que muitas organizações já estão integrando essas práticas em suas avaliações de nuvem, demonstrando como esses processos e ferramentas efetivamente mitigam preocupações de custo em ambientes locais e eliminam despesas desnecessárias de migração para hipervisores alternativos.
 
 
 
+[[tco-estimator]]
 === Estimador de TCO
 
 A NetApp criou um estimador de TCO simples que serviria de trampolim para iniciar essa jornada de otimização.  O estimador de TCO usa RVtools ou métodos de entrada manual para projetar facilmente quantos hosts são necessários para a implantação fornecida e calcular a economia para otimizar a implantação usando sistemas de armazenamento NetApp ONTAP .  Tenha em mente que este é o trampolim.
@@ -52,6 +55,7 @@ image:vmfs-deploy-001.png["Figura mostrando diálogo de entrada/saída ou repres
 
 
 
+[[cloud-insights]]
 === Cloud Insights
 
 Depois que o estimador mostrar as economias possíveis (o que será o caso para qualquer organização), será hora de analisar profundamente os perfis de E/S da carga de trabalho em máquinas virtuais usando métricas em tempo real.  Para isso, a NetApp fornece o Cloud Insights.  Ao fornecer análises detalhadas e recomendações para recuperação de VM, o Cloud Insights pode ajudar as empresas a tomar decisões informadas sobre a otimização de seu ambiente de VM.  Ele pode identificar onde os recursos podem ser recuperados ou os hosts desativados com impacto mínimo na produção, ajudando as empresas a navegar pelas mudanças trazidas pela aquisição da VMware pela Broadcom de maneira estratégica e ponderada.  Em outras palavras, o Cloud Insight ajuda as empresas a eliminar a emoção da decisão.  Em vez de reagir às mudanças com pânico ou frustração, eles podem usar os insights fornecidos pela ferramenta Cloud Insights para tomar decisões racionais e estratégicas que equilibrem a otimização de custos com a eficiência operacional e a produtividade.
@@ -69,12 +73,14 @@ Com a NetApp, dimensione corretamente seus ambientes virtualizados e introduza d
 
 
 
+[[netapp-ontap-tools-for-vmware-vsphere]]
 == Ferramentas NetApp ONTAP para VMware vSphere
 
 Para aprimorar e simplificar ainda mais a integração do VMware, a NetApp oferece diversas ferramentas offtap que podem ser usadas com o NetApp ONTAP e o VMware vSphere para gerenciar ambientes virtualizados com eficiência.  Esta seção se concentrará nas ferramentas ONTAP para VMware.  As ONTAP tools for VMware vSphere 10 fornecem um conjunto abrangente de ferramentas para gerenciamento do ciclo de vida da máquina virtual, simplificando o gerenciamento de armazenamento, aprimorando recursos de eficiência, melhorando a disponibilidade e reduzindo custos de armazenamento e sobrecarga operacional.  Essas ferramentas integram-se perfeitamente ao ecossistema VMware, facilitando o provisionamento de armazenamento de dados e oferecendo proteção básica para máquinas virtuais.  A versão 10.x das ONTAP tools for VMware vSphere compreende microsserviços escaláveis horizontalmente e orientados a eventos, implantados como um Open Virtual Appliance (OVA), seguindo as práticas recomendadas para provisionamento de armazenamentos de dados e otimização das configurações do host ESXi para ambientes de armazenamento em bloco e NFS.  Considerando esses benefícios, o OTV é recomendado como uma prática recomendada para uso com sistemas que executam software ONTAP .
 
 
 
+[[getting-started]]
 === Começando
 
 Antes de implantar e configurar ferramentas ONTAP para VMware, certifique-se de que os pré-requisitos sejam atendidos.  Uma vez concluído, implante uma configuração de nó único.
@@ -84,6 +90,7 @@ NOTE: Três endereços IP são necessários para implantação: um endereço IP 
 
 
 
+[[steps]]
 === Passos
 
 . Efetue login no servidor vSphere.
@@ -157,6 +164,7 @@ Consulte estes links para provisionamento de armazenamento de dados vVol, FC, NV
 
 
 
+[[vaai-offloading]]
 == Descarregamento VAAI
 
 Os primitivos VAAI são usados em operações de rotina do vSphere, como criar, clonar, migrar, iniciar e parar VMs.  Essas operações podem ser executadas por meio do cliente vSphere para simplificar ou pela linha de comando para criação de scripts ou para obter um tempo mais preciso.  O VAAI para SAN tem suporte nativo do ESX.  O VAAI está sempre habilitado em sistemas de armazenamento NetApp suportados e fornece suporte nativo para as seguintes operações VAAI no armazenamento SAN:
@@ -187,6 +195,7 @@ Veja orientações detalhadas paralink:https://docs.netapp.com/us-en/ontap-apps-
 
 
 
+[[data-protection]]
 == Proteção de Dados
 
 Fazer backup eficiente de VMs no armazenamento de dados VMFS e recuperá-las rapidamente estão entre as principais vantagens do ONTAP para vSphere.  Ao integrar-se ao vCenter, o software NetApp SnapCenter software oferece uma ampla gama de recursos de backup e recuperação para VMs.  Ele fornece operações de backup e restauração rápidas, com eficiência de espaço, consistentes em caso de falhas e consistentes com VMs, armazenamentos de dados e VMDKs.  Ele também funciona com o SnapCenter Server para dar suporte a operações de backup e restauração baseadas em aplicativos em ambientes VMware usando plug-ins específicos do aplicativo SnapCenter .  O aproveitamento de cópias de instantâneo permite fazer cópias rápidas da VM ou do armazenamento de dados sem qualquer impacto no desempenho e usar a tecnologia NetApp SnapMirror ou NetApp SnapVault para proteção de dados externa de longo prazo.
@@ -210,6 +219,7 @@ Etapas de alto nível para implantação e configuração:
 
 
 
+[[setting-up-snapcenter-plug-in-for-vmware-for-vms]]
 == Configurando o plug-in SnapCenter para VMware para VMs
 
 Para proteger VMs e datastores iSCSI que as hospedam, o SnapCenter Plug-in para VMware deve ser implantado.  É uma importação OVF simples.
@@ -233,10 +243,12 @@ image:vmfs-deploy-021.png["Figura mostrando diálogo de entrada/saída ou repres
 
 
 
+[[add-storage-create-policy-and-resource-group]]
 == Adicionar armazenamento, criar política e grupo de recursos
 
 
 
+[[adding-storage-system]]
 === Adicionando sistema de armazenamento
 
 O próximo passo é adicionar o sistema de armazenamento.  O ponto de extremidade de gerenciamento de cluster ou o IP do ponto de extremidade de administração da máquina virtual de armazenamento (SVM) deve ser adicionado como um sistema de armazenamento para fazer backup ou restaurar VMs.  Adicionar armazenamento permite que o SnapCenter Plug-in para VMware reconheça e gerencie operações de backup e restauração no vCenter.
@@ -257,6 +269,7 @@ image:vmfs-deploy-023.png["Figura mostrando diálogo de entrada/saída ou repres
 
 
 
+[[create-backup-policy]]
 === Criar política de backup
 
 Uma estratégia abrangente de backup inclui fatores como quando, o que fazer backup e por quanto tempo manter os backups.  Os snapshots podem ser disparados a cada hora ou diariamente para fazer backup de armazenamentos de dados inteiros.  Essa abordagem não apenas captura os armazenamentos de dados, mas também permite fazer backup e restaurar as VMs e VMDKs dentro desses armazenamentos de dados.
@@ -288,6 +301,7 @@ Depois que a política for criada, o próximo passo é criar o grupo de recursos
 
 
 
+[[create-resource-group]]
 === Criar grupo de recursos
 
 Um grupo de recursos é o contêiner para VMs e armazenamentos de dados que precisam ser protegidos.  Os recursos podem ser adicionados ou removidos dos grupos de recursos a qualquer momento.
@@ -323,6 +337,7 @@ image:vmfs-deploy-029.png["Figura mostrando diálogo de entrada/saída ou repres
 
 
 
+[[back-up-resource-groups]]
 == Fazer backup de grupos de recursos
 
 Agora é hora de acionar um backup.  As operações de backup são executadas em todos os recursos definidos em um grupo de recursos.  Se um grupo de recursos tiver uma política anexada e um agendamento configurado, os backups ocorrerão automaticamente de acordo com o agendamento.
@@ -343,6 +358,7 @@ Monitore o progresso da operação selecionando Tarefas recentes na parte inferi
 
 
 
+[[restore-vms-from-backup]]
 == Restaurar VMs a partir de backup
 
 O plug-in SnapCenter para VMware permite restaurar máquinas virtuais (VMs) para o vCenter.  Ao restaurar uma VM, ela pode ser restaurada para o armazenamento de dados original montado no host ESXi original, que substituirá o conteúdo existente pela cópia de backup selecionada, ou uma VM excluída/renomeada pode ser restaurada a partir de uma cópia de backup (a operação substitui os dados nos discos virtuais originais).  Para executar a restauração, siga os passos abaixo:
@@ -392,6 +408,7 @@ Veja orientações detalhadas paralink:https://docs.netapp.com/us-en/ontap-apps-
 
 
 
+[[ransomware-protection]]
 == Proteção contra ransomware
 
 Uma das maneiras mais eficazes de proteção contra ataques de ransomware é implementar medidas de segurança em várias camadas.  Cada máquina virtual que reside em um armazenamento de dados hospeda um sistema operacional padrão.  Garanta que os conjuntos de produtos antimalware dos servidores corporativos estejam instalados e atualizados regularmente, o que é um componente essencial da estratégia de proteção contra ransomware em várias camadas.  Junto com isso, implemente a proteção de dados aproveitando a tecnologia de snapshot da NetApp para garantir uma recuperação rápida e confiável de um ataque de ransomware.
@@ -406,6 +423,7 @@ Para saber mais sobre o MAV e como configurar seus recursos de proteção, consu
 
 
 
+[[migration]]
 == Migração
 
 Muitas organizações de TI estão adotando uma abordagem de nuvem híbrida em primeiro lugar à medida que passam por uma fase de transformação.  Os clientes estão avaliando sua infraestrutura de TI atual e movendo suas cargas de trabalho para a nuvem com base nessa avaliação e descoberta.  Os motivos para migrar para a nuvem variam e podem incluir fatores como elasticidade e explosão, saída do data center, consolidação do data center, cenários de fim de vida útil, fusões, aquisições e muito mais.  O raciocínio de migração de cada organização depende de suas prioridades comerciais específicas, sendo a otimização de custos a maior prioridade.  Selecionar o armazenamento em nuvem certo é crucial ao migrar para a nuvem híbrida, pois ele libera o poder da implantação e da elasticidade da nuvem.
@@ -419,16 +437,19 @@ Ao integrar serviços 1P fornecidos pela NetApp em cada hiperescalar, as organiz
 
 
 
+[[disaster-recovery]]
 == Recuperação de desastres
 
 
 
+[[disaster-recovery-between-on-premises-sites]]
 === Recuperação de desastres entre sites locais
 
 Para obter mais detalhes, visite link:https://docs.netapp.com/us-en/netapp-solutions-cloud/vmware/vmw-hybrid-dr-vmfs.html["NetApp Disaster Recovery para datastores VMFS"^]
 
 
 
+[[disaster-recovery-between-on-premises-and-vmware-cloud-in-any-hyperscalar]]
 === Recuperação de desastres entre o ambiente local e o VMware Cloud em qualquer hiperescalar
 
 Para os clientes que buscam usar o VMware Cloud em qualquer hiperescalar como destino de recuperação de desastres, os datastores com armazenamento ONTAP (Azure NetApp Files, FSx ONTAP, volumes do Google Cloud NetApp ) podem ser usados para replicar dados locais usando qualquer solução de terceiros validada que forneça capacidade de replicação de VM.  Ao adicionar datastores com armazenamento ONTAP , será possível uma recuperação de desastres com custo otimizado no destino, com menos hosts ESXi.  Isso também permite desativar um site secundário no ambiente local, possibilitando economias de custos significativas.
@@ -440,6 +461,7 @@ Para os clientes que buscam usar o VMware Cloud em qualquer hiperescalar como de
 
 
 
+[[conclusion]]
 == Conclusão
 
 Esta solução demonstra a abordagem ideal para usar as tecnologias ONTAP SAN e as ferramentas Offtap para fornecer serviços essenciais de TI para empresas agora e no futuro.  Essas vantagens são particularmente benéficas para ambientes virtualizados que executam o VMware vSphere em uma configuração SAN.  Com a flexibilidade e a escalabilidade dos sistemas de armazenamento da NetApp , as organizações podem estabelecer uma base para atualizar e ajustar sua infraestrutura, permitindo que elas atendam às necessidades comerciais em constante mudança ao longo do tempo.  Este sistema pode lidar com cargas de trabalho atuais e aumentar a eficiência da infraestrutura, reduzindo assim os custos operacionais e preparando-se para cargas de trabalho futuras.

@@ -18,6 +18,7 @@ Explore a integração do OpenShift Virtualization com o NetApp por meio de uma 
 
 
 
+[[vm-management-and-operations]]
 == Gerenciamento e operações de VM
 
 .Criando uma VM no OpenShift Virtualization usando armazenamento iSCSI
@@ -32,6 +33,7 @@ video::bac58645-dd75-4e92-b5fe-b12b015dc199[panopto,width=360]
 video::27773297-a80c-473c-ab41-b01200fa009a[panopto,width=360]
 
 
+[[data-protection-and-disaster-recovery]]
 == Proteção de dados e recuperação de desastres
 
 .Protegendo uma VM usando Trident Protect
@@ -42,6 +44,7 @@ video::ae4bdcf7-b344-4f19-89ed-b2d500f94efd[panopto,width=360]
 video::f2a8fa24-2971-4cdc-9bbb-b1f1007032ea[panopto,width=360]
 
 
+[[storage-integration-and-management]]
 == Integração e gerenciamento de armazenamento
 
 .Instalando o Trident usando o operador Trident certificado pela Red Hat
@@ -52,6 +55,7 @@ video::2e2c6fdb-4651-46dd-b028-b1ed00d37da3[panopto,width=360]
 video::d3eacf8c-888f-4028-a695-b1ed00d28dee[panopto,width=360]
 
 
+[[automation-and-monitoring]]
 == Automação e monitoramento
 
 .Automação Ansible para implantar o Trident e criar uma classe de armazenamento no cluster OpenShift

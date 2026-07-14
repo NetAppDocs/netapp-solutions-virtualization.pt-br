@@ -18,6 +18,7 @@ Exclua recursos de backup e restauração para VMs no OpenShift Virtualization u
 
 
 
+[[deleting-a-backup]]
 == Excluindo um backup
 
 Você pode excluir um CR de backup sem excluir os dados do Object Storage usando a ferramenta OC CLI.
@@ -36,6 +37,7 @@ velero backup delete <backup_CR_name> -n <velero_namespace>
 ....
 
 
+[[deleting-a-restore]]
 == Excluindo uma restauração
 
 Você pode excluir o CR de restauração usando o Velero CLI

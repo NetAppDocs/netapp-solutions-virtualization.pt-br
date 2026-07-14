@@ -18,12 +18,14 @@ A NetApp oferece plataformas personalizadas para ambientes VMware, incluindo FAS
 
 
 
+[[introduction]]
 == Introdução
 
 Essas ofertas melhoram o desempenho, a escalabilidade e o gerenciamento de dados para o administrador do VMware.  Além disso, o ONTAP é utilizado nessas plataformas, oferecendo uma solução de gerenciamento de dados unificada, escalável e eficiente que oferece suporte a vários protocolos de armazenamento, melhora a proteção de dados e otimiza o desempenho para diversas cargas de trabalho.
 
 
 
+[[common-benefits-across-netapp-platforms]]
 == Benefícios comuns em todas as plataformas NetApp
 
 * *Integração com VMware:* todas as plataformas NetApp oferecem integrações profundas com o VMware, aumentando a eficiência do ambiente de armazenamento.  Soluções locais podem aproveitar plug-ins, APIs, VAAI e VASA para melhorar o gerenciamento geral de dados e, ao mesmo tempo, aumentar a versatilidade da infraestrutura.
@@ -42,6 +44,7 @@ Observação: as soluções de nuvem da NetApp podem ter recursos limitados pelo
 
 
 
+[[netapp-asa-all-san-array-benefits]]
 == Benefícios do NetApp ASA (All SAN Array)
 
 * *Otimizado para SAN:* Projetado especificamente para cargas de trabalho SAN, fornecendo alto desempenho e baixa latência para ambientes VMware que dependem de armazenamento em bloco.
@@ -60,6 +63,7 @@ image:vmware-asa-002.png["largura=800"]
 
 
 
+[[storage-protocol-support]]
 === Suporte ao protocolo de armazenamento
 
 O ASA oferece suporte a todos os protocolos SAN padrão, incluindo iSCSI, Fibre Channel (FC), Fibre Channel sobre Ethernet (FCoE) e NVME sobre fabrics.
@@ -78,6 +82,7 @@ Para obter orientações de design sobre NVMe, consulte https://docs.netapp.com/
 
 
 
+[[active-active-technology]]
 === Tecnologia ativo-ativa
 
 Os NetApp All-Flash SAN Arrays permitem caminhos ativos-ativos por meio de ambos os controladores, eliminando a necessidade de o sistema operacional do host esperar que um caminho ativo falhe antes de ativar o caminho alternativo.  Isso significa que o host pode utilizar todos os caminhos disponíveis em todos os controladores, garantindo que os caminhos ativos estejam sempre presentes, independentemente de o sistema estar em estado estável ou passando por uma operação de failover do controlador.
@@ -92,6 +97,7 @@ Para obter informações detalhadas, consulte o https://www.netapp.com/asa/["Pá
 
 
 
+[[netapp-aff-all-flash-fas-benefits]]
 == Benefícios do NetApp AFF (All Flash FAS)
 
 * *Desempenho extremo:* utiliza armazenamento all-flash para fornecer latência abaixo de um milissegundo e alto IOPS, ideal para cargas de trabalho VMware sensíveis ao desempenho.
@@ -106,6 +112,7 @@ Para obter mais informações sobre os conjuntos de armazenamento NetApp C-Serie
 
 
 
+[[netapp-fas-fabric-attached-storage-benefits]]
 == Benefícios do NetApp FAS (Fabric-Attached Storage)
 
 * *Arquitetura de armazenamento unificada:* Suporta protocolos SAN (nível de bloco) e NAS (nível de arquivo), tornando-o versátil para diversas cargas de trabalho do VMware.
@@ -114,6 +121,7 @@ Para obter mais informações sobre os conjuntos de armazenamento NetApp C-Serie
 
 
 
+[[cloud-solutions-benefits]]
 == Benefícios das Soluções em Nuvem
 
 * *Gerenciamento de dados nativos da nuvem:* utiliza ofertas nativas da nuvem para melhorar a mobilidade de dados, backup e recuperação de desastres para cargas de trabalho do VMware.  O suporte para armazenamento de dados NFS nativo para cargas de trabalho em nuvem VMware é o seguinte:
@@ -128,6 +136,7 @@ Para obter mais informações sobre os conjuntos de armazenamento NetApp C-Serie
 
 
 
+[[summary]]
 == Resumo
 
 Em resumo, as plataformas ONTAP e NetApp oferecem um conjunto abrangente de benefícios para cargas de trabalho VMware, melhorando o desempenho, a escalabilidade e o gerenciamento de dados.  Embora os recursos comuns forneçam uma base sólida, cada plataforma oferece benefícios diferenciados adaptados às necessidades específicas, seja armazenamento econômico com FAS, alto desempenho com AFF, desempenho otimizado de SAN com ASA ou flexibilidade de nuvem híbrida com ofertas de nuvem da NetApp .

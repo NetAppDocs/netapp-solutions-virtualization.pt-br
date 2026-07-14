@@ -20,6 +20,7 @@ O Shift Toolkit permite a migração de máquinas virtuais entre plataformas de 
 
 
 
+[[before-you-begin]]
 == Antes de começar
 
 Verifique se os seguintes pré-requisitos foram atendidos antes de iniciar a migração.
@@ -220,6 +221,7 @@ NOTE: O script de preparação utiliza o pacote .msi para instalar os drivers e 
 
 
 
+[[step-1-add-the-destination-site-openshift]]
 == Passo 1: Adicione o site de destino (OpenShift)
 
 Adicione o ambiente de virtualização OpenShift de destino ao Shift Toolkit.
@@ -282,6 +284,7 @@ NOTE: O volume de origem e o de destino serão os mesmos, pois a conversão do f
 
 
 
+[[step-2-create-resource-groups]]
 == Etapa 2: Criar grupos de recursos
 
 Organize as VMs em grupos de recursos para preservar a ordem de inicialização e as configurações de atraso de inicialização.
@@ -358,6 +361,7 @@ O grupo de recursos foi criado e está pronto para a configuração do modelo.
 
 
 
+[[step-3-create-a-migration-blueprint]]
 == Etapa 3: Criar um plano de migração
 
 Crie um plano para definir a migração, incluindo mapeamento de plataformas, configuração de rede e configurações de máquinas virtuais.
@@ -484,6 +488,7 @@ image::shift-toolkit-113.png[Projeto pronto para migração]
 ====
 
 
+[[step-4-execute-the-migration]]
 == Etapa 4: Execute a migração
 
 Inicie o fluxo de trabalho de migração para converter máquinas virtuais do VMware ESXi para a virtualização OpenShift.
@@ -556,6 +561,7 @@ NOTE: A opção de verificação pode ser exercida no projeto assim que a tarefa
 
 
 
+[[use-migration-toolkit-for-virtualization-with-shift-toolkit-scripted-approach]]
 == Utilize o Migration Toolkit para virtualização com o Shift Toolkit (abordagem por script)
 
 Esta seção descreve como usar o Migration Toolkit for Virtualization (MTV) com o NetApp Shift Toolkit para uma migração perfeita para o Red Hat OpenShift Virtualization.
@@ -708,6 +714,7 @@ Após a conclusão da migração, o volume clone precisa ser desanexado. O méto
 
 
 
+[[video-demonstration]]
 == Demonstração em vídeo
 
 O vídeo a seguir demonstra o processo descrito nesta solução.

@@ -17,6 +17,7 @@ Prepare-se para instalar o NetApp Shift Toolkit, certificando-se de que seu ambi
 
 
 
+[[before-you-begin]]
 == Antes de começar
 
 Verifique se seu ambiente atende aos seguintes requisitos:
@@ -32,6 +33,7 @@ NOTE: Instale o Shift Toolkit em uma máquina virtual dedicada para habilitar o 
 
 
 
+[[select-an-installation-package]]
 == Selecione um pacote de instalação
 
 O Shift Toolkit está disponível em dois pacotes de instalação da empresa. link:https://mysupport.netapp.com/site/tools/tool-eula/netapp-shift-toolkit["Caixa de ferramentas NetApp"]:

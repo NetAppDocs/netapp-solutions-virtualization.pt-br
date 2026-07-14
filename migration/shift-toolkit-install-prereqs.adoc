@@ -16,6 +16,7 @@ Verifique se seu ambiente atende aos requisitos de hardware, conectividade e arm
 
 
 
+[[hardware-requirements]]
 == Requisitos de hardware
 
 Certifique-se de que o servidor Shift Toolkit atenda aos seguintes requisitos mínimos de hardware:
@@ -27,6 +28,7 @@ Certifique-se de que o servidor Shift Toolkit atenda aos seguintes requisitos m�
 
 
 
+[[connectivity-requirements]]
 == Requisitos de conectividade
 
 Verifique se os seguintes requisitos de conectividade são atendidos:
@@ -40,12 +42,14 @@ Verifique se os seguintes requisitos de conectividade são atendidos:
 
 
 
+[[ontap-storage-configurations]]
 == Configurações de armazenamento ONTAP
 
 Configure os componentes de armazenamento do ONTAP , incluindo SVMs, qtrees e compartilhamentos CIFS, para dar suporte às migrações do Shift Toolkit.
 
 
 
+[[create-a-new-svm-recommended]]
 === Criar uma nova SVM (recomendado)
 
 Embora o Shift Toolkit permita o uso de uma SVM existente, a NetApp recomenda a criação de uma SVM dedicada para operações de migração.
@@ -66,6 +70,7 @@ NOTE: Para migração bidirecional entre VMware e Hyper-V, habilite os protocolo
 
 
 
+[[qtree-requirements]]
 === Requisitos do Qtree
 
 Crie qtrees no volume que hospedará as VMs convertidas. As Qtrees segregam e armazenam arquivos de disco convertidos com base no hipervisor de destino.
@@ -94,6 +99,7 @@ NOTE: Para virtualização OpenShift, os arquivos QCOW2 convertidos podem, opcio
 
 
 
+[[cifs-share-requirements]]
 === Requisitos de compartilhamento CIFS
 
 Para migrações do Hyper-V, crie um compartilhamento CIFS para armazenar os dados da VM convertida. Tanto o compartilhamento NFS (VMs de origem) quanto o compartilhamento CIFS (VMs convertidas) devem residir no mesmo volume.

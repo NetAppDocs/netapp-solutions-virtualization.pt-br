@@ -18,6 +18,7 @@ Implante, converta ou atualize ambientes do VMware Cloud Foundation 9 com o ONTA
 
 
 
+[[deploy-a-new-vcf-9-instance]]
 == Implantar uma nova instância do VCF 9
 
 Use este fluxo de trabalho para implantar um ambiente limpo do VMware Cloud Foundation (VCF) 9.0.  Após a implantação, você pode migrar cargas de trabalho ou começar a provisionar aplicativos e fornecer serviços de infraestrutura.
@@ -127,6 +128,7 @@ Você pode reutilizar essas etapas sempre que criar um novo domínio de carga de
 
 
 
+[[converge-existing-components-into-vcf-9]]
 == Convergir componentes existentes no VCF 9
 
 Talvez você já tenha alguns componentes da frota VCF e prefira reutilizá-los.  Ao reutilizar uma instância do vCenter, os armazenamentos de dados são frequentemente provisionados com ferramentas ONTAP , que podem servir como armazenamento principal para VCF.
@@ -147,6 +149,7 @@ Talvez você já tenha alguns componentes da frota VCF e prefira reutilizá-los.
 
 
 
+[[upgrade-an-existing-vcf-environment-to-vcf-9]]
 == Atualizar um ambiente VCF existente para VCF 9
 
 Atualize uma implantação anterior do VCF para a versão 9.0 usando o processo de atualização padrão.  O resultado é um ambiente VCF executando a versão 9.0 com domínios de gerenciamento e carga de trabalho atualizados.

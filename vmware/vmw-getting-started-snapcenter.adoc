@@ -18,6 +18,7 @@ O SnapCenter Plug-in for VMware vSphere permite operações rápidas de backup e
 
 
 
+[[documentation-resources]]
 == Recursos de documentação
 
 Consulte os seguintes recursos de documentação para obter informações detalhadas.
@@ -27,6 +28,7 @@ Consulte os seguintes recursos de documentação para obter informações detalh
 
 
 
+[[solution-resources]]
 == Recursos da solução
 
 Consulte a seguinte solução de backup 3-2-1 com o SnapCenter Plug-in for VMware vSphere e backup e recuperação de VMs da NetApp .
@@ -37,6 +39,7 @@ Blog Tech ONTAP :link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/3-2-1-Dat
 
 
 
+[[video-resources]]
 == Recursos de vídeo
 
 .SnapCenter Plug-in for VMware vSphere - Pré-requisitos da solução

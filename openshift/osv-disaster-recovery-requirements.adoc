@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-disaster-recovery-requirements.html 
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization 
+summary: Virtualização Red Hat OpenShift 
+---
+= Pré-requisitos do Trident Protect/AppMirror para recuperação de desastres em OpenShift Virtualization
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta seção fornece informações sobre os pré-requisitos para usar NetApp Trident Protect e AppMirror para a recuperação de desastres de cargas de trabalho de virtualização do OpenShift. Isso inclui as configurações de cluster necessárias, os requisitos de storage e as etapas de instalação para configurar o Trident Protect e o AppMirror para uma recuperação eficaz de desastres de máquinas virtuais em execução na virtualização do OpenShift.
+
+
+
+[[prerequisites]]
+== Pré-requisitos
+
+. Um cluster Red Hat OpenShift com OpenShift Virtualization instalado e configurado. Para obter instruções de instalação, consulte o link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/installation_overview/index["documentação aqui"].
+. Dois sistemas de storage NetApp ONTAP com um SVM configurado em cada um, para fornecer storage para os clusters OpenShift ativo e de recuperação de desastres. Cada SVM deve ter pelo menos uma LIF de gerenciamento e uma LIF de dados configuradas e acessíveis a partir do cluster OpenShift correspondente.
+. O emparelhamento de clusters e o emparelhamento de SVMs configurados entre os dois sistemas ONTAP para permitir a replicação de dados do SVM do cluster de origem para o SVM do cluster de destino. Para obter instruções sobre como configurar o emparelhamento de clusters e o emparelhamento de SVMs, consulte o link:https://docs.netapp.com/us-en/ontap/peering/index.html["Documentação sobre peering de clusters ONTAP aqui"].
+. NetApp Trident instalado e configurado no cluster OpenShift para provisionar storage persistente a partir do ONTAP SVM. Para instruções de instalação, consulte o link:https://docs.netapp.com/us-en/trident/["Documentação do Trident aqui"].
+. Configuração de backend Trident criada para a ONTAP SVM e uma StorageClass configurada no cluster OpenShift para usar esse backend Trident como provisionador. Para instruções sobre como criar uma configuração de backend Trident e StorageClass, consulte o link:https://docs.netapp.com/us-en/trident/trident-use/backends.html["Documentação de configuração do backend Trident aqui"].
+. Acesso de administrador do cluster ao cluster OpenShift e acesso de administrador ao sistema de storage ONTAP para realizar as configurações necessárias.
+. Uma estação de trabalho administrativa com  `tridentctl` e  `oc` ferramentas instaladas e adicionadas à variável de ambiente $PATH para interagir com o cluster OpenShift e Trident.
+. Recursos de hardware adequados no cluster OpenShift para suportar o operador OpenShift Virtualization e as VMs que serão provisionadas. Para obter mais detalhes sobre os requisitos de recursos, consulte a link:https://docs.openshift.com/container-platform/4.7/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt["documentação aqui"].
+. Opcionalmente, configure regras de posicionamento de nós para OpenShift Virtualization para especificar um subconjunto de nós do cluster para hospedar os operadores, controladores e máquinas virtuais do OpenShift Virtualization. Para obter instruções sobre como configurar regras de posicionamento de nós, consulte o link:https://docs.openshift.com/container-platform/4.7/virt/install/virt-specifying-nodes-for-virtualization-components.html["documentação aqui"].
+. Para o storage que dá suporte à OpenShift Virtualization, é recomendado ter uma StorageClass dedicada que solicite storage de um backend Trident específico, que por sua vez é suportado por uma SVM dedicada. Isso mantém um nível de multitenancy em relação aos dados fornecidos para cargas de trabalho baseadas em máquinas virtuais no cluster OpenShift.
+. Uma VM deve estar disponível no OpenShift Virtualization.  Para obter detalhes sobre como implantar uma nova VM ou migrar uma VM existente para o OpenShift Virtualization, consulte a seção apropriada na documentação.
+
+
+
+
+[[install-netapp-trident-protect-for-openshift-virtualization]]
+== Instale NetApp Trident Protect para OpenShift Virtualização
+
+Para habilitar os recursos de recuperação de desastres para cargas de trabalho de virtualização do OpenShift usando o NetApp Trident Protect, você precisa ter o Trident Protect instalado e configurado no cluster OpenShift. O Trident Protect pode ser instalado usando um Helm chart.
+
+
+NOTE: A instalação do Trident Protect deve ser feita após a instalação do Trident.
+
+Para obter instruções completas de instalação, consulte o link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html["Documentação do Trident Protect aqui"].
+
+.Mostrar exemplo
+[%collapsible]
+====
+image:osv-disaster-recovery-001.png["Instalação do Trident Protect"]
+
+image:osv-disaster-recovery-002.png["Instalação do Trident Protect concluída"]
+
+====

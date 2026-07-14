@@ -18,6 +18,7 @@ Descubra como a NetApp e a VMware otimizam as configurações de multicloud híb
 
 
 
+[[introduction]]
 == Introdução
 
 Essa abordagem permite que as empresas migrem facilmente cargas de trabalho, otimizem o uso de recursos e mantenham operações consistentes em ambos os ambientes.
@@ -26,6 +27,7 @@ Para obter mais informações sobre cenários de nuvem híbrida com VMware e Net
 
 
 
+[[vmware-deployment-scenarios-with-netapp]]
 == Cenários de implantação do VMware com NetApp
 
 Esta seção descreve várias opções de implantação para ambientes VMware em nuvens públicas e locais.  Cada um dos provedores de nuvem oferece suporte a uma pilha VMware Software Defined Data Center (SDDC) e/ou VMware Cloud Foundation (VCF) em suas respectivas ofertas de nuvem pública.

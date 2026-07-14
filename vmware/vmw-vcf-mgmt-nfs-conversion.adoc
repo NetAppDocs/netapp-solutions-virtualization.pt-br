@@ -19,6 +19,7 @@ Quando apropriado, a documentação da VMware é referenciada para obter instru�
 
 
 
+[[step-1-copy-the-vcf-import-tool-and-run-a-precheck]]
 == Etapa 1: Copie a ferramenta de importação VCF e execute uma pré-verificação
 
 Use a Ferramenta de Importação de VCF no dispositivo vCenter para validar se o cluster vSphere está em um estado íntegro para o processo de conversão ou importação de VCF.
@@ -40,6 +41,7 @@ image:../media/vmware-vcf-import-nfs-011.png["ferramenta de importação vcf pr�
 
 
 
+[[step-2-deploy-the-sddc-manager-and-create-the-nsx-deploy-specification]]
 == Etapa 2: implantar o SDDC Manager e criar a especificação de implantação do NSX
 
 Implante o dispositivo SDDC Manager no mesmo cluster vSphere que você planeja converter em um domínio de gerenciamento VCF e, em seguida, crie uma especificação de implantação NSX para o processo de conversão.
@@ -91,6 +93,7 @@ NOTE: Ao implantar um cluster do NSX Manager em uma operação de conversão ou 
 
 
 
+[[step-3-upload-software-to-the-sddc-manager]]
 == Etapa 3: Carregar software no SDDC Manager
 
 Carregue o pacote da Ferramenta de Importação VCF e o pacote de implantação NSX para o Gerenciador SDDC seguindo as instruções na documentação do VMware: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/seed-software-on-sddc-manager.html["Carregue o software necessário para o SDDC Manager Appliance"] .
@@ -99,6 +102,7 @@ Certifique-se de copiar a Ferramenta de Importação VCF e o pacote de implanta�
 
 
 
+[[step-4-convert-the-vsphere-cluster-to-the-vcf-management-domain]]
 == Etapa 4: converter o cluster vSphere para o domínio de gerenciamento VCF
 
 Converta o cluster vSphere para o domínio de gerenciamento VCF seguindo as instruções na documentação do VMware: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html["Converter ou importar o ambiente vSphere para o inventário do SDDC Manager"] .
@@ -122,6 +126,7 @@ TIP: Você pode revisar todas as funções disponíveis da ferramenta de importa
 
 
 
+[[step-5-add-licensing-to-vcf]]
 == Etapa 5: adicionar licenciamento ao VCF
 
 Após concluir a conversão, adicione o licenciamento ao ambiente VCF.
@@ -139,6 +144,7 @@ Após concluir a conversão, adicione o licenciamento ao ambiente VCF.
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 * Para obter mais informações sobre a Ferramenta de Importação VCF, consulte a documentação do VMware:link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/vcf-import-tool-options-and-parameters-admin.html["Opções e parâmetros da ferramenta de importação VCF"] .

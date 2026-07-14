@@ -17,6 +17,7 @@ Execute as seguintes etapas no cluster de domínio de gerenciamento do VCF usand
 
 
 
+[[step-1-deploy-ontap-tools-for-vmware-vsphere]]
 == Etapa 1: implantar ONTAP tools for VMware vSphere
 
 As ONTAP tools for VMware vSphere (OTV) são implantadas como um dispositivo de VM e fornecem uma interface de usuário do vCenter integrada para gerenciar o armazenamento ONTAP .
@@ -84,6 +85,7 @@ image:vmware-vcf-asa-035.png["Personalize o modelo OTV 2"]
 
 
 
+[[step-2-add-a-storage-system]]
 == Etapa 2: adicionar um sistema de armazenamento
 
 Execute as seguintes etapas para adicionar um sistema de armazenamento usando ferramentas ONTAP .
@@ -125,6 +127,7 @@ image:vmware-vcf-asa-017.png["Autorizar certificado de cluster"]
 
 
 
+[[optional-migrate-management-vms-to-the-iscsi-datastore]]
 == Opcional: migrar VMs de gerenciamento para o armazenamento de dados iSCSI
 
 Nos casos em que você preferir usar o armazenamento ONTAP para proteger as VMs de gerenciamento do VCF, use o vMotion para migrar as VMs para o armazenamento de dados iSCSI recém-criado.
@@ -168,6 +171,7 @@ image:vmware-vcf-asa-021.png["Painel de tarefas recentes do cliente vSphere"]
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 * Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consultelink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"^] .

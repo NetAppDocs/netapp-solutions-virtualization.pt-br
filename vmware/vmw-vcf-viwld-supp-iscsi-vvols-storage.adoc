@@ -18,6 +18,7 @@ Configure o armazenamento iSCSI vVols em um domínio de carga de trabalho VI usa
 
 
 
+[[step-1-deploy-ontap-tools-for-vmware-vsphere]]
 == Etapa 1: implantar ONTAP tools for VMware vSphere
 
 Para domínios de carga de trabalho do VI, as ferramentas ONTAP são instaladas no VCF Management Cluster, mas registradas no vCenter associado ao domínio de carga de trabalho do VI.
@@ -87,6 +88,7 @@ image:vmware-vcf-asa-035.png["Personalize o modelo OTV 2"]
 
 
 
+[[step-2-add-a-storage-system]]
 == Etapa 2: adicionar um sistema de armazenamento
 
 Execute as seguintes etapas para adicionar um sistema de armazenamento usando ferramentas ONTAP .
@@ -131,6 +133,7 @@ image:vmware-vcf-asa-017.png["Autorizar certificado de cluster"]
 
 
 
+[[step-3-create-a-storage-capability-profile-in-ontap-tools]]
 == Etapa 3: Crie um perfil de capacidade de armazenamento nas ferramentas ONTAP
 
 Os perfis de capacidade de armazenamento descrevem os recursos fornecidos por um conjunto de armazenamento ou sistema de armazenamento.  Elas incluem definições de qualidade de serviço e são usadas para selecionar sistemas de armazenamento que atendem aos parâmetros definidos no perfil.  Um dos perfis fornecidos pode ser usado ou novos podem ser criados.
@@ -197,6 +200,7 @@ image:vmware-vcf-asa-040.png["Resumo para SCP"]
 
 
 
+[[step-4-create-a-vvols-datastore-in-ontap-tools]]
 == Etapa 4: Crie um armazenamento de dados vVols nas ferramentas ONTAP
 
 Para criar um armazenamento de dados vVols nas ferramentas ONTAP , conclua as seguintes etapas.
@@ -250,6 +254,7 @@ image:vmware-vcf-asa-045.png["Página de resumo"]
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 * Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consultelink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"^] .

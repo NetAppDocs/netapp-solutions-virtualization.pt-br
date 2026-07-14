@@ -15,6 +15,7 @@ Revise os requisitos para converter um cluster vSphere 8 com datastores NetApp O
 
 
 
+[[infrastructure-requirements]]
 == Requisitos de infraestrutura
 
 Certifique-se de que os seguintes componentes e configurações estejam instalados.
@@ -36,6 +37,7 @@ As ONTAP tools for VMware vSphere 10 podem ser instaladas em configurações HA 
 
 
 
+[[additional-resources]]
 == Recursos adicionais
 
 * Para armazenamento suportado e outras considerações para conversão ou importação do vSphere para VCF 5.2, consulte https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/considerations-before-converting-or-importing-existing-vsphere-environments-into-vcf-admin.html["Considerações antes de converter ou importar ambientes vSphere existentes para o VMware Cloud Foundation"] .
@@ -45,6 +47,7 @@ As ONTAP tools for VMware vSphere 10 podem ser instaladas em configurações HA 
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Depois de revisar os requisitos de implantação,link:vmw-vcf-mgmt-fc-deploy.html["implantar ferramentas ONTAP e provisionar o armazenamento de dados FC"] .

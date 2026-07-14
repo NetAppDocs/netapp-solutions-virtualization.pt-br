@@ -22,6 +22,7 @@ Se você é novo no ONTAP, use a Interface do Gerenciador de Sistemas para concl
 
 
 
+[[storage-administrator-tasks]]
 == Tarefas do administrador de armazenamento
 
 Conclua estas tarefas para provisionar armazenamento NFS no ONTAP para uso com OpenNebula.
@@ -49,6 +50,7 @@ image:opennebula-ontap-nfs-002.png["Opção FlexGroup"]
 
 
 
+[[virtualization-administrator-tasks]]
 == Tarefas do administrador de virtualização
 
 Conclua essas tarefas para adicionar o volume NFS como Datastore no OpenNebula e configurar nConnect ou trunking de sessão para melhorar o desempenho.

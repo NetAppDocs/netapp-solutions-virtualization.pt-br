@@ -18,6 +18,7 @@ Saiba mais sobre os benefícios do VMware Virtual Volumes (vVols), provisionamen
 
 
 
+[[overview]]
 == Visão geral
 
 A API vSphere para Consciência de Armazenamento (VASA) facilita para um administrador de máquinas virtuais usar quaisquer recursos de armazenamento necessários para provisionar máquinas virtuais sem precisar interagir com sua equipe de armazenamento. Antes do VASA, os administradores de VMs podiam definir políticas de armazenamento de VMs, mas precisavam trabalhar com seus administradores de armazenamento para identificar os datastores apropriados, geralmente usando documentação ou convenções de nomenclatura. Com o VASA, os administradores do vCenter com as permissões apropriadas podem definir uma variedade de recursos de armazenamento que os usuários do vCenter podem usar para provisionar máquinas virtuais. O mapeamento entre a política de armazenamento da VM e o perfil de capacidade de armazenamento do datastore permite que o vCenter exiba uma lista de datastores compatíveis para seleção, além de possibilitar que outras tecnologias, como o VCF Automation (anteriormente conhecido como Aria ou vRealize Automation) ou o VMware vSphere Kubernetes Service, selecionem automaticamente o armazenamento a partir de uma política atribuída. Essa abordagem é conhecida como gerenciamento baseado em políticas de armazenamento. Embora perfis e políticas de capacidade de armazenamento também possam ser usados ​​com datastores tradicionais, nosso foco aqui está nos datastores vVols . O provedor VASA para ONTAP está incluído como parte das ONTAP tools for VMware vSphere.
@@ -49,6 +50,7 @@ Atualmente, as ONTAP tools for VMware vSphere estão disponíveis em duas versõ
 
 
 
+[[ontap-tools-9-x]]
 == Ferramentas ONTAP 9.x
 
 * Quando o suporte vVol para NVMe/FC é necessário
@@ -58,6 +60,7 @@ Atualmente, as ONTAP tools for VMware vSphere estão disponíveis em duas versõ
 
 
 
+[[ontap-tools-10-x]]
 == Ferramentas ONTAP 10.x
 
 * Alta disponibilidade
@@ -69,6 +72,7 @@ Atualmente, as ONTAP tools for VMware vSphere estão disponíveis em duas versõ
 
 
 
+[[why-vvols]]
 == Por que vVols?
 
 O VMware Virtual Volumes (vVols) oferece os seguintes benefícios:
@@ -86,6 +90,7 @@ O VMware Virtual Volumes (vVols) oferece os seguintes benefícios:
 
 
 
+[[connectivity-options]]
 == Opções de conectividade
 
 O ambiente de malha dupla é normalmente recomendado para redes de armazenamento para atender à alta disponibilidade, desempenho e tolerância a falhas.  Os vVols são suportados com iSCSI, FC, NFSv3 e NVMe/FC.  NOTA: Consultelink:https://imt.netapp.com/matrix["Ferramenta de Matriz de Interoperabilidade (IMT)"] para a versão suportada da ferramenta ONTAP
@@ -98,12 +103,14 @@ image:vmware-vvol-overview-004.png["Rede NFS"]
 
 
 
+[[provisioning-using-ontap-tools-for-vmware-vsphere]]
 == Provisionamento usando ONTAP tools for VMware vSphere
 
 O armazenamento de dados vVol pode ser provisionado de forma semelhante ao armazenamento de dados VMFS ou NFS usando ferramentas ONTAP .  Se o plug-in de ferramentas ONTAP não estiver disponível na interface do cliente do vSphere, consulte a seção Como começar abaixo.
 
 
 
+[[with-ontap-tools-9-13]]
 === Com ferramentas ONTAP 9.13
 
 . Clique com o botão direito do mouse no cluster ou host do vSphere e selecione Provisionar Datastore nas ferramentas NetApp ONTAP .
@@ -132,6 +139,7 @@ ou use a senha atualizada com o console de manutenção das ferramentas ONTAP . 
 
 
 
+[[with-ontap-tools-10-1]]
 === Com ferramentas ONTAP 10.1
 
 . Clique com o botão direito do mouse no cluster ou host do vSphere e selecione Criar armazenamento de dados (10.1) em Ferramentas NetApp ONTAP .
@@ -145,6 +153,7 @@ ou use a senha atualizada com o console de manutenção das ferramentas ONTAP . 
 
 
 
+[[data-protection-of-vms-on-vvol-datastore]]
 == Proteção de dados de VMs no armazenamento de dados vVol
 
 A visão geral da proteção de dados de VMs no armazenamento de dados vVol pode ser encontrada emlink:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vvols-protect.html["protegendo vVols"] .
@@ -160,18 +169,21 @@ Referirlink:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_atta
 
 
 
+[[vm-migration-from-traditional-datastores-to-vvol-datastore]]
 == Migração de VM de datastores tradicionais para datastores vVol
 
 Para migrar VMs de outros armazenamentos de dados para um armazenamento de dados vVol, várias opções estão disponíveis com base no cenário.  Pode variar de uma simples operação de armazenamento vMotion até migração usando HCX.  Referirlink:../migration/migrate-vms-to-ontap-datastore.html["migrar vms para o armazenamento de dados ONTAP"] para mais detalhes.
 
 
 
+[[vm-migration-between-vvol-datastores]]
 == Migração de VM entre datastores vVol
 
 Para migração em massa de VMs entre datastores vVol, verifiquelink:../migration/migrate-vms-to-ontap-datastore.html["migrar vms para o armazenamento de dados ONTAP"] .
 
 
 
+[[sample-reference-architecture]]
 == Arquitetura de referência de amostra
 
 As ONTAP tools for VMware vSphere e SCV podem ser instaladas no mesmo vCenter que ele está gerenciando ou em servidores vCenter diferentes.  É melhor evitar hospedar no armazenamento de dados vVol que ele está gerenciando.
@@ -192,6 +204,7 @@ image:vmware-vvol-overview-037.png["Mistura de ferramentas ONTAP compartilhadas 
 
 
 
+[[how-to-get-started]]
 == Como começar
 
 Se as ferramentas ONTAP não estiverem instaladas em seu ambiente, faça o download emlink:https://support.netapp.com["Site de suporte da NetApp"] e siga as instruções disponíveis emlink:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vvols-ontap.html["usando vVols com ONTAP"] .

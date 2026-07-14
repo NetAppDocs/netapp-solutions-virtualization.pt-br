@@ -18,6 +18,7 @@ Neste cenário, demonstraremos como implantar o armazenamento de dados VMFS com 
 
 
 
+[[benefits-of-fibre-channel]]
 == Benefícios do Fibre Channel
 
 *Alto desempenho:* o FC fornece altas taxas de transferência de dados, tornando-o ideal para aplicações que exigem acesso rápido e confiável a grandes quantidades de dados.
@@ -32,6 +33,7 @@ Para obter mais informações sobre o uso do Fibre Channel com sistemas de armaz
 
 
 
+[[scenario-overview]]
 == Visão geral do cenário
 
 O armazenamento de dados suplementar do VCF é fornecido como parte das operações do dia 2 usando o vCenter.  Este cenário abrange as seguintes etapas de alto nível:
@@ -44,6 +46,7 @@ O armazenamento de dados suplementar do VCF é fornecido como parte das operaç�
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Este cenário requer os seguintes componentes e configurações:
@@ -66,6 +69,7 @@ Para obter mais informações sobre o uso do VMFS com sistemas de armazenamento 
 
 
 
+[[deployment-steps-for-management-domain]]
 == Etapas de implantação para domínio de gerenciamento
 
 Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS no domínio de gerenciamento do VCF, conclua as seguintes etapas:
@@ -77,6 +81,7 @@ Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS
 
 
 
+[[deployment-steps-for-vi-workload-domain]]
 == Etapas de implantação para o domínio de carga de trabalho do VI
 
 Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS no domínio de carga de trabalho do VCF VI, conclua as seguintes etapas:
@@ -88,6 +93,7 @@ Para implantar o ONTAP Tools e usá-lo para criar um armazenamento de dados VMFS
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
@@ -96,6 +102,7 @@ Para obter informações sobre como configurar o VCF, consultelink:https://techd
 
 
 
+[[video-demo-for-this-solution]]
 == Demonstração em vídeo desta solução
 
 .VMFS(FC) Datastore como armazenamento suplementar para domínio de gerenciamento VCF

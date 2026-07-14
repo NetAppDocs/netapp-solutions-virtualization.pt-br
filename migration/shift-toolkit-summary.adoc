@@ -18,12 +18,14 @@ Depois de converter ou migrar VMs usando o Shift Toolkit, revise as principais t
 
 
 
+[[conclusion]]
 == Conclusão
 
 O kit de ferramentas NetApp Shift ajuda um administrador a converter VMs do VMware para o Hyper-V de forma rápida e integrada. Ele também pode converter apenas os discos virtuais entre os diferentes hipervisores.  Portanto, o Shift toolkit economiza várias horas de esforço sempre que você deseja mover cargas de trabalho de um hipervisor para outro.  As organizações agora podem hospedar ambientes com vários hipervisores sem precisar se preocupar se as cargas de trabalho estão vinculadas a um único hipervisor.  Esse recurso aumenta a flexibilidade e reduz os custos de licenciamento, o bloqueio e os compromissos com um único fornecedor.
 
 
 
+[[next-steps]]
 == Próximos passos
 
 Libere o potencial do Data ONTAP baixando o pacote do Shift Toolkit e comece a migrar ou converter as máquinas virtuais ou os arquivos de disco para simplificar e agilizar as migrações.
@@ -34,6 +36,7 @@ Para saber mais sobre esse processo, sinta-se à vontade para seguir o passo a p
 video::6bf11896-3219-4ba7-9a00-b2d800d47144[panopto,width=360]
 
 
+[[troubleshooting-and-known-issues]]
 == Solução de problemas e problemas conhecidos
 
 . O script de gatilho para definir o endereço IP e remover as ferramentas VMware falha para a VM do Windows com o seguinte erro: A credencial é inválida
@@ -116,10 +119,12 @@ a. Decrypt the VMDK inside VMware and retry the operation.
 
 
 
+[[appendix]]
 == Apêndice
 
 
 
+[[custom-ontap-role-for-shift-toolkit]]
 === Função ONTAP personalizada para o kit de ferramentas Shift
 
 Crie uma função ONTAP com privilégios mínimos para que não haja necessidade de usar a função de administrador ONTAP para executar operações no Shift toolkit.  Essas funções mínimas são necessárias no nível do SVM no lado do armazenamento ONTAP .
@@ -154,6 +159,7 @@ Uma vez feito isso, use o usuário criado acima ao configurar os sites de origem
 
 
 
+[[minimum-permissions-role-required-on-vmware]]
 === Função de permissões mínimas necessária no VMware
 
 Para migrar máquinas virtuais do VMware vSphere usando o Shift Toolkit, crie um usuário RBAC com os privilégios mencionados abaixo usando Administração > Controle de acesso > Funções.

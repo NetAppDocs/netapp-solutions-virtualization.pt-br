@@ -18,6 +18,7 @@ Utilize o painel de monitoramento de tarefas do Shift Toolkit para acompanhar op
 
 
 
+[[job-monitoring-dashboard]]
 == Painel de monitoramento de tarefas
 
 O painel de monitoramento de tarefas fornece uma visão centralizada de todas as operações ativas e concluídas dentro do Shift Toolkit.  Use este painel para monitorar o progresso de suas tarefas de migração, conversão e criação de projetos.
@@ -35,6 +36,7 @@ O painel de controle exibe informações importantes para cada vaga:
 
 
 
+[[understanding-job-status]]
 == Entendendo a situação do emprego
 
 A interface intuitiva permite avaliar rapidamente o estado de todas as operações e identificar tarefas que necessitam de atenção.

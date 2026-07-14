@@ -18,6 +18,7 @@ O ONTAP aprimora a segurança e a proteção contra ransomware em ambientes VMwa
 
 
 
+[[introduction]]
 == Introdução
 
 Ao aproveitar os recursos avançados do NetApp ONTAP em ambientes VMware, as organizações podem garantir a integridade, a disponibilidade e a segurança de seus dados.
@@ -26,30 +27,35 @@ Veja abaixo como essas tecnologias trabalham juntas para oferecer *segurança* e
 
 
 
+[[security-and-ransomware]]
 == Segurança e Ransomware
 
 A segurança é uma preocupação primordial em ambientes virtualizados, e o NetApp ONTAP fornece recursos robustos para aumentar a segurança em infraestruturas VMware.  O ONTAP oferece criptografia para dados em repouso e em trânsito, garantindo que informações confidenciais sejam protegidas contra acesso não autorizado.  As chaves de criptografia são gerenciadas com segurança, e o ONTAP oferece suporte a soluções de criptografia baseadas em software e hardware.  Ao integrar-se às ferramentas de segurança da VMware, como os recursos de segurança integrados do vSphere e soluções de segurança de terceiros, o ONTAP ajuda a criar um ambiente seguro e compatível.
 
 
 
+[[ransomware-defense]]
 == Defesa contra ransomware
 
 Ataques de ransomware representam uma ameaça significativa às organizações, e a combinação de VMware e ONTAP fornece um forte mecanismo de defesa.  A tecnologia Snapshot da ONTAP permite a criação de snapshots imutáveis que não podem ser alterados ou excluídos por ransomware.  No caso de um ataque, esses snapshots podem ser usados para restaurar rapidamente VMs e datastores afetados ao estado anterior ao ataque, minimizando o tempo de inatividade e a perda de dados.  Além disso, a integração do ONTAP com sistemas de gerenciamento de eventos e informações de segurança (SIEM) permite monitoramento proativo e alertas de atividades suspeitas.  O ONTAP também oferece suporte à autenticação multifator (MFA) e ao controle de acesso baseado em função (RBAC) para aumentar ainda mais a segurança.
 
 
 
+[[ransomware-recovery-guarantee]]
 == Garantia de Recuperação de Ransomware
 
 A Garantia contra Ransomware da NetApp oferece às organizações uma solução robusta e confiável para proteção contra ataques de ransomware.  Ao aproveitar os recursos avançados do NetApp ONTAP, as organizações podem garantir a segurança e a disponibilidade de seus dados.  A garantia oferece tranquilidade, sabendo que, no caso de um ataque de ransomware, os dados podem ser restaurados de forma rápida e eficaz, minimizando o tempo de inatividade, a perda de dados e o impacto financeiro.  Esse compromisso com a segurança e a resiliência de dados torna a NetApp uma parceira ideal para organizações que buscam proteger seus ativos críticos contra ameaças cibernéticas em evolução.
 
 
 
+[[advanced-security-features]]
 == Recursos avançados de segurança
 
 O ONTAP inclui recursos avançados de segurança, como multilocação segura, que isola dados e recursos em ambientes multilocatários, e auditoria de conformidade, que rastreia e registra o acesso a dados confidenciais.  Esses recursos garantem que os dados permaneçam seguros e que as organizações possam demonstrar conformidade com as regulamentações e padrões do setor.
 
 
 
+[[summary]]
 == Resumo
 
 A integração dos recursos de segurança do ONTAP — como criptografia, snapshots imutáveis e controles de acesso avançados — com as ferramentas da VMware fornece defesa robusta contra ameaças cibernéticas, incluindo ransomware.  O suporte da ONTAP para auditoria de conformidade e multilocação segura garante a proteção de dados e a conformidade regulatória.

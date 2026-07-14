@@ -18,6 +18,7 @@ O Red Hat OpenShift Container Platform une o desenvolvimento e as operações de
 
 
 
+[[red-hat-openshift-provides-the-following-capabilities]]
 == O Red Hat OpenShift fornece os seguintes recursos:
 
 * *Provisionamento de autoatendimento* Os desenvolvedores podem criar aplicativos sob demanda de forma rápida e fácil a partir das ferramentas que mais usam, enquanto as operações mantêm controle total sobre todo o ambiente.
@@ -37,6 +38,7 @@ image:redhat-openshift-004.png["Figura mostrando diálogo de entrada/saída ou r
 
 
 
+[[deployment-methods-for-red-hat-openshift]]
 == Métodos de implantação para Red Hat OpenShift
 
 A partir do Red Hat OpenShift 4, os métodos de implantação do OpenShift incluem implantações manuais usando a Infraestrutura Provisionada pelo Usuário (UPI) para implantações altamente personalizadas ou implantações totalmente automatizadas usando a Infraestrutura Provisionada pelo Instalador (IPI).
@@ -45,6 +47,7 @@ O método de instalação IPI é o método preferido na maioria dos casos porque
 
 
 
+[[ipi-installation-of-red-hat-openshift]]
 === Instalação IPI do Red Hat OpenShift
 
 A implantação da infraestrutura provisionada pelo instalador (IPI) do OpenShift envolve estas etapas de alto nível:
@@ -63,6 +66,7 @@ image:redhat-openshift-009.png["Figura mostrando diálogo de entrada/saída ou r
 
 
 
+[[netapp-validated-openshift-deployments]]
 === Implantações OpenShift validadas pela NetApp
 
 A NetApp testou e validou a implantação do Red Hat OpenShift em seus laboratórios usando o método de implantação de infraestrutura provisionada pelo instalador (IPI) em cada um dos seguintes ambientes de data center:

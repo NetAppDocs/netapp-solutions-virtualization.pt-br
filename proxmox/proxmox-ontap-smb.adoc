@@ -25,6 +25,7 @@ NOTE: As senhas são salvas em arquivos de texto não criptografado e só podem 
 video::5b4ae54a-08d2-4f7d-95ec-b22d015f6035[panopto,width=360]
 
 
+[[storage-administrator-tasks]]
 == Tarefas do administrador de armazenamento
 
 Se você é novo no ONTAP, use a Interface do Gerenciador de Sistemas para concluir essas tarefas.
@@ -67,6 +68,7 @@ image:proxmox-ontap-smb-004.png["Informações de compartilhamento de PMEs"]
 
 
 
+[[virtualization-administrator-tasks]]
 == Tarefas do administrador de virtualização
 
 Conclua essas tarefas para adicionar o compartilhamento SMB como armazenamento no Proxmox VE e habilitar o multicanal para melhor desempenho e tolerância a falhas.

@@ -18,6 +18,7 @@ O Proxmox Virtual Environment (VE) é um hipervisor Tipo 1 de código aberto bas
 
 
 
+[[overview]]
 == Visão geral
 
 O Proxmox Virtual Environment (VE) suporta virtualização completa de máquinas virtuais e virtualização baseada em contêineres no mesmo host. A Máquina Virtual Baseada em Kernel (KVM) e o Emulador Rápido (QEMU) são utilizados para a virtualização completa de máquinas virtuais. O QEMU é um emulador de máquina e virtualizador de código aberto que utiliza o módulo do kernel KVM para executar código convidado diretamente na CPU do host. O Linux Containers (LXC) permite que os contêineres sejam gerenciados como máquinas virtuais, com persistência de dados mesmo após reinicializações. A partir do Proxmox VE 9, o suporte ao registro OCI está incluído para extrair imagens de contêiner de registros públicos e privados. O suporte a contêineres de aplicativos foi adicionado como uma prévia tecnológica no Proxmox VE 9.
@@ -28,6 +29,7 @@ A API RESTful está disponível para tarefas de automação.  Para obter informa
 
 
 
+[[cluster-management]]
 == Gerenciamento de Cluster
 
 O portal de gerenciamento baseado na web está disponível no nó Proxmox VE na porta 8006.  Um conjunto de nós pode ser unido para formar um cluster.  A configuração do Proxmox VE, `/etc/pve` , é compartilhado entre todos os nós do cluster.  Usos do Proxmox VElink:https://pve.proxmox.com/wiki/Cluster_Manager["Motor de cluster Corosync"] para gerenciar o cluster.  O portal de gerenciamento pode ser acessado de qualquer nó do cluster.
@@ -49,6 +51,7 @@ Clientes com uma assinatura ativa Basic, Standard ou Premium para seus servidore
 
 
 
+[[compute]]
 == Calcular
 
 As opções de CPU para uma VM incluem o número de núcleos e soquetes de CPU (para especificar o número de vCPUs), opção para escolher NUMA, definição de afinidade, configuração de limites e o tipo de CPU.
@@ -65,6 +68,7 @@ A VM e o LXC podem especificar o tamanho da memória.  Para VMs, o recurso de ba
 
 
 
+[[storage]]
 == Armazenar
 
 Uma máquina virtual consiste em um arquivo de configuração, `/etc/pve/qemu-server/<vm id>.conf` e componentes de disco virtual.  Os formatos de disco virtual suportados são raw, qcow2 e VMDK.  O QCOW2 pode fornecer recursos de provisionamento fino e instantâneo em vários tipos de armazenamento.
@@ -94,6 +98,7 @@ Para importar VMs de um ambiente Broadcom vSphere, o host vSphere também pode s
 
 
 
+[[network]]
 == Rede
 
 O Proxmox VE suporta tanto redes baseadas em host quanto VNets em todo o cluster, utilizando recursos nativos de rede do Linux, como Linux Bridge e Open vSwitch, para implementar Redes Definidas por Software (SDN). As interfaces Ethernet no host podem ser agrupadas para fornecer tolerância a falhas e alta disponibilidade. Para outras opções, consulte link:https://pve.proxmox.com/pve-docs/chapter-sysadmin.html#_choosing_a_network_configuration["Documentação do Proxmox VE"]
@@ -118,6 +123,7 @@ image:proxmox-overview-014.png["Informações de VNet no datacenter"]
 
 
 
+[[monitoring]]
 == Monitoramento
 
 A página de resumo na maioria dos objetos, como Datacenter, host, VM, contêiner, armazenamento, etc., fornece detalhes e inclui algumas métricas de desempenho.  A captura de tela a seguir mostra a página de resumo de um host e inclui informações sobre os pacotes instalados.
@@ -128,6 +134,7 @@ As estatísticas sobre hosts, convidados, armazenamento, etc. podem ser enviadas
 
 
 
+[[data-protection]]
 == Proteção de Dados
 
 O Proxmox VE inclui opções para fazer backup e restaurar VMs e contêineres para armazenamento configurado para conteúdo de backup.  Os backups podem ser iniciados pela IU ou CLI usando a ferramenta vzdump ou podem ser agendados. Para mais detalhes, consultelink:https://pve.proxmox.com/pve-docs/chapter-vzdump.html["Seção de backup e restauração da documentação do Proxmox VE"] .

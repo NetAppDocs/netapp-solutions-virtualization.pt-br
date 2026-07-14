@@ -1,0 +1,80 @@
+---
+sidebar: sidebar 
+permalink: openshift/osv-disaster-recovery-simulate-dr.html 
+keywords: OpenShift, OCP, Trident, Trident Protect, NetApp ONTAP, Red Hat OpenShift, OpenShift Virtualization, Red Hat OpenShift Virtualization 
+summary: Virtualização Red Hat OpenShift 
+---
+= Failover de uma máquina virtual em OpenShift Virtualization Disaster Recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta seção descreve como realizar um failover de uma máquina virtual (VM) de um cluster de origem para um cluster de destino de recuperação de desastres usando NetApp Trident Protect e AppMirror. Isso é útil para testar o processo de failover e para realizar manutenção planejada no cluster de origem. Seguindo estas etapas, você garante que sua VM estará em execução no cluster de destino de recuperação de desastres com todas as alterações intactas após um evento de recuperação de desastres.
+
+
+
+[[failover-without-site-outage-for-openshift-virtualization]]
+== Failover sem falha no local para OpenShift Virtualization
+
+Esta seção descreve como realizar um failover de uma VM de um cluster de origem sem falha no local. Isso é útil para testar o processo de failover e para realizar manutenção planejada no cluster de origem. +
+
+Para realizar um failover sem falha no local, primeiro certifique-se de que os clusters de origem e destino estejam configurados para recuperação de desastres, conforme descrito nas seções anteriores. Em seguida, execute as seguintes etapas:
+
+. Estabeleça a relação AppMirror entre o cluster de origem e o cluster de destino. Quando a relação AppMirror é estabelecida, o snapshot mais recente é transferido para o namespace de destino. O PVC é criado para a VM no namespace de destino, porém, o pod da VM ainda não é criado nesse namespace de destino.
++
+.Mostrar exemplo
+[%collapsible]
+====
+[source, yaml]
+----
+# application-mirror-relationship.yaml
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: amr1
+spec:
+  desiredState: Established
+  destinationAppVaultRef: ontap-s3-appvault
+  destinationApplicationRef: test-dest-app
+  namespaceMapping:
+  - destination: test-dr-ns-dest
+    source: test-dr-ns
+  recurrenceRule: |-
+    DTSTART:20240901T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  sourceAppVaultRef: ontap-s3-appvault
+  sourceApplicationName: test-source-app
+  sourceApplicationUID: "<application-uid-of-the-source-app>"
+  storageClassName: "sc-nas"
+----
+image:osv-disaster-recovery-009.png["Relação OCP-v AppMirror no namespace trident-protect"]
+
+image:osv-disaster-recovery-010.png["Relação OCP-v AppMirror estabelecida no namespace trident-protect"]
+
+
+NOTE: O AppMirror relacionamento deve ser criado a partir da cli do cluster de destino. Ele deve ser criado com o estado desejado como Established. Isso garantirá que os dados do snapshot mais recente sejam replicados para o cluster de destino.
+
+====
+. Promova o relacionamento AppMirror. Altere o estado desejado do relacionamento para "Promoted" para criar a máquina virtual no namespace de destino. A máquina virtual continua em execução no namespace de origem. Os dados do snapshot mais recente são replicados para o cluster de destino e a máquina virtual é iniciada no cluster de destino. Esse método permite que você teste o failover e mantenha a disponibilidade da máquina virtual sem precisar interromper todo o cluster de origem.
++
+.Mostrar exemplo
+[%collapsible]
+====
+[source, cli]
+----
+oc patch amr amr1 -n test-dr-ns-dest --type=merge -p '{"spec":{"desiredState":"Promoted"}}'
+----
+image:osv-disaster-recovery-012.png["Relação OCP-v AppMirror Promovida"]
+
+[source, cli]
+----
+oc get pod, pvc,vm -n test-dr-ns-dest
+oc get pod, pvc,vm -n test-dr-ns
+----
+====
+

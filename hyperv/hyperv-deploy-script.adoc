@@ -18,6 +18,7 @@ Use o script do PowerShell para migrar VMs do VMware vSphere para o Microsoft Hy
 
 
 
+[[powershell-script]]
 == Script do Powershell
 
 [source, powershell]

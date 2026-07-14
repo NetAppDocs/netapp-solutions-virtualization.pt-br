@@ -18,6 +18,7 @@ O NetApp Data Infrastructure Insights (anteriormente Cloud Insights) é uma plat
 
 
 
+[[monitoring-on-premises-storage-with-data-infrastructure-insights]]
 == Monitoramento de armazenamento local com Data Infrastructure Insights
 
 O Data Infrastructure Insights opera por meio do software Acquisition Unit, que é configurado com coletores de dados para ativos como os sistemas de armazenamento VMware vSphere e NetApp ONTAP .  Esses coletores reúnem dados e os transmitem ao Data Infrastructure Insights.  A plataforma então utiliza uma variedade de painéis, widgets e consultas métricas para organizar os dados em análises perspicazes para os usuários interpretarem.
@@ -28,6 +29,7 @@ image:vmware-dii.png["Data Infrastructure Insights"]
 
 
 
+[[solution-deployment-overview]]
 == Visão geral da implantação da solução
 
 Esta solução fornece uma introdução ao monitoramento de sistemas de armazenamento VMware vSphere e ONTAP locais usando o Data Infrastructure Insights.
@@ -45,6 +47,7 @@ Esta lista fornece as etapas de alto nível abordadas nesta solução:
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Esta solução utiliza os seguintes componentes:
@@ -57,10 +60,12 @@ Esta solução utiliza os seguintes componentes:
 
 
 
+[[solution-deployment]]
 == Implantação de solução
 
 
 
+[[configure-data-collectors]]
 === Configurar coletores de dados
 
 Para configurar os coletores de dados para sistemas de armazenamento VMware vSphere e ONTAP , conclua as seguintes etapas:
@@ -103,6 +108,7 @@ image:vmware-asa-034.png["Configurar coletor"]
 ====
 
 
+[[add-annotations-to-assets]]
 === Adicionar anotações aos ativos
 
 As anotações são um método útil de marcar ativos para que eles possam ser filtrados e identificados nas várias visualizações e consultas de métricas disponíveis no Cloud Insights.
@@ -129,6 +135,7 @@ image:vmware-asa-037.png["Executar todas as regras"]
 ====
 
 
+[[explore-and-correlate-assets]]
 === Explorar e correlacionar ativos
 
 O Cloud Insights tira conclusões lógicas sobre os ativos que estão sendo executados juntos em seus sistemas de armazenamento e clusters do vSphere.
@@ -167,6 +174,7 @@ image:vmware-asa-043.png["Métricas de desempenho de VM"]
 ====
 
 
+[[use-cloud-insights-to-identify-noisy-neighbors]]
 === Use o Cloud Insights para identificar vizinhos barulhentos
 
 O Cloud Insights apresenta painéis que podem isolar facilmente VMs pares que estão impactando negativamente outras VMs em execução no mesmo volume de armazenamento.
@@ -195,6 +203,7 @@ image:vmware-asa-047.png["Contenção de carga de trabalho"]
 ====
 
 
+[[view-over-and-under-utilized-resources-in-cloud-insights]]
 === Visualize recursos super e subutilizados no Cloud Insights
 
 Ao combinar os recursos da VM com os requisitos reais da carga de trabalho, a utilização dos recursos pode ser otimizada, resultando em economia de custos em infraestrutura e serviços de nuvem.  Os dados no Cloud Insights podem ser personalizados para exibir facilmente VMs super ou subutilizadas.
@@ -223,6 +232,7 @@ image:vmware-asa-051.png["VMs desligadas"]
 ====
 
 
+[[use-queries-to-isolate-and-sort-metrics]]
 === Use consultas para isolar e classificar métricas
 
 A quantidade de dados capturados pelo Cloud Insights é bastante abrangente.  Consultas métricas fornecem uma maneira poderosa de classificar e organizar grandes quantidades de dados de maneiras úteis.
@@ -243,12 +253,14 @@ image:vmware-asa-053.png["ONTAP Essential - VMware"]
 ====
 
 
+[[conclusion]]
 == Conclusão
 
 Esta solução foi projetada como uma introdução para aprender como começar a usar o NetApp Cloud Insights e mostrar alguns dos poderosos recursos que esta solução de observabilidade pode fornecer.  Há centenas de painéis e consultas de métricas incorporados ao produto, o que facilita começar a usar imediatamente.  A versão completa do Cloud Insights está disponível como teste de 30 dias e a versão básica está disponível gratuitamente para clientes da NetApp .
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 Para saber mais sobre as tecnologias apresentadas nesta solução, consulte as seguintes informações adicionais.

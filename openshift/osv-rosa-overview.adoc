@@ -20,6 +20,7 @@ Também veremos como conectar-se à máquina virtual usando as credenciais de co
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 * link:https://signin.aws.amazon.com/signin?redirect_uri=https://portal.aws.amazon.com/billing/signup/resume&client_id=signup["Conta AWS"]
@@ -39,6 +40,7 @@ A partir da versão Trident 25.02, você pode preparar facilmente os nós de tra
 
 
 
+[[initial-setup]]
 == Configuração inicial
 
 Configure o backend do trident, a classe de armazenamento e o VolumeSnapshotClass.  Você pode consultar olink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
@@ -99,6 +101,7 @@ Certifique-se de que a classe de armazenamento e a classe de instantâneo de vol
 
 
 
+[[create-a-vm-from-the-template]]
 === **Crie uma VM a partir do modelo**
 
 Use o console da Web para criar uma VM a partir de um modelo.  No console do RedHat OpenShiftService na AWS, crie uma máquina virtual.  Há modelos disponíveis no cluster que podem ser usados para criar a VM.  Na captura de tela abaixo, escolhemos a VM do Fedora nesta lista.  Dê um nome à VM e clique em **Personalizar máquina virtual**.  Selecione a aba **Discos** e clique em **Adicionar discos**.  Altere o nome do disco, de preferência para algo significativo, e certifique-se de que **trident-csi** esteja selecionado para classe de armazenamento.  Clique em **Salvar**.  Clique em **Criar Máquina Virtual**
@@ -117,6 +120,7 @@ image:redhat-openshift-ocpv-rosa-008.png["VM OCP-v em execução"]
 
 
 
+[[review-all-the-objects-created-for-the-vm]]
 === **Revise todos os objetos criados para a VM**
 
 Os discos de armazenamento.image:redhat-openshift-ocpv-rosa-009.png["Discos de armazenamento OCP-v"]
@@ -135,6 +139,7 @@ Aqui podemos ver os dois volumes associados ao pod da VM e os dois PVCs associad
 
 
 
+[[connect-to-the-vm]]
 === **Conecte-se à VM**
 
 Clique no botão 'Abrir console da web' e faça login usando as credenciais de convidadoimage:redhat-openshift-ocpv-rosa-016.png["Conexão de VM OCP-v"]

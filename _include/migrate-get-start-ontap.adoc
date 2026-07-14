@@ -6,6 +6,7 @@ Essa migração permite integração perfeita, melhor proteção de dados e maio
 
 
 
+[[use-cases]]
 == Casos de uso
 
 Há muitas opções de migração em termos de origem e destino ao considerar a mudança para armazenamentos de dados suportados ONTAP .

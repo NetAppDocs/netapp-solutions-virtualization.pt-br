@@ -26,6 +26,7 @@ image:redhat-openshift-ocpv-rosa-023.png["Arquivos de reinicialização da VM OC
 
 
 
+[[vm-live-migration]]
 == Migração ao vivo de VM
 
 Nesta seção, realizaremos uma migração ao vivo de VM e, em seguida, examinaremos o conteúdo dos discos.  Migração ao vivo refere-se ao processo de mover uma Máquina Virtual (VM) em execução de um host físico para outro host sem interromper as operações normais ou causar qualquer tempo de inatividade ou outros efeitos adversos para o usuário final.  A migração ao vivo é considerada um passo importante na virtualização.  Ele permite que uma VM inteira seja movida com um sistema operacional (SO), memória, armazenamento e conectividade de rede em execução do nó atual para o destino.  Abaixo veremos como realizar uma Migração ao Vivo da VM do nó atual para um novo nó.
@@ -48,6 +49,7 @@ Os volumes associados ao pod da VM também são os mesmos (2 PVCs) de antes.imag
 
 
 
+[[demo-video]]
 == Vídeo de demonstração
 
 .Migração ao vivo de máquinas virtuais no OpenShift Virtualization no ROSA com Amazon FSx for NetApp ONTAP

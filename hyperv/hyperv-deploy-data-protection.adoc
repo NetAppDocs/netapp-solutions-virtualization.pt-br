@@ -20,6 +20,7 @@ Aprenda a abordar considerações exclusivas de backup do Hyper-V, como conflito
 
 
 
+[[restore-using-netapp-storage-snapshot]]
 == Restaurar usando snapshot do NetApp Storage
 
 Fazer backup de VMs e recuperá-las ou cloná-las rapidamente estão entre os grandes pontos fortes dos volumes ONTAP .  Use cópias de instantâneo para fazer cópias FlexClone rápidas das VMs ou até mesmo de todo o volume CSV sem afetar o desempenho.  Isso permite trabalhar com dados de produção sem o risco de corrupção de dados ao clonar volumes de dados de produção e montá-los em ambientes de controle de qualidade, preparação e desenvolvimento.  Os volumes FlexClone são úteis para fazer cópias de teste de dados de produção, sem precisar dobrar a quantidade de espaço necessária para copiar os dados.
@@ -30,6 +31,7 @@ Embora seja simples com hosts Hyper-V autônomos, o procedimento é diferente pa
 
 
 
+[[backup-and-restore-using-third-party-solutions]]
 == Backup e restauração usando soluções de terceiros
 
 *Observação*: Esta seção usa o Commvault, no entanto, isso se aplica a outras soluções de terceiros.
@@ -149,6 +151,7 @@ Para obter etapas detalhadas para todas as opções de restauração suportadas,
 
 
 
+[[advanced-netapp-ontap-options]]
 == Opções avançadas do NetApp ONTAP
 
 O NetApp SnapMirror permite replicação eficiente de armazenamento de site para site, tornando a recuperação de desastres rápida, confiável e gerenciável para atender às empresas globais de hoje.  Ao replicar dados em alta velocidade em LANs e WANs, o SnapMirror fornece alta disponibilidade de dados e recuperação rápida para aplicativos de missão crítica, bem como excelentes recursos de desduplicação de armazenamento e compactação de rede.  Com a tecnologia NetApp SnapMirror , a recuperação de desastres pode proteger todo o data center.  Os volumes podem ser armazenados em um local externo de forma incremental.  O SnapMirror executa replicação incremental baseada em blocos com a mesma frequência do RPO necessário.  As atualizações em nível de bloco reduzem os requisitos de largura de banda e tempo, e a consistência dos dados é mantida no site de DR.

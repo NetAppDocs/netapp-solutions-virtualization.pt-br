@@ -18,6 +18,7 @@ Neste caso de uso, descrevemos o procedimento para usar um armazenamento de dado
 
 
 
+[[introduction]]
 == Introdução
 
 Quando apropriado, faremos referência à documentação externa para as etapas que devem ser executadas no SDDC Manager do VCF e faremos referência às etapas específicas da parte de configuração de armazenamento.
@@ -32,6 +33,7 @@ NOTE: Esta solução é aplicável para plataformas ONTAP que suportam armazenam
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Os seguintes componentes e configurações são usados neste cenário:
@@ -47,10 +49,12 @@ Para obter informações sobre como configurar o VCF, consultelink:https://docs.
 
 
 
+[[deployment-steps]]
 == Etapas de implantação
 
 
 
+[[management-domain-default-cluster]]
 === Domínio de Gerenciamento - Cluster Padrão
 
 O armazenamento principal do FC no cluster inicial só é suportado com a ferramenta de importação brownfield do VCF.  Se o VCF for implantado com a ferramenta Cloud Builder (antes da versão 5.2.x), somente o vSAN será suportado.
@@ -59,6 +63,7 @@ Para obter mais informações sobre como usar um ambiente vSphere existente, con
 
 
 
+[[management-domain-additional-cluster]]
 === Domínio de Gerenciamento - Cluster Adicional
 
 O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com as seguintes opções:
@@ -70,6 +75,7 @@ O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com
 
 
 
+[[additional-information]]
 == Informações adicionais
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.

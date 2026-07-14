@@ -22,12 +22,14 @@ image:vmw-vcf-vmsc-viwld-mcc-001.png["Domínio de carga de trabalho VCF VI com v
 
 
 
+[[introduction]]
 == Introdução
 
 Nesta solução, demonstraremos como implementar o Stetched VCF VI Workload Domain com NFS como Principal Datastore usando o ONTAP MetroCluster.  O VI Workload Domain pode ser implantado usando o SDDC Manager ou importar um ambiente vSphere existente como VI Workload Domain.
 
 
 
+[[scenario-overview]]
 == Visão geral do cenário
 
 Este cenário abrange as seguintes etapas de alto nível:
@@ -41,6 +43,7 @@ Este cenário abrange as seguintes etapas de alto nível:
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Este cenário requer os seguintes componentes e configurações:
@@ -78,6 +81,7 @@ Para obter informações sobre como configurar o VCF, consultelink:https://techd
 
 
 
+[[deployment-steps]]
 == Etapas de implantação
 
 Para implantar o VCF Stretched Management Domain com NFS como armazenamento de dados principal,
@@ -98,6 +102,7 @@ Para uma visão geral do processo de conversão, consulte https://techdocs.broad
 
 
 
+[[deploy-vsphere-hosts-and-vcenter]]
 === Implantar hosts vSphere e vCenter
 
 Implante o vSphere em hosts usando o ISO baixado do portal de suporte da Broadcom ou use a opção de implantação existente para o host vSphere.
@@ -124,6 +129,7 @@ Implante o vCenter no NFS Datastore.  Certifique-se de que o SSH e o shell Bash 
 
 
 
+[[create-vsphere-cluster]]
 === Criar cluster vSphere
 
 . Efetue login no vSphere webclient, crie o DataCenter e o vSphere Cluster adicionando um dos hosts onde o NFS VAAI está implantado.  Optamos por gerenciar todos os hosts no cluster com a opção de imagem única.  [DICA] Não selecione Gerenciar configuração no nível do cluster.  Para obter detalhes adicionais, consulte https://knowledge.broadcom.com/external/article/373968/vlcm-config-manager-is-enabled-on-this-c.html["Consideração do NSX no vSphere Cluster"] .  Para melhores práticas de vMSC com ONTAP MetroCluster, verifique https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware_vmsc_design.html#netapp-storage-configuration["Diretrizes de design e implementação do vMSC"]
@@ -134,6 +140,7 @@ Implante o vCenter no NFS Datastore.  Certifique-se de que o SSH e o shell Bash 
 
 
 
+[[convert-vsphere-environment-to-vcf-vi-workload-domain]]
 === Converter ambiente vSphere para domínio de carga de trabalho VCF VI
 
 A seção a seguir aborda as etapas para implantar o gerenciador SDDC e converter o cluster vSphere 8 em um domínio de gerenciamento VCF 5.2.  Quando apropriado, a documentação da VMware será consultada para obter detalhes adicionais.

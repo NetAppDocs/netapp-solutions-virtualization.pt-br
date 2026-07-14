@@ -22,6 +22,7 @@ image::shift-toolkit-250.png[Ícone de configurações na barra de ferramentas d
 
 
 
+[[credential-security-service-provider-credssp]]
 == Provedor de Serviços de Segurança de Credenciais (CredSSP)
 
 O Shift Toolkit utiliza o Credential Security Service Provider (CredSSP) para gerenciar a transferência de credenciais durante o processo de conversão.  O servidor Shift executa scripts no sistema operacional convidado da máquina virtual que está sendo convertida, passando as credenciais por meio de um "salto duplo" do servidor Shift para o sistema operacional convidado através do servidor Hyper-V.
@@ -30,6 +31,7 @@ image::shift-toolkit-251.png[Configurações do CredSSP]
 
 
 
+[[configure-the-shift-server-as-a-credssp-client]]
 === Configure o servidor Shift como um cliente CredSSP.
 
 O assistente de Configurações Avançadas configura automaticamente o servidor Shift como um cliente CredSSP, permitindo que ele delegue credenciais aos servidores Hyper-V.
@@ -56,6 +58,7 @@ Ative esta política e adicione `wsman/fqdn-of-hyper-v-host` .
 
 
 
+[[configure-the-hyper-v-server-as-a-credssp-server]]
 === Configure o servidor Hyper-V como um servidor CredSSP.
 
 Use o `Enable-WSManCredSSP` Utilize o cmdlet no servidor Hyper-V para configurá-lo como um servidor CredSSP, permitindo que ele receba credenciais do servidor Shift.
@@ -73,6 +76,7 @@ Enable-WSManCredSSP -Role server
 
 
 
+[[logging-and-debugging]]
 == Registro e depuração
 
 O Shift Toolkit inclui registro de logs padrão com um período de retenção de 30 dias.  O registro de logs pode ser alternado para o modo de depuração mediante solicitação do suporte para fins de solução de problemas.
@@ -81,6 +85,7 @@ image::shift-toolkit-252.png[Configurações de registro de logs]
 
 
 
+[[swagger]]
 == Arrogância
 
 A página Swagger nas configurações avançadas permite interagir com as APIs REST do Shift Toolkit.
@@ -93,6 +98,7 @@ image::shift-toolkit-254.png[categorias de recursos da API]
 
 
 
+[[authentication-and-setup-apis]]
 === APIs de autenticação e configuração
 
 Utilize essas APIs para estabelecer conexões, gerenciar usuários e configurar a autenticação para o servidor Shift Toolkit.
@@ -145,6 +151,7 @@ Gerenciar configurações multi-inquilino:
 
 
 
+[[infrastructure-management-apis]]
 === APIs de gerenciamento de infraestrutura
 
 Utilize essas APIs para configurar e descobrir seus ambientes de origem e destino.
@@ -182,6 +189,7 @@ Descubra e inventarie máquinas virtuais e recursos nos sites de origem e destin
 
 
 
+[[vm-and-resource-management-apis]]
 === APIs de gerenciamento de VMs e recursos
 
 Utilize essas APIs para inventariar, organizar e gerenciar máquinas virtuais e recursos para migração.
@@ -220,6 +228,7 @@ Organize as VMs em grupos de proteção para migração:
 
 
 
+[[migration-and-recovery-apis]]
 === APIs de migração e recuperação
 
 Utilize essas APIs para executar migrações, monitorar a conformidade e gerenciar operações de recuperação.
@@ -270,6 +279,7 @@ Executar e gerenciar operações de migração e recuperação:
 
 
 
+[[automation-apis]]
 === APIs de automação
 
 Utilize essas APIs para estender e automatizar a funcionalidade do Shift Toolkit.
@@ -286,6 +296,7 @@ Aceda e execute scripts de automação:
 
 
 
+[[script-block-and-automation]]
 == Bloco de script e automação
 
 O bloco de script dentro do Shift Toolkit fornece exemplos de código para ajudar você a automatizar, integrar e desenvolver recursos usando APIs internas e externas.  Navegue e baixe exemplos na seção Exemplos de Código, escritos pela equipe de automação do Shift Toolkit e membros da comunidade.  Use esses exemplos para começar a trabalhar com tarefas de automação, gerenciamento ou integração.
@@ -304,6 +315,7 @@ O objetivo do bloco de scripts é fornecer scripts de exemplo para o dia 0 e par
 
 
 
+[[email-notifications-and-alerts]]
 == Notificações e alertas por e-mail
 
 Configure notificações por e-mail para enviar alertas sobre tarefas de descoberta, conversão ou migração para destinatários específicos.  As notificações da interface do usuário (alertas dentro da interface) também estão disponíveis e são armazenadas por 7 dias.
@@ -337,6 +349,7 @@ NOTE: Nesta versão, a notificação por e-mail utiliza autenticação SMTP bás
 
 
 
+[[abort-and-revert-capabilities]]
 == Capacidades de abortar e reverter
 
 O Shift Toolkit oferece a opção de cancelar uma tarefa em execução em qualquer etapa do fluxo de trabalho.  Quando uma tarefa é cancelada, todos os componentes órfãos são automaticamente removidos, incluindo:
@@ -350,6 +363,7 @@ Como o Shift Toolkit não modifica a VM de origem de forma alguma, o processo de
 
 
 
+[[verify-migration]]
 == Verificar migração
 
 O Shift toolkit agora oferece uma opção de verificação em relação ao nível do blueprint, que é habilitada após o status da migração ser marcado como "Success" ou "Partial Failure". Uma vez concluída, a opção de verificação iniciará uma nova tarefa e verificará as configurações da VM conforme especificado nos mapeamentos do blueprint. O status da tarefa de verificação da migração será listado no Job Monitoring e os detalhes podem ser visualizados clicando na tarefa e selecionando "view logs".
@@ -366,6 +380,7 @@ image::shift-toolkit-472.png[Verificar lista de tarefas de migração]
 
 
 
+[[split-workflow]]
 == Fluxo de trabalho dividido
 
 O fluxo de trabalho dividido (aplicável somente a OpenShift blueprints de migração que utilizam o driver ONTAP NAS) descobre automaticamente os volumes associados às VMs, bem como seus volumes FlexClone correspondentes.
@@ -389,6 +404,7 @@ image::shift-toolkit-474.png[Progresso do job do fluxo de trabalho dividido]
 
 
 
+[[advanced-hypervisor-settings]]
 == Configurações avançadas do hipervisor
 
 O Shift Toolkit inclui configurações avançadas de hipervisor para tarefas de migração para hipervisores de destino. Essas configurações permitem que os administradores de migração habilitem recursos para cada onda de migração de VMs, conforme necessário. O Shift Toolkit lê as configurações em tempo de execução, de modo que cada tarefa aplica as opções selecionadas ao ser iniciada.

@@ -15,6 +15,7 @@ Implante ONTAP tools for VMware vSphere 10 e provisione um armazenamento de dado
 
 
 
+[[step-1-deploy-ontap-tools-for-vmware-vsphere]]
 == Etapa 1: implantar ONTAP tools for VMware vSphere
 
 Nesta etapa, o ONTAP Tools 10 é implantado em uma configuração não HA.  Para obter detalhes adicionais de implantação em configurações de HA e não HA, consulte a documentação das ONTAP tools for VMware vSphere : https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/ontap-tools-deployment.html["Implantar ONTAP tools for VMware vSphere"] .
@@ -72,6 +73,7 @@ image::vmware-vcf-import-nfs-003.png[Personalizar modelo]
 
 
 
+[[step-2-configure-ontap-tools]]
 == Etapa 2: Configurar ferramentas ONTAP
 
 Depois que a VM das ferramentas ONTAP estiver instalada e ligada, adicione os servidores vCenter e os sistemas de armazenamento ONTAP para gerenciar. Consulte o  https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html["Documentação das ONTAP tools for VMware vSphere"] para maiores informações.
@@ -102,6 +104,7 @@ NOTE: O backend de armazenamento é adicionado na interface do cliente do vSpher
 
 
 
+[[step-3-provision-the-fc-datastore-with-ontap-tools]]
 == Etapa 3: provisionar o armazenamento de dados FC com ferramentas ONTAP
 
 As ferramentas ONTAP integram funcionalidades em toda a interface do cliente vSphere. Nesta etapa, um armazenamento de dados FC é provisionado a partir da página de inventário de hosts.
@@ -156,6 +159,7 @@ image::vmware-vcf-convert-fc-005.png[Página de resumo]
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Depois de implantar as ferramentas ONTAP e provisionar o armazenamento de dados FC,link:vmw-vcf-mgmt-fc-conversion.html["converter o cluster vSphere em um domínio de gerenciamento VCF"] .

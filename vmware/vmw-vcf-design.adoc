@@ -18,6 +18,7 @@ Você pode começar do zero com o VCF 9 ou reutilizar implantações existentes 
 
 
 
+[[storage-options]]
 == Opções de armazenamento
 
 O VMware Cloud Foundation com ONTAP oferece suporte a uma variedade de configurações de armazenamento para atender a diferentes requisitos de desempenho, escalabilidade e disponibilidade.  As tabelas a seguir resumem as principais e suplementares opções de armazenamento disponíveis para seu ambiente.
@@ -50,12 +51,14 @@ O VMware Cloud Foundation com ONTAP oferece suporte a uma variedade de configura
 |===
 
 
+[[blueprints]]
 == Projetos
 
 Os projetos a seguir ilustram modelos comuns de implantação para VMware Cloud Foundation e ONTAP em vários cenários de sites e recursos.
 
 
 
+[[vcf-fleet-in-a-single-site-with-minimal-footprint]]
 === Frota VCF em um único local com pegada mínima
 
 Este projeto de design é para implantar componentes de gerenciamento e carga de trabalho em um único cluster vSphere com recursos mínimos.  Ele suporta VMFS e NFSv3 Principal Datastores e uma opção de implantação simples com uma configuração de dois nós.  Se você planeja usar o VCF Automation com o modelo de organização de todos os aplicativos, precisará de um segundo cluster para implantar o vSphere Supervisor e os nós do NSX Edge.
@@ -71,6 +74,7 @@ Para mais detalhes sobre este projeto, consulte olink:https://techdocs.broadcom.
 
 
 
+[[vcf-fleet-in-a-single-site]]
 === Frota VCF em um único local
 
 Este projeto de design é para clientes com um único Datacenter Primário que dependem de Alta Disponibilidade de aplicativos.  Normalmente, envolve um único ambiente VCF.  Você pode usar o ASA para cargas de trabalho em bloco e o AFF para cargas de trabalho de arquivo/unificadas.
@@ -94,6 +98,7 @@ Para mais detalhes sobre este projeto, consulte olink:https://techdocs.broadcom.
 
 
 
+[[vcf-fleet-with-multiple-sites-in-a-single-region]]
 === Frota VCF com vários locais em uma única região
 
 Este design é para clientes que fornecem serviços semelhantes aos da nuvem com maior disponibilidade, distribuindo cargas de trabalho entre diferentes domínios de falhas.
@@ -116,6 +121,7 @@ Para mais informações, consulte olink:https://techdocs.broadcom.com/us/en/vmwa
 
 
 
+[[vcf-fleet-with-multiple-sites-across-multiple-regions]]
 === Frota VCF com vários locais em várias regiões
 
 Este projeto é para clientes espalhados pelo mundo todo, fornecendo serviços de proximidade e soluções de recuperação de desastres.
@@ -143,6 +149,7 @@ Para mais informações, consulte olink:https://techdocs.broadcom.com/us/en/vmwa
 
 
 
+[[vcf-fleet-with-multiple-sites-in-a-single-region-plus-additional-regions]]
 === Frota VCF com vários locais em uma única região, além de regiões adicionais
 
 Este design aborda tanto a disponibilidade quanto a recuperação de desastres de VMs e aplicativos VKS.

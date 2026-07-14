@@ -18,6 +18,7 @@ Instale o operador OpenShift API for Data Protection (OADP) para habilitar recur
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 * Um cluster Red Hat OpenShift (posterior à versão 4.12) instalado em infraestrutura bare-metal com nós de trabalho RHCOS
@@ -37,6 +38,7 @@ NOTE: Se você quiser fazer um backup de uma VM quando ela estiver no estado Em 
 
 
 
+[[steps-to-install-oadp-operator]]
 == Etapas para instalar o operador OADP
 
 . Acesse o Operator Hub do cluster e selecione o operador Red Hat OADP. Na página Instalar, use todas as seleções padrões e clique em instalar. Na próxima página, use novamente todos os padrões e clique em Instalar. O operador OADP será instalado no namespace openshift-adp.
@@ -50,6 +52,7 @@ image:redhat-openshift-oadp-install-003.png["API OpenShift para Operador de Prot
 
 
 
+[[prerequisites-for-velero-configuration-with-ontap-s3-details]]
 === Pré-requisitos para configuração do Velero com detalhes do Ontap S3
 
 Após a instalação bem-sucedida do operador, configure a instância do Velero. O Velero pode ser configurado para usar o Object Storage compatível com S3. Configure o ONTAP S3 usando os procedimentos mostrados nolink:https://docs.netapp.com/us-en/ontap/object-storage-management/index.html["Seção de gerenciamento de armazenamento de objetos da documentação do ONTAP"] . Você precisará das seguintes informações da sua configuração do ONTAP S3 para integrar com o Velero.
@@ -62,6 +65,7 @@ Após a instalação bem-sucedida do operador, configure a instância do Velero.
 
 
 
+[[prerequisites-for-velero-configuration-with-storagegrid-s3-details]]
 === Pré-requisitos para configuração do Velero com detalhes do StorageGrid S3
 
 O Velero pode ser configurado para usar o Object Storage compatível com S3. Você pode configurar o StorageGrid S3 usando os procedimentos mostrados nolink:https://docs.netapp.com/us-en/storagegrid-116/s3/configuring-tenant-accounts-and-connections.html["Documentação do StorageGrid"] . Você precisará das seguintes informações da configuração do StorageGrid S3 para integrar com o Velero.
@@ -74,6 +78,7 @@ O Velero pode ser configurado para usar o Object Storage compatível com S3. Voc
 
 
 
+[[steps-to-configure-velero]]
 === Etapas para configurar o Velero
 
 * Primeiro, crie um segredo para uma credencial de usuário do ONTAP S3 ou credenciais de usuário do StorageGrid Tenant. Isso será usado para configurar o Velero mais tarde. Você pode criar um segredo a partir da CLI ou do console da web. Para criar um segredo no console da web, selecione Segredos e clique em Segredo de chave/valor. Forneça os valores para o nome da credencial, a chave e o valor, conforme mostrado. Certifique-se de usar o ID da chave de acesso e a chave de acesso secreta do seu usuário do S3. Dê um nome apropriado ao segredo. No exemplo abaixo, um segredo com credenciais de usuário do ONTAP S3 chamado ontap-s3-credentials é criado.

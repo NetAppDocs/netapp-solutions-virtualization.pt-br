@@ -25,6 +25,7 @@ NOTE: Ao usar LVM com protocolos SAN (FC, iSCSI, NVMe-oF), o grupo de volumes po
 
 
 
+[[choose-a-storage-protocol]]
 == Escolha um protocolo de armazenamento
 
 Selecione o protocolo que melhor se adequa ao seu ambiente e às suas necessidades:

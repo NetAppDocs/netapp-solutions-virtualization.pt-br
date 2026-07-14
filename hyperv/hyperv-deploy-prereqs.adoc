@@ -18,6 +18,7 @@ Prepare seu ambiente para implantar um cluster Microsoft Hyper-V com sistemas de
 
 
 
+[[pre-requisites-for-deployment-procedure]]
 == Pré-requisitos para o procedimento de implantação
 
 * Todo o hardware deve ser certificado para a versão do Windows Server que você está executando, e a solução completa do cluster de failover deve passar em todos os testes do Assistente para Validar uma Configuração
@@ -39,6 +40,7 @@ Para mais informações, consulte:
 
 
 
+[[installing-windows-features]]
 === Instalando recursos do Windows
 
 As etapas a seguir descrevem como instalar os recursos necessários do Windows Server 2022.
@@ -58,6 +60,7 @@ Add-WindowsFeature Hyper-V, Failover-Clustering, Multipath-IO `-IncludeManagemen
 
 
 
+[[configuring-networks]]
 === Configurando Redes
 
 O planejamento adequado da rede é essencial para alcançar uma implantação tolerante a falhas.  Configurar adaptadores de rede física distintos para cada tipo de tráfego era a sugestão padrão para um cluster de failover.  Com a capacidade de adicionar adaptadores de rede virtuais, o switch embedded teaming (SET) e recursos como o Hyper-V QoS introduzidos, condensam o tráfego de rede em menos adaptadores físicos.  Projete a configuração de rede com qualidade de serviço, redundância e isolamento de tráfego em mente.  Configurar técnicas de isolamento de rede, como VLANs, em conjunto com técnicas de isolamento de tráfego, fornece redundância para o tráfego e qualidade de serviço, o que melhoraria e adicionaria consistência ao desempenho do tráfego de armazenamento.
@@ -79,6 +82,7 @@ Para obter informações adicionais, consultelink:https://learn.microsoft.com/en
 
 
 
+[[deciding-on-storage-design-for-hyper-v]]
 === Decidindo sobre o design de armazenamento para o Hyper-V
 
 O Hyper-V oferece suporte a NAS (SMB3.0) e armazenamento em bloco (iSCSI/FC) como armazenamento de apoio para máquinas virtuais.  O NetApp oferece suporte aos protocolos SMB3.0, iSCSI e FC, que podem ser usados como armazenamento nativo para VMs - Cluster Shared Volumes (CSV) usando iSCSI/FC e SMB3.  Os clientes também podem usar SMB3 e iSCSI como opções de armazenamento conectado a convidados para cargas de trabalho que exigem acesso direto ao armazenamento.  O ONTAP oferece opções flexíveis com armazenamento unificado (All Flash Array) para cargas de trabalho que exigem acesso a protocolos mistos e armazenamento otimizado para SAN (All SAN Array) para configurações somente SAN.
@@ -100,6 +104,7 @@ A decisão de usar SMB3 em vez de iSCSI/FC é motivada pela infraestrutura exist
 
 
 
+[[installing-netapp-windows-iscsi-host-utilities]]
 === Instalando os utilitários do host iSCSI do NetApp Windows
 
 A seção a seguir descreve como executar uma instalação autônoma do NetApp Windows iSCSI Host Utilities.  Para obter informações detalhadas sobre a instalação, consulte olink:https://docs.netapp.com/us-en/ontap-sanhost/hu_wuhu_72.html["Instalar o Windows Unified Host Utilities 7.2 (ou a versão mais recente com suporte)"]
@@ -125,6 +130,7 @@ Unblock-file ~\Downloads\netapp_windows_host_utilities_7.2_x64.msi
 
 
 
+[[configuring-windows-host-iscsi-initiator]]
 === Configurando o iniciador iSCSI do Windows Host
 
 As etapas a seguir descrevem como configurar o iniciador iSCSI integrado da Microsoft.
@@ -182,6 +188,7 @@ Get-IscsiTarget | Connect-IscsiTarget -IsPersistent $true -IsMultipathEnabled $t
 
 
 
+[[creating-a-cluster]]
 === Criando um Cluster
 
 *Apenas um servidor*

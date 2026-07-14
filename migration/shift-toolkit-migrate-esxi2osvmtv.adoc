@@ -18,6 +18,7 @@ Esta seção aborda como o Migration Toolkit for Virtualization (MTV) e o NetApp
 
 
 
+[[before-you-begin]]
 == Antes de começar
 
 Verifique se os seguintes pré-requisitos foram atendidos antes de iniciar a migração.
@@ -54,6 +55,7 @@ NOTE: Quando os VMDKs são colocados dentro de uma qtree, o Shift Toolkit utiliz
 
 
 
+[[step-1-create-migration-plans-using-migration-toolkit-for-virtualization]]
 == Etapa 1: Crie planos de migração usando o Migration Toolkit for Virtualization
 
 . Para aproveitar a conversão ultrarrápida de VMs, o primeiro passo é criar um plano de migração para as VMs usando o MTV.link:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.3/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console["console web"] ou olink:https://docs.redhat.com/en/documentation/migration_toolkit_for_virtualization/2.0/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-virtual-machines-to-virt_mtv#migrating-virtual-machines-cli_mtv["linha de comando"] .

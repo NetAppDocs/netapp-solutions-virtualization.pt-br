@@ -20,6 +20,7 @@ Configure o Logical Volume Manager (LVM) para armazenamento compartilhado entre 
 video::80164fe4-06db-4c21-a25d-b22e0179c3d2[panopto,width=360]
 
 
+[[initial-virtualization-administrator-tasks]]
 == Tarefas iniciais do administrador de virtualização
 
 Conclua estas tarefas iniciais para preparar os hosts Proxmox VE para conectividade NVMe/TCP e coletar as informações necessárias para o administrador de armazenamento.
@@ -36,6 +37,7 @@ nvme show-hostnqn
 
 
 
+[[storage-administrator-tasks]]
 == Tarefas do administrador de armazenamento
 
 Se você é novo no ONTAP, use o Gerenciador de Sistemas para uma melhor experiência.
@@ -56,6 +58,7 @@ image:proxmox-ontap-nvme-tcp-001.png["criação de namespace nvme"]
 
 
 
+[[final-virtualization-administrator-tasks]]
 == Tarefas finais do administrador de virtualização
 
 Conclua estas tarefas para configurar o namespace NVMe como armazenamento LVM compartilhado no Proxmox VE.

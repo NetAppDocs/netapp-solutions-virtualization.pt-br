@@ -18,6 +18,7 @@ Revise os requisitos de infraestrutura e design de rede recomendados para implan
 
 
 
+[[infrastructure-requirements]]
 == Requisitos de infraestrutura
 
 * Um sistema de armazenamento ONTAP AFF ou ASA com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
@@ -27,6 +28,7 @@ Revise os requisitos de infraestrutura e design de rede recomendados para implan
 
 
 
+[[recommended-nvmetcp-network-design]]
 == Projeto de rede NVMe/TCP recomendado
 
 A NetApp recomenda projetos de rede totalmente redundantes para NVMe/TCP. O diagrama a seguir ilustra um exemplo de configuração redundante, fornecendo tolerância a falhas para sistemas de armazenamento, switches, adaptadores de rede e sistemas host.
@@ -37,6 +39,7 @@ Para multipathing e failover em vários caminhos, configure no mínimo dois LIFs
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Após revisar os requisitos de implantação,link:vmw-vcf-viwld-supp-nvme-svm-lifs.html["criar o SVM e os LIFs"] .

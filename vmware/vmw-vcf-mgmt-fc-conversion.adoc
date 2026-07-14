@@ -19,6 +19,7 @@ Quando apropriado, a documentação da VMware será consultada para obter instru
 
 
 
+[[step-1-copy-the-vcf-import-tool-and-run-a-precheck]]
 == Etapa 1: Copie a ferramenta de importação VCF e execute uma pré-verificação
 
 A Ferramenta de Importação de VCF é usada no dispositivo vCenter para validar se o cluster vSphere está em um estado íntegro para o processo de conversão ou importação de VCF.
@@ -45,6 +46,7 @@ image::vmware-vcf-import-nfs-011.png[ferramenta de importação vcf pré-verific
 
 
 
+[[step-2-deploy-the-sddc-manager-and-create-nsx-deployment-specification]]
 == Etapa 2: implantar o SDDC Manager e criar a especificação de implantação do NSX
 
 Implante o dispositivo SDDC Manager no mesmo cluster vSphere que você planeja converter em um domínio de gerenciamento VCF.
@@ -100,6 +102,7 @@ NOTE: Ao implantar um cluster do NSX Manager em uma operação de conversão ou 
 
 
 
+[[step-3-upload-software-to-sddc-manager]]
 == Etapa 3: Carregar software no SDDC Manager
 
 Carregue o pacote da Ferramenta de Importação VCF e o pacote de implantação NSX para o Gerenciador SDDC seguindo as instruções na documentação do VMware: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/seed-software-on-sddc-manager.html["Carregue o software necessário para o SDDC Manager Appliance"] .
@@ -108,6 +111,7 @@ Certifique-se de copiar a Ferramenta de Importação VCF e o pacote de implanta�
 
 
 
+[[step-4-convert-the-vsphere-cluster-to-the-vcf-management-domain]]
 == Etapa 4: converter o cluster vSphere para o domínio de gerenciamento VCF
 
 Converta o cluster vSphere para o domínio de gerenciamento VCF seguindo as instruções na documentação do VMware: https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/import-workload-domain-into-sddc-manager-inventory.html["Converter ou importar o ambiente vSphere para o inventário do SDDC Manager"] .
@@ -130,6 +134,7 @@ TIP: Você pode revisar todas as funções disponíveis da ferramenta de importa
 
 
 
+[[step-5-add-licensing-to-vcf]]
 == Etapa 5: adicionar licenciamento ao VCF
 
 Após concluir a conversão, o licenciamento deve ser adicionado ao ambiente.

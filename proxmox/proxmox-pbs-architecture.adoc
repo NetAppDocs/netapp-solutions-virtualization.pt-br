@@ -19,6 +19,7 @@ O PBS suporta diversos sistemas de armazenamento, incluindo armazenamento local,
 
 
 
+[[solution-architecture]]
 == Arquitetura da solução
 
 A solução inclui os seguintes componentes:

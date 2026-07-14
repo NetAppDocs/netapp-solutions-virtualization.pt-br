@@ -18,6 +18,7 @@ Restaure VMs no OpenShift Virtualization usando o Velero e a API OpenShift para 
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Para restaurar a partir de um backup, vamos supor que o namespace onde a máquina virtual existia foi excluído acidentalmente.

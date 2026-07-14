@@ -18,6 +18,7 @@ Neste caso de uso, descrevemos o procedimento para configurar um armazenamento d
 
 
 
+[[benefits-of-nfs]]
 == Benefícios do NFS
 
 *Simplicidade e facilidade de uso:* O NFS é simples de configurar e gerenciar, o que o torna uma excelente escolha para ambientes que exigem compartilhamento de arquivos rápido e fácil.
@@ -32,6 +33,7 @@ Para obter mais informações sobre o uso do Fibre Channel com sistemas de armaz
 
 
 
+[[scenario-overview]]
 == Visão geral do cenário
 
 Este cenário abrange as seguintes etapas de alto nível:
@@ -51,6 +53,7 @@ NOTE: Esta solução é aplicável para plataformas ONTAP que suportam armazenam
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Os seguintes componentes e configurações são usados neste cenário:
@@ -75,6 +78,7 @@ Para obter mais informações sobre o uso do NFS com clusters vSphere, consulte 
 
 
 
+[[deployment-steps]]
 == Etapas de implantação
 
 Para implantar um domínio de carga de trabalho VI com um armazenamento de dados NFS como armazenamento principal, conclua as seguintes etapas:
@@ -294,12 +298,14 @@ Para obter instruções passo a passo sobre como implantar o NetApp NFS Plug-in 
 ====
 
 
+[[video-demo-for-this-solution]]
 == Demonstração em vídeo desta solução
 
 .Datastores NFS como armazenamento principal para domínios de carga de trabalho VCF
 video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto,width=360]
 
 
+[[additional-information]]
 == Informações adicionais
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.

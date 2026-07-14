@@ -22,6 +22,7 @@ Neste cenário, demonstraremos como implantar e usar ONTAP tools for VMware vSph
 
 
 
+[[solution-overview]]
 == Visão geral da solução
 
 Este cenário abrange as seguintes etapas de alto nível:
@@ -35,6 +36,7 @@ Este cenário abrange as seguintes etapas de alto nível:
 
 
 
+[[architecture]]
 == Arquitetura
 
 O diagrama a seguir mostra os componentes arquitetônicos de uma implementação de ONTAP tools for VMware vSphere 10.
@@ -43,6 +45,7 @@ image:vmware-nfs-otv10-029.png["arquitetura otv10"]
 
 
 
+[[prerequisites]]
 == Pré-requisitos
 
 Esta solução requer os seguintes componentes e configurações:
@@ -62,12 +65,14 @@ Ferramentas ONTAP abrangentes 10 recursos podem ser encontrados https://docs.net
 
 
 
+[[deployment-steps]]
 == Etapas de implantação
 
 Para implantar as ferramentas ONTAP 10 e usá-las para criar um armazenamento de dados NFS no domínio de gerenciamento do VCF, conclua as seguintes etapas:
 
 
 
+[[create-svm-and-lifs-on-ontap-storage-system]]
 === Crie SVM e LIFs no sistema de armazenamento ONTAP
 
 A etapa seguinte é executada no ONTAP System Manager.
@@ -108,6 +113,7 @@ image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
 ====
 
 
+[[set-up-networking-for-nfs-on-esxi-hosts]]
 === Configurar rede para NFS em hosts ESXi
 
 As etapas a seguir são executadas no cluster do VI Workload Domain usando o cliente vSphere.  Neste caso, o vCenter Single Sign-On está sendo usado para que o cliente vSphere seja comum em todos os domínios de gerenciamento e carga de trabalho.
@@ -194,6 +200,7 @@ image:vmware-nfs-otv10-006.png["Revisar as seleções do VMkernel"]
 ====
 
 
+[[deploy-and-use-ontap-tools-10-to-configure-storage]]
 === Implantar e usar ferramentas ONTAP 10 para configurar o armazenamento
 
 As etapas a seguir são executadas no cluster vSphere 8 usando o cliente vSphere e envolvem a implantação do OTV, a configuração do ONTAP Tools Manager e a criação de um armazenamento de dados NFS vVols .
@@ -439,6 +446,7 @@ image:vmware-nfs-otv10-032.png["Painel de tarefas recentes"]
 ====
 
 
+[[additional-information]]
 == Informações adicionais
 
 Para obter uma lista completa de ONTAP tools for VMware vSphere 10, consulte https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html["ONTAP tools for VMware vSphere"] .

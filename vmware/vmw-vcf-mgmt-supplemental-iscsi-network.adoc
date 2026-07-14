@@ -17,6 +17,7 @@ Execute estas etapas no cluster de domínio de gerenciamento do VCF usando o cli
 
 
 
+[[step-1-create-distributed-port-groups-for-iscsi-traffic]]
 == Etapa 1: criar grupos de portas distribuídas para tráfego iSCSI
 
 Conclua as seguintes etapas para criar um novo grupo de portas distribuídas para cada rede iSCSI:
@@ -69,6 +70,7 @@ image:vmware-vcf-asa-026.png["mover uplink1 para não utilizado"]
 
 
 
+[[step-2-create-vmkernel-adapters-on-each-esxi-host]]
 == Etapa 2: criar adaptadores VMkernel em cada host ESXi
 
 Crie adaptadores VMkernel em cada host ESXi no domínio de gerenciamento.
@@ -127,6 +129,7 @@ image:vmware-vcf-asa-034.png["Revisar as seleções do VMkernel"]
 
 
 
+[[whats-next]]
 == O que vem a seguir?
 
 Depois de configurar a rede para iSCSI em todos os hosts ESXi no domínio de carga de trabalho,link:vmw-vcf-mgmt-supplemental-iscsi-storage.html["configurar armazenamento para iSCSI em hosts ESXi"] .
