@@ -174,9 +174,9 @@ NOTE: Para obter detalhes adicionais sobre as práticas recomendadas para config
 [[openshift-virtualization-tuning-scaling-guide]]
 == **OpenShift Virtualization - Guia de ajuste e dimensionamento**
 
-A Red Hat documentoulink:https://docs.openshift.com/container-platform/latest/scalability_and_performance/recommended-performance-scale-practices/recommended-control-plane-practices.html["Recomendações e limitações de dimensionamento de cluster OpenShift"] .
+A Red Hat documentou link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/scalability_and_performance/recommended-performance-and-scalability-practices-2["Recomendações e limitações de dimensionamento de cluster OpenShift"].
 
-Além disso, eles também documentaramlink:https://access.redhat.com/articles/6994974]["Guia de ajuste de virtualização OpenShift"] elink:https://access.redhat.com/articles/6571671["Limites suportados para OpenShift Virtualization 4.x"] .
+Além disso, eles também documentaram link:https://access.redhat.com/articles/6994974["Guia de ajuste de virtualização OpenShift"] e link:https://access.redhat.com/articles/6571671["Limites suportados para OpenShift Virtualization 4.x"].
 
 
 NOTE: É necessária uma assinatura ativa do Red Hat para acessar o conteúdo acima.
@@ -185,7 +185,7 @@ O guia de ajuste contém informações sobre muitos parâmetros de ajuste, inclu
 
 * Ajustando parâmetros para criar muitas VMs de uma vez ou em grandes lotes
 * Migração ao vivo de VMs
-* link:https://docs.openshift.com/container-platform/latest/virt/vm_networking/virt-dedicated-network-live-migration.html["Configurando uma rede dedicada para migração ao vivo"]
+* link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/live-migration#virt-configuring-secondary-network-vm-live-migration_virt-configuring-cross-cluster-live-migration-network["Configurando uma rede dedicada para migração ao vivo"]
 * Personalizando um modelo de VM incluindo um tipo de carga de trabalho
 
 

@@ -61,7 +61,7 @@ image:redhat-openshift-008.png["Figura mostrando diálogo de entrada/saída ou r
 +
 image:redhat-openshift-009.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
 
-. Siga olink:https://docs.openshift.com/container-platform/4.7/installing/index.html["instruções de instalação"] fornecido pela Red Hat para implantação no ambiente de sua escolha.
+. Siga as link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22#Install["instruções de instalação"] instruções fornecidas pela Red Hat para implantar no ambiente de sua escolha.
 
 
 

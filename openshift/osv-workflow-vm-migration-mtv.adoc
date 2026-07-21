@@ -14,12 +14,12 @@ summary: Virtualização Red Hat OpenShift com NetApp ONTAP
 
 
 [role="lead"]
-Migre VMs do VMware para um cluster OpenShift usando o kit de ferramentas de migração de virtualização OpenShift.  Essa migração envolve a instalação do Migration Toolkit for Virtualization (MTV), a criação de provedores de origem e destino, a criação de um plano de migração e a execução de uma migração fria ou quente.
+Migre máquinas virtuais do VMware para um cluster OpenShift usando o kit de ferramentas de migração de virtualização OpenShift. Essa migração envolve a instalação do Kit de Ferramentas de Migração para Virtualização (MTV), a criação de provedores de origem e destino, a criação de um plano de migração e a execução de uma migração a frio ou a quente.
 
 .Migração Fria
 [%collapsible%open]
 ====
-Este é o tipo de migração padrão.  As máquinas virtuais de origem são desligadas enquanto os dados são copiados.
+Este é o tipo de migração padrão. As máquinas virtuais de origem são desligadas enquanto os dados são copiados.
 
 ====
 .Migração Quente
@@ -42,9 +42,9 @@ video::bac58645-dd75-4e92-b5fe-b12b015dc199[panopto,width=360]
 [[migration-of-vm-from-vmware-to-openshift-virtualization-using-migration-toolkit-for-virtualization]]
 == Migração de VM do VMware para o OpenShift Virtualization usando o Migration Toolkit for Virtualization
 
-Nesta seção, veremos como usar o Migration Toolkit for Virtualization (MTV) para migrar máquinas virtuais do VMware para o OpenShift Virtualization em execução na plataforma OpenShift Container e integradas ao armazenamento NetApp ONTAP usando o Trident.
+Esta seção descreve como usar o Migration Toolkit for Virtualization (MTV) para migrar máquinas virtuais do VMware para OpenShift Virtualization executando na OpenShift Container Platform e integrada ao armazenamento NetApp ONTAP usando Trident.
 
-O diagrama a seguir mostra uma visão geral da migração de uma VM do VMware para o Red Hat OpenShift Virtualization.
+O diagrama a seguir mostra uma visão geral de alto nível da migração de uma máquina virtual do VMware para o Red Hat OpenShift Virtualization.
 
 image:rh-os-n-use-case-vm-migration-using-mtv.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
 
@@ -56,43 +56,45 @@ image:rh-os-n-use-case-vm-migration-using-mtv.png["Figura mostrando diálogo de 
 
 
 [[on-vmware]]
-=== **No VMware**
+=== No VMware
 
-* Uma VM RHEL 9 usando rhel 9.3 com as seguintes configurações foi instalada:
+* Uma máquina virtual RHEL 9 usando RHEL 9.3 com as seguintes configurações foi instalada:
 +
 ** CPU: 2, Memória: 20 GB, Disco rígido: 20 GB
-** credenciais do usuário: usuário root e credenciais de usuário administrador
+** Credenciais do usuário: usuário raiz e usuário admin
 
 
-* Depois que a VM ficou pronta, o servidor postgresql foi instalado.
+* Após a máquina virtual estar pronta, o servidor PostgreSQL foi instalado.
 +
-** o servidor postgresql foi iniciado e habilitado para iniciar na inicialização
-+
+** O servidor PostgreSQL foi iniciado e habilitado para iniciar na inicialização do sistema
+
+
+
+
 [source, console]
 ----
-systemctl start postgresql.service`
+systemctl start postgresql.service
 systemctl enable postgresql.service
-The above command ensures that the server can start in the VM in OpenShift Virtualization after migration
 ----
-** Foram adicionados 2 bancos de dados, 1 tabela e 1 linha na tabela. Consultelink:https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_using_database_servers/using-postgresql_configuring-and-using-database-servers#configuring-postgresql_using-postgresql["aqui"] Para obter instruções sobre como instalar o servidor PostgreSQL no RHEL e criar entradas de banco de dados e tabelas.
+Esses comandos garantem que o servidor possa ser iniciado na máquina virtual em OpenShift Virtualization após a migração.
+
+* Adicionadas 2 bases de dados, 1 tabela e 1 linha à tabela. Consulte link:https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_using_database_servers/using-postgresql_configuring-and-using-database-servers#configuring-postgresql_using-postgresql["aqui"] para obter instruções sobre como instalar o servidor PostgreSQL no RHEL e criar entradas de banco de dados e tabelas.
 
 
 
-
-
-NOTE: Certifique-se de iniciar o servidor postgresql e habilitar o serviço para iniciar na inicialização.
+NOTE: Certifique-se de iniciar o servidor PostgreSQL e habilitar o serviço para iniciar na inicialização.
 
 
 
 [[on-openshift-cluster]]
-=== **No OpenShift Cluster**
+=== No OpenShift Cluster
 
 As seguintes instalações foram concluídas antes da instalação da MTV:
 
 * OpenShift Cluster 4.17 ou posterior
 * Multipath nos nós do cluster habilitados para iSCSI (para classe de armazenamento ontap-san).  O multicaminho pode ser habilitado facilmente se você instalar o Trident 25.02 usando o sinalizador node-prep.  Você pode consultar olink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
 * Instale as classes de backend e armazenamento necessárias e a classe de snapshot. Consulte olink:osv-trident-install.html["Seção de instalação do Trident"] para mais detalhes.
-* link:https://docs.openshift.com/container-platform/4.13/virt/install/installing-virt-web.html["Virtualização OpenShift"]
+* link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.19#Virtualization["Virtualização OpenShift"]
 
 
 
@@ -100,19 +102,21 @@ As seguintes instalações foram concluídas antes da instalação da MTV:
 [[install-mtv]]
 === Instalar MTV
 
-Agora você pode instalar o Migration Toolkit para virtualização (MTV).  Consulte as instruções fornecidaslink:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-the-operator["aqui"] para obter ajuda com a instalação.
+Agora você pode instalar o Migration Toolkit for Virtualization (MTV). Consulte as instruções fornecidas link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/installing-the-operator["aqui"] para obter ajuda com a instalação.
 
-A interface de usuário do Migration Toolkit for Virtualization (MTV) é integrada ao console web do OpenShift.  Você pode se referirlink:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#mtv-ui_mtv["aqui"] para começar a usar a interface do usuário para várias tarefas.
+A interface de usuário do Migration Toolkit for Virtualization (MTV) está integrada ao OpenShift web console. Você pode consultar link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#mtv-ui_mtv["aqui"] para começar a usar a interface de usuário para diversas tarefas.
 
-**Criar Provedor de Origem**
 
-Para migrar a VM RHEL do VMware para o OpenShift Virtualization, você precisa primeiro criar o provedor de origem para o VMware.  Consulte as instruçõeslink:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#adding-providers["aqui"] para criar o provedor de origem.
+
+==== Criar provedor de origem
+
+Para migrar a VM do RHEL do VMware para OpenShift Virtualization, você precisa primeiro criar o provedor de origem para o VMware. Consulte as instruções link:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#adding-providers["aqui"] para criar o provedor de origem.
 
 Você precisa do seguinte para criar seu provedor de origem VMware:
 
-* URL do VCenter
-* Credenciais do VCenter
-* Impressão digital do servidor VCenter
+* URL do vCenter
+* Credenciais do vCenter
+* vCenter servidor impressão digital
 * Imagem VDDK em um repositório
 
 
@@ -125,18 +129,22 @@ NOTE: O Migration Toolkit for Virtualization (MTV) usa o SDK do VMware Virtual D
 
 Siga as instruções fornecidaslink:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#creating-vddk-image_mtv["aqui"] para criar e enviar a imagem do VDDK para um registro acessível no OpenShift Cluster.
 
-**Criar provedor de destino**
 
-O cluster de host é adicionado automaticamente, pois o provedor de virtualização OpenShift é o provedor de origem.
 
-**Criar Plano de Migração**
+==== Criar provedor de destino
+
+O cluster de hosts é adicionado automaticamente como provedor de destino.
+
+
+
+==== Criar plano de migração
 
 Siga as instruções fornecidaslink:https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/migrating-vms-web-console#creating-migration-plan_mtv["aqui"] para criar um plano de migração.
 
 Ao criar um plano, você precisa criar o seguinte, caso ainda não tenha criado:
 
 * Um mapeamento de rede para mapear a rede de origem para a rede de destino.
-* Um mapeamento de armazenamento para mapear o armazenamento de dados de origem para a classe de armazenamento de destino.  Para isso, você pode escolher a classe de armazenamento ontap-san.  Depois que o plano de migração for criado, o status do plano deverá mostrar *Pronto* e agora você poderá *Iniciar* o plano.
+* Um mapeamento de armazenamento para associar o armazenamento de dados de origem à classe de armazenamento de destino. Para isso, você pode escolher a classe de armazenamento ontap-san. Após a criação do plano de migração, o status do plano deverá exibir *Pronto* e você poderá *Iniciar* o plano.
 
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-ready.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
@@ -146,48 +154,48 @@ image:rh-os-n-use-case-vm-migration-mtv-plan-ready.png["Figura mostrando diálog
 [[perform-cold-migration]]
 === Executar migração a frio
 
-Clicar em *Iniciar* executará uma sequência de etapas para concluir a migração da VM.
+Clique em *Iniciar* para executar uma sequência de etapas e concluir a migração da máquina virtual.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-complete.png["Figura mostrando diálogo de entrada/saída ou representando conteúdo escrito"]
 
-Quando todas as etapas forem concluídas, você poderá ver as VMs migradas clicando em *máquinas virtuais* em *Virtualização* no menu de navegação do lado esquerdo.  Instruções para acessar as máquinas virtuais são fornecidaslink:https://docs.openshift.com/container-platform/4.13/virt/virtual_machines/virt-accessing-vm-consoles.html["aqui"] .
+Quando todas as etapas estiverem concluídas, você poderá visualizar as VMs migradas clicando em *Máquinas Virtuais* em *Virtualização* no menu de navegação à esquerda. Para gerenciar as máquinas virtuais, consulte link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/virtualization/managing-vms["a documentação de virtualização do OpenShift"].
 
-Você pode efetuar login na máquina virtual e verificar o conteúdo dos bancos de dados posgresql.  Os bancos de dados, tabelas e entradas na tabela devem ser os mesmos que foram criados na VM de origem.
+Você pode acessar a máquina virtual e verificar o conteúdo dos bancos de dados PostgreSQL. Os bancos de dados, as tabelas e as entradas nas tabelas devem ser idênticos aos criados na máquina virtual de origem.
 
 
 
 [[perform-warm-migration]]
 === Executar migração quente
 
-Para executar uma migração quente, depois de criar um plano de migração conforme mostrado acima, você precisa editar as configurações do plano para alterar o tipo de migração padrão.  Clique no ícone de edição ao lado da migração fria e alterne o botão para defini-la como migração quente.  Clique em **Salvar**.  Agora clique em **Iniciar** para iniciar a migração.
+Para realizar uma migração a quente, após criar um plano de migração como mostrado acima, você precisa editar as configurações do plano para alterar o tipo de migração padrão. Clique no ícone de edição ao lado da migração a frio e alterne o botão para defini-la como migração a quente. Clique em *Salvar*. Agora clique em *Iniciar* para iniciar a migração.
 
 
-NOTE: Ao migrar do armazenamento em bloco no VMware, certifique-se de ter selecionado a classe de armazenamento em bloco para a VM de virtualização OpenShift.  Além disso, o volumeMode deve ser definido como block e o modo de acesso deve ser rwx para que você possa executar a migração ao vivo da VM posteriormente.
+NOTE: Certifique-se de que, ao migrar do armazenamento em blocos no VMware, você tenha selecionado a classe de armazenamento em blocos para a máquina virtual de OpenShift Virtualization. Além disso, o volumeMode deve ser definido como Block e o modo de acesso deve ser ReadWriteMany (RWX) para que você possa realizar a migração ao vivo da máquina virtual posteriormente.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-001.png["1"]
 
-Clique em **0 de 1 vms concluídas**, expanda a vm e você poderá ver o progresso da migração.
+Clique em *0 de 1 VMs concluídas*, expanda a VM e você pode ver o progresso da migração.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-002.png["2"]
 
-Após algum tempo, a transferência do disco é concluída e a migração aguarda para prosseguir para o estado Cutover.  O DataVolume está em estado pausado.  Volte ao plano e clique no botão **Cutover**.
+Após algum tempo, a transferência de disco é concluída e a migração aguarda para prosseguir para o estado de Cutover. O DataVolume está em estado Pausado. Retorne ao plano e clique no botão *Cutover*.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-003.png["3"]
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-004.png["4"]
 
-A hora atual será exibida na caixa de diálogo.  Altere o horário para um horário futuro se quiser agendar uma transferência para um horário posterior.  Caso contrário, para executar uma transição agora, clique em **Definir transição**.
+A caixa de diálogo mostra a hora atual. Altere a hora para agendar a transição para mais tarde ou clique em *Definir transição* para realizar a transição imediatamente.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-005.png["5"]
 
-Após alguns segundos, o DataVolume passa do estado pausado para o estado ImportScheduled e para o ImportInProgress quando a fase de transição começa.
+Após alguns segundos, o DataVolume passa do estado Paused para o estado ImportScheduled para ImportInProgress quando a fase de cutover começa.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-006.png["6"]
 
-Quando a fase de transição é concluída, o DataVolume chega ao estado bem-sucedido e o PVC é vinculado.
+Quando a fase de transição é concluída, o DataVolume entra no estado Succeeded e o PVC é vinculado.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-007.png["7"]
 
-O plano de migração prossegue para concluir a fase de conversão de imagem e, finalmente, a fase de criação de máquina virtual é concluída.  A VM entra no estado de execução no OpenShift Virtualization.
+O plano de migração prossegue para concluir a fase ImageConversion e, finalmente, a fase VirtualMachineCreation é concluída. A VM entra no estado de execução em OpenShift Virtualization.
 
 image:rh-os-n-use-case-vm-migration-mtv-plan-warm-008.png["8"]
