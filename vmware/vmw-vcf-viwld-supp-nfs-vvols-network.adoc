@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc 
-summary: Configure a rede NFS em hosts ESXi em domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com sistemas de armazenamento ONTAP .  Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host ESXi para estabelecer caminhos NFS dedicados para recursos de failover. 
+summary: Configure a rede NFS nos hosts vSphere nos domínios de carga de trabalho do VMware Cloud Foundation para habilitar a conectividade com os sistemas de storage ONTAP. Você vai criar grupos de portas distribuídas com separação de VLAN, configurar o agrupamento de uplink para redundância e configurar adaptadores VMkernel em cada host vSphere para estabelecer caminhos NFS dedicados para recursos de failover. 
 ---
-= Configurar rede para NFS em hosts ESXi em um domínio de carga de trabalho VCF VI
+= Configurar a rede para NFS em hosts vSphere em um domínio de workload VCF
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,9 +14,9 @@ summary: Configure a rede NFS em hosts ESXi em domínios de gerenciamento do VMw
 
 
 [role="lead"]
-Configure a rede NFS em hosts ESXi em domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com sistemas de armazenamento ONTAP .  Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host ESXi para estabelecer caminhos NFS dedicados para recursos de failover.
+Configure a rede NFS nos hosts vSphere nos domínios de carga de trabalho do VMware Cloud Foundation para habilitar a conectividade com os sistemas de storage ONTAP. Você vai criar grupos de portas distribuídas com separação de VLAN, configurar o agrupamento de uplink para redundância e configurar adaptadores VMkernel em cada host vSphere para estabelecer caminhos NFS dedicados para recursos de failover.
 
-Execute as seguintes etapas no cluster do VI Workload Domain usando o cliente vSphere. Neste caso, o vCenter Single Sign-On está sendo usado para que o cliente vSphere seja comum em todos os domínios de gerenciamento e carga de trabalho.
+Execute as seguintes etapas no cluster do domínio de carga de trabalho usando o cliente vSphere. Neste caso, o vCenter Single Sign-On está sendo utilizado, então o cliente vSphere é comum aos domínios de gerenciamento e de carga de trabalho.
 
 
 
@@ -60,18 +60,18 @@ image:vmware-vcf-aff-037.png["DPG - editar configurações"]
 image:vmware-vcf-aff-038.png["DPG - uplinks de equipe"]
 
 ====
-. Repita esse processo para cada host ESXi no cluster.
+. Repita esse processo para cada vSphere host no cluster.
 
 
 
 
-[[step-2-create-a-vmkernel-adapter-on-each-esxi-host]]
-== Etapa 2: Crie um adaptador VMkernel em cada host ESXi
+[[step-2-create-a-vmkernel-adapter-on-each-vsphere-host]]
+== Etapa 2: Crie um adaptador VMkernel em cada vSphere host
 
-Crie um adaptador VMkernel em cada host ESXi no domínio de carga de trabalho.
+Crie um adaptador VMkernel em cada host vSphere no domínio de carga de trabalho.
 
 .Passos
-. No cliente vSphere, navegue até um dos hosts ESXi no inventário do domínio de carga de trabalho. Na aba *Configurar* selecione *Adaptadores VMkernel* e clique em *Adicionar Rede...* para começar.
+. No cliente vSphere, navegue até um dos hosts vSphere no inventário do domínio de carga de trabalho. Na guia *Configurar*, selecione *Adaptadores VMkernel* e clique em *Adicionar rede...* para começar.
 +
 .Mostrar exemplo
 [%collapsible]
@@ -119,4 +119,4 @@ image:vmware-vcf-aff-041.png["Revisar as seleções do VMkernel"]
 [[whats-next]]
 == O que vem a seguir?
 
-Depois de configurar a rede para NFS em todos os hosts ESXi no domínio de carga de trabalho,link:vmw-vcf-viwld-supp-nfs-vvols-storage.html["configurar armazenamento para NFS vVols"] .
+Após você configurar a rede para NFS em todos os hosts vSphere no domínio de carga de trabalho, link:vmw-vcf-viwld-supp-nfs-vvols-storage.html["configurar armazenamento para NFS vVols"].

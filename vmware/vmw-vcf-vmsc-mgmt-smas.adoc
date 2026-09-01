@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-vmsc-mgmt-smas.html
 keywords: netapp, vmware, cloud, foundation, vcf, asa, all-flash, array, ontap tools, otv, sddc, iscsi 
 summary:  
 ---
-= Configurar um cluster de extensão para um domínio de gerenciamento VCF usando o SnapMirror Active Sync
+= Configure um cluster estendido para um domínio de gerenciamento VCF usando o SnapMirror Active Sync (SAN e NAS)
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -16,47 +16,46 @@ summary:
 [role="lead"]
 Neste caso de uso, descrevemos o procedimento para usar ONTAP tools for VMware vSphere para configurar um cluster estendido para um domínio de gerenciamento VCF.  Este procedimento inclui a implantação de hosts vSphere e vCenter Server, a instalação de ferramentas ONTAP , a proteção de datastores com o SnapMirror Active Sync, a migração de VMs para datastores protegidos e a configuração de armazenamento suplementar.
 
-image:vmware-vcf-asa-mgmt-stretchcluster-001.png["Instância Única - Múltiplas Zonas de Disponibilidade"]
+image:vmw-vcf-vmsc-mgmt-smas-001.png["Stretch Cluster com ONTAP para domínio de gerenciamento de VCF"]
 
+Tanto as configurações de cluster estendido uniforme quanto não uniforme são suportadas para SAN. No caso de NAS, é uma configuração ativo-passivo com o ONTAP 9.19.1.
+
+[NOTE]
+====
+As configurações de proximidade do host são usadas com a configuração de multipath para garantir a seleção do caminho ideal para o tráfego de storage. As configurações de proximidade do host são configuradas no igroup no caso de SCSI e no subsistema no caso de NVMe-oF. Por exemplo, na configuração de Uniform host access, o host tem acesso a ambos os sistemas de storage no stretched cluster. Na configuração de multipath, os caminhos ideais e não ideais são configurados com base nas configurações de proximidade do host.
+
+====
 
 
 [[scenario-overview]]
 == Visão geral do cenário
 
-A solução de cluster extensível pode ser implementada no cluster padrão ou em um cluster adicional em domínios de gerenciamento ou carga de trabalho do VCF.  O VMFS no FC é suportado tanto no armazenamento de dados principal quanto no armazenamento de dados suplementar.  O VMFS no iSCSI só é suportado com armazenamentos de dados suplementares.  Consulte o IMT para obter suporte de VMFS em NVMe-oF com sincronização ativa do SnapMirror .
+A solução de cluster estendido pode ser implementada no cluster padrão ou em cluster adicional nos domínios de gerenciamento ou de carga de trabalho do VCF. As ONTAP tools 10.6 oferecem suporte à proteção de datastore com SnapMirror active sync para datastores VMFS nos protocolos iSCSI e FC. O ONTAP oferece suporte ao SnapMirror active sync para SAN (com iSCSI, FC, NVMe-oF) e NAS (NFS v3 e NFSv4.1). Para protocolos SAN, a proteção é realizada no nível de grupo de consistência, enquanto para NAS é realizada no nível de SVM. O diagrama a seguir ilustra a solução de cluster estendido para um domínio de gerenciamento VCF com as ONTAP tools para VMFS com FC.
 
 image:vmware-vcf-asa-mgmt-stretchcluster-002.png["Stretch Cluster com ONTAP para domínio de gerenciamento de VCF"]
 
 .Armazenamento principal no domínio de gerenciamento
 [%collapsible%open]
 ====
-A partir do VCF 5.2, o domínio de gerenciamento pode ser implantado sem VSAN usando a ferramenta de importação do VCF.  A opção de conversão da ferramenta de importação VCF permitelink:vmw-vcf-mgmt-fc.html["uma implantação existente do vCenter em um domínio de gerenciamento"] .  Todos os clusters no vCenter se tornarão parte do domínio de gerenciamento.
+. Implemente o domínio de gerenciamento VCF com qualquer protocolo compatível.
++
+.. Para VMFS em FC e NFSv3, a ferramenta VCF Installer é usada diretamente. No caso de iSCSI, NVMe-oF e NFSv4.1, é necessário configurar o vCenter e, posteriormente, usar a ferramenta VCF Installer para implantar o domínio de gerenciamento. Para mais informações, consulte link:vmw-vcf-migrate.html["Implantação do domínio de gerenciamento VCF com iSCSI, NVMe-oF e NFSv4.1"]
 
-. Implantar hosts vSphere
-. Implantar o servidor vCenter no armazenamento de dados local (o vCenter precisa coexistir em hosts vSphere que serão convertidos em domínio de gerenciamento)
+
 . Implantar ONTAP tools for VMware vSphere
 . Implantar o plugin SnapCenter para VMware vSphere (opcional)
-. Criar armazenamento de dados (a configuração da zona FC deve estar em vigor)
-. Proteja o cluster vSphere
-. Migrar VMs para um armazenamento de dados recém-criado
+. Proteja o datastore.
++
+.. Para iSCSI e FC, o ONTAP tools 10.6 ou superior é usado para proteger os datastores. No caso de NVMe-oF e NFSv4.1, utilize o System Manager para proteger os datastores. Para referência, confira o vídeo de demonstração abaixo para NVMe/TCP e NFS.
 
 
 
-NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualizar o relacionamento do cluster do host nas ferramentas ONTAP para que o cluster indique as alterações feitas na origem ou no destino.
 
 ====
 .Armazenamento suplementar no domínio de gerenciamento
 [%collapsible%open]
 ====
-Depois que o domínio de gerenciamento estiver instalado e funcionando, armazenamentos de dados adicionais poderão ser criados usando ferramentas ONTAP , o que acionará a expansão do grupo de consistência.
-
-
-TIP: Se um cluster vSphere estiver protegido, todos os armazenamentos de dados no cluster estarão protegidos.
-
-Se o ambiente VCF for implantado com a ferramenta Cloud Builder, para criar o armazenamento suplementar com iSCSI, implante ferramentas ONTAP para criar o armazenamento de dados iSCSI e proteger o cluster vSphere.
-
-
-NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualizar o relacionamento do cluster do host nas ferramentas ONTAP para que o cluster indique as alterações feitas na origem ou no destino.
+Após o domínio de gerenciamento estar em funcionamento, datastores adicionais podem ser criados usando o ONTAP tools 10.6 ou superior e protegidos com o SnapMirror active sync para iSCSI e FC. Para NVMe-oF e NFS, consulte o vídeo de demonstração abaixo como referência, pois a demonstração é realizada em um domínio de carga de trabalho, mas as mesmas etapas podem ser seguidas para o domínio de gerenciamento também.
 
 ====
 
@@ -66,12 +65,16 @@ NOTE: Sempre que o cluster for expandido ou reduzido, será necessário atualiza
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
 
-Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html["Documentação do VMware Cloud Foundation 5.2"] .
+Para obter informações sobre como configurar o VCF, consulte link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html["Documentação do VMware Cloud Foundation"].
 
 
 
 [[video-demo-for-this-solution]]
 == Demonstração em vídeo desta solução
 
-.Cluster de alongamento para VCF com ferramentas ONTAP
-video::569a91a9-2679-4414-b6dc-b25d00ff0c5a[panopto,width=360]
+.Stretch cluster para VCF com SnapMirror active sync iSCSI usando as ferramentas ONTAP
+video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto,width=360]
+.Cluster expansível para VCF com SnapMirror active sync NVMe/TCP
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto,width=360]
+.Cluster estendido para VCF com SnapMirror sincronização ativa NAS
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto,width=360]

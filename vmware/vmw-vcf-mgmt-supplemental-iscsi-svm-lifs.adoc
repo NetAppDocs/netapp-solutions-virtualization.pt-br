@@ -59,4 +59,4 @@ image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
 [[whats-next]]
 == O que vem a seguir?
 
-Depois de criar o SVM e os LIFs,link:vmw-vcf-mgmt-supplemental-iscsi-network.html["configurar rede para iSCSI em hosts ESXi"] .
+Após criar a SVM e as LIFs, link:vmw-vcf-mgmt-supplemental-iscsi-network.html["configurar rede para iSCSI em vSphere hosts"].

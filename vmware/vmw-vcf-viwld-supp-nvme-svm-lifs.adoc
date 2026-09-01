@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-nvme-svm-lifs.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: 'Crie uma Máquina Virtual de Armazenamento (SVM) com várias Interfaces Lógicas (LIFs) para fornecer conectividade iSCSI para domínios de gerenciamento do VMware Cloud Foundation.  Você configurará o SVM com suporte ao protocolo NVMe e configurará vários LIFs em redes Ethernet separadas para habilitar multipathing e failover para desempenho e disponibilidade ideais.' 
+summary: 'Crie uma Storage Virtual Machine (SVM) com várias Logical Interfaces (LIFs) para fornecer conectividade NVMe/TCP para domínios de workload do VMware Cloud Foundation. Você vai configurar a SVM com suporte ao protocolo NVMe e configurar várias LIFs em redes Ethernet separadas para habilitar multipath e failover, garantindo desempenho e disponibilidade ideais.' 
 ---
-= Crie SVM e LIFs e o namespace NVMe para armazenamentos de dados NVMe/TCP vVols em um domínio de carga de trabalho VCF VI
+= Crie SVMs e LIFs e o namespace NVMe para datastores NVMe/TCP em um domínio de carga de trabalho do VMware Cloud Foundation
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -64,10 +64,10 @@ image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
 
 Os namespaces NVMe são análogos aos LUNs para iSCSi ou FC. Você deve criar o Namespace NVMe antes que um armazenamento de dados VMFS possa ser implantado a partir do vSphere Client.
 
-Para criar o namespace NVMe, obtenha o Nome Qualificado NVMe (NQN) de cada host ESXi no cluster.  O ONTAP usa o NQN para fornecer controle de acesso ao namespace.
+Para criar o namespace NVMe, obtenha o Nome Qualificado NVMe (NQN) de cada vSphere host no cluster. O ONTAP usa o NQN para fornecer controle de acesso ao namespace.
 
 .Passos
-. Abra uma sessão SSH com um host ESXi no cluster para obter seu NQN.  Use o seguinte comando da CLI:
+. Abra uma sessão SSH com um host vSphere no cluster para obter seu NQN. Use o seguinte comando na CLI:
 +
 [source, cli]
 ----
@@ -81,7 +81,7 @@ Uma saída semelhante ao exemplo a seguir deve ser exibida:
 ----
 Host NQN: nqn.2014-08.com.netapp.sddc:nvme:vcf-wkld-esx01
 ----
-. Registre o NQN para cada host ESXi no cluster.
+. Registre o NQN para cada host vSphere no cluster.
 . No ONTAP System Manager, navegue até *NVMe Namespaces* no menu à esquerda e clique em *+ Adicionar* para iniciar.
 +
 .Mostrar exemplo
@@ -91,7 +91,7 @@ image:vmware-vcf-asa-093.png["Clique em +Adicionar para criar o namespace NVMe"]
 
 ====
 . Na página *Adicionar namespace NVMe*, preencha um prefixo de nome, o número de namespaces a serem criados, o tamanho do namespace e o sistema operacional do host que acessará o namespace.
-. Na seção *Host NQN*, crie uma lista separada por vírgulas dos NQNs coletados anteriormente dos hosts ESXi que acessarão os namespaces.
+. Na seção *Host NQN*, crie uma lista separada por vírgulas dos NQN's coletados anteriormente dos hosts vSphere que acessarão os namespaces.
 . Clique em *Mais opções* para configurar itens adicionais, como a política de proteção de instantâneos.
 . Por fim, clique em *Salvar* para criar o Namespace NVMe.
 +
@@ -108,4 +108,4 @@ image:vmware-vcf-asa-093.png["Clique em +Adicionar para criar o namespace NVMe"]
 [[whats-next]]
 == O que vem a seguir?
 
-Após criar o SVM e os LIFs,link:vmw-vcf-viwld-supp-nvme-network.html["configurar rede para NVMe/TCP (NVMe/TCP) vVols"] .
+Após criar a SVM e as LIFs, link:vmw-vcf-viwld-supp-nvme-network.html["configurar a rede para NVMe/TCP (NVMe/TCP)"].

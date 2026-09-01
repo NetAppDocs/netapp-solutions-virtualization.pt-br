@@ -49,31 +49,31 @@ entries:
     url: "/vmware/vmw-vcf-deployment.html"
   - title: NetApp Disaster Recovery
     url: "/vmware/vmw-vcf-disaster-recovery-nfs.html"
-  - title: Converter clusters vSphere existentes em VCF
+  - title: Convergir clusters vSphere existentes para VCF
     entries:
-    - title: Sobre a conversão de clusters vSphere existentes para VCF
+    - title: Sobre a convergência de clusters existentes vSphere para VCF
       url: "/vmware/vmw-vcf-migrate.html"
-    - title: Converter cluster vSphere existente com datastores NFS
+    - title: Convergir o cluster vSphere existente com os datastores NFS
       url: "/vmware/vmw-vcf-mgmt-nfs.html"
-    - title: Converter cluster vSphere existente com datastores FC
-      url: "/vmware/vmw-vcf-mgmt-fc.html"
+    - title: Convergir o cluster vSphere existente com datastores VMFS
+      url: "/vmware/vmw-vcf-mgmt-vmfs.html"
   - title: Provisionar VCF com armazenamento principal
     entries:
     - title: Sobre o provisionamento de armazenamento principal
       url: "/vmware/vmw-vcf-provision.html"
-    - title: Provisionar domínios de gerenciamento com FC
+    - title: Provisionar domínio de gerenciamento com FC
       url: "/vmware/vmw-vcf-mgmt-principal-fc.html"
-    - title: Provisionar domínios de gerenciamento com NFS
+    - title: Provisionar o domínio de gerenciamento com NFS
       url: "/vmware/vmw-vcf-mgmt-principal-nfs.html"
-    - title: Provisionar domínios de carga de trabalho VI com FC
+    - title: Provisione domínios de carga de trabalho com FC
       url: "/vmware/vmw-vcf-viwld-principal-fc.html"
-    - title: Provisionar domínios de carga de trabalho VI com NFS
+    - title: Provisione domínios de carga de trabalho com o NFS
       url: "/vmware/vmw-vcf-viwld-principal-nfs.html"
   - title: Expanda o VCF com armazenamento suplementar
     entries:
     - title: Saiba mais sobre como expandir o armazenamento
       url: "/vmware/vmw-vcf-expand.html"
-    - title: Expanda os domínios de gerenciamento com iSCSI
+    - title: Expanda o domínio de gerenciamento com iSCSI
       entries:
       - title: Fluxo de trabalho de implantação
         url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi.html"
@@ -85,9 +85,9 @@ entries:
         url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html"
       - title: Configurar armazenamento
         url: "/vmware/vmw-vcf-mgmt-supplemental-iscsi-storage.html"
-    - title: Expanda os domínios de gerenciamento com FC
+    - title: Expanda o domínio de gerenciamento com FC
       url: "/vmware/vmw-vcf-mgmt-supplemental-fc.html"
-    - title: Expanda os domínios de carga de trabalho do VI com vVols iSCSI
+    - title: Expanda os domínios de carga de trabalho do VCF com vVols iSCSI
       entries:
       - title: Fluxo de trabalho de implantação
         url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols.html"
@@ -99,7 +99,7 @@ entries:
         url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html"
       - title: Configurar armazenamento
         url: "/vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html"
-    - title: Expanda os domínios de carga de trabalho do VI com vVols NFS
+    - title: Expanda os domínios de carga de trabalho do VCF com vVols NFS
       entries:
       - title: Fluxo de trabalho de implantação
         url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols.html"
@@ -111,7 +111,7 @@ entries:
         url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-network.html"
       - title: Configurar armazenamento
         url: "/vmware/vmw-vcf-viwld-supp-nfs-vvols-storage.html"
-    - title: Expanda os domínios de carga de trabalho do VI com NVMe/TCP
+    - title: Expanda os domínios de carga de trabalho do VCF com NVMe/TCP
       entries:
       - title: Fluxo de trabalho de implantação
         url: "/vmware/vmw-vcf-viwld-supp-nvme.html"
@@ -123,7 +123,7 @@ entries:
         url: "/vmware/vmw-vcf-viwld-supp-nvme-network.html"
       - title: Configurar armazenamento
         url: "/vmware/vmw-vcf-viwld-supp-nvme-storage.html"
-    - title: Expanda os domínios de carga de trabalho do VI com FC
+    - title: Expanda os domínios de carga de trabalho do VCF com FC
       url: "/vmware/vmw-vcf-viwld-supp-fc.html"
   - title: Proteja o VCF com o SnapCenter
     entries:
@@ -141,11 +141,13 @@ entries:
       url: "/vmware/vmw-vcf-protect-vmsc.html"
     - title: Configurar domínios de gerenciamento com o MetroCluster
       url: "/vmware/vmw-vcf-vmsc-mgmt-mcc.html"
-    - title: Configurar domínios de carga de trabalho do VI com o MetroCluster
+    - title: Configurar domínios de carga de trabalho com o MetroCluster
       url: "/vmware/vmw-vcf-vmsc-viwld-mcc.html"
-    - title: Configurar domínios de gerenciamento com SnapMirror Active Sync
+    - title: Configurar domínios de gerenciamento com o SnapMirror Active Sync (SAN
+        e NAS)
       url: "/vmware/vmw-vcf-vmsc-mgmt-smas.html"
-    - title: Configurar domínios de carga de trabalho VI com SnapMirror Active Sync
+    - title: Configurar domínios de carga de trabalho com o SnapMirror Active Sync
+        (SAN e NAS)
       url: "/vmware/vmw-vcf-vmsc-viwld-smas.html"
   - title: Migrar VMs do vSphere
     url: "/vmware/migrate-vms-to-ontap-datastore.html"

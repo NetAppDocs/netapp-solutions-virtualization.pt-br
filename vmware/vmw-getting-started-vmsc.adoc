@@ -32,10 +32,10 @@ O NetApp MetroCluster usa o recurso de alta disponibilidade (HA) do NetApp para 
 
 
 
-[[netapp-snapmirror-active-sync]]
-== Sincronização ativa do NetApp SnapMirror
+[[netapp-snapmirror-active-sync-san-and-nas-protocols]]
+== NetApp SnapMirror active sync (protocolos SAN e NAS)
 
-O NetApp SnapMirror Active Sync fornece proteção granular de armazenamento de dados com protocolos FCP e iSCSI SAN, protegendo seletivamente a topologia de cargas de trabalho de alta prioridade.  Ele oferece acesso ativo-ativo a sites locais e remotos, diferentemente do MetroCluster ativo-em espera.  A partir do ONTAP 9.15.1, a sincronização ativa do SnapMirror oferece suporte à capacidade simétrica ativa/ativa, permitindo operações de E/S de leitura e gravação de ambas as cópias de um LUN protegido com replicação síncrona bidirecional.
+NetApp SnapMirror active sync oferece proteção granular por datastore (grupo de consistência) com protocolos SAN, protegendo seletivamente workloads de alta prioridade na topologia. Ele oferece acesso ativo-ativo tanto ao site local quanto ao remoto, diferentemente do ativo-em-espera MetroCluster. A partir do ONTAP 9.15.1, SnapMirror active sync suporta a capacidade ativo-ativo simétrica, permitindo operações de leitura e gravação de I/O a partir de ambas as cópias de um LUN/namespace protegido com replicação síncrona bidirecional. Com o ONTAP 9.19.1 em diante, SnapMirror active sync suporta protocolos NAS, protegendo no nível do SVM. O SVM ficará ativo em um site e em espera no outro, com replicação síncrona bidirecional.
 
 
 

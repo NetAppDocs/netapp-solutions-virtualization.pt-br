@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-nvme-requirements.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: Para implantar NVMe vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI, você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF completo e um domínio de carga de trabalho VI existente.  Revise o design de rede recomendado e os requisitos de infraestrutura para garantir uma integração de armazenamento confiável e de alto desempenho. 
+summary: Para implantar um datastore NVMe/TCP em um domínio de carga de trabalho do VMware Cloud Foundation, você precisa de um sistema de storage ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento do VCF concluído e um domínio de carga de trabalho existente. Analise o projeto de rede recomendado e os requisitos de infraestrutura para garantir uma integração de storage confiável e de alto desempenho. 
 ---
-= Requisitos de implantação para NVMe vVols em um domínio de carga de trabalho VI
+= Requisitos de implantação para datastore NVMe/TCP em um domínio de workload do VMware Cloud Foundation
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: Para implantar NVMe vVols em um domínio de carga de trabalho do VMware
 
 
 [role="lead"]
-Revise os requisitos de infraestrutura e design de rede recomendados para implantar NVMe vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI.  Você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF implantado e um domínio de carga de trabalho VI existente.
+Analise o projeto de rede recomendado e os requisitos de infraestrutura para implantar um datastore NVMe/TCP em um domínio de carga de trabalho do VMware Cloud Foundation. Você precisa de um sistema de storage ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento do VCF implantado e um domínio de carga de trabalho existente.
 
 
 
@@ -23,7 +23,7 @@ Revise os requisitos de infraestrutura e design de rede recomendados para implan
 
 * Um sistema de armazenamento ONTAP AFF ou ASA com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
 * A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
-* Um domínio de carga de trabalho VI foi implantado anteriormente.
+* Um domínio de carga de trabalho já foi implantado anteriormente.
 
 
 

@@ -2,26 +2,26 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-network.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: Configure a rede para armazenamento iSCSI em hosts ESXi em um domínio de carga de trabalho VI.  Você criará grupos de portas distribuídas para tráfego iSCSI e configurará adaptadores VMkernel usando o cliente vSphere para habilitar conectividade confiável e multipathing. 
+summary: Configure a rede para storage iSCSI nos hosts vSphere em um domínio de carga de trabalho. Você criará grupos de portas distribuídas para o tráfego iSCSI e configurará adaptadores VMkernel usando o cliente vSphere para habilitar conectividade confiável e multipathing. 
 ---
-= Configurar rede para iSCSI em hosts ESXi em um domínio de carga de trabalho VCF VI
-:hardbreaks:
+= Configurar a rede para iSCSI em hosts vSphere em um domínio de workload VCF
 :allow-uri-read: 
-:nofooter: 
-:icons: font
-:linkattrs: 
-:imagesdir: ../media/
 
+
+
+
+[[configure-networking-for-iscsi-on-vsphere-hosts-in-a-vcf-workload-domain]]
+== Configurar a rede para iSCSI em hosts vSphere em um domínio de workload VCF
 
 [role="lead"]
-Configure a rede para armazenamento iSCSI em hosts ESXi em um domínio de carga de trabalho VI.  Você criará grupos de portas distribuídas para tráfego iSCSI e configurará adaptadores VMkernel usando o cliente vSphere para habilitar conectividade confiável e multipathing.
+Configure a rede para storage iSCSI nos hosts vSphere em um domínio de carga de trabalho. Você criará grupos de portas distribuídas para o tráfego iSCSI e configurará adaptadores VMkernel usando o cliente vSphere para habilitar conectividade confiável e multipathing.
 
-Use o cliente vSphere com o vCenter Single Sign-On para executar estas etapas no cluster do VI Workload Domain.  O mesmo cliente vSphere gerencia os domínios de gerenciamento e carga de trabalho.
+Utilize o cliente vSphere com vCenter Single Sign-On para executar estas etapas no cluster do domínio de carga de trabalho. O mesmo cliente vSphere gerencia tanto o domínio de gerenciamento quanto o de carga de trabalho.
 
 
 
 [[step-1-create-distributed-port-groups-for-iscsi-traffic]]
-== Etapa 1: criar grupos de portas distribuídas para tráfego iSCSI
+=== Etapa 1: criar grupos de portas distribuídas para tráfego iSCSI
 
 Conclua as etapas a seguir para criar um novo grupo de portas distribuídas para cada rede iSCSI.
 
@@ -73,10 +73,10 @@ image:vmware-vcf-asa-026.png["mover uplink1 para não utilizado"]
 
 
 
-[[step-2-create-vmkernel-adapters-on-each-esxi-host]]
-== Etapa 2: criar adaptadores VMkernel em cada host ESXi
+[[step-2-create-vmkernel-adapters-on-each-vsphere-host]]
+=== Etapa 2: Crie adaptadores VMkernel em cada vSphere host
 
-Execute as seguintes etapas em cada host ESXi no domínio de carga de trabalho usando o cliente vSphere.
+Execute os seguintes passos em cada host vSphere no domínio de carga de trabalho usando o cliente vSphere.
 
 .Passos
 . No cliente vSphere, navegue até um dos hosts ESXi no inventário do domínio de carga de trabalho. Na aba *Configurar* selecione *Adaptadores VMkernel* e clique em *Adicionar Rede...* para começar.
@@ -133,6 +133,6 @@ image:vmware-vcf-asa-034.png["Revisar as seleções do VMkernel"]
 
 
 [[whats-next]]
-== O que vem a seguir?
+=== O que vem a seguir?
 
-Depois de configurar a rede para iSCSI em todos os hosts ESXi no domínio de carga de trabalho,link:vmw-vcf-viwld-supp-iscsi-vvols-storage.html["configurar armazenamento para iSCSI vVols"] .
+Após você configurar a rede para iSCSI em todos os hosts vSphere no domínio de carga de trabalho, link:vmw-vcf-viwld-supp-iscsi-vvols-storage.html["configurar armazenamento para iSCSI vVols"].

@@ -14,19 +14,19 @@ summary:
 
 
 [role="lead"]
-Neste caso de uso, descrevemos o procedimento para usar um armazenamento de dados VMFS baseado em FC existente no ONTAP como armazenamento primário para domínios de gerenciamento do VMware Cloud Foundation (VCF).  Este procedimento resume os componentes, configurações e etapas de implantação necessários.
+Neste caso de uso, descrevemos o procedimento para criar um datastore VMFS baseado em FC no ONTAP como o storage primário para o domínio de gerenciamento do VMware Cloud Foundation (VCF). Este procedimento resume os componentes, configurações e etapas de implantação necessários.
 
 
 
 [[introduction]]
 == Introdução
 
-Quando apropriado, faremos referência à documentação externa para as etapas que devem ser executadas no SDDC Manager do VCF e faremos referência às etapas específicas da parte de configuração de armazenamento.
+Quando apropriado, faremos referência à documentação externa para os passos que devem ser executados em vCenter e mencionaremos os passos que são específicos para a parte de configuração de storage.
 
-Para obter informações sobre como converter um ambiente vSphere baseado em FC existente com ONTAP, consultelink:vmw-vcf-mgmt-fc.html["Converter ambiente vSphere (armazenamento de dados FC) em domínio de gerenciamento VCF"] .
+Para obter informações sobre como converter um datastore VMFS existente (incluindo iSCSI e NVMe-oF) no ambiente vSphere com o ONTAP, consulte link:vmw-vcf-mgmt-vmfs.html["Convergir o ambiente vSphere (datastore VMFS) para o domínio de gerenciamento VCF"].
 
 
-NOTE: A versão 5.2 do VCF introduziu a capacidade de converter um ambiente vSphere 8 existente em um domínio de gerenciamento VCF ou importar como domínios de carga de trabalho VCF VI.  Antes desta versão, o VMware vSAN era a única opção de armazenamento principal para o domínio de gerenciamento do VCF.
+NOTE: A versão 5.2 do VCF introduziu a capacidade de converter um ambiente vSphere 8 existente em um domínio de gerenciamento do VCF ou importá-lo como domínios de carga de trabalho do VCF VI. Antes dessa versão, o VMware vSAN era a única opção de storage primário para o domínio de gerenciamento do VCF. É recomendável implantar as VMs do controlador NSX em um datastore VMFS baseado em FC ou usar dois switches de rede para evitar ponto único de falha. Se essas opções não estiverem disponíveis, considere usar o vSAN para hospedar essas VMs.
 
 
 NOTE: Esta solução é aplicável para plataformas ONTAP que suportam armazenamento FC, incluindo NetApp ASA, AFF e FAS.
@@ -45,7 +45,7 @@ Os seguintes componentes e configurações são usados neste cenário:
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
 
-Para obter informações sobre como configurar o VCF, consultelink:https://docs.vmware.com/en/VMware-Cloud-Foundation/index.html["Documentação do VMware Cloud Foundation"] .
+Para obter informações sobre como configurar o VCF, consulte link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html["Documentação do VMware Cloud Foundation"].
 
 
 
@@ -57,21 +57,18 @@ Para obter informações sobre como configurar o VCF, consultelink:https://docs.
 [[management-domain-default-cluster]]
 === Domínio de Gerenciamento - Cluster Padrão
 
-O armazenamento principal do FC no cluster inicial só é suportado com a ferramenta de importação brownfield do VCF.  Se o VCF for implantado com a ferramenta Cloud Builder (antes da versão 5.2.x), somente o vSAN será suportado.
+A ferramenta VCF Installer oferece suporte a VMFS em datastores FC, NFS v3 e vSAN para o domínio de gerenciamento. As etapas a seguir descrevem o procedimento para implantar um domínio de gerenciamento com um datastore VMFS baseado em FC no ONTAP como o storage primário.
 
-Para obter mais informações sobre como usar um ambiente vSphere existente, consulte https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2/map-for-administering-vcf-5-2/importing-existing-vsphere-environments-admin/convert-or-import-a-vsphere-environment-into-vmware-cloud-foundation-admin.html["convertendo o ambiente vSphere existente para o domínio de gerenciamento"] para mais informações.
+Para obter mais informações sobre como usar um ambiente vSphere existente, consulte link:vmw-vcf-mgmt-vmfs.html["Convergir o ambiente vSphere (datastore VMFS) para o domínio de gerenciamento VCF"].
 
 
 
 [[management-domain-additional-cluster]]
 === Domínio de Gerenciamento - Cluster Adicional
 
-O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com as seguintes opções:
+Para expandir o domínio de gerenciamento com um cluster adicional, consulte  https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/building-your-private-cloud-infrastructure/working-with-workload-domains/expand-a-workload-domain/add-a-cluster-to-a-workload-domain-using-the-sddc-manager-ui.html["Adicionar um cluster SDDC a um domínio VCF"].
 
-* Tenha um cluster adicional no ambiente vSphere e use a ferramenta de importação brownfield do VCF para converter o ambiente vSphere em domínio de gerenciamento. https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html["ONTAP tools for VMware vSphere"] https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] pode ser usado para implantar o armazenamento de dados VMFS no cluster vSphere.
-* Use a API do SDDC para implantar um cluster adicional.  Os hosts vSphere devem ter o armazenamento de dados VMFS configurado.  Usar https://docs.netapp.com/us-en/ontap/san-admin/provision-storage.html["Gerenciador de sistema ou API ONTAP"] para implantar LUN em hosts vSphere.
-* Use a interface de usuário do SDDC Manager para implantar um cluster adicional.  Mas esta opção só cria um armazenamento de dados VSAN até a versão 5.2.x.
-
+Em um nível mais alto, as etapas para adicionar um cluster adicional ao domínio de gerenciamento são as seguintes: * Certifique-se de que os hosts estejam comissionados e os pools de rede estejam configurados no vCenter. * O LUN é provisionado no sistema de storage ONTAP e apresentado aos hosts no cluster adicional. * Crie um novo cluster SDDC no domínio de gerenciamento no vCenter e siga o assistente para adicionar o cluster adicional ao domínio de gerenciamento.
 
 
 
@@ -80,4 +77,4 @@ O cluster vSphere adicional no domínio de gerenciamento pode ser implantado com
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
 
-Para obter informações sobre como configurar o VCF, consultelink:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-5-2-and-earlier/5-2.html["Documentação do VMware Cloud Foundation"] .
+Para obter informações sobre como configurar o VCF, consulte link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html["Documentação do VMware Cloud Foundation"].

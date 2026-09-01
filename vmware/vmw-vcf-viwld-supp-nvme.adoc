@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-nvme.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: 'Comece adicionando um armazenamento de dados NVMe sobre TCP (NVMe/TCP) como armazenamento suplementar para um domínio de carga de trabalho de infraestrutura virtual (VI) do VMware Cloud Foundation (VCF).  Você configurará uma Máquina Virtual de Armazenamento (SVM) habilitada para NVMe/TCP e LIFs, criará namespaces NVMe, configurará a rede do host ESXi e implantará um armazenamento de dados VMFS.' 
+summary: 'Comece adicionando um datastore NVMe sobre TCP (NVMe/TCP) como armazenamento suplementar para um domínio de workload do VMware Cloud Foundation (VCF). Você vai configurar uma Storage Virtual Machine (SVM) habilitada para NVMe/TCP e LIFs, criar namespaces NVMe, configurar a rede do host vSphere e implantar um datastore VMFS.' 
 ---
-= Fluxo de trabalho de implantação para adicionar datastores vVols NVMe como armazenamento suplementar em um domínio de carga de trabalho VI
+= Fluxo de trabalho de implantação para adicionar vVols datastores NVMe como armazenamento suplementar em um domínio de carga de trabalho
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,11 +14,11 @@ summary: 'Comece adicionando um armazenamento de dados NVMe sobre TCP (NVMe/TCP)
 
 
 [role="lead"]
-Comece adicionando datastores NVMe/TCP vVols como armazenamento suplementar para um domínio de carga de trabalho de infraestrutura virtual (VI) do VMware Cloud Foundation (VCF).  Você revisará os requisitos de implantação, configurará SVMs e LIFs habilitados para NVMe/TCP, configurará a rede do host ESXi e implantará o armazenamento de dados NVMe/TCP.
+Comece adicionando datastores NVMe/TCP vVols como armazenamento suplementar para um domínio de carga de trabalho do VMware Cloud Foundation (VCF). Você revisará os requisitos de implantação, configurará SVMs e LIFs habilitados para NVMe/TCP, configurará a rede do host vSphere e implantará o datastore NVMe/TCP vVol.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Um"]link:vmw-vcf-viwld-supp-nvme-requirements.html["Revise os requisitos de implantação"]
 [role="quick-margin-para"]
-Revise os requisitos para implantar o armazenamento de dados NVMe/TCP em um domínio de carga de trabalho do VMware Cloud Foundation VI.
+Analise os requisitos para implementar um datastore NVMe/TCP em um domínio de workload do VMware Cloud Foundation.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Dois"]link:vmw-vcf-viwld-supp-nvme-svm-lifs.html["Crie o SVM e os LIFs e o namespace NVMe"]
 [role="quick-margin-para"]
@@ -26,8 +26,18 @@ Crie uma máquina virtual de armazenamento com interfaces lógicas e o namespace
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Três"]link:vmw-vcf-viwld-supp-nvme-network.html["Configurar rede"]
 [role="quick-margin-para"]
-Crie grupos de portas distribuídas e adaptadores vmkernel nos hosts ESXi para o domínio de carga de trabalho do VI.
+Crie grupos de portas distribuídas e adaptadores vmkernel nos hosts vSphere para o domínio de carga de trabalho do VCF.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["Quatro"]link:vmw-vcf-viwld-supp-nvme-storage.html["Configurar armazenamento"]
 [role="quick-margin-para"]
 Implante o armazenamento de dados NVMe/TCP.
+
+
+
+[[video-demo-for-this-solution]]
+== Demonstração em vídeo desta solução
+
+.Datastore suplementar com NVMe/TCP
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto,width=360]
+.Datastore suplementar com NVMe/FC
+video::b2b16a35-05cd-49c9-a91a-b4ac0127813d[panopto,width=360]

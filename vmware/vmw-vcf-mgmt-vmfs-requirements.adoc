@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-mgmt-vmfs-requirements.html 
+keywords: netapp, vmware, cloud, foundation, vcf, asa, aff, all-flash, fc, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10 
+summary: Analise os requisitos para convergir um cluster vSphere com datastores VMFS do NetApp ONTAP para um domínio de gerenciamento do VMware Cloud Foundation. 
+---
+= Requisitos de implantação para convergir instâncias do servidor vCenter para domínios de gerenciamento VCF com datastores VMFS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Analise os requisitos para convergir um cluster vSphere com datastores VMFS do NetApp ONTAP para um domínio de gerenciamento do VMware Cloud Foundation.
+
+
+
+[[infrastructure-requirements]]
+== Requisitos de infraestrutura
+
+Certifique-se de que os seguintes componentes e configurações estejam instalados.
+
+* NetApp ASA R2/ASA/AFF sistema de storage com uma máquina virtual de storage (SVM) configurada para permitir tráfego FC/iSCSI.
+* Interface lógica (LIF) criada para transportar tráfego FC/iSCSI e associada à SVM.
+* Para FC e NVMe/FC, o zoneamento FC é configurado nos switches da malha.
+* Para iSCSI e NVMe/TCP, o grupo de portas vmkernel configurado nos hosts vSphere para transportar o tráfego respectivo.
+* Um cluster vSphere com suporte, com 4 hosts vSphere e um appliance vCenter colocados no mesmo cluster.
+* Grupo de portas distribuídas configurado para vMotion nas VLANs ou segmentos de rede estabelecidos para essa finalidade.
+* A ferramenta de instalação do VCF baixada é necessária para a convergência do VCF. Para obter mais detalhes, consulte https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment.html["Implantação, convergência e atualização do VCF"].
+* Os pré-requisitos para ferramentas ONTAP são atendidos.
++
+Para obter informações completas sobre os pré-requisitos para ferramentas ONTAP , consulte https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/deploy/prerequisites.html#system-requirements["Pré-requisitos para ONTAP tools for VMware vSphere"] .
+
++
+As ONTAP tools for VMware vSphere 10 podem ser instaladas em configurações HA ou não HA.
+
+
+
+
+
+[[additional-resources]]
+== Recursos adicionais
+
+* Para obter informações sobre storage compatível e outras considerações para convergir vSphere para VCF, consulte  https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/converging-your-existing-vsphere-infrastructure-to-a-vcf-or-vvf-platform-/supported-and-not-supported-configurations.html["Configurações suportadas e não suportadas para convergência com o VCF"].
+* Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] .
+* Para obter informações sobre como configurar o VCF, consulte o link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html["Documentação do VMware Cloud Foundation 9.1"].
+
+
+
+
+[[whats-next]]
+== O que vem a seguir?
+
+Após revisar os requisitos de implantação, link:vmw-vcf-mgmt-vmfs-deploy.html["Implantar as ONTAP tools e provisionar o datastore VMFS"].

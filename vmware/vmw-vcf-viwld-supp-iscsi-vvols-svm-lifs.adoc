@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-svm-lifs.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: 'Crie uma Máquina Virtual de Armazenamento (SVM) e várias interfaces lógicas (LIFs) em um sistema ONTAP para dar suporte ao tráfego iSCSI para armazenamentos de dados vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI.  Você adicionará uma nova SVM, habilitará o iSCSI, configurará LIFs e, opcionalmente, habilitará a conta de administração da VM de armazenamento.' 
+summary: 'Crie uma Storage Virtual Machine (SVM) e várias interfaces lógicas (LIFs) em um sistema ONTAP para suportar o tráfego iSCSI para vVols datastores em um domínio de workload do VMware Cloud Foundation. Você vai adicionar uma nova SVM, habilitar iSCSI, configurar as LIFs e, opcionalmente, habilitar a conta de administração da Storage Virtual Machine.' 
 ---
-= Crie SVM e LIFs para armazenamentos de dados iSCSI vVols em um domínio de carga de trabalho VCF VI
+= Crie SVM e LIFs para datastores iSCSI vVols em um domínio de carga de trabalho VCF
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: 'Crie uma Máquina Virtual de Armazenamento (SVM) e várias interfaces 
 
 
 [role="lead"]
-Crie uma Máquina Virtual de Armazenamento (SVM) e várias interfaces lógicas (LIFs) em um sistema ONTAP para dar suporte ao tráfego iSCSI para armazenamentos de dados vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI.  Você adicionará uma nova SVM, habilitará o iSCSI, configurará LIFs e, opcionalmente, habilitará a conta de administração da VM de armazenamento.
+Crie uma máquina virtual de armazenamento (SVM) e várias interfaces lógicas (LIFs) em um sistema ONTAP para suportar o tráfego iSCSI para vVols datastores em um domínio de carga de trabalho do VMware Cloud Foundation. Você adicionará uma nova SVM, habilitará iSCSI, configurará as LIFs e, opcionalmente, habilitará a conta de administração da máquina virtual de armazenamento.
 
 Para adicionar novos LIFs a um SVM existente, consulte a documentação do ONTAP :link:https://docs.netapp.com/us-en/ontap/networking/create_a_lif.html["Criar LIFs ONTAP"^] .
 
@@ -62,4 +62,4 @@ image:vmware-vcf-asa-004.png["Habilitar conta SVM e finalizar"]
 [[whats-next]]
 == O que vem a seguir?
 
-Depois de criar o SVM e os LIFs,link:vmw-vcf-viwld-supp-iscsi-vvols-network.html["configurar rede para iSCSI em hosts ESXi"] .
+Após criar a SVM e as LIFs, link:vmw-vcf-viwld-supp-iscsi-vvols-network.html["configurar rede para iSCSI em vSphere hosts"].

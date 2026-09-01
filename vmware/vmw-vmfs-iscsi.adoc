@@ -92,7 +92,7 @@ TIP: São recomendadas duas interfaces de rede iSCSI por nó.
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-single-host-management-vmware-host-client-7-0/networking-in-the-vsphere-host-client-vSphereSingleHostManagementVMwareHostClient/managing-physical-network-adapters-in-the-vsphere-host-client-vSphereSingleHostManagementVMwareHostClient/view-physical-network-adapter-information-in-the-vsphere-host-client-vSphereSingleHostManagementVMwareHostClient.html++["Identifique o número de NICs físicas disponíveis no host vSphere."]
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-storage-8-0/configuring-iscsi-and-iser-adapters-and-storage-with-esxi/configure-the-software-iscsi-adapter-with-esxi.html++["Configure o iniciador iSCSI."]Um caso de uso típico é um iniciador iSCSI de software.
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/vsan-network-design/ip-network-transport-configuration/vsphere-tcp-ip-stacks.html++["Verifique se a pilha TCPIP para iSCSI está disponível"] .
-. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/assign-a-port-group-or-network-to-a-network-protocol-profile.html++["Verifique se os grupos de portas iSCSI estão disponíveis"] .
+. link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-networking/basic-networking-with-vnetwork-distributed-switches/dvport-groups.html++["Verifique se os grupos de portas iSCSI estão disponíveis"].
 +
 ** Normalmente usamos um único switch virtual com várias portas de uplink.
 ** Use o mapeamento do adaptador 1:1.
@@ -104,6 +104,13 @@ TIP: São recomendadas duas interfaces de rede iSCSI por nó.
 . link:++https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/storage-hardware-acceleration-in-vsphere/vsphere-hardware-acceleration-on-block-storage/managing-hardware-acceleration-filter-and-plug-ins/verify-hardware-acceleration-support-status.html++["Verifique o suporte à aceleração de hardware."]
 
 
+
+
+[[reference-video]]
+== Vídeo de referência:
+
+.iSCSI Multipath com AFF e ASA r2
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto]
 
 
 [[whats-next]]

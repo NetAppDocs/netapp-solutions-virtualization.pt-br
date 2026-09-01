@@ -24,7 +24,7 @@ Revise os requisitos para adicionar armazenamentos de dados iSCSI como armazenam
 Certifique-se de que os seguintes componentes e configurações estejam instalados.
 
 * Um sistema de armazenamento ONTAP AFF ou ASA com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
-* A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
+* A implantação do domínio de gerenciamento do VCF foi concluída e o vSphere web client está acessível.
 
 
 
@@ -36,10 +36,10 @@ Você deve configurar projetos de rede totalmente redundantes para iSCSI.  O dia
 
 image:vmware-vcf-asa-074.png["Projeto de rede iSCSI"]{nbsp}
 
-Para multipathing e failover em vários caminhos, crie no mínimo dois LIFs por nó de armazenamento em redes Ethernet separadas para todas as SVMs em configurações iSCSI.
+Para multipathing e failover em múltiplos caminhos, crie no mínimo duas LIFs por nó de storage em redes Ethernet separadas para todas as SVMs em configurações iSCSI. Com o ONTAP 9.19.1 e versões posteriores, você pode habilitar a opção de multipathing ativo-ativo simétrico em SVMs no AFF. No ASA, o multipathing ativo-ativo simétrico está habilitado por padrão.
 
 
-TIP: Em situações em que vários adaptadores VMkernel são configurados na mesma rede IP, é recomendável usar a vinculação de porta iSCSI de software nos hosts ESXi para garantir que o balanceamento de carga entre os adaptadores ocorra. Consulte o artigo da KBlink:https://knowledge.broadcom.com/external/article?legacyId=2038869["Considerações sobre o uso de vinculação de porta iSCSI de software no ESX/ESXi"^] .
+TIP: Em situações onde vários adaptadores VMkernel estão configurados na mesma rede IP, recomenda-se usar o vínculo de porta iSCSI por software nos hosts ESXi para garantir que o balanceamento de carga entre os adaptadores ocorra. Consulte o artigo da base de conhecimento link:https://knowledge.broadcom.com/external/article?legacyId=2038869["Considerações para o uso da vinculação de porta iSCSI por software no vSphere"^].
 
 
 

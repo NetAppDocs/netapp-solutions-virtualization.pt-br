@@ -4,7 +4,7 @@ permalink: vmware/vmw-vcf-overview.html
 keywords: netapp, vmware, cloud, foundation, vcf, flexpod 
 summary:  
 ---
-= Simplifique a experiência de nuvem híbrida com VMware Cloud Foundation e ONTAP
+= Aprimore a experiência de nuvem privada com o VMware Cloud Foundation e o ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,29 +14,80 @@ summary:
 
 
 [role="lead"]
-O NetApp ONTAP integra-se ao VMware Cloud Foundation (VCF) para fornecer uma solução de armazenamento unificada com suporte a protocolos de bloco e de arquivo.  Essa integração simplifica implantações de nuvem híbrida, melhora o gerenciamento e o desempenho de dados e garante serviços de dados consistentes em ambientes locais e na nuvem.
+NetApp ONTAP integra-se ao VMware Cloud Foundation (VCF) para fornecer uma solução de storage unificado que suporta protocolos de bloco, arquivo e objeto. As funcionalidades de alocação a vários clientes do ONTAP permitem que as organizações consolidem cargas de trabalho e simplifiquem o gerenciamento, enquanto oferecem proteção e disponibilidade de dados de nível empresarial. Este documento fornece uma visão geral do VCF e de como NetApp ONTAP pode ser usado para aprimorar funcionalidades de storage em um ambiente VCF.
 
 
 
-= Introdução
+[[introduction]]
+== Introdução
 
-Usar o NetApp com VCF melhora o gerenciamento de dados e a eficiência de armazenamento por meio de recursos avançados do NetApp, como desduplicação, compactação e snapshots.  Essa combinação proporciona integração perfeita, alto desempenho e escalabilidade para ambientes virtualizados.  Além disso, ele simplifica as implantações de nuvem híbrida ao permitir serviços de dados e gerenciamento consistentes em infraestruturas locais e na nuvem.
+O VCF permite que as organizações implementem e gerenciem um ambiente de nuvem privada com facilidade. De forma integrada, ele fornece máquinas virtuais, Kubernetes, contêineres e redes como serviço, e permite expandir para oferecer outros serviços como itens de catálogo em um portal de autoatendimento. Ao utilizar NetApp ONTAP como a solução de storage dentro do VCF, as organizações podem alcançar maior flexibilidade, escalabilidade e eficiência no gerenciamento de suas cargas de trabalho.
 
 
 
 [[introduction-to-netapp-ontap]]
 == Introdução ao NetApp ONTAP
 
-O NetApp ONTAP é um software abrangente de gerenciamento de dados que oferece recursos avançados de armazenamento em uma ampla linha de produtos.  O ONTAP está disponível como armazenamento definido por software, como um serviço primário por meio dos principais provedores de nuvem e como sistema operacional de armazenamento para plataformas NetApp ASA (All San Array), AFF (All-flash FAS) e FAS (Fabric-Attached Storage).  O ONTAP oferece alto desempenho e baixa latência para uma variedade de casos de uso, incluindo virtualização VMware, sem criar silos.
+NetApp ONTAP é um software de gerenciamento de dados abrangente que oferece funcionalidades avançadas de storage em uma ampla linha de produtos. O ONTAP está disponível como storage definido por software, como um serviço próprio por meio dos principais provedores de nuvem e como o sistema operacional de storage para NetApp ASA (Desagregado para Otimização de Blocos), AFX (Desagregado para dados não estruturados), AFF e FAS (Unificado). O ONTAP oferece alto desempenho e baixa latência para uma variedade de casos de uso, incluindo virtualização VMware, sem criar silos. De forma semelhante à criação de uma máquina virtual em computação, o ONTAP permite a criação de máquinas virtuais de storage (SVMs) que podem ser usadas para criar e gerenciar recursos de storage. O ONTAP fornece uma solução de storage unificado que suporta múltiplos protocolos, incluindo NFS, SMB, iSCSI, FC, NVMe/TCP, NVMe/FC e NVMe/RDMA. Essa flexibilidade permite que as organizações consolidem cargas de trabalho e simplifiquem o gerenciamento, ao mesmo tempo que fornecem proteção e disponibilidade de dados de nível empresarial.
 
 
 
 [[introduction-to-vmware-cloud-foundation]]
 == Introdução ao VMware Cloud Foundation
 
-O VCF integra ofertas de computação, rede e armazenamento com produtos VMware e integrações de terceiros, facilitando cargas de trabalho nativas do Kubernetes e baseadas em máquinas virtuais. Esta plataforma de software inclui componentes essenciais como VMware vSphere, NSX, Aria Suite Enterprise, VMware vSphere Kubernetes Service, HCX Enterprise, SDDC Manager e capacidade de armazenamento vinculada aos núcleos da CPU do host via vSAN. O NetApp ONTAP integra-se perfeitamente com diversos modelos de implementação do VCF, tanto em ambientes locais quanto na nuvem pública.
+O VMware Cloud Foundation (VCF) permite que as organizações criem nuvens privadas virtuais onde podem consumir máquinas virtuais, clusters Kubernetes, contêineres, redes e storage como serviço, seja para cargas de trabalho de IA, DevOps ou cargas de trabalho tradicionais baseadas em máquinas virtuais.
+
+O VCF é implementado em ambientes novos ou para expandir um ambiente vSphere existente para uma nuvem privada completa. Um conjunto de hosts de computação forma um cluster vSphere, um grupo de clusters vSphere forma um domínio VCF, e um grupo de domínios VCF forma uma instância VCF. Uma frota consiste em uma ou mais instâncias VCF. Ambientes de nuvem privada VCF são criados usando uma ou mais frotas. A operação e a automação são gerenciadas no nível da frota, enquanto a instância VCF é a unidade de implementação.
+
+Um namespace do vSphere é utilizado para definir limites de recursos para cargas de trabalho. Uma zona do vSphere é uma coleção de clusters do vSphere que pode ser usada para fornecer alta disponibilidade e funcionalidades de recuperação de desastres para cargas de trabalho em execução na zona.
 
 image:vmware-vcf-overview-components.png["Componentes do VMware Cloud Foundation"]
+
+Na automação do VCF, uma região é um conjunto de zonas do vSphere de um ou mais domínios do VCF que compartilham a mesma infraestrutura NSX. Uma organização é um agrupamento lógico de usuários e recursos de uma ou mais regiões. A organização pode ser subdividida em vários projetos, cada um com seu próprio gateway de trânsito e conexão externa. Um projeto possui um ou mais namespaces e pode ser usado para fornecer isolamento e alocação de recursos para cargas de trabalho em execução no projeto.
+
+Os namespaces são a unidade fundamental para alocação de recursos dentro de um projeto. Cada namespace corresponde a uma nuvem privada virtual (VPC) e pode ser usado para fornecer isolamento e alocação de recursos para cargas de trabalho em execução no namespace.
+
+Os namespaces são criados com uma VPC dedicada ou uma VPC compartilhada. Uma VPC dedicada é uma VPC dedicada a um único namespace, enquanto uma VPC compartilhada é uma VPC que pode ser usada por vários namespaces. As sub-redes são criadas dentro de uma VPC onde as cargas de trabalho são implantadas.
+
+[cols="25%, 25%, 50%"]
+|===
+
+
+| *Componente* | *Contém* | *Notas* 
+
+
+| Cluster vSphere | hosts vSphere | Um cluster é uma coleção de vSphere hosts que compartilham os mesmos recursos e podem ser usados para fornecer alta disponibilidade e funcionalidades de recuperação de desastres para cargas de trabalho em execução no cluster. 
+
+
+| Domínio VCF | vSphere cluster(es) | Um domínio é uma coleção de vSphere clusters. Ele pode fazer parte de uma instância NSX dedicada ou compartilhar uma instância NSX existente com outros domínios. 
+
+
+| Instância VCF | Domínio(s) VCF | Uma instância é uma coleção de domínios VCF. 
+
+
+| O VCF Fleet | Instância(s) VCF | Uma frota é uma coleção de instâncias do VCF gerenciadas centralmente pelo o Operations Manager. 
+
+
+| Zona do vSphere | vSphere cluster(es) | Uma zona é um conjunto de clusters vSphere que podem ser usados para fornecer alta disponibilidade e funcionalidades de recuperação de desastres para cargas de trabalho em execução na zona. 
+
+
+| Região de automação VCF | vSphere zona(s) | Uma região é um conjunto de zonas vSphere de um ou mais domínios VCF que compartilham a mesma infraestrutura NSX. 
+
+
+| Organização de automação VCF | Projeto(s) de automação VCF | Uma organização corresponde a um projeto NSX. 
+
+
+| Projeto de Automação VCF | namespace(s) do vSphere | Um projeto mapeia para o gateway de trânsito NSX e a conexão externa. 
+
+
+| Espaço de nomes de automação VCF | vSphere Zona(s) | Cada namespace corresponde a uma nuvem privada (VPC) e pode ser usado para fornecer isolamento e alocação de recursos para cargas de trabalho em execução nesse namespace. 
+
+
+| Nuvem Privada Virtual (VPC) | Sub-rede(s) | Uma VPC é uma rede virtual que pode ser usada para fornecer isolamento e alocação de recursos para cargas de trabalho executadas na VPC. Uma VPC pode ser dedicada a um único namespace ou compartilhada por vários namespaces. 
+|===
+O armazenamento é consumido por políticas de Storage Policy Based Management (SPBM) definidas em vCenter. O SPBM pode ser criado com um conjunto de regras que definem os requisitos de armazenamento para uma carga de trabalho. Os datastores são normalmente etiquetados e utilizados para criar políticas de armazenamento que atendam às necessidades específicas de diferentes cargas de trabalho.
+
+As cargas de trabalho que exigem regras de afinidade e antiafinidade são gerenciadas por políticas de infraestrutura, que utilizam as políticas de computação do vCenter para definir a alocação de cargas de trabalho em hosts ou clusters específicos. As políticas de infraestrutura podem ser usadas para garantir que as cargas de trabalho sejam alocadas em hosts ou clusters específicos com base em seus requisitos.
 
 
 
@@ -49,8 +100,8 @@ image:vmware-vcf-overview-domains.png["Domínios de nuvem VMware"]
 
 Existem dois tipos principais de domínios com VCF:
 
-* *Domínio de gerenciamento* – O domínio de gerenciamento inclui componentes responsáveis pelas funções principais do ambiente VCF.  Os componentes lidam com tarefas essenciais, como provisionamento de recursos, monitoramento, manutenção e incluem integrações de plug-ins de terceiros, como o NetApp ONTAP Tools for VMware.  Domínios de gerenciamento podem ser implantados usando o Cloud Builder Appliance para garantir que as práticas recomendadas sejam seguidas, ou um ambiente vCenter existente pode ser convertido em um domínio de gerenciamento VCF.
-* *Domínio de carga de trabalho de infraestrutura virtual* – Os domínios de carga de trabalho de infraestrutura virtual são projetados para serem conjuntos de recursos dedicados a uma necessidade operacional, carga de trabalho ou organização específica.  Os domínios de carga de trabalho são implantados facilmente por meio do SDDC Manager, ajudando a automatizar uma série de tarefas complexas.  Até 24 domínios de carga de trabalho podem ser provisionados em um ambiente VCF, com cada um representando uma unidade de infraestrutura pronta para aplicativos.
+* *Domínio de gerenciamento* – O domínio de gerenciamento inclui componentes responsáveis pelas funções principais do ambiente VCF. Os componentes lidam com tarefas essenciais, como provisionamento de recursos, monitoramento, manutenção e incluem integrações de plug-ins de terceiros, como NetApp ONTAP Tools for VMware. Os domínios de gerenciamento podem ser implementados usando o VCF Installer Appliance para garantir que as melhores práticas sejam seguidas, ou um ambiente vCenter existente pode ser convertido em um domínio de gerenciamento VCF.
+* *Domínio de Carga de Trabalho* – Os domínios de carga de trabalho são projetados para serem conjuntos de recursos dedicados a uma necessidade operacional, carga de trabalho ou organização específica. Os domínios de carga de trabalho são implantados facilmente por meio do OPS Manager, ajudando a automatizar uma série de tarefas complexas. Até 24 domínios de carga de trabalho podem ser provisionados em um ambiente VCF, cada um representando uma unidade de infraestrutura pronta para uso. Cada domínio de carga de trabalho possui sua própria infraestrutura NSX ou compartilha uma existente, dependendo se a implantação é de região única ou multirregional.
 
 
 
@@ -62,8 +113,8 @@ O armazenamento que eles consomem é essencial para a funcionalidade dos domíni
 
 Existem dois tipos principais de armazenamento com VCF:
 
-* *Armazenamento principal* – Este tipo de armazenamento é alocado durante a criação inicial do domínio.  Para domínios de gerenciamento, esse armazenamento abriga os componentes administrativos e operacionais do VCF.  Para domínios de carga de trabalho, esse armazenamento foi projetado para dar suporte às cargas de trabalho, VMs ou contêineres para os quais o domínio foi implantado.
-* *Armazenamento suplementar* – O armazenamento suplementar pode ser adicionado a qualquer domínio de carga de trabalho após a implantação.  Esse tipo de armazenamento ajuda as organizações a aproveitar os investimentos existentes em infraestrutura de armazenamento e integrar várias tecnologias de armazenamento para otimizar o desempenho, a escalabilidade e a relação custo-benefício.
+* *Armazenamento principal* – Este tipo de armazenamento é provisionado automaticamente como parte da implantação inicial de um novo domínio VCF ou como parte da convergência ou importação de um vCenter existente. O instalador do VCF oferece suporte a VSAN, VMFS em FC e NFS como parte de uma implantação nova, enquanto outros tipos de armazenamento compatíveis, incluindo VMFS em iSCSI e NVMe-oF, podem ser definidos como armazenamento principal como parte da convergência ou importação de um vCenter existente. O ONTAP Tools for VMware vSphere pode ser usado apenas para convergência ou importação de um vCenter existente para implantar o armazenamento principal de um domínio VCF. Qualquer datastore criado como parte da implantação de um cluster adicional ou como parte da expansão de um domínio é considerado armazenamento principal. O armazenamento principal é usado para hospedar os componentes de gerenciamento do VCF, incluindo o vCenter, o NSX Manager e o SDDC Manager, bem como as cargas de trabalho em execução no domínio.
+* *Armazenamento suplementar* – O armazenamento suplementar é qualquer datastore provisionado após a implantação inicial de um domínio VCF ou após a convergência ou importação de um ambiente vCenter existente. O armazenamento suplementar pode ser criado usando o ONTAP Tools for VMware vSphere para implantar datastores para um domínio VCF. O armazenamento suplementar é criado para atender a necessidades adicionais de capacidade, requisitos de desempenho ou para suportar cargas de trabalho específicas que exigem diferentes características de storage. O armazenamento suplementar também pode ser criado para criar clusters estendidos para alta disponibilidade.
 
 
 *Suporta tipos de armazenamento VCF*
@@ -75,12 +126,13 @@ Existem dois tipos principais de armazenamento com VCF:
 | *Tipo de domínio* | *Armazenamento Principal* | *Armazenamento Suplementar* 
 
 
-| Domínio de Gestão | vSAN FC* NFS* | vVols (FC, iSCSI ou NFS) FC NFS iSCSI NVMe/TCP NVMe/FC NVMe/RDMA 
+| Domínio de Gestão | vSAN FC NFS 3 NFS 4.1 ^2^ iSCSI ^2^ NVMe/TCP ^2^ NVMe/FC ^2^ NVMe/RDMA ^2^ | vVols (FC, iSCSI ou NFS) ^1^ FC NFS 3 NFS 4.1 iSCSI NVMe/TCP NVMe/FC NVMe/RDMA 
 
 
-| Domínio de carga de trabalho de infraestrutura virtual | vSAN vVols (FC, iSCSI ou NFS) FC NFS | vVols (FC, iSCSI ou NFS) FC NFS iSCSI NVMe/TCP NVMe/FC NVMe/RDMA 
+| Domínio da carga de trabalho | vSAN vVols (FC, iSCSI ou NFS) ^1^ FC NFS 3 NFS 4.1 ^2^ iSCSI ^2^ NVMe/TCP ^2^ NVMe/FC ^2^ NVMe/RDMA ^2^ | vVols (FC, iSCSI ou NFS) ^1^ FC NFS 3 NFS 4.1 iSCSI NVMe/TCP NVMe/FC NVMe/RDMA 
 |===
-Observação: * Suporte a protocolo específico fornecido ao usar a Ferramenta de importação VCF com ambientes vSphere existentes.
+
+NOTE: ^1^ O suporte a vVol está obsoleto em ambientes vSphere. ^2^ Com a opção Converge ou de importação
 
 
 
@@ -135,7 +187,7 @@ Para obter informações detalhadas sobre as ofertas da NetApp para o VMware Clo
 
 *Documentação do VMware Cloud Foundation*
 
-* link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf.html["Documentação do VMware Cloud Foundation"]
+* https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1.html["Documentação do VMware Cloud Foundation"]
 
 
 *Série de blogs de quatro (4) partes sobre VCF com NetApp*
@@ -148,23 +200,29 @@ Para obter informações detalhadas sobre as ofertas da NetApp para o VMware Clo
 
 *VMware Cloud Foundation com matrizes SAN All-Flash da NetApp *
 
-* link:vmw-getting-started-ntap-options.html#netapp-asa-all-san-array-benefits["VCF com matrizes NetApp ASA , introdução e visão geral da tecnologia"]
+* link:vmw-getting-started-ntap-options.html["VCF com matrizes NetApp ASA , introdução e visão geral da tecnologia"]
 * link:vmw-vcf-mgmt-principal-fc.html["Use ONTAP com FC como armazenamento principal para domínios de gerenciamento"]
-* link:vmw-vcf-viwld-principal-fc.html["Use o ONTAP com FC como armazenamento principal para domínios de carga de trabalho do VI"]
-* link:vmw-vcf-mgmt-supplemental-iscsi.html["Use o Ontap Tools para implantar armazenamentos de dados iSCSI em um domínio de gerenciamento VCF"]
-* link:vmw-vcf-mgmt-supplemental-fc.html["Use o Ontap Tools para implantar datastores FC em um domínio de gerenciamento VCF"]
-* link:vmw-vcf-viwld-supp-iscsi-vvols.html["Use o Ontap Tools para implantar datastores vVols (iSCSI) em um domínio de carga de trabalho VI"]
-* link:vmw-vcf-viwld-supp-nvme.html["Configurar armazenamentos de dados NVMe sobre TCP para uso em um domínio de carga de trabalho VI"]
-* link:vmw-vcf-scv-viwld.html["Implante e use o SnapCenter Plug-in for VMware vSphere para proteger e restaurar VMs em um domínio de carga de trabalho VI"]
-* link:vmw-vcf-scv-nvme.html["Implante e use o SnapCenter Plug-in for VMware vSphere para proteger e restaurar VMs em um domínio de carga de trabalho VI (datastores NVMe/TCP)"]
+* link:vmw-vcf-viwld-principal-fc.html["Use o ONTAP com FC como storage primário para domínios de workload"]
+* link:vmw-vcf-mgmt-supplemental-iscsi.html["Use o ONTAP Tools para implantar datastores iSCSI em um domínio de gerenciamento VCF"]
+* link:vmw-vcf-mgmt-vmfs.html["Use as ferramentas ONTAP para implantar datastores NVMe-oF como storage primário em um domínio de gerenciamento VCF"]
+* link:vmw-vcf-mgmt-supplemental-fc.html["Use as ONTAP Tools para implantar datastores FC suplementares em um domínio de gerenciamento VCF"]
+* link:vmw-vcf-vmsc-viwld-smas.html["Use as ferramentas do ONTAP para implantar datastores iSCSI suplementares em um domínio de carga de trabalho"]
+* link:vmw-vcf-viwld-supp-iscsi-vvols.html["Use o ONTAP Tools para implantar datastores vVols (iSCSI) em um domínio de carga de trabalho"]
+* link:vmw-vcf-viwld-supp-nvme.html["Configure datastores NVMe-oF para uso em um workload domain"]
+* link:vmw-vcf-scv-viwld.html["Implemente e utilize o SnapCenter Plug-in para VMware vSphere para proteger e restaurar máquinas virtuais em um domínio de carga de trabalho"]
+* link:vmw-vcf-scv-nvme.html["Implante e utilize o SnapCenter Plug-in para VMware vSphere para proteger e restaurar máquinas virtuais em um domínio de carga de trabalho (datastores NVMe/TCP)"]
 
 
 *VMware Cloud Foundation com matrizes NetApp All-Flash AFF *
 
-* link:vmw-getting-started-ntap-options.html#netapp-aff-all-flash-fas-benefits["VCF com matrizes NetApp AFF , introdução e visão geral da tecnologia"]
-* link:vmw-vcf-mgmt-principal-nfs.html["Use ONTAP com NFS como armazenamento principal para domínios de gerenciamento"]
-* link:vmw-vcf-viwld-principal-nfs.html["Use ONTAP com NFS como armazenamento principal para domínios de carga de trabalho VI"]
-* link:vmw-vcf-viwld-supp-nfs-vvols.html["Use as ferramentas ONTAP para implantar armazenamentos de dados vVols (NFS) em um domínio de carga de trabalho VI"]
+Os links para o ASA são aplicáveis principalmente aos arrays AFF, mas os links a seguir são específicos para os arrays AFF e suas funcionalidades.
+
+* link:vmw-getting-started-ntap-options.html["VCF com matrizes NetApp AFF , introdução e visão geral da tecnologia"]
+* link:vmw-vcf-mgmt-principal-nfs.html["Utilize o ONTAP com NFSv3 como storage primário para domínios de gerenciamento"]
+* link:vmw-vcf-mgmt-nfs.html["Use as ferramentas do ONTAP para implantar datastores NFSv3/NFSv4.1 em um domínio de gerenciamento VCF"]
+* link:vmw-vcf-viwld-principal-nfs.html["Use o ONTAP com NFS como storage primário para domínios de carga de trabalho"]
+* link:vmw-vcf-vmsc-viwld-smas.html["Use as ferramentas do ONTAP para implantar datastores NFSv3/NFSv4.1 em um domínio de carga de trabalho"]
+* link:vmw-vcf-viwld-supp-nfs-vvols.html["Use as ferramentas do ONTAP para implantar datastores vVols (NFS) em um domínio de carga de trabalho"]
 
 
 * Soluções NetApp FlexPod para VMware Cloud Foundation*

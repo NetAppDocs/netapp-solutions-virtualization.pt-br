@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-expand.html 
-keywords: vmware, vcf, expand, supplemental, storage 
-summary: 'O VMware Cloud Foundation (VCF) oferece suporte a uma ampla variedade de opções de armazenamento suplementar para expandir o armazenamento em domínios de gerenciamento de VCF e domínios de carga de trabalho de infraestrutura virtual (VI).' 
+keywords: vmware, vcf, expand, supplemental, storage, workload 
+summary: 'O VMware Cloud Foundation (VCF) oferece suporte a uma ampla gama de opções de armazenamento suplementar para expandir o armazenamento nos domínios de gerenciamento do VCF e nos domínios de carga de trabalho do VCF.' 
 ---
 = Aprenda sobre como expandir o armazenamento para um ambiente VCF usando armazenamento suplementar
 :hardbreaks:
@@ -14,7 +14,7 @@ summary: 'O VMware Cloud Foundation (VCF) oferece suporte a uma ampla variedade 
 
 
 [role="lead"]
-O VMware Cloud Foundation (VCF) oferece suporte a uma ampla variedade de opções de armazenamento suplementar para expandir o armazenamento em domínios de gerenciamento de VCF e domínios de carga de trabalho de infraestrutura virtual (VI).
+O VMware Cloud Foundation (VCF) oferece suporte a uma ampla gama de opções de armazenamento suplementar para expandir o armazenamento nos domínios de gerenciamento do VCF e nos domínios de carga de trabalho do VCF.
 
 As ONTAP tools for VMware vSphere fornecem uma solução eficiente para essa expansão, integrando perfeitamente o armazenamento NetApp ao ambiente VCF.
 
@@ -27,12 +27,12 @@ As ferramentas ONTAP simplificam a configuração e o gerenciamento de armazenam
 
 Ambientes VCF podem ser expandidos usando vários protocolos de armazenamento, cada um oferecendo benefícios e casos de uso exclusivos.
 
-Você pode usar os seguintes protocolos para expandir o armazenamento em domínios de gerenciamento VCF e domínios de carga de trabalho VI.  Escolha a melhor opção para seu ambiente para integrar perfeitamente o armazenamento suplementar à sua implantação de VCF.
+Você pode usar os seguintes protocolos para expandir o armazenamento em domínios de gerenciamento e domínios de carga de trabalho do VCF. Escolha a melhor opção para o seu ambiente para integrar perfeitamente o storage suplementar à sua implementação do VCF.
 
 .iSCSI
 Protocolo baseado em blocos que utiliza redes Ethernet padrão.  Ideal para ambientes que exigem alto desempenho, flexibilidade e dimensionamento econômico.
 
-O iSCSI é amplamente utilizado para armazenamentos de dados VMFS e oferece suporte a recursos ONTAP avançados, como snapshots e clonagem.
+iSCSI é amplamente utilizado para datastores VMFS e oferece suporte a recursos avançados do ONTAP, como snapshots e clonagem. O ONTAP 9.19.1 e versões posteriores também oferecem suporte à configuração ativo-ativo simétrica em sistemas AFF. Inicialmente, esse recurso estava disponível apenas em sistemas ASA.
 
 * *Alto desempenho:* oferece alto desempenho para fornecer taxas de transferência de dados rápidas e eficientes e baixa latência.  Ideal para aplicativos empresariais exigentes e ambientes virtualizados.
 * *Facilidade de gerenciamento:* simplifica o gerenciamento de armazenamento usando ferramentas e protocolos familiares baseados em IP.
@@ -43,6 +43,8 @@ Para obter mais informações sobre o uso do iSCSI com sistemas de armazenamento
 
 .Canal de Fibra (FC)
 Protocolo de alta velocidade e baixa latência que utiliza redes FC dedicadas.  O FC é preferido para cargas de trabalho de missão crítica que exigem confiabilidade, largura de banda dedicada e correção de erros robusta.  É comumente usado para armazenamentos de dados VMFS em ambientes corporativos.
+
+O ONTAP 9.19.1 e versões posteriores também suportam configuração ativo-ativo simétrica em sistemas AFF. Inicialmente, esse recurso estava disponível apenas em sistemas ASA.
 
 * *Alto desempenho:* o FC fornece altas taxas de transferência de dados, tornando-o ideal para aplicações que exigem acesso rápido e confiável a grandes quantidades de dados.
 * *Baixa latência:* latência muito baixa, o que é crucial para aplicativos sensíveis ao desempenho, como bancos de dados e ambientes virtualizados.
@@ -58,18 +60,20 @@ Protocolo baseado em arquivos que permite fácil compartilhamento e gerenciament
 Os datastores NFS são suportados pelo ONTAP e pelo vSphere para domínios de gerenciamento e carga de trabalho.
 
 * *Simplicidade e facilidade de uso:* O NFS é simples de configurar e gerenciar, o que o torna uma excelente escolha para ambientes que exigem compartilhamento de arquivos rápido e fácil.
-* *Escalabilidade:* a arquitetura do ONTAP permite que o NFS seja dimensionado de forma eficiente, dando suporte às crescentes necessidades de dados sem mudanças significativas na infraestrutura.
+* *Escalabilidade:* A arquitetura do ONTAP permite que o NFS seja dimensionado de forma eficiente, suportando necessidades crescentes de dados sem alterações significativas na infraestrutura. FlexGroup, juntamente com o pNFS, pode ser usado para dimensionar datastores NFS para níveis de petabytes.
 * *Flexibilidade:* O NFS oferece suporte a uma ampla variedade de aplicativos e cargas de trabalho, o que o torna versátil para vários casos de uso, incluindo ambientes virtualizados.
 
 
 Para mais informações, consulte o link:vmw-vvf-overview.html["Guia de referência do NFS v3 para vSphere 8"] .
 
-.NVMe/TCP
-Protocolo moderno que oferece alto desempenho e baixa latência em redes Ethernet padrão usando TCP/IP.  NVMe/TCP é ideal para aplicações exigentes e operações de dados em larga escala, proporcionando escalabilidade e eficiência de custos sem exigir hardware especializado.
+.NVMe-oF
+Protocolo moderno que oferece alto desempenho e baixa latência em redes Ethernet padrão usando TCP/IP. O NVMe-oF (NVMe over Fabrics) é ideal para aplicações exigentes e operações de dados em larga escala, proporcionando escalabilidade e eficiência de custos sem a necessidade de hardware especializado.
+
+O ONTAP 9.19.1 e versões posteriores também suportam configuração ativo-ativo simétrica em sistemas AFF. Inicialmente, esse recurso estava disponível apenas em sistemas ASA.
 
 * *Alto desempenho:* Oferece desempenho excepcional com baixa latência e altas taxas de transferência de dados.  Isso é crucial para aplicativos exigentes e operações de dados em larga escala.
 * *Escalabilidade:* Suporta configurações escaláveis, permitindo que os administradores de TI expandam sua infraestrutura perfeitamente conforme os requisitos de dados aumentam.
-* *Custo-benefício:* Funciona em switches Ethernet padrão e é encapsulado dentro de datagramas TCP. Não é necessário equipamento especial para implementar.
+* *Custo-benefício:* Funciona em switches Ethernet padrão e é encapsulado em datagramas TCP. Nenhum equipamento especial é necessário para implementar. NVMe-oF sobre TCP é comumente utilizado.
 
 
 Para obter mais informações sobre os benefícios do NVMe, consulte https://www.netapp.com/data-storage/nvme/what-is-nvme/["O que é NVME?"] .

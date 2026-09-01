@@ -15,6 +15,14 @@ Aprenda o que há de novo em soluções de virtualização.
 
 
 
+[[21-august-2026]]
+== 21 de agosto de 2026
+
+* Documentação do VCF atualizada para refletir o lançamento do VCF 9.1 e os recursos do ONTAP 9.19.1.
+
+
+
+
 [[10-may-2026]]
 == 10 de maio de 2026
 

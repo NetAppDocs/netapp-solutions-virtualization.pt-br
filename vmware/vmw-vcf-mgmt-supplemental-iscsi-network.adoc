@@ -1,17 +1,17 @@
 ---
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-mgmt-supplemental-iscsi-network.html 
-keywords: netapp, vmware, cloud, foundation, vcf, iscsi, network, esxi 
-summary: Configure a rede iSCSI em hosts ESXi em domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com sistemas de armazenamento ONTAP .  Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host ESXi para estabelecer caminhos iSCSI dedicados para recursos de failover. 
+keywords: netapp, vmware, cloud, foundation, vcf, iscsi, network, vSphere 
+summary: Configure a rede iSCSI em hosts vSphere nos domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com os sistemas de storage ONTAP. Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host vSphere para estabelecer caminhos iSCSI dedicados para recursos de failover. 
 ---
-= Configurar rede para iSCSI em hosts ESXi em um domínio de gerenciamento VCF
+= Configurar a rede para iSCSI em hosts vSphere em um domínio de gerenciamento VCF
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Configure a rede iSCSI em hosts ESXi em domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com sistemas de armazenamento ONTAP .  Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host ESXi para estabelecer caminhos iSCSI dedicados para recursos de failover.
+Configure a rede iSCSI em hosts vSphere nos domínios de gerenciamento do VMware Cloud Foundation para habilitar a conectividade com os sistemas de storage ONTAP. Você criará grupos de portas distribuídas com separação de VLAN, configurará o agrupamento de uplink para redundância e configurará adaptadores VMkernel em cada host vSphere para estabelecer caminhos iSCSI dedicados para recursos de failover.
 
 Execute estas etapas no cluster de domínio de gerenciamento do VCF usando o cliente vSphere.
 
@@ -70,10 +70,10 @@ image:vmware-vcf-asa-026.png["mover uplink1 para não utilizado"]
 
 
 
-[[step-2-create-vmkernel-adapters-on-each-esxi-host]]
-== Etapa 2: criar adaptadores VMkernel em cada host ESXi
+[[step-2-create-vmkernel-adapters-on-each-vsphere-host]]
+== Etapa 2: Crie adaptadores VMkernel em cada vSphere host
 
-Crie adaptadores VMkernel em cada host ESXi no domínio de gerenciamento.
+Crie adaptadores VMkernel em cada vSphere host no domínio de gerenciamento.
 
 .Passos
 . No cliente vSphere, navegue até um dos hosts ESXi no inventário do domínio de carga de trabalho. Na aba *Configurar* selecione *Adaptadores VMkernel* e clique em *Adicionar Rede...* para começar.
@@ -132,4 +132,4 @@ image:vmware-vcf-asa-034.png["Revisar as seleções do VMkernel"]
 [[whats-next]]
 == O que vem a seguir?
 
-Depois de configurar a rede para iSCSI em todos os hosts ESXi no domínio de carga de trabalho,link:vmw-vcf-mgmt-supplemental-iscsi-storage.html["configurar armazenamento para iSCSI em hosts ESXi"] .
+Após configurar a rede para iSCSI em todos os hosts vSphere no domínio de gerenciamento, link:vmw-vcf-mgmt-supplemental-iscsi-storage.html["configurar storage para iSCSI em hosts vSphere"].

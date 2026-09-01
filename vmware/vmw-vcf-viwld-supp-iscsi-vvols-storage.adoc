@@ -2,26 +2,26 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-iscsi-vvols-storage.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc, iscsi 
-summary: Configure o armazenamento iSCSI vVols em um domínio de carga de trabalho VI usando ferramentas ONTAP .  Você implantará ONTAP tools for VMware vSphere, registrará um sistema de armazenamento, criará um perfil de capacidade de armazenamento e provisionará um armazenamento de dados vVols no cliente vSphere. 
+summary: Configure o armazenamento iSCSI vVols em um domínio de carga de trabalho usando as ONTAP tools. Você implantará as ONTAP tools for VMware vSphere, registrará um sistema de storage, criará um perfil de capacidade de armazenamento e provisionará um datastore vVols no cliente vSphere. 
 ---
-= Configurar o armazenamento iSCSI vVols em um domínio de carga de trabalho VCF VI usando ferramentas ONTAP
-:hardbreaks:
+= Configurar o armazenamento iSCSI vVols em um domínio de carga de trabalho VCF usando o ONTAP tools
 :allow-uri-read: 
-:nofooter: 
-:icons: font
-:linkattrs: 
-:imagesdir: ../media/
 
+
+
+
+[[configure-iscsi-vvols-storage-in-a-vcf-workload-domain-using-ontap-tools]]
+== Configurar o armazenamento iSCSI vVols em um domínio de carga de trabalho VCF usando o ONTAP tools
 
 [role="lead"]
-Configure o armazenamento iSCSI vVols em um domínio de carga de trabalho VI usando ferramentas ONTAP .  Você implantará ONTAP tools for VMware vSphere, registrará um sistema de armazenamento, criará um perfil de capacidade de armazenamento e provisionará um armazenamento de dados vVols no cliente vSphere.
+Configure o armazenamento iSCSI vVols em um domínio de carga de trabalho usando as ONTAP tools. Você implantará as ONTAP tools for VMware vSphere, registrará um sistema de storage, criará um perfil de capacidade de armazenamento e provisionará um datastore vVols no cliente vSphere.
 
 
 
 [[step-1-deploy-ontap-tools-for-vmware-vsphere]]
-== Etapa 1: implantar ONTAP tools for VMware vSphere
+=== Etapa 1: implantar ONTAP tools for VMware vSphere
 
-Para domínios de carga de trabalho do VI, as ferramentas ONTAP são instaladas no VCF Management Cluster, mas registradas no vCenter associado ao domínio de carga de trabalho do VI.
+Para domínios de carga de trabalho, o ONTAP tools é instalado no cluster de gerenciamento VCF, mas registrado no vCenter associado ao domínio de carga de trabalho.
 
 As ONTAP tools for VMware vSphere são implantadas como um dispositivo de VM e fornecem uma interface de usuário do vCenter integrada para gerenciar o armazenamento ONTAP .
 
@@ -89,7 +89,7 @@ image:vmware-vcf-asa-035.png["Personalize o modelo OTV 2"]
 
 
 [[step-2-add-a-storage-system]]
-== Etapa 2: adicionar um sistema de armazenamento
+=== Etapa 2: adicionar um sistema de armazenamento
 
 Execute as seguintes etapas para adicionar um sistema de armazenamento usando ferramentas ONTAP .
 
@@ -134,7 +134,7 @@ image:vmware-vcf-asa-017.png["Autorizar certificado de cluster"]
 
 
 [[step-3-create-a-storage-capability-profile-in-ontap-tools]]
-== Etapa 3: Crie um perfil de capacidade de armazenamento nas ferramentas ONTAP
+=== Etapa 3: Crie um perfil de capacidade de armazenamento nas ferramentas ONTAP
 
 Os perfis de capacidade de armazenamento descrevem os recursos fornecidos por um conjunto de armazenamento ou sistema de armazenamento.  Elas incluem definições de qualidade de serviço e são usadas para selecionar sistemas de armazenamento que atendem aos parâmetros definidos no perfil.  Um dos perfis fornecidos pode ser usado ou novos podem ser criados.
 
@@ -201,7 +201,7 @@ image:vmware-vcf-asa-040.png["Resumo para SCP"]
 
 
 [[step-4-create-a-vvols-datastore-in-ontap-tools]]
-== Etapa 4: Crie um armazenamento de dados vVols nas ferramentas ONTAP
+=== Etapa 4: Crie um armazenamento de dados vVols nas ferramentas ONTAP
 
 Para criar um armazenamento de dados vVols nas ferramentas ONTAP , conclua as seguintes etapas.
 

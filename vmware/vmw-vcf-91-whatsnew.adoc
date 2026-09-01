@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-91-whatsnew.html 
+keywords: netapp, vmware, cloud, foundation, vcf, flexpod 
+summary: O VCF 9.1 adiciona novos recursos e melhorias. 
+---
+= Novidades do VMware Cloud Foundation 9.1
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+O VCF 9.1 introduz diversos novos recursos e melhorias que aprimoram a funcionalidade e o desempenho geral do seu ambiente de nuvem privada. Saiba mais sobre as atualizações mais recentes e como os produtos NetApp continuam a agregar valor.
+
+Aqui estão alguns dos principais novos recursos e melhorias do VCF 9.1:
+
+* Provisionamento sem intervenção (ZTP) para vSphere clusters, permitindo a implantação e configuração automatizadas de vSphere clusters.
++
+** Lembre-se de incluir o plugin NFS VAAI na imagem se você planeja utilizar o VAAI com datastores NFS do ONTAP. https://mysupport.netapp.com/site/products/all/details/nfsplugin-vmware-vaai/about-tab["Plug-in NFS VAAI"] Ele pode ser baixado do site de suporte da NetApp e adicionado à imagem usada para a implantação do cluster vSphere.
+
+
+* Suporte do UNMAP para datastores NFS 4.1, permitindo maior eficiência de storage e exigência de espaço.
+* Suporte a NVMe sobre RDMA para melhor desempenho de storage e menor latência.
++
+** As ferramentas (pktcap-uw, rdmaperf-uw, rdmaperf) para análise de pacotes e resolução de problemas em conexões RoCEv2 agora estão disponíveis com o hipervisor.
+
+
+* Descoberta, configuração e gerenciamento automatizados de conexões iSCSI com o protocolo Internet Storage Name Service (iSNS). Para mais informações, consulte  https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-1/vsphere-storage/configuring-iscsi-and-iser-adapters-and-storage-with-esxi/using-isns-with-esx.html["Usando o iSNS com o ESXi"].
+* O suporte a camadas de memória inclui suporte para todos os tipos de máquinas virtuais e implantação simplificada.
+* Suporte expandido para sistemas operacionais convidados, incluindo Ubuntu 26.04 LTS, Debian 13 e SUSE Linux Enterprise Server 16.
+* O vSphere Host Web Client foi atualizado para oferecer uma experiência semelhante ao vCenter Server Web Client, com total paridade de recursos em relação às versões anteriores.
+* Clones vinculados de discos de primeira classe (FCD) para provisionamento rápido de volumes de storage de contêineres no VMware Kubernetes Service (VKS).
+* O Distributed Transit Gateway oferece suporte ao VKS Supervisor e à automação do VCF usando o Virtual Network Appliance (VNA). O suporte ao balanceador de carga de camada 4 também está disponível a partir do VNA.
+* O VPC Transit Gateway, o Traceflow e a análise de tráfego em tempo real já estão disponíveis no cliente vSphere.
+* A extensão de VLAN para sub-redes VPC permite a integração de cargas de trabalho de grupos de portas de vswitch distribuído para sub-redes VPC.
+* Possibilidade de definir o alcance da rede para o Transit Gateway e a VPC, restringindo-os a clusters específicos ou permitindo que abranjam todas as instâncias de vCenter do domínio de rede.
+* Velocidade aprimorada do vMotion para migrações em massa.
+* Políticas de conectividade VPC para maior segurança e controle sobre o tráfego de rede entre VPCs.
+* Suporte de rede VKS Multi-Interface para gerenciamento isolado e tráfego de carga de trabalho.
+* Ferramenta de migração incluída para migração direta do vCloud Director para o VCF Automation.
+
+
+Para obter mais detalhes sobre esses recursos e melhorias, consulte o link:https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/release-notes/vmware-cloud-foundation-9-1-0-0-release-notes/what-s-new.html["Documentação técnica da Broadcom sobre as novidades do VCF 9.1"].
+
+A maior parte do nosso documento ainda se aplica ao VCF 9.1, salvo indicação em contrário. Antes de utilizá-lo em produção, lembre-se sempre de verificar  https://imt.netapp.com/matrix/#search["Ferramenta de Matriz de Interoperabilidade"] e  https://www.vmware.com/resources/compatibility/search.php?deviceCategory=san["Guia de compatibilidade do VMware"] para detalhes relacionados a versões específicas.

@@ -2,14 +2,14 @@
 sidebar: sidebar 
 permalink: vmware/vmw-vcf-viwld-supp-nfs-vvols-requirements.html 
 keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, vvol, vvols, array, ontap tools, otv, sddc 
-summary: Para implantar NFS vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI, você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF completo e um domínio de carga de trabalho VI existente.  Revise o design de rede recomendado e os requisitos de infraestrutura para garantir uma integração de armazenamento confiável e de alto desempenho. 
+summary: Para implementar NFS vVols em um domínio de carga de trabalho do VMware Cloud Foundation, você precisa de um sistema de storage ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento do VCF concluído e um domínio de carga de trabalho VI existente. Analise o projeto de rede e os requisitos de infraestrutura recomendados para garantir uma integração de storage confiável e de alto desempenho. 
 ---
-= Requisitos de implantação para adicionar NFS vVols em um domínio de carga de trabalho VI
+= Requisitos de implantação para adicionar NFS vVols em um domínio de carga de trabalho
 :allow-uri-read: 
 
 
 [role="lead"]
-Revise os requisitos de infraestrutura e design de rede recomendados para implantar NFS vVols em um domínio de carga de trabalho do VMware Cloud Foundation VI.  Você precisa de um sistema de armazenamento ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento VCF completo e um domínio de carga de trabalho VI existente.
+Analise o design de rede recomendado e os requisitos de infraestrutura para implementar NFS vVols em um domínio de carga de trabalho do VMware Cloud Foundation. Você precisa de um sistema de storage ONTAP AFF ou ASA totalmente configurado, um domínio de gerenciamento do VCF concluído e um domínio de carga de trabalho existente.
 
 
 
@@ -20,7 +20,7 @@ Certifique-se de que os seguintes componentes e configurações estejam instalad
 
 * Um sistema de armazenamento ONTAP AFF ou FAS com portas de dados físicas em switches Ethernet dedicados ao tráfego de armazenamento.
 * A implantação do domínio de gerenciamento do VCF foi concluída e o cliente vSphere está acessível.
-* Um domínio de carga de trabalho VI foi implantado anteriormente.
+* Um domínio de carga de trabalho já foi implantado anteriormente.
 
 
 

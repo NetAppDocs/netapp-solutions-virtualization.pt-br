@@ -1,0 +1,20 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vcf-mgmt-nfs-converge.html 
+keywords: netapp, vmware, cloud, foundation, vcf, aff, all-flash, nfs, array, ontap tools, otv, sddc, sddc manager, ontap tools, ontap tools 10 
+summary: Converja um cluster vSphere existente para um domínio de gerenciamento VCF usando a Ferramenta de Instalação VCF. Você validará o appliance vCenter, implantará o Instalador VCF, reutilizará componentes existentes e instalará novos para concluir o domínio de gerenciamento VCF. 
+---
+= Converja o cluster vSphere para o domínio de gerenciamento do VCF usando a ferramenta de instalação do VCF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Converja um cluster vSphere existente para um domínio de gerenciamento VCF usando a Ferramenta de Instalação VCF. Você validará o appliance vCenter, implantará o Instalador VCF, reutilizará componentes existentes e instalará novos para concluir o domínio de gerenciamento VCF.
+
+Com base nos componentes já implantados em seu ambiente, a Ferramenta de Instalação do VCF determinará quais componentes podem ser reutilizados e quais precisam ser instalados. A Ferramenta de Instalação do VCF também validará o appliance vCenter existente e garantirá que ele atenda aos requisitos de convergência.
+
+Siga os passos documentados em  https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/converging-your-existing-vsphere-infrastructure-to-a-vcf-or-vvf-platform-.html["Convergindo sua infraestrutura vSphere existente para um domínio de gerenciamento VCF"] para concluir o processo de convergência.
+
+https://vmware.github.io/vcf-upgrade-planner/["Ferramenta de Planejamento de Atualização VCF"]Fornece as etapas de alto nível para concluir o processo de convergência com base nas entradas que você fornecer.

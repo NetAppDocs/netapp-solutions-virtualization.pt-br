@@ -62,6 +62,8 @@ indexpage:
       url: https://www.vmware.com/resources/compatibility/search.php?deviceCategory=san&details=1&partner=64&isSVA=0&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc
   - title: Recursos adicionais
     links:
+    - title: Novidades do VMware Cloud Foundation 9.1
+      url: vmw-vcf-91-whatsnew.html
     - title: Práticas recomendadas do VMware vSphere com ONTAP
       url: https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html
     - title: Volumes virtuais VMware vSphere (vVols) com NetApp ONTAP

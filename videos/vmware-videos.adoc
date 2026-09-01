@@ -94,6 +94,18 @@ video::255640f5-4dff-438c-8d50-b01200f017d1[panopto,width=360]
 video::9b66ac8d-d2b1-4ac4-a33c-b16900f67df6[panopto]
 .Armazenamentos de dados iSCSI como armazenamento suplementar para domínios de gerenciamento VCF
 video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto]
+.Datastore suplementar com NVMe/FC
+video::b2b16a35-05cd-49c9-a91a-b4ac0127813d[panopto,width=360]
+.Datastore suplementar com FC
+video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto,width=360]
+.Stretch cluster para VCF com SnapMirror active sync iSCSI usando as ferramentas ONTAP
+video::4c21ee83-dc11-43bf-a9af-b4ac014aaa0e[panopto,width=360]
+.Cluster expansível para VCF com SnapMirror active sync NVMe/TCP
+video::f85530ec-ff24-4c7d-abb4-b49b0176402c[panopto,width=360]
+.Cluster estendido para VCF com SnapMirror sincronização ativa NAS
+video::76549cac-a1e3-4471-acf5-b49c00eebcf7[panopto,width=360]
+.iSCSI Multipath com AFF e ASA r2
+video::62c2a66c-1a07-4284-bc7b-b4ac00e9aeea[panopto,width=360]
 
 
 [[netapp-cloud-insights]]
@@ -101,3 +113,12 @@ video::1d0e1af1-40ae-483a-be6f-b156015507cc[panopto]
 
 .NetApp Cloud Insights - Observabilidade para o Data Center Moderno
 video::1e4da521-3104-4d51-8cde-b0e001502d3d[panopto,width=360]
+
+
+[[vks-with-ontap]]
+== VKS com o ONTAP
+
+.VKS com Supervisor em Virtual Distributed Switch
+video::4ef64b3c-7a68-41d5-bacf-b4a8012b49f8[panopto,width=360]
+.VKS com automação VCF
+video::571ced1a-58e8-4bf4-9c24-b4b10118bc22[panopto,width=360]
