@@ -174,9 +174,9 @@ NOTE: Para obter detalhes adicionais sobre as práticas recomendadas para config
 [[openshift-virtualization-tuning-scaling-guide]]
 == **OpenShift Virtualization - Guia de ajuste e dimensionamento**
 
-A Red Hat documentou link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/scalability_and_performance/recommended-performance-and-scalability-practices-2["Recomendações e limitações de dimensionamento de cluster OpenShift"].
+A Red Hat documentou link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/scalability_and_performance/recommended-performance-and-scalability-practices["Recomendações e limitações de dimensionamento de cluster OpenShift"].
 
-Além disso, eles também documentaram link:https://access.redhat.com/articles/6994974["Guia de ajuste de virtualização OpenShift"] e link:https://access.redhat.com/articles/6571671["Limites suportados para OpenShift Virtualization 4.x"].
+Além disso, eles também documentaram link:https://access.redhat.com/articles/6994974["Guia de ajuste de virtualização OpenShift"] e link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/virtualization/virt-supported-limits["Limites suportados para OpenShift Virtualization 4.x"].
 
 
 NOTE: É necessária uma assinatura ativa do Red Hat para acessar o conteúdo acima.

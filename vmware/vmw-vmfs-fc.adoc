@@ -102,3 +102,5 @@ Para provisionar um armazenamento de dados VMFS, conclua as seguintes etapas:
 
 .Datastore suplementar com FC
 video::96311abf-aa45-4ce9-984b-b4b001005bab[panopto,width=360]
+.Datastore principal com FC
+video::9c51101c-292b-41ef-8dd5-b4cf0131dd62[panopto,width=360]

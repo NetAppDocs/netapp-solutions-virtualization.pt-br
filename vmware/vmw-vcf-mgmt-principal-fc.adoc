@@ -41,6 +41,7 @@ Os seguintes componentes e configurações são usados neste cenário:
 * Sistema de armazenamento NetApp com uma máquina virtual de armazenamento (SVM) configurada para permitir tráfego FC.
 * Interfaces lógicas (LIF) foram criadas na estrutura FC que transportará o tráfego FC e está associada ao SVM.
 * O zoneamento foi configurado para usar zoneamento de iniciador-destino único em switches FC para HBAs de host e destinos de armazenamento.
+* Crie um datastore VMFS (com LUN FC) em um dos hosts do vSphere no cluster.
 
 
 Para obter informações sobre como configurar sistemas de armazenamento ONTAP , consulte olink:https://docs.netapp.com/us-en/ontap["Documentação do ONTAP 9"] centro.
@@ -70,6 +71,13 @@ Para expandir o domínio de gerenciamento com um cluster adicional, consulte  ht
 
 Em um nível mais alto, as etapas para adicionar um cluster adicional ao domínio de gerenciamento são as seguintes: * Certifique-se de que os hosts estejam comissionados e os pools de rede estejam configurados no vCenter. * O LUN é provisionado no sistema de storage ONTAP e apresentado aos hosts no cluster adicional. * Crie um novo cluster SDDC no domínio de gerenciamento no vCenter e siga o assistente para adicionar o cluster adicional ao domínio de gerenciamento.
 
+
+
+[[reference-video]]
+== Vídeo de referência
+
+.Datastore principal com FC
+video::9c51101c-292b-41ef-8dd5-b4cf0131dd62[panopto,width=360]
 
 
 [[additional-information]]
