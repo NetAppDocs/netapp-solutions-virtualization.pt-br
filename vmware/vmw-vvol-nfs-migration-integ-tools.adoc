@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vvol-nfs-migration-integ-tools.html 
+keywords: netapp, vmware, nfs, ontap, tools, integration, vaai, snapcenter, sra, disaster recovery 
+summary: Saiba mais sobre as ferramentas de integração do ONTAP para gerenciar e proteger datastores NFS em ambientes VMware, incluindo o ONTAP tools for VMware vSphere, o plug-in NFS VAAI e o SnapCenter Plug-in for VMware vSphere. 
+---
+= Ferramentas de integração do ONTAP para datastores NFS em ambientes VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Saiba mais sobre as ferramentas de integração do ONTAP para gerenciar, monitorar e proteger datastores NFS em ambientes VMware, incluindo o ONTAP tools for VMware vSphere, o NFS VAAI plug-in e o SnapCenter Plug-in for VMware vSphere.
+
+NetApp fornece as seguintes ferramentas para gerenciar e proteger datastores NFS em ambientes VMware:
+
+* *link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/index.html["ONTAP tools for VMware vSphere"^]*: integra o gerenciamento do ONTAP ao vSphere Client para provisionar, monitorar e gerenciar datastores NFS e aplica as configurações recomendadas do host ESXi.
+* *link:https://docs.netapp.com/us-en/nfs-plugin-vmware-vaai/index.html["Plug-in NetApp NFS para VMware VAAI"^]*: Descarrega operações de armazenamento, como clonagem, para ONTAP, melhorando o desempenho e reduzindo a carga nos hosts ESXi.
+* *link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/protect/enable-storage-replication-adapter.html["Adaptador de Replicação de Storage (SRA)"^]*: Integra-se com o VMware Live Site Recovery (anteriormente VMware Site Recovery Manager) para orquestrar a recuperação de desastres usando a replicação do ONTAP SnapMirror.
+* *link:vmw-dr-gs.html["NetApp Disaster Recovery"]*: orquestra a recuperação de desastres de VMs em datastores NFS do NetApp Console.
+* *link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/index.html["SnapCenter Plug-in for VMware vSphere"^]*: Fornece backup e restauração consistentes com falhas e consistentes com VMs para VMs em datastores NFS.
+* *link:https://docs.netapp.com/us-en/data-infrastructure-insights/index.html["Data Infrastructure Insights da NetApp"^]*: Fornece visibilidade do desempenho e da integridade do storage ONTAP e da infraestrutura VMware.
+
+
+Essas ferramentas simplificam as operações, melhoram o desempenho e fornecem proteção de dados para datastores NFS em ambientes VMware.

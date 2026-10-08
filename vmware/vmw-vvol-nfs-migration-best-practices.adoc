@@ -1,0 +1,104 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-vvol-nfs-migration-best-practices.html 
+keywords: netapp, vmware, nfs, ontap, deployment, best practices, connectivity, provisioning, nconnect, security 
+summary: Aprenda sobre as melhores práticas para usar datastores NFS em ambientes VMware com o ONTAP, incluindo conectividade, provisionamento, nConnect e segurança. 
+---
+= Melhores práticas para usar datastores NFS em ambientes VMware com ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Aprenda sobre as melhores práticas para usar datastores NFS em ambientes VMware com o ONTAP, incluindo conectividade, provisionamento, nConnect e segurança, para garantir desempenho e confiabilidade ideais após migrar de vVols.
+
+
+
+[[deployment-best-practices]]
+== Melhores práticas de implantação
+
+Ao implementar datastores NFS em ambientes VMware com ONTAP, considere as seguintes práticas recomendadas:
+
+* Utilize NFSv3 ou NFSv4.1 com base nos requisitos do seu ambiente. O NFSv3 tem amplo suporte. O NFSv4.1 adiciona autenticação Kerberos e trunking de sessão para multipathing. O trunking de sessão requer o ONTAP 9.14.1 ou posterior.
+* Configure interfaces de rede dedicadas para o tráfego NFS a fim de isolar o tráfego de storage e melhorar o desempenho.
+* Habilite a opção vStorage na SVM. O NetApp NFS Plug-in for VMware VAAI exige isso.
+* Habilite jumbo frames (MTU 9000) de ponta a ponta em hosts ESXi, switches de rede e o ONTAP.
+* Use múltiplas LIFs no ONTAP para balanceamento de carga e alta disponibilidade.
+* Garanta a sincronização consistente de DNS e de tempo entre os hosts ESXi e os sistemas ONTAP.
+* Aplique as configurações de host ESXi recomendadas pela NetApp. O ONTAP tools for VMware vSphere pode aplicá-las para você.
+* Use as cópias Snapshot do ONTAP para backup e recuperação eficientes.
+* Utilize RBAC e políticas de exportação para restringir o acesso a volumes NFS.
+* Teste cenários de failover para validar as configurações de alta disponibilidade e recuperação de desastres.
+
+
+Para obter detalhes, consulte link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-datastores-nfs.html["Datastores NFS no VMware vSphere com o ONTAP: guia de melhores práticas"^] e link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-settings.html["Host ESXi recomendado e outras configurações ONTAP"^].
+
+
+
+[[nfs-connectivity-best-practices]]
+== Melhores práticas de conectividade NFS
+
+Ao configurar a conectividade NFS entre hosts ESXi e o storage ONTAP, siga estas práticas recomendadas:
+
+* Coloque os hosts ESXi e as LIFs NFS do ONTAP no mesmo segmento de rede ou assegure o roteamento adequado.
+* Utilize VLANs dedicadas para isolar e proteger o tráfego NFS.
+* Configure vários LIFs do ONTAP para NFS para fornecer balanceamento de carga e failover.
+* Verifique se as políticas de exportação do ONTAP permitem acesso de todos os hosts ESXi que montam o datastore.
+* Use nomes DNS ou endereços IP consistentes ao montar datastores NFS em todos os hosts.
+* Teste a conectividade de cada host ESXi com os LIFs do ONTAP usando  `vmkping`.
+
+
+Para orientações sobre projeto de rede, consulte link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-network.html["Configuração de rede"^].
+
+
+
+[[nfs-provisioning-best-practices]]
+== Melhores práticas para provisionamento NFS
+
+Ao provisionar datastores NFS no ONTAP para ambientes VMware, siga estas práticas recomendadas:
+
+* *Use as ONTAP tools for VMware vSphere*: provisione datastores NFS com as ONTAP tools para garantir a configuração e a integração corretas com o vSphere. Consulte link:vmw-nfs-otv10.html["Configurar datastores NFS para vSphere 8 usando ONTAP tools for VMware vSphere"].
+* *Selecione o tipo de volume apropriado*: escolha volumes FlexVol para cargas de trabalho menores ou volumes FlexGroup para ambientes grandes que exigem alta escalabilidade. Consulte link:vmw-vvol-nfs-migration-storage-options.html["Opções de armazenamento"].
+* *Configurar políticas de exportação*: restrinja o acesso a hosts ESXi autorizados ou intervalos de IP.
+* *Ative thin provisioning*: otimize a utilização do espaço e monitore a capacidade para evitar comprometimento em excesso.
+* *Defina a reserva do Snapshot*: dimensione a reserva do Snapshot com base em seus requisitos de retenção.
+* *Utilize várias LIFs*: distribua os datastores entre as LIFs para balanceamento de carga e alta disponibilidade.
+* *Monitore a capacidade e o desempenho*: verifique regularmente o uso do datastore e as métricas de desempenho para evitar gargalos.
+
+
+
+
+[[nconnect-recommendations]]
+== nConnect recomendações
+
+nConnect permite várias conexões TCP por datastore NFS, o que melhora a taxa de transferência ao fazer melhor uso das placas de interface de rede de alta velocidade.
+
+* O ESXi 8.0 Update 1 introduziu nConnect para datastores NFSv3, e ele se tornou amplamente disponível no ESXi 8.0 Update 2. O ESXi 8.0 Update 3 adicionou nConnect para NFSv4.1.
+* O padrão é uma conexão por datastore. Por padrão, você pode configurar até quatro conexões por datastore e aumentar o máximo para oito com a `/NFS/MaxConnectionsPerDatastore` configuração avançada. Geralmente, não é necessário aumentar o máximo padrão.
+* O ESXi suporta até 256 conexões NFS por host em todos os datastores montados, e cada conexão nConnect conta para esse total.
+* Para evitar problemas de desempenho com vMotion, use o mesmo número de conexões para um datastore NFS em todos os hosts em um cluster do vSphere.
+* Teste o impacto no desempenho de nConnect em seu ambiente antes de implementar mudanças em larga escala em produção.
+
+
+Para obter detalhes, consulte link:vmw-vsphere8-nfs-nconnect.html["Use o nConnect em datastores NFS v3 para melhorar o desempenho do datastore"] e o artigo da base de conhecimento da Broadcom link:https://knowledge.broadcom.com/external/article/313464/support-for-nconnect-feature-added-in-es.html["Suporte para o recurso nConnect no cliente NFS - ESXi"^].
+
+
+
+[[security-features]]
+== Recursos de segurança
+
+O ONTAP oferece os seguintes recursos de segurança para datastores NFS em ambientes VMware:
+
+* *Políticas de exportação*: controle o acesso aos volumes NFS especificando hosts, endereços IP ou sub-redes permitidos.
+* *autenticação Kerberos*: o NFSv4.1 com Kerberos (krb5, krb5i, krb5p) oferece autenticação segura, integridade e confidencialidade.
+* *Controle de acesso baseado em função (RBAC)*: conceda permissões granulares para gerenciar recursos de storage.
+* *Criptografia de dados em repouso*: link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/index.html["Criptografe os dados em repouso"^]no nível do volume ou do agregado.
+* *alocação a vários clientes segura*: isole as cargas de trabalho usando SVMs.
+* *Proteção contra ransomware*: link:https://docs.netapp.com/us-en/ontap/anti-ransomware/index.html["Proteção autônoma contra ransomware ONTAP"^] detecta atividades suspeitas e cria pontos de recuperação.
+
+
+Para obter mais informações, consulte o link:https://docs.netapp.com/us-en/ontap/nfs-admin/index.html["Documentação do ONTAP NFS"^].

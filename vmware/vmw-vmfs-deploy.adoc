@@ -160,7 +160,7 @@ image:vmfs-deploy-015.png["Figura mostrando diálogo de entrada/saída ou repres
 
 
 
-Consulte estes links para provisionamento de armazenamento de dados vVol, FC, NVMe/TCP.
+Para provisionar datastores vVols ou datastores VMFS usando FC ou NVMe/TCP, consulte link:https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere-10/configure/create-datastore.html["Criar um datastore nas ONTAP tools"^]. Essa página também lista a configuração do host ESXi necessária para NVMe/TCP.
 
 
 
