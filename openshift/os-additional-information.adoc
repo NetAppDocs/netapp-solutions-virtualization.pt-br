@@ -19,7 +19,7 @@ Acesse recursos adicionais que oferecem mais informações sobre suporte à impl
 * https://docs.netapp.com/["Documentação da NetApp"^]
 * https://docs.netapp.com/us-en/trident/index.html["Documentação do Trident"^]
 * https://access.redhat.com/documentation/en-us/openshift_container_platform/4.7/["Documentação do Red Hat OpenShift"^]
-* https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.1/["Documentação da plataforma Red Hat OpenStack"^]
+* https://docs.redhat.com/en/documentation/red_hat_openstack_platform/16.1["Documentação da plataforma Red Hat OpenStack"^]
 * https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.4/["Documentação de virtualização do Red Hat"^]
 * https://docs.vmware.com["Documentação do VMware vSphere"^]
 

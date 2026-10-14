@@ -1475,7 +1475,6 @@
   <block id="b5fd692a7ea9558930c2173bc3c46a5e" category="inline-link">Documentação do Red Hat OpenShift</block>
   <block id="89ac02f553c84b8fc9e61169e79f2c7f" category="list-text"><block ref="89ac02f553c84b8fc9e61169e79f2c7f" category="inline-link-rx"></block></block>
   <block id="b9ccb9a7b6b82d2a5c7f42314d2a7d2a" category="inline-link">Documentação da plataforma Red Hat OpenStack</block>
-  <block id="ed0676f65fd9fcde9ee42fb4fee3ab6b" category="list-text"><block ref="ed0676f65fd9fcde9ee42fb4fee3ab6b" category="inline-link-rx"></block></block>
   <block id="a881011d7c5d5c51ae176f0592eaa6bc" category="inline-link">Documentação de virtualização do Red Hat</block>
   <block id="f6dd4cc664e64de4d4824ac86c3bfb28" category="list-text"><block ref="f6dd4cc664e64de4d4824ac86c3bfb28" category="inline-link-rx"></block></block>
   <block id="7a32ae1d68cfe1067bd30afa48a7f0ef" category="inline-link">Documentação do VMware vSphere</block>
@@ -1987,7 +1986,6 @@
   <block id="bdb7ca310f573681391786bf3cb42689" category="paragraph"><block ref="bdb7ca310f573681391786bf3cb42689" category="inline-image-macro-rx" type="image"></block></block>
   <block id="0f2ed001ca108c8ae69e0de13c18a4e2" category="section-title">Criar um aplicativo</block>
   <block id="0309bfa11ebaa855df6d24af0acfb503" category="example-title">Criar aplicativo</block>
-  <block id="fdb727d66243e25346b3d13832ab432c" category="paragraph">**Crie um aplicativo de proteção Trident para a VM**</block>
   <block id="b4558b01953ba19496b47e3314b4c464" category="paragraph">No exemplo, o namespace de demonstração tem uma VM e todos os recursos do namespace são incluídos ao criar o aplicativo.</block>
   <block id="d8c2b35beac411ce0afb9c51a5672d73" category="inline-image-macro">Aplicativo criado</block>
   <block id="42d4770af6ec88890eee6837918615e4" category="paragraph"><block ref="42d4770af6ec88890eee6837918615e4" category="inline-image-macro-rx" type="image"></block></block>
@@ -2113,7 +2111,6 @@
   <block id="4d6fbe9b83d5f0fb3e028f70cf910b17" category="doc">Crie backup sob demanda para VMs no Red Hat OpenShift Virtualization usando Velero</block>
   <block id="bc4ce070ed8db68d82ed3da6ba7ac97e" category="paragraph">Faça backup de VMs no OpenShift Virtualization usando Velero e NetApp ONTAP S3 ou StorageGRID.  Este procedimento inclui a criação de Recursos Personalizados de Backup (CRs) para backups sob demanda e CRs Agendados para backups agendados.  Cada backup captura metadados de VM e volumes persistentes, armazenando-os no local de armazenamento de objetos especificado para fins de recuperação ou conformidade.</block>
   <block id="a35185b73e84533fd73cfb8322fefa9c" category="section-title">Etapas para criar um backup de uma VM</block>
-  <block id="f4c2b4c588235f6ac7745db472c4d9ab" category="paragraph">Para criar um backup sob demanda de toda a VM (metadados da VM e discos da VM), clique na guia **Backup**.  Isso cria um Recurso Personalizado de Backup (CR). Um exemplo de yaml é fornecido para criar o Backup CR.  Usando este yaml, a VM e seus discos no namespace especificado serão copiados. Parâmetros adicionais podem ser definidos conforme mostrado na<block ref="45bf4fcb30cb666d5b02b54fb671e73b" category="inline-link-macro-rx"></block> .</block>
   <block id="f5895613b4fc01023daa64f694a33785" category="paragraph">Um instantâneo dos volumes persistentes que dão suporte aos discos será criado pelo CSI.  Um backup da VM junto com o instantâneo de seus discos são criados e armazenados no local de backup especificado no yaml. O backup permanecerá no sistema por 30 dias, conforme especificado no ttl.</block>
   <block id="c04e0f40b83a86fd835680d3df9ce399" category="paragraph">Quando o backup for concluído, sua Fase será exibida como concluída.</block>
   <block id="a2eabcbade98a44462292c4666e62044" category="inline-image-macro">Backup concluído</block>
@@ -7778,7 +7775,6 @@
   <block id="0bb0fe78cec7e68d89f6dbb07d2b8093" category="video-title">Recuperação de desastres para uma VM usando Trident Protect</block>
   <block id="b16acd8ae1ca5e379b2e4aa604f8a2ba" category="section-title">Criar AppVault usando ONTAP S3</block>
   <block id="472263ee87de0443326619011c98d149" category="paragraph">Esta seção mostra como configurar um objeto AppVault no Trident Protect usando ONTAP storage de objetos S3.</block>
-  <block id="c1a6380543e106c0301282521b55a3fc" category="paragraph">Utilize os comandos oc e os arquivos yaml mostrados abaixo para criar um segredo e o recurso personalizado AppVault para ONTAP s3. Certifique-se de criá-los no namespace trident protect.</block>
   <block id="4035a79b3668307381cda3c40c13747d" category="paragraph">Certifique-se de que o cofre S3 do ONTAP foi criado e está no estado Disponível</block>
   <block id="6cd1f4dd55f2126ac98b438f1fa31844" category="inline-image-macro">OCP-v AppVault no namespace trident-protect</block>
   <block id="c047817699debbb2dda60dae4514bd1c" category="paragraph"><block ref="c047817699debbb2dda60dae4514bd1c" category="inline-image-macro-rx" type="image"></block></block>
@@ -8757,24 +8753,12 @@
   <block id="1772d045ac6084e8616a073ae3aa13a2" category="paragraph">**Conformidade e Auditoria** Oferece ferramentas e recursos que ajudam as organizações a atender aos requisitos de conformidade e realizar auditorias regulares de suas práticas de proteção de dados.</block>
   <block id="04961098dd1c9db5b3eb5179135f1cf1" category="paragraph">**Recuperação de Desastres** integra-se aos recursos de replicação do ONTAP para fornecer soluções robustas de recuperação de desastres, garantindo a continuidade dos negócios mesmo diante de eventos catastróficos.</block>
   <block id="06452dbfecb9925c362f50b4228f4238" category="paragraph">Para obter detalhes completos sobre o Trident Protect, consulte NetApp Trident Protect <block ref="22119dfffa935338f489f6ce2e67baee" category="inline-link-macro-rx"></block>.</block>
-  <block id="2ca92584b9f53c63bf549d4b202a2351" category="section-title">NetApp ONTAP modelos de hardware e protocolos suportados</block>
-  <block id="78e3871b51a9a03feeb507b46a55c050" category="paragraph">NetApp ONTAP software é executado em diversos modelos de hardware, cada um projetado para atender a diferentes requisitos de desempenho e capacidade. Trident amplia seus recursos robustos para oferecer suporte a vários sistemas NetApp ONTAP, incluindo All Flash FAS (AFF), All SAN Array (ASA) e ASA R2. Esse suporte garante que as organizações possam aproveitar todo o potencial de suas soluções de storage de alto desempenho em ambientes conteinerizados.</block>
-  <block id="b8935f18ffe32272a10bdd62b7db4777" category="paragraph">**Sistemas All Flash FAS (AFF)** Os sistemas AFF oferecem desempenho excepcional e baixa latência, tornando-os ideais para aplicações de alta demanda.</block>
-  <block id="4393a8e49a1de4f5361d9bdd0fad982c" category="paragraph">**All SAN Array (ASA) Systems** Os sistemas ASA são projetados para ambientes SAN dedicados, oferecendo desempenho robusto e confiabilidade.</block>
-  <block id="6e2dd8dfcfca0792c36dd5ae66a865aa" category="paragraph">**ASA R2 Systems** Os sistemas ASA R2 oferecem recursos e capacidades aprimorados para ambientes SAN.</block>
-  <block id="c160a7c3fe76f26a1eb3a7ae8e68161b" category="paragraph">**AFX** NetApp AFX é uma arquitetura de storage all-flash desagregada, desenvolvida especificamente para cargas de trabalho de IA corporativas. Oferece NAS de alto desempenho, permitindo o escalonamento independente de computação e capacidade. Os sistemas de storage NetApp AFX diferem de outros sistemas baseados em ONTAP (ASA, AFF e FAS) na implementação de sua camada de storage. AFX utiliza um sistema de arquivos distribuído que permite alto desempenho e escalabilidade, enquanto outros sistemas baseados em ONTAP utilizam uma arquitetura de storage tradicional.</block>
-  <block id="e7672ad0deaa706df754c867d11571ac" category="list-text">Protocolos suportados para AFF: NFS, CIFS/SMB, iSCSI, FC, NVMe/TCP</block>
-  <block id="edfd90336d93ec40b5ed8bca8679b9aa" category="list-text">Protocolos suportados para ASA: iSCSI, FC, NVMe/TCP</block>
-  <block id="483886e70fa508c09b938eb1394c50f6" category="list-text">Protocolos suportados para ASA R2: iSCSI, FC, NVMe/TCP</block>
-  <block id="1e22e1f992f7e96e5e55bf2d61e4bf47" category="list-text">Protocolos suportados para AFX: a partir do Trident 25.10, apenas o protocolo NFS é suportado; o protocolo SMB não é suportado.</block>
   <block id="0dd6128d6f2eb1e95bb7e4597e1d9e01" category="section-title">Drivers Trident para storage ONTAP</block>
   <block id="68edc55766f524a48117d68c7aeaf53f" category="paragraph">Trident inclui os seguintes drivers CSI, cada um capaz de provisionar um volume no storage de backend</block>
-  <block id="985be8f460623f562d2ea84ef63651c6" category="section-title">Para protocolos NAS em modelos de hardware compatíveis</block>
   <block id="6f6f242b4caf9e6048b5b75b6a40049c" category="list-text">ontap-nas: Um PVC corresponde a um PV, que é um flexvolume dedicado.</block>
   <block id="8d2475e5fcc85cb7751bf6530341aade" category="list-text">ontap-nas-economy: Cada PV provisionado é uma qtree, com um número configurável de qtrees por FlexVolume (o padrão é 200, configurável entre 50 e 300). Um pvc corresponde a 1 pv, que é uma qtree em um flexvolume compartilhado.</block>
   <block id="6b35b187dc7a6a13097d957a2cc0ca90" category="admonition">Você pode colocar todos os discos das VMs como qtrees em um único volume. No entanto, esteja ciente de que os recursos de Snapshot, Clones e Replicação não são suportados pelo Trident. Quando esses recursos são gerenciados pelo administrador de storage, eles não são granulares em nível de PV.</block>
   <block id="ad10c066f0a61cd907eb4fc280ac4780" category="list-text">ontap-nas-flexgroup: Cada PV provisionado é um ONTAP FlexGroup, e todos os agregados atribuídos a um SVM são utilizados.</block>
-  <block id="03d78dff6642af51896e39c5f5f7c5f7" category="section-title">Para protocolos SAN em modelos de hardware compatíveis</block>
   <block id="ee8ff062ef9fb516aaceb92228d88995" category="list-text">ontap-san: Um PVC corresponde a um PV, que é um LUN em um flexvolume dedicado</block>
   <block id="b9d700f45b618e4b31f6fd3bf4882301" category="list-text">ontap-san-economy: Um PVC corresponde a um PV, que é um LUN em um flexvolume compartilhado. Você pode ter vários LUNs no flexvolume compartilhado (o padrão é 100, configurável entre 50 e 200 LUNs/PVs por volume flexvol).</block>
   <block id="c907ece3af5b287acc45d9c2fab7658f" category="admonition">Você pode colocar todos os discos das VMs como LUNs em um único volume. No entanto, embora este driver suporte Snapshots e Clones, ele não suporta replicação. Quando a replicação é gerenciada pelo administrador de storage, ela não é granular por PV.</block>
@@ -9886,4 +9870,16 @@
   <block id="137e4d3e0bc5586af6fc7ca9441511e1" category="sidebar">Diretrizes de dimensionamento</block>
   <block id="ec7f55f91b201191775a6197f011f7f7" category="sidebar">Ferramentas de integração do ONTAP</block>
   <block id="7fb0755110f4a96ae5bd0935a2d5ccbb" category="sidebar">Opções de migração</block>
+  <block id="64500b33ac617d44e2ae502732348883" category="list-text"><block ref="64500b33ac617d44e2ae502732348883" category="inline-link-rx"></block></block>
+  <block id="c0ce1b494fcd9e77baa6389056bb4590" category="paragraph">Os discos persistentes das VMs de virtualização do OpenShift podem ser respaldados pelo armazenamento ONTAP integrado ao cluster do OpenShift usando <block ref="d66058559be29002c97cec8314567a26" category="inline-link-macro-rx"></block>. Nesta seção, usamos <block ref="c2cd0213dc3e8b35c8b76d6370cfa296" category="inline-link-macro-rx"></block> para fazer backup das VMs e de seus volumes de dados em</block>
+  <block id="5c96fa5ac807ed29b4b0ff068b21de35" category="inline-link-macro">Documentação do OpenShift Container Platform</block>
+  <block id="e71641623e94ea440f0b781184464bd5" category="paragraph">Para criar um backup sob demanda de toda a VM (metadados da VM e discos da VM), clique na guia **Backup**. Isso cria um Recurso Personalizado de Backup (CR). Um exemplo de yaml é fornecido para criar o CR de Backup. Usando este yaml, a VM e seus discos no namespace especificado terão backup. Informações adicionais podem ser encontradas em <block ref="658222a07b5db4a220ad3b7826613ed3" category="inline-link-macro-rx"></block>.</block>
+  <block id="3d5daa93898f5bf318fa29ecd109d1f3" category="section-title">Suporte do Trident para orquestradores e backends de armazenamento</block>
+  <block id="a555fee6c6587118e36d8dd135df1313" category="inline-link-macro">Requisitos do Trident</block>
+  <block id="9abe4911730ca9713a3331cf0eba515d" category="paragraph">Para obter informações sobre as distribuições do Kubernetes e os backends de armazenamento suportados, consulte o <block ref="b842740bc630595775d32ab9da2ba37d" category="inline-link-macro-rx"></block>.</block>
+  <block id="a9918024ce651ba38ef3bcc8cade94c3" category="inline-link-macro">Documentação de preparação do ONTAP NAS</block>
+  <block id="c5e5ae90877fb232973188902e5f45bf" category="admonition">O Trident também oferece suporte a NetApp <block ref="32e1a1bd45e8cf2cac0c6c03ad06c661" category="inline-link-macro-rx"></block>. Para requisitos de suporte a AFX, consulte o <block ref="c0260325c7b73c05c3aabbdb7652d210" category="inline-link-macro-rx"></block>.</block>
+  <block id="6e2a3b1094b66d679a2f74a8a08c9246" category="section-title">Para protocolos NAS</block>
+  <block id="5090601a75323a1861526e5add664b7b" category="section-title">Para protocolos SAN</block>
+  <block id="744a96e9ce909d310b032af09b7da629" category="paragraph">**Crie um aplicativo Trident Protect para a VM**</block>
 </blocks>

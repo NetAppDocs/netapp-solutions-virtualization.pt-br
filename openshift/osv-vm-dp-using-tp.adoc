@@ -140,7 +140,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-007.png["vm, pods e pvc criados"]
 .Criar aplicativo
 [%collapsible]
 ====
-**Crie um aplicativo de proteção Trident para a VM**
+**Crie um aplicativo Trident Protect para a VM**
 
 No exemplo, o namespace de demonstração tem uma VM e todos os recursos do namespace são incluídos ao criar o aplicativo.
 
