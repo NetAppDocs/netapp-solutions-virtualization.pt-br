@@ -312,6 +312,8 @@ image::shift_migration_completed.png[Plano de migração concluído com sucesso]
 .O que vem a seguir
 Após a conclusão da migração, cada volume clonado deve ser desanexado. O método de desanexação depende da versão do ONTAP: use divisão de clones para ONTAP 9.17.1 e versões anteriores, ou vol move para versões anteriores.
 
+Para operações de divisão de PVC mais rápidas após a migração, mantenha o datastore NFS de origem com 5 TB ou menos. Volumes maiores podem ser usados, mas ao criar de 200 a 300 clones para migrações de VMs, volumes menores são ideais para concluir as divisões mais rapidamente.
+
 Tanto a divisão de clones quanto a movimentação de volumes são operações em segundo plano e não afetam as cargas de trabalho de produção enquanto estão em execução. Um script para iniciar o processo de desanexação está disponível no widget *Desanexar Pós-Migração* dentro do NetApp Console Catálogo de Automação.
 
 
