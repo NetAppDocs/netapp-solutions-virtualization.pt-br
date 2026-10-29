@@ -57,8 +57,25 @@ Se você é novo no ONTAP, use o Gerenciador de Sistemas para uma melhor experi�
 +
 image:proxmox-ontap-fc-001.png["Detalhes da interface FC"]
 
-. Crie um grupo de interfaces (igroup) e preencha os iniciadores FC do host.
-. Crie o LUN com o tamanho desejado na SVM e apresente-o ao igroup criado na etapa anterior. Certifique-se de que a proteção antiransomware esteja ativada na guia de segurança para sistemas ASA e na guia de segurança de volume para sistemas AFF/ FAS .
+. Crie um igroup com o tipo de sistema operacional definido como `linux` e adicione os iniciadores FC do host.
++
+O Proxmox VE é baseado no Debian Linux, portanto use o `linux` tipo de SO para os igroups que contêm iniciadores de host do Proxmox VE. No System Manager, selecione *Linux* como o sistema operacional do host. Se você usa a ONTAP CLI, execute o seguinte comando.
+
++
+[source, cli]
+----
+lun igroup create -vserver <svm_name> -igroup <igroup_name> -protocol fcp -ostype linux -initiator <wwpn_1>,<wwpn_2>
+----
+. Crie o LUN com o tipo de SO definido como  `linux` e o tamanho desejado no SVM e apresente-o ao igroup criado na etapa anterior. Certifique-se de que a proteção antiransomware esteja ativada na guia de segurança para os sistemas ASA e na guia de segurança do volume para os sistemas AFF/FAS.
++
+No System Manager, selecione *Linux* como o sistema operacional do host. Se você usar a ONTAP CLI, execute os seguintes comandos.
+
++
+[source, cli]
+----
+lun create -vserver <svm_name> -path /vol/<volume_name>/<lun_name> -size <size> -ostype linux
+lun mapping create -vserver <svm_name> -path /vol/<volume_name>/<lun_name> -igroup <igroup_name>
+----
 +
 image:proxmox-ontap-fc-002.png["detalhes do lun"]
 

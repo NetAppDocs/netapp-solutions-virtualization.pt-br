@@ -1,0 +1,155 @@
+---
+sidebar: sidebar 
+permalink: nutanix/nutanix-deploy-cluster.html 
+keywords: nutanix, ahv, aos, foundation central, cluster, deploy, ontap, netapp 
+summary: Implante um cluster de computação Nutanix usando o Foundation Central e, em seguida, conecte-o ao storage ONTAP da NetApp. 
+---
+= Implante um cluster de computação Nutanix com armazenamento ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Implante um cluster de computação Nutanix que consuma armazenamento do NetApp ONTAP. Você baixa os pacotes de instalação do AOS e do AHV, configura o Foundation Central, prepara a imagem e realiza o processo de ambientação dos nós de computação, cria o cluster e, em seguida, conecta o storage do ONTAP a ele.
+
+.Passos
+. *Faça o download dos pacotes de instalação do AOS e do AHV.*
++
+Para obter mais informações, consulte link:https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v11_2:ahv-ahv-installer-download-t.html["Baixando os pacotes de instalação do AOS e do AHV"^].
+
+. *Configure a Foundation Central.*
++
+O Nutanix Foundation Central (FCA) é a ferramenta de implantação recomendada para criar imagens dos servidores OEM compatíveis e criar o cluster de computação Nutanix.
+
++
+.. Baixe o pacote de instalação do Foundation e implante a VM do Foundation.
+.. Conclua o link:https://portal.nutanix.com/page/documents/details?targetId=Foundation-Central-Appliance-v1_11:v1-setup-fca-t.html["Configuração do Foundation Central"^].
+.. Atualize o endereço IP de gerenciamento e as configurações de rede conforme necessário.
+.. Acesse a interface web do Foundation Central usando o endereço IP configurado.
++
+
+NOTE: Se a implantação do Foundation Central falhar, faça login na VM do FCA, execute `k3d cluster delete fccluster` e, em seguida, execute novamente o processo de configuração.
+
++
+Para obter mais informações, consulte link:https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide:fie-foundation-vm-install-on-workstation-t.html["Instalando a Foundation VM"^].
+
+
+
+. *Faça upload das imagens de instalação do AOS e do AHV.*
++
+Utilize o gerenciamento de imagens do Foundation Central para realizar o seguinte:
+
++
+.. Faça o upload das imagens AOS e AHV no Foundation Central.
+.. Verifique se as imagens estão disponíveis para implantação.
+
+
+. *Descubra e crie imagens dos nós de computação.*
++
+Escolha uma das seguintes opções.
+
++
+*Opção A: fornecedor de hardware (recomendado)*
+
++
+Utilize uma link:https://portal.nutanix.com/page/documents/details?targetId=Foundation-Central-Appliance-v2_3_0_1:v2-bare-metal-install-workflow-c.html["fornecedor de hardware"^] para automatizar a criação de imagens de nós e o processo de ambientação.
+
++
+.. Configure uma conexão com um provedor de hardware usando o HPE iLO ou o Dell iDRAC.
+.. Descubra automaticamente os servidores de destino.
+.. Selecione as imagens AOS e AHV carregadas.
+.. Crie imagens dos nós diretamente do Foundation Central.
++
+*Opção B: imagem manual*
+
++
+Se a descoberta do fornecedor de hardware não estiver disponível, use link:https://portal.nutanix.com/page/documents/details?targetId=Foundation-Central-Appliance-v2_3_0_1:v2-manual-workflow-c.html["criação manual de imagens"^].
+
++
+Antes de começar, certifique-se de que os seguintes pré-requisitos sejam atendidos:
+
++
+*** O modo de inicialização UEFI está ativado.
+*** O Secure Boot está desativado.
+*** As redes fora de banda (OOB) e de dados estão acessíveis.
+*** Não há descompasso de horário entre os hosts e a Foundation Central.
+*** Um endereço IP do AHV está disponível para cada host.
++
+
+NOTE: Não atribua endereços IP de uma sub-rede que se sobreponha ao espaço de endereços 192.168.5.0/24 na VLAN padrão.
+
+
+
+.. Crie tokens de reivindicação seguros.
+.. Monte a imagem ISO de instalação do AHV em cada nó de computação.
+.. Inicialize e instale o AHV manualmente.
+
+
+. *Faça a ambientação dos nós.*
++
+O processo de ambientação registra os servidores descobertos no Foundation Central Appliance e os prepara para fluxos de trabalho de criação de imagens ou de clusters.
+
++
+.. Selecione os hosts AHV descobertos.
+.. Inicie o processo de ambientação.
+.. Verifique se todos os nós aparecem no inventário de nós.
++
+Após a conclusão do processo de ambientação, os hosts estão prontos para a criação do cluster.
+
+
+
+. *Crie o cluster Nutanix.*
++
+.. Selecione os nós ambientados.
+.. Clique em *Create Cluster*.
+.. Forneça as informações de configuração do cluster.
+.. Insira os endereços IP da máquina virtual do controlador (CVM) quando isso for solicitado.
++
+O fluxo de trabalho de criação de cluster realiza as seguintes etapas:
+
++
+*** Implanta as CVMs.
+*** Instala o AOS.
+*** Configura os serviços do cluster.
+*** Realiza verificações de validação.
++
+image:nutanix-deploy-001.png["Página inicial do Prism Element de um cluster Nutanix recém-criado executando AHV"]
+
++
+
+NOTE: Certifique-se de que não haja diferença de horário entre os nós. Falhas na sincronização de relógios podem fazer a implantação do cluster falhar, exigindo que o processo seja reiniciado.
+
+
+
+
+
+. *Conecte o armazenamento ONTAP ao cluster de computação Nutanix.*
++
+Após o cluster Nutanix estar operacional, faça o seguinte:
+
++
+.. Verifique a conectividade entre todos os hosts AHV e as LIFs de dados NFS do ONTAP.
+.. Adicione as exportações NFS do ONTAP ao cluster Nutanix.
+.. Monte os compartilhamentos NFS exportados do FlexVol.
+.. Valide o acesso de leitura/gravação.
+.. Confirme a visibilidade e a disponibilidade do datastore.
++
+Você pode usar o armazenamento NFS montado para o seguinte:
+
++
+*** Cargas de trabalho de máquinas virtuais
+*** Repositórios de imagens
+*** Modelos
+*** Dados do aplicativo
++
+Para ver o procedimento detalhado, consulte link:nutanix-attach-storage.html["Conecte o storage NFS do ONTAP a um cluster de computação Nutanix"].
+
+
+
+
+
+

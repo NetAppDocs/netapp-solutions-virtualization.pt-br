@@ -1,0 +1,116 @@
+---
+sidebar: sidebar 
+permalink: nutanix/nutanix-overview.html 
+keywords: nutanix, ahv, ontap, nfs, netapp, virtualization, overview, architecture, disaggregated 
+summary: Aprenda como o storage ONTAP da NetApp se integra à Nutanix Cloud Platform para fornecer storage NFS externo e dimensionar computação e storage de forma independente. 
+---
+= Saiba mais sobre a Nutanix Cloud Platform com o storage ONTAP da NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+A Nutanix Cloud Platform com storage ONTAP da NetApp oferece uma arquitetura desagregada na qual você dimensiona a capacidade e o desempenho de storage independentemente da computação do Nutanix. Saiba mais sobre a arquitetura, a configuração compatível e os requisitos que você deve ter em mente antes de implantar.
+
+O ONTAP oferece uma plataforma de storage escalável e resiliente para hospedar cargas de trabalho de máquina virtual do Nutanix, permitindo que as organizações simplifiquem o gerenciamento de storage e, ao mesmo tempo, otimizem a utilização da capacidade, o desempenho e a proteção de dados.
+
+Ao combinar o poder de computação da Nutanix com o storage ONTAP, os clientes podem aproveitar serviços de storage de nível empresarial, gerenciamento de dados flexível e escalabilidade contínua, mantendo um modelo operacional consistente. A solução usa conceitos de storage conhecidos, como máquinas virtuais de storage (SVMs), volumes FlexVol, políticas de exportação e datastores NFS, permitindo que os administradores implantem e gerenciem o storage usando as ferramentas e os procedimentos estabelecidos do ONTAP. Essa integração permite que o hipervisor Nutanix AHV se beneficie dos serviços de dados maduros do ONTAP, ao mesmo tempo em que fornece uma infraestrutura flexível e eficiente para ambientes virtualizados.
+
+
+
+[[introduction]]
+== Introdução
+
+Descubra por que as organizações estão avaliando a Nutanix Cloud Platform, o desafio de escalabilidade de computação e storage que ela pode criar e como o storage externo do NetApp ONTAP aborda esse desafio.
+
+
+
+[[why-organizations-are-reassessing-virtualization]]
+=== Por que as organizações estão reavaliando a virtualização
+
+O cenário da virtualização mudou significativamente após a aquisição da VMware pela Broadcom, levando muitas organizações a reavaliar suas estratégias de infraestrutura e nuvem a longo prazo. À medida que as empresas buscam iniciativas de modernização, elas avaliam plataformas que possam oferecer consistência operacional, escalabilidade e eficiência econômica, minimizando a interrupção das cargas de trabalho existentes. Seja por mudanças no licenciamento, objetivos de otimização de custos, iniciativas de transformação de data centers ou pela necessidade de maior flexibilidade de nuvem híbrida, as organizações buscam cada vez mais soluções que simplifiquem a migração e ofereçam um caminho sustentável para seus ambientes virtualizados.
+
+
+
+[[nutanix-cloud-platform]]
+=== A Nutanix Cloud Platform
+
+A Nutanix Cloud Platform (NCP) oferece um modelo operacional híbrido multicloud consistente, permitindo que as organizações executem aplicativos e dados em ambientes locais e nuvens públicas, mantendo gerenciamento, operações e governança comuns. Ao aproveitar a arquitetura definida por software da Nutanix, os clientes podem estender cargas de trabalho entre ambientes de forma integrada, simplificar o gerenciamento de infraestrutura e reduzir a complexidade operacional.
+
+
+
+[[the-compute-and-storage-scaling-challenge]]
+=== O desafio de escalabilidade de computação e armazenamento
+
+Um desafio comum em ambientes de virtualização é equilibrar os requisitos de computação e armazenamento. Arquiteturas tradicionais frequentemente exigem que as organizações escalem recursos de computação simplesmente para obter capacidade de storage adicional, resultando em custos de infraestrutura mais elevados. Cargas de trabalho com uso intensivo de storage geralmente requerem capacidade e desempenho adicionais, em vez de recursos adicionais de CPU e memória.
+
+
+
+[[how-ontap-addresses-the-challenge]]
+=== Como o ONTAP aborda esse desafio
+
+É aqui que a integração do storage ONTAP da NetApp com a Nutanix Cloud Platform agrega valor significativo. O ONTAP oferece funcionalidades de storage de nível empresarial, incluindo alto desempenho, eficiência, proteção de dados, segurança e escalabilidade, além de permitir que a capacidade de storage e o desempenho sejam dimensionados independentemente da infraestrutura de computação da Nutanix.
+
+
+
+[[example-scenario]]
+=== Cenário de exemplo
+
+Considere o seguinte cenário: um cliente precisa de recursos de infraestrutura equivalentes a oito nós para atender aos requisitos de computação da aplicação (vCPU e memória). No entanto, devido ao rápido crescimento de dados e a aplicações com uso intensivo de storage, a organização precisa de capacidade de storage que tradicionalmente exigiria a implantação de nós adicionais. Isso aumenta o custo total de propriedade (TCO), porque o cliente precisa adquirir recursos de computação adicionais apenas para atender aos requisitos de storage. Com o ONTAP integrado a ambientes Nutanix, as organizações oferecem uma arquitetura verdadeiramente desagregada que pode escalar o storage de forma independente, fornecendo a capacidade e o desempenho de storage necessários sem expansão desnecessária de computação.
+
+
+
+[[supported-workloads-and-use-cases]]
+=== Cargas de trabalho e casos de uso suportados
+
+Essa capacidade é valiosa para uma ampla gama de implantações de aplicativos corporativos, incluindo bancos de dados essenciais aos negócios, plataformas ERP, aplicativos Microsoft, infraestruturas de desktop virtual (VDI), cargas de trabalho analíticas, ambientes de IA/ML, serviços de arquivos e aplicativos conteinerizados modernos. Ela também oferece suporte a importantes iniciativas de infraestrutura, como migrações de cargas de trabalho, recuperação de desastres, ambientes de desenvolvimento e teste, proteção de dados e resiliência cibernética. Ao permitir o dimensionamento independente dos recursos de computação e de storage, as organizações podem otimizar os investimentos em infraestrutura, compartilhando um pool comum de storage denso entre clusters de computação, enquanto atendem aos requisitos de desempenho, disponibilidade e capacidade de aplicativos tradicionais e modernos.
+
+
+
+[[what-this-solution-covers]]
+=== O que esta solução abrange
+
+Esta solução descreve as etapas necessárias para provisionar e integrar o storage ONTAP com a Nutanix Cloud Platform, permitindo o uso de storage baseado em NFS para cargas de trabalho virtualizadas, além de otimizar custo, escalabilidade e desempenho.
+
+
+
+[[high-level-architecture]]
+== Arquitetura de alto nível
+
+Nessa arquitetura, o cluster de computação Nutanix fornece a camada de computação usando hipervisores AHV que executam máquinas virtuais em um cluster Nutanix, enquanto o ONTAP fornece a camada externa de storage compartilhado. Os discos e dados das máquinas virtuais são armazenados em datastores NFSv3 da NetApp, que são montados diretamente pelos hosts Nutanix.
+
+A Nutanix utiliza o NFSv3 como o caminho de dados de alto desempenho para E/S de VM, enquanto as APIs REST do ONTAP são usadas para provisionamento de storage, gerenciamento e automação. O ONTAP oferece serviços de dados de nível empresarial, incluindo snapshots, clonagem, replicação, eficiência de storage e operações não disruptivas, independentemente da infraestrutura de computação da Nutanix.
+
+image:nutanix-overview-001.png["Diagrama de arquitetura de um cluster de computação Nutanix com três nós AHV conectados a um cluster ONTAP 9 da NetApp usando NFSv3 e a API REST do ONTAP"]
+
+Essa arquitetura desagregada permite que os clientes dimensionem computação e storage de forma independente, otimizem a utilização do storage e aproveitem os comprovados recursos de resiliência e proteção de dados do ONTAP. A solução oferece suporte às plataformas NetApp AFF e FAS, fornecendo uma base flexível para cargas de trabalho virtualizadas, implantações de nuvem privada e aplicativos de missão crítica.
+
+
+
+[[requirements]]
+== Requisitos
+
+Analise os seguintes requisitos antes de implementar o storage ONTAP com um cluster de computação Nutanix.
+
+* É necessário um cluster de computação de no mínimo três nós.
+* No ONTAP, uma máquina virtual de storage (SVM) fornece storage para o cluster de computação.
+* Cada FlexVol volume é exportado como um compartilhamento ou exportação NFSv3.
+
+
+
+
+[[configuration-limitations-and-considerations]]
+== Limitações e considerações de configuração
+
+Ao planejar sua configuração do Nutanix e do ONTAP, leve em consideração as seguintes limitações e considerações de projeto.
+
+* O armazenamento externo do ONTAP não pode ser anexado a um cluster HCI do Nutanix novo ou existente. Os clusters de computação do Nutanix podem ser implantados em configurações de HCI ou de armazenamento externo, mas um cluster de computação não pode usar ambas as configurações ao mesmo tempo. Adicionar armazenamento externo a uma implantação de HCI existente requer a reimplantação completa dos nós.
+* Apenas uma SVM do ONTAP de um único cluster do ONTAP pode ser adicionada a um cluster Nutanix somente para computação.
+* Ao conectar um contêiner de armazenamento, é possível usar apenas um LIF por SVM.
+* A recuperação de desastres baseada no SnapMirror do ONTAP e a recuperação de snapshots baseada em FlexVol não são suportadas.
+* Um único cluster ONTAP pode ser usado por vários clusters de computação Nutanix, sujeito à capacidade de storage, ao desempenho e aos requisitos de design.
+

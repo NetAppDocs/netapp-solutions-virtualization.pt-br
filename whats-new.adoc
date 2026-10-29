@@ -15,8 +15,13 @@ Aprenda o que há de novo em soluções de virtualização.
 
 
 
-[[14-october-2026]]
-== 14 de outubro de 2026
+[[22-october-2026]]
+== 22 de outubro de 2026
+
+* Adicionado o tipo de sistema operacional do ONTAP recomendado para namespaces NVMe, subsistemas NVMe, LUNs e igroups usados com o Proxmox VE.
++
+** link:proxmox/proxmox-ontap.html["Provisionar armazenamento ONTAP para o ambiente virtual Proxmox"] == 14 de outubro de 2026
+
 
 * Adicionada a solução de continuidade dos negócios para Proxmox VE com o ONTAP SnapMirror active sync.
 +

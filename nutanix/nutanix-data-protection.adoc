@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: nutanix/nutanix-data-protection.html 
+keywords: nutanix, ontap, data protection, disaster recovery, snapshot, snapmirror, migration, nutanix move, limitations, ga 
+summary: Saiba como funcionam a proteção de dados, a recuperação de desastres e a migração de VMs para o Nutanix com o ONTAP external storage, e quais recursos não são compatíveis na disponibilidade geral. 
+---
+= Proteção de dados, recuperação de desastres, migração e limitações para Nutanix com ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Entenda como a proteção de dados, a recuperação de desastres e a migração de máquinas virtuais funcionam quando você usa o ONTAP como storage externo para um cluster de computação Nutanix e revise os recursos que não são compatíveis na disponibilidade geral (GA).
+
+
+
+[[data-protection]]
+== Proteção de dados
+
+Os snapshots de VMs gerenciados pelo Prism usam clones de arquivo em nível de arquivo do ONTAP dos discos da VM, em vez de snapshots de volume do ONTAP. O Prism gerencia o ciclo de vida do snapshot, enquanto o ONTAP fornece a capacidade subjacente de clonagem de arquivos.
+
+Um clone de arquivo é uma cópia gravável no sistema de arquivos ativo. Por si só, ele não pode ser bloqueado contra exclusão, não é um ponto de recuperação de ARP e não é retido nem armazenado em cofre de forma independente por meio de SnapMirror ou SnapVault. Cada disco é clonado separadamente, portanto os pontos de recuperação entre discos não são capturados em um único ponto compartilhado no tempo, a menos que isso seja coordenado. Os snapshots de volume do ONTAP fornecem essas proteções nativamente. Os clientes que precisam de pontos de recuperação imutáveis, resilientes a ransomware e retidos por longo prazo devem considerar esperar pela integração de snapshots do ONTAP.
+
+
+NOTE: Está planejado resolver a limitação de GA no suporte a snapshots do ONTAP em uma versão futura.
+
+
+
+[[disaster-recovery]]
+== Recuperação de desastres
+
+Durante a versão GA, o DR assíncrono da Nutanix é o único método de replicação suportado. O ONTAP SnapMirror não está disponível.
+
+O SnapMirror é a opção consagrada para replicar dados do ONTAP entre sites. Ele replica apenas blocos alterados, mantém as economias de deduplicação e compressão em trânsito e no destino e pode manter vários pontos de recuperação no sistema secundário. Como a replicação é executada no sistema de storage, os hosts não precisam copiar os dados. Para clientes que usam o ONTAP como storage externo, isso significa que o DR usa os mesmos processos de replicação, retenção e recuperação que o restante do seu ambiente ONTAP.
+
+
+NOTE: A integração do SnapMirror está planejada para uma versão futura. Os clientes que desejam padronizar a recuperação de desastres (DR) na replicação do ONTAP devem considerar esperar pela integração do SnapMirror.
+
+
+
+[[vm-migrations]]
+== Migrações de VM
+
+Nesta versão, a migração de VMs utiliza o Nutanix Move. O kit de ferramentas Shift da NetApp não é suportado. A integração do kit de ferramentas Shift com o Nutanix Move está planejada para uma versão futura. Ela utilizará a clonagem do ONTAP e o mapeamento de blocos alocados para evitar cópias completas de dados e acelerar as migrações.
+
+
+
+[[features-not-supported-at-ga]]
+== Recursos não suportados no GA
+
+As seguintes configurações, funcionalidades e integrações não têm suporte na GA para a integração entre a NetApp e a Nutanix:
+
+* Configurações que usam múltiplos arrays NetApp, múltiplas máquinas virtuais de storage (SVMs) por cluster Nutanix ou múltiplas interfaces lógicas (LIFs)
+* NetApp MetroCluster
+* Snapshots do ONTAP e recursos que dependem deles
+* Sincronização ativa do SnapMirror
+* ONTAP Select
+* O NetApp Trident para a Nutanix Kubernetes Platform (NKP)
+* NFSv4.1
+* Volumes FlexGroup
+* NetApp Kit de ferramentas Shift
+
