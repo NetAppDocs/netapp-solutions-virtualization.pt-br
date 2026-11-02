@@ -18,7 +18,7 @@ A API OpenShift para proteção de dados (OADP) com Velero fornece recursos de b
 
 As máquinas virtuais no ambiente de virtualização OpenShift são aplicativos em contêineres executados nos nós de trabalho da sua plataforma OpenShift Container. É importante proteger os metadados da VM, bem como os discos persistentes das VMs, para que, quando eles forem perdidos ou corrompidos, você possa recuperá-los.
 
-Os discos persistentes das VMs de virtualização OpenShift podem ser apoiados pelo armazenamento ONTAP integrado ao cluster OpenShift usandolink:https://docs.netapp.com/us-en/trident/["Trident CSI"] . Nesta seção usamoslink:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/installing/installing-oadp-ocs.html["API OpenShift para Proteção de Dados (OADP)"] para executar backup de VMs, incluindo seus volumes de dados para
+Os discos persistentes das VMs do OpenShift Virtualization podem usar o armazenamento ONTAP integrado ao cluster do OpenShift usando link:https://docs.netapp.com/us-en/trident/["Trident CSI"]. Nesta seção, usamos link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html/backup_and_restore/oadp-application-backup-and-restore#installing-oadp["API OpenShift para Proteção de Dados (OADP)"] para fazer o backup das VMs, incluindo seus volumes de dados para
 
 * Armazenamento de objetos ONTAP
 * StorageGrid
@@ -46,4 +46,4 @@ O OADP 1.3 está disponível no hub do operador do cluster OpenShift 4.12 e post
 * ONTAP 9.12
 
 
-link:https://docs.netapp.com/us-en/trident/["Trident CSI"] link:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/installing/installing-oadp-ocs.html["API OpenShift para Proteção de Dados (OADP)"] link:https://velero.io/["Velero"]
+link:https://docs.netapp.com/us-en/trident/["Trident CSI"] link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html/backup_and_restore/oadp-application-backup-and-restore#installing-oadp["API OpenShift para Proteção de Dados (OADP)"] link:https://velero.io/["Velero"]

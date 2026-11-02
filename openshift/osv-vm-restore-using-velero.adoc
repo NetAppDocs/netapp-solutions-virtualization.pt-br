@@ -26,7 +26,7 @@ Para restaurar a partir de um backup, vamos supor que o namespace onde a máquin
 .Restaurar para o mesmo namespace
 [%collapsible%open]
 ====
-Para restaurar o backup que acabamos de criar, precisamos criar um Recurso Personalizado de Restauração (CR). Precisamos fornecer um nome, fornecer o nome do backup que queremos restaurar e definir restorePVs como verdadeiro. Parâmetros adicionais podem ser definidos conforme mostrado nalink:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/restoring-applications.html["documentação"] . Clique no botão Criar.
+Para restaurar a partir do backup que acabamos de criar, precisamos criar um Recurso Personalizado de Restauração (CR). Precisamos fornecer um nome para ele, o nome do backup do qual queremos restaurar e definir o parâmetro restorePVs como true. Parâmetros adicionais podem ser definidos como mostrado em link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html/backup_and_restore/oadp-application-backup-and-restore#oadp-backing-up["documentação"]. Clique no botão Create.
 
 image:redhat-openshift-oadp-restore-001.png["Criar Restaurar CR"]
 
