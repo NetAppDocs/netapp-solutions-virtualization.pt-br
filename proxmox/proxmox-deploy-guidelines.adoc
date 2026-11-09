@@ -44,6 +44,7 @@ Siga estas práticas recomendadas para otimizar o desempenho e a escalabilidade 
 * Utilize volumes FlexGroup para requisitos de grande capacidade e aproveite todo o potencial de escalabilidade do ONTAP .
 * Em ambientes geograficamente distribuídos, utilize o FlexCache para distribuir imagens e modelos mais próximos dos nós do Proxmox VE, a fim de obter tempos de implantação mais rápidos e gerenciamento centralizado.
 * Ao usar o FlexGroup com NFS, utilize a combinação de nConnect ou trunking de sessão e pNFS para otimizar o desempenho e a disponibilidade.
+* Mantenha as operações de arquivos esparsos do NFS v4.2 (`-v4.2-sparsefile-ops`) desativadas nas SVMs que fornecem armazenamento NFS ao Proxmox VE. O ONTAP suporta a operação DEALLOCATE apenas para arquivos inteiros, e solicitações de desalocação parcial de arquivos podem causar erros de E/S e corrupção de dados nas VMs convidadas. Para obter mais informações, consulte link:proxmox-ontap-nfs.html["Configure o armazenamento NFS para o Proxmox VE."].
 * Para protocolos de bloco, assegure o zoneamento adequado e o mascaramento de LUN para restringir o acesso apenas a nós Proxmox VE autorizados.
 * Alocar capacidade de armazenamento suficiente para acomodar o crescimento das máquinas virtuais e as necessidades de dados.
 * Implemente o armazenamento em camadas para otimizar o desempenho e a relação custo-benefício.

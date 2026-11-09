@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: proxmox/proxmox-ontap-nfs.html 
-keywords: netapp, proxmox, proxmox ve, nfs, ontap, storage, nconnect, session trunking 
-summary: Configure o armazenamento NFS para o ambiente virtual Proxmox usando o ONTAP. Este procedimento inclui a ativação do SVM, a criação do LIF, a configuração da política de exportação, a criação de volumes e a configuração do nConnect ou do trunking de sessão para tolerância a falhas e desempenho. 
+keywords: netapp, proxmox, proxmox ve, nfs, ontap, storage, nconnect, session trunking, sparse file operations 
+summary: Configure o armazenamento NFS para o Proxmox VE usando o ONTAP, incluindo SVM, LIF, política de exportação, volume e a configuração de nConnect ou trunking de sessão. 
 ---
 = Configure o armazenamento NFS para o Proxmox VE.
 :hardbreaks:
@@ -20,6 +20,9 @@ O ONTAP é compatível com todas as versões do NFS suportadas pelo Proxmox VE. 
 
 Se você é novo no ONTAP, use a Interface do Gerenciador de Sistemas para concluir essas tarefas.
 
+
+CAUTION: Não habilite as operações de arquivo esparso do NFS v4.2 (`-v4.2-sparsefile-ops`, disponíveis no ONTAP 9.12.1 e posterior) em SVMs que fornecem armazenamento NFS para o Proxmox VE. O ONTAP oferece suporte à operação DEALLOCATE do NFS v4.2 apenas para um arquivo inteiro. Quando o Proxmox VE solicita a desalocação de parte de um arquivo, por exemplo, quando um sistema operacional convidado emite comandos discard ou TRIM para um disco com thin provisioning, o ONTAP retorna um erro NFS4ERR_IO. O erro de E/S passa pelo QEMU para o sistema operacional convidado e pode causar corrupção de dados. Esta opção fica desabilitada por padrão. Mantenha-a desabilitada. Para obter mais informações, consulte o link:https://kb.netapp.com/on-prem/ontap/da/NAS/NAS-KBs/Does_this_v4.2-sparsefile-ops_perform_ALLOCATE_DEALLOCATE%3F["NetApp artigo da Knowledge Base sobre operações de arquivos esparsos do NFS v4.2"^].
+
 .Opção NFS nconnect com ONTAP
 video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto,width=360]
 
@@ -30,6 +33,20 @@ video::f6c9aba3-b070-45d6-8048-b22e001acfd4[panopto,width=360]
 Conclua estas tarefas para provisionar armazenamento NFS no ONTAP para uso com o Proxmox VE.
 
 . Habilite o SVM para NFS. Consulte link:https://docs.netapp.com/us-en/ontap/nfs-config/verify-protocol-enabled-svm-task.html["Documentação do ONTAP 9"].
+. Verifique se as operações de arquivos esparsos do NFS v4.2 estão desativadas na SVM. Execute o seguinte comando e confirme se o valor é `disabled`:
++
+[source, cli]
+----
+vserver nfs show -vserver <svm_name> -fields v4.2-sparsefile-ops
+----
++
+Se o valor for  `enabled`, execute o seguinte comando para desativá-lo:
+
++
+[source, cli]
+----
+vserver nfs modify -vserver <svm_name> -v4.2-sparsefile-ops disabled
+----
 . Crie pelo menos duas LIFs por controlador. Siga os passos indicados na documentação. Para referência, segue uma captura de tela dos LIFs usados no laboratório.
 +
 .Mostrar exemplo

@@ -15,6 +15,18 @@ Aprenda o que há de novo em soluções de virtualização.
 
 
 
+[[5-november-2026]]
+== 5 de novembro de 2026
+
+* Adicionadas orientações para manter desativadas as operações de arquivos esparsos do NFS v4.2 para o armazenamento NFS do Proxmox VE.
++
+** link:proxmox/proxmox-ontap-nfs.html["Configure o armazenamento NFS para o Proxmox VE."]
+
+
+
+
+
+
 [[22-october-2026]]
 == 22 de outubro de 2026
 
