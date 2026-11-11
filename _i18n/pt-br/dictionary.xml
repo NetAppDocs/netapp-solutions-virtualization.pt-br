@@ -29,7 +29,6 @@
   <block id="407f1754d47b022d224184ba78043466" category="section-title">Cenários de migração de VM</block>
   <block id="60a392608625b9eda74d86f2c986cbae" category="paragraph">O vMotion é frequentemente usado para migrar VMs independentemente do seu estado de energia.  Considerações adicionais e procedimentos de migração para cenários específicos estão disponíveis abaixo.</block>
   <block id="60a503f29372372274084ecd49ed17d1" category="inline-link">Condições e limitações da VM do vSphere vMotion</block>
-  <block id="87f3600ce33f342b10587ce8ad49104e" category="admonition">Entender<block ref="5cb6239c39b36fbae133a5f1d170baf7" category="inline-link-rx"></block> antes de prosseguir com qualquer opção de migração de VM.</block>
   <block id="b54d9fc1cdef0a24fc13ccfcc05a04ca" category="example-title">Migração de VMs de um vSphere Datastore específico</block>
   <block id="1209c19104cf806da2509fa4183cf968" category="paragraph">Siga o procedimento abaixo para migrar VMs para o novo Datastore usando a interface do usuário.</block>
   <block id="9f54af6392a5e7279ec1b02fb2298987" category="list-text">Com o vSphere Web Client, selecione o Datastore no inventário de armazenamento e clique na guia VMs.</block>
@@ -54,7 +53,6 @@
   <block id="6f33028fff02cecb516f5e2a865e550c" category="paragraph"><block ref="6f33028fff02cecb516f5e2a865e550c" category="inline-image-macro-rx" type="image"></block></block>
   <block id="abd56d7535056b175963af8675f32417" category="admonition">Quando o Cluster de Datastore estiver em uso com DRS (Agendamento Dinâmico de Recursos) de armazenamento totalmente automatizado e ambos os datastores (origem e destino) forem do mesmo tipo (VMFS/NFS/vVol), mantenha ambos os datastores no mesmo cluster de armazenamento e migre as VMs do datastore de origem habilitando o modo de manutenção na origem.  A experiência será semelhante à forma como os hosts de computação são gerenciados para manutenção.</block>
   <block id="c1bd08cef6ea55ad141205bb4652da6f" category="inline-link">Compatibilidade de CPU e compatibilidade aprimorada com vSphere vMotion</block>
-  <block id="2426039635007bcc9f03cf496e7f8b51" category="admonition">Referir<block ref="50cb0fd3f064393324f1b30977bea82e" category="inline-link-rx"></block> quando os hosts de origem e de destino são de famílias ou modelos de CPU diferentes.</block>
   <block id="a33e2de71bc4a1dd5ee6184e1a98ebb6" category="list-text">Escolha a opção para alterar o recurso de computação e armazenamento, clique em Avançar</block>
   <block id="a5bd22742fd4e0f4ecb0c61b99a2c288" category="inline-image-macro">Alterar computação e armazenamento</block>
   <block id="8934933b0b44bf59ffee8a8ec7ac7bd9" category="paragraph"><block ref="8934933b0b44bf59ffee8a8ec7ac7bd9" category="inline-image-macro-rx" type="image"></block></block>
@@ -70,7 +68,6 @@
   <block id="d278eda991982af0390dcc63b50d6cec" category="paragraph"><block ref="d278eda991982af0390dcc63b50d6cec" category="inline-image-macro-rx" type="image"></block></block>
   <block id="e4991f515597208b8d5688673bd1ac21" category="paragraph">Siga o procedimento abaixo para migrar VMs para o novo servidor vCenter listado na mesma interface do usuário do vSphere Client.</block>
   <block id="668251322616477782480694c04ab4eb" category="inline-link">Documentação do vSphere sobre requisitos para vMotion entre instâncias do servidor vCenter</block>
-  <block id="76bd3dafe5e70b877f4c74cd6b789fad" category="admonition">Para requisitos adicionais, como versões de origem e destino do vCenter, etc., verifique<block ref="15531949925a9ab13d501d9e355f8fd2" category="inline-link-rx"></block></block>
   <block id="8ec58dea3da0b291945f34e7c8168d60" category="list-text">Selecione o cluster de destino no servidor vCenter de destino.</block>
   <block id="905bc5c946741b9eafdefa1971a6baa7" category="list-text">Revise as opções de migração e clique em Concluir.</block>
   <block id="29666ff4ecae595758733eced0aa5ad9" category="example-title">Migração de VMs entre servidores vCenter em diferentes domínios SSO</block>
@@ -84,7 +81,6 @@
   <block id="9a14e6dcef5d5c8983b859a7a239c6c1" category="inline-image-macro">Exportação entre vCenter Servers</block>
   <block id="b5c5c158df4cdda390bf5324a7918730" category="paragraph"><block ref="b5c5c158df4cdda390bf5324a7918730" category="inline-image-macro-rx" type="image"></block></block>
   <block id="6367b892ffc53d7adaa5a0c9e9b0a02b" category="inline-link">Importar ou clonar uma máquina virtual com o Advanced Cross vCenter vMotion</block>
-  <block id="81f30df27aa74b1696d9a3b1ddeb4fe8" category="admonition">A VM também pode ser importada do servidor vCenter de destino.  Para esse procedimento, verifique<block ref="ae4f23729d2e7fd78e04fa4fd2bce779" category="inline-link-rx"></block></block>
   <block id="34f454ce9807d9bed3fecbe0313c4375" category="list-text">Forneça detalhes de credenciais do vCenter e clique em Login.</block>
   <block id="dcf2f84dc2ed5c13d78c9e07b650b7f3" category="inline-image-macro">Credenciais do vCenter</block>
   <block id="b7069528969b1d96d2400f9c6946cd1a" category="paragraph"><block ref="b7069528969b1d96d2400f9c6946cd1a" category="inline-image-macro-rx" type="image"></block></block>
@@ -166,16 +162,13 @@
   <block id="8d529016191c5d8888d2b3cee0d947cc" category="list-text">Com base em onde o armazenamento de dados ONTAP é provisionado, escolha as opções de migração de VM acima.</block>
   <block id="82154dec8199b96d4b6fc6e680b3987f" category="example-title">Migração da versão anterior para a versão mais recente do vSphere.</block>
   <block id="5109f11ddb7fa395a2b9702dd7da5188" category="list-text">Se a atualização local não for possível, você pode criar um novo ambiente e usar as opções de migração acima.</block>
-  <block id="d5587d106e98a47bcb64cd09ef215f28" category="admonition">Na opção de migração entre vCenter, importe do destino se a opção de exportação não estiver disponível na origem.  Para esse procedimento, verifique<block ref="4bd34efc494b7c0c048a599de5fb1d0e" category="inline-link-macro-rx"></block></block>
   <block id="fcfd0c15962db1f564732b4025884f01" category="example-title">Migração para o domínio de carga de trabalho do VCF.</block>
   <block id="67885add60f172422ab38b3902e15ebe" category="list-text">Migre VMs de cada cluster do vSphere para o domínio de carga de trabalho de destino.</block>
   <block id="ed0e87b54c5aad3a24966d14ebf411a5" category="inline-link">Configurar uma VM de borda para ponte</block>
   <block id="b50537e52be225bdbe992eca087c73cf" category="admonition">Para permitir a comunicação de rede com VMs existentes em outros clusters no vCenter de origem, estenda o segmento NSX adicionando os hosts vSphere do vCenter de origem à zona de transporte ou use a ponte L2 na borda para permitir a comunicação L2 na VLAN.  Verifique a documentação do NSX<block ref="479fb9d0c2493899b72e326d5f4144d6" category="inline-link-rx"></block></block>
   <block id="89d5e6802ef5a3ae4296f49d4d6bc447" category="section-title">Recursos adicionais</block>
   <block id="bc9119ed58244e2689047c3cedd83108" category="inline-link">Migração de Máquina Virtual vSphere</block>
-  <block id="49f68dbfd307bea6e62464f61c8139bf" category="list-text"><block ref="49f68dbfd307bea6e62464f61c8139bf" category="inline-link-rx"></block></block>
   <block id="53882348759a32fd2ff144a62e67f923" category="inline-link">Migrando máquinas virtuais com o vSphere vMotion</block>
-  <block id="32d6fa2d7a53e6d8e6a138f47e512f15" category="list-text"><block ref="32d6fa2d7a53e6d8e6a138f47e512f15" category="inline-link-rx"></block></block>
   <block id="3a231af9bfa3b8f20d401bc62fdd9c21" category="inline-link">Configurações de gateway de nível 0 na NSX Federation</block>
   <block id="bb395a25245d60b22e4ee35bb3720619" category="list-text"><block ref="bb395a25245d60b22e4ee35bb3720619" category="inline-link-rx"></block></block>
   <block id="4c7b9062bf6dec81cf8f1f612748c4ea" category="inline-link">Guia do usuário do HCX 4.8</block>
@@ -9061,7 +9054,6 @@
   <block id="bf3f0b2ca058bcdbf31e79b8d8fe0c84" category="paragraph">Quando a fase de transição é concluída, o DataVolume entra no estado Succeeded e o PVC é vinculado.</block>
   <block id="d59dcd95172517ecdb4895532a71f370" category="paragraph">O plano de migração prossegue para concluir a fase ImageConversion e, finalmente, a fase VirtualMachineCreation é concluída. A VM entra no estado de execução em OpenShift Virtualization.</block>
   <block id="735c16b2a9c39cd92d183ec84328eda5" category="sidebar">Backup e restauração usando o NetApp Console</block>
-  <block id="9e7b8966b92f2729b2874cc084bff343" category="admonition">Algumas máquinas virtuais implantadas com uma ferramenta de gerenciamento externa, como VCF Automation, vSphere Supervisor (ou outras variantes do Kubernetes), geralmente dependem da política de armazenamento da máquina virtual. Se você migrar entre datastores dentro da mesma política de armazenamento da máquina virtual, o impacto para os aplicativos deverá ser menor. Consulte os proprietários dos aplicativos para migrar corretamente essas máquinas virtuais para o novo datastore. O vSphere 8 introduziu <block ref="4138091703f18ed0bf54f6615bff3dc7" category="inline-link-rx"></block> para preparar os aplicativos para o vMotion.</block>
   <block id="30e78b58f384fe575ee25be94d65aad4" category="video-title">Datastore suplementar com NVMe/FC</block>
   <block id="ec551004b042ec5b7897b563e4ecdd09" category="video-title">Datastore suplementar com FC</block>
   <block id="30c635f4eaf98ab2f250ab2b8875fb34" category="video-title">Stretch cluster para VCF com SnapMirror active sync iSCSI usando as ferramentas ONTAP</block>
@@ -10757,4 +10749,12 @@
   <block id="c48b251f1a0e09db59e345d9c01e941c" category="section-title">5 de novembro de 2026</block>
   <block id="94940fc5e3ed7709a1802b0f6c8c0da3" category="list-text">Adicionadas orientações para manter desativadas as operações de arquivos esparsos do NFS v4.2 para o armazenamento NFS do Proxmox VE.</block>
   <block id="92a08e70da607bac4fc002495ff52b6b" category="list-text"><block ref="92a08e70da607bac4fc002495ff52b6b" category="inline-link-macro-rx"></block></block>
+  <block id="0880d7d7e8a9f9f117378333baf1744c" category="admonition">Algumas máquinas virtuais implantadas com uma ferramenta de gerenciamento externa, como VCF Automation, vSphere Supervisor (ou outras variantes do Kubernetes), geralmente dependem da política de armazenamento da máquina virtual. Se você migrar entre datastores dentro da mesma política de armazenamento da máquina virtual, o impacto para os aplicativos deverá ser menor. Consulte os proprietários dos aplicativos para migrar corretamente essas máquinas virtuais para o novo datastore. O vSphere 8 introduziu <block ref="8d4be88356ddd5437433cb20b3032bba" category="inline-link-rx"></block> para preparar os aplicativos para o vMotion.</block>
+  <block id="0911a2ec135cb755bbc6e76a42a4e900" category="admonition">Entenda<block ref="8d653b0042694a03b6e6e500ccc4b091" category="inline-link-rx"></block> antes de prosseguir com qualquer opção de migração de VM.</block>
+  <block id="2663cc8682585aac97b0eb40812cdc58" category="admonition">Consulte<block ref="f1148a707d78805a2b200287a6d70377" category="inline-link-rx"></block> quando os hosts de origem e destino forem de famílias ou modelos de CPU diferentes.</block>
+  <block id="d2068895e2cdfa74faf5f610cd35f08f" category="admonition">Para requisitos adicionais, como as versões de origem e de destino do vCenter etc., verifique<block ref="aaa2836d8eacdf37af3c5b55a09f191f" category="inline-link-rx"></block></block>
+  <block id="e9654b9ca9eb14de9bcff07ab11d788d" category="admonition">A VM também pode ser importada do servidor vCenter de destino. Para esse procedimento, verifique<block ref="c5f2565c7bfd3d2181c0cb0b402b72dd" category="inline-link-rx"></block></block>
+  <block id="312289e2486572e4b856f4a585abff49" category="admonition">Na opção de migração Cross vCenter, importe do destino se a opção de exportação não estiver disponível na origem. Para esse procedimento, verifique <block ref="e57ae436e3e09bf8897078cbdb056dec" category="inline-link-macro-rx"></block></block>
+  <block id="2bafda705f6b7c42a6e67d826d6e08f8" category="list-text"><block ref="2bafda705f6b7c42a6e67d826d6e08f8" category="inline-link-rx"></block></block>
+  <block id="05f8528d1c6c0ee3bbe70ec7fefe2fae" category="list-text"><block ref="05f8528d1c6c0ee3bbe70ec7fefe2fae" category="inline-link-rx"></block></block>
 </blocks>
